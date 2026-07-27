@@ -1,0 +1,37 @@
+# dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# build output
+dist/
+build/
+.vite/
+.cache/
+
+# secrets — never commit these
+.env
+.env.*
+!.env.example
+
+# photography and video live in Supabase Storage, not in git.
+# Large binaries bloat the repo permanently — git never forgets them.
+assets/photos/
+assets/video/
+*.mp4
+*.mov
+*.RAF
+*.CR2
+*.dng
+
+# os / editor
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+*.swp
+
+# logs
+*.log
+npm-debug.log*

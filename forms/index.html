@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Villa 25 Ekas — Forms</title>
+<meta name="robots" content="noindex, nofollow">
+<style>
+:root{
+  --ink:#16130E; --ink2:#3A3327; --paper:#F7F2E7; --card:#FFFDF7; --card2:#F0E9D9;
+  --line:#DED3BC; --line2:#C6B899; --bronze:#9C6C36; --bronze2:#845A2A;
+  --reef:#1D5450; --muted:#6F6555;
+  --fd:'Iowan Old Style','Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif;
+  --ft:'Segoe UI',system-ui,-apple-system,'Helvetica Neue',sans-serif;
+  --fu:ui-monospace,'Cascadia Mono',Consolas,'SF Mono',monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --ink:#F0E8D7; --ink2:#C8BCA5; --paper:#0F0D0A; --card:#191510; --card2:#221C15;
+    --line:#302A21; --line2:#473E31; --bronze:#C99A5C; --bronze2:#E2B87E;
+    --reef:#66B2A8; --muted:#94886F;
+  }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--ft);
+  font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;
+  min-height:100vh;display:flex;align-items:center;justify-content:center;padding:40px 24px}
+body::before{content:'';position:fixed;inset:0 0 auto 0;height:3px;
+  background:linear-gradient(90deg,var(--reef),var(--bronze) 48%,var(--line2) 72%,var(--reef))}
+
+.wrap{max-width:640px;width:100%}
+.mark{display:flex;flex-direction:column;align-items:center;text-align:center;line-height:1;
+  margin-bottom:44px}
+.m1,.m3{font-family:var(--fd);font-size:17px;letter-spacing:.42em;text-indent:.42em;
+  text-transform:uppercase;color:var(--ink2)}
+.m2{font-family:var(--fd);font-size:56px;color:var(--bronze);margin:7px 0 3px}
+.msub{font-family:var(--fu);font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;
+  color:var(--muted);margin-top:14px}
+
+h1{font-family:var(--fd);font-weight:400;font-size:clamp(30px,5vw,42px);line-height:1.1;
+  margin:0 0 16px;letter-spacing:-.015em;text-wrap:balance}
+.intro{margin:0 0 36px;color:var(--ink2)}
+
+.cards{display:flex;flex-direction:column;gap:14px}
+a.card{display:block;padding:24px 26px;background:var(--card);border:1px solid var(--line);
+  border-radius:4px;text-decoration:none;color:inherit;
+  transition:border-color .16s,transform .16s}
+a.card:hover,a.card:focus-visible{border-color:var(--bronze);transform:translateY(-2px)}
+a.card:focus-visible{outline:2px solid var(--reef);outline-offset:3px}
+.ct{display:flex;align-items:baseline;gap:12px;margin-bottom:7px}
+.ct h2{font-family:var(--fd);font-weight:400;font-size:24px;margin:0;flex:1}
+.mins{font-family:var(--fu);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--bronze);white-space:nowrap}
+a.card p{margin:0;color:var(--muted);font-size:15.5px;line-height:1.5}
+.go{display:inline-block;margin-top:14px;font-family:var(--fu);font-size:11px;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--bronze2)}
+
+.foot{margin-top:38px;padding-top:22px;border-top:1px solid var(--line);
+  font-size:14.5px;color:var(--muted)}
+.foot p{margin:0 0 8px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="mark">
+    <span class="m1">Villa</span>
+    <span class="m2">25</span>
+    <span class="m3">Ekas</span>
+    <span class="msub">Lombok · Indonesia</span>
+  </div>
+
+  <h1>Two things we need from you</h1>
+  <p class="intro">Both save as you go, so you can stop halfway and come back to the same
+     link. Neither needs an account or a login.</p>
+
+  <div class="cards">
+
+    <a class="card" href="decisions.html">
+      <div class="ct">
+        <h2>Decisions to sign off</h2>
+        <span class="mins">~15 min</span>
+      </div>
+      <p>Twenty-six open questions about deposits, cancellations, pricing and the website —
+         each with the options laid out and a recommendation. Six of them are holding up the
+         launch, and they're marked in red.</p>
+      <span class="go">Start →</span>
+    </a>
+
+    <a class="card" href="questionnaire.html">
+      <div class="ct">
+        <h2>Property questionnaire</h2>
+        <span class="mins">~45 min</span>
+      </div>
+      <p>The facts about the villa that become the actual words on the website — rooms,
+         amenities, distances, surf, food, and the story of how the place came about. Longer,
+         but you can do it in pieces.</p>
+      <span class="go">Start →</span>
+    </a>
+
+  </div>
+
+  <div class="foot">
+    <p>Answers come straight back to us when you press send. Nothing is published anywhere.</p>
+    <p>Stuck, or something doesn't make sense? Just send a message — a half-finished form
+       with a note beats a blank one.</p>
+  </div>
+
+</div>
+</body>
+</html>

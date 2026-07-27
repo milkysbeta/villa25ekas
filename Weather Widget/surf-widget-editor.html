@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Surf Widget Editor — luxury gold</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:wght@300;400;600&family=Playfair+Display:wght@400;500;600&family=Bodoni+Moda:wght@400;500;600&family=Marcellus&family=Forum&family=Italiana&family=Tenor+Sans&family=Jost:wght@300;400;500&family=Outfit:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ed-bg:#080706; --ed-line:#2a2418;
+    --ed-gold:#d4af37; --ed-sand:#e6d6ac; --ed-dim:#8a7f66;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--ed-bg);color:var(--ed-sand);
+       font:14px/1.5 ui-sans-serif,system-ui,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  header{padding:18px 22px;border-bottom:1px solid var(--ed-line)}
+  header h1{margin:0;font-family:'Cinzel',Georgia,serif;font-size:17px;letter-spacing:.24em;
+            text-transform:uppercase;color:var(--ed-gold);font-weight:500}
+  header p{margin:6px 0 0;color:var(--ed-dim);font-size:12.5px}
+  .wrap{display:grid;grid-template-columns:360px 1fr;min-height:calc(100vh - 74px)}
+  @media (max-width:980px){.wrap{grid-template-columns:1fr}}
+  .panel{padding:18px 20px;border-right:1px solid var(--ed-line);overflow-y:auto}
+  .stage{padding:22px;display:flex;flex-direction:column;gap:18px;min-width:0}
+  fieldset{border:1px solid var(--ed-line);border-radius:8px;padding:12px 14px 16px;margin:0 0 16px}
+  legend{color:var(--ed-gold);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;padding:0 6px}
+  label{display:block;font-size:11.5px;letter-spacing:.06em;color:var(--ed-dim);margin:10px 0 4px;text-transform:uppercase}
+  input[type=text],input[type=number],select{width:100%;background:#0d0b09;border:1px solid var(--ed-line);
+    color:var(--ed-sand);border-radius:6px;padding:7px 9px;font:inherit;font-size:13px}
+  input:focus,select:focus{outline:none;border-color:var(--ed-gold)}
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .clr{display:flex;align-items:center;gap:8px;margin-top:4px}
+  .clr input[type=color]{width:34px;height:28px;padding:0;border:1px solid var(--ed-line);border-radius:5px;background:none;cursor:pointer}
+  .clr input[type=text]{flex:1}
+  .chk{display:flex;align-items:center;gap:8px;margin:8px 0;color:var(--ed-sand);font-size:13px;text-transform:none;letter-spacing:0}
+  .chk input{accent-color:var(--ed-gold);width:15px;height:15px}
+  .rng{display:flex;align-items:center;gap:10px}
+  .rng input[type=range]{flex:1;accent-color:var(--ed-gold)}
+  .rng output{width:48px;text-align:right;font-variant-numeric:tabular-nums;color:var(--ed-gold);font-size:12px}
+  button{background:transparent;border:1px solid var(--ed-gold);color:var(--ed-gold);border-radius:6px;
+    padding:8px 14px;font:inherit;font-size:12px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer}
+  button:hover{background:var(--ed-gold);color:#000}
+  button.ghost{border-color:var(--ed-line);color:var(--ed-dim)}
+  button.ghost:hover{background:var(--ed-line);color:var(--ed-sand)}
+  .bar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+  .bar h2{margin:0;font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ed-dim);font-weight:600}
+  #preview{padding:34px 24px;border:1px dashed var(--ed-line);border-radius:10px;overflow-x:auto;
+    background:radial-gradient(120% 80% at 50% 0%,#141008 0%,#080706 70%)}
+  textarea{width:100%;height:240px;background:#0d0b09;border:1px solid var(--ed-line);color:#cbbf9d;
+    border-radius:8px;padding:12px;font:12px/1.55 ui-monospace,Consolas,"Courier New",monospace;resize:vertical}
+  .note{font-size:12px;color:var(--ed-dim)}
+  .note b{color:var(--ed-gold);font-weight:600}
+  code{color:var(--ed-gold);font-family:ui-monospace,Consolas,monospace;font-size:12px}
+  .swatches{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
+  .swatches button{padding:5px 9px;font-size:10px;letter-spacing:.08em}
+
+  /* --- reorderable row list --- */
+  #rowlist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+  #rowlist li{border:1px solid var(--ed-line);border-radius:7px;padding:7px 8px;background:#0d0b09}
+  #rowlist li.drag{opacity:.35}
+  #rowlist li.over{border-color:var(--ed-gold);box-shadow:0 0 0 1px var(--ed-gold) inset}
+  .r-top{display:flex;align-items:center;gap:7px}
+  .r-grip{cursor:grab;color:var(--ed-dim);font-size:14px;line-height:1;user-select:none;padding:0 2px}
+  .r-grip:active{cursor:grabbing}
+  .r-name{flex:1;font-size:12.5px;color:var(--ed-sand);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .r-move{display:flex;gap:2px}
+  .r-move button{padding:1px 6px;font-size:11px;border-color:var(--ed-line);color:var(--ed-dim);letter-spacing:0}
+  .r-move button:hover{background:var(--ed-line);color:var(--ed-gold)}
+  .r-show{display:flex;align-items:center;gap:4px;font-size:10.5px;color:var(--ed-dim);
+          letter-spacing:.08em;text-transform:uppercase;cursor:pointer;white-space:nowrap}
+  .r-show input{accent-color:var(--ed-gold);width:14px;height:14px;margin:0}
+  .r-lbl{display:flex;align-items:center;gap:6px;margin-top:6px;padding-left:20px}
+  .r-lbl input[type=text]{padding:4px 7px;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase}
+  .r-lbl .r-show{margin-left:auto}
+  #rowlist li.off .r-name,#rowlist li.off .r-lbl{opacity:.4}
+
+  /* --- arrow style picker --- */
+  #arrowpick{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:4px}
+  #arrowpick button{padding:8px 2px;border-color:var(--ed-line);color:var(--ed-gold);
+    display:flex;align-items:center;justify-content:center}
+  #arrowpick button:hover{background:rgba(212,175,55,.12);color:var(--ed-gold);border-color:var(--ed-gold)}
+  #arrowpick button.on{border-color:var(--ed-gold);background:rgba(212,175,55,.18);
+    box-shadow:0 0 10px rgba(212,175,55,.25) inset}
+  #arrowpick svg{width:20px;height:20px;display:block}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Surf Widget Editor</h1>
+  <p>Live 5-day forecast — metallic gold, grain, glow. Data: Open-Meteo (free, no API key). Paste the output straight into your site.</p>
+</header>
+
+<div class="wrap">
+  <div class="panel">
+
+    <fieldset>
+      <legend>Layout</legend>
+      <p class="note" style="margin:0 0 4px">Auto-saves as you work — reopening this file restores your last layout. <span id="lay_stamp"></span></p>
+      <label>Save current layout as</label>
+      <div style="display:flex;gap:6px">
+        <input type="text" id="lay_name" placeholder="e.g. Villa 25 — homepage">
+        <button type="button" id="lay_save">Save</button>
+      </div>
+      <label>Saved layouts</label>
+      <select id="lay_list"></select>
+      <div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap">
+        <button type="button" id="lay_load">Load</button>
+        <button class="ghost" type="button" id="lay_del">Delete</button>
+        <button class="ghost" type="button" id="lay_exp">Export .json</button>
+        <button class="ghost" type="button" id="lay_imp">Import .json</button>
+      </div>
+      <input type="file" id="lay_file" accept="application/json,.json" style="display:none">
+    </fieldset>
+
+    <fieldset>
+      <legend>Spot</legend>
+      <label>Title</label>
+      <input type="text" id="c_title" value="Ekas Inside">
+      <div class="row2">
+        <div><label>Latitude</label><input type="number" id="c_lat" step="0.0001" value="-8.87"></div>
+        <div><label>Longitude</label><input type="number" id="c_lon" step="0.0001" value="116.44"></div>
+      </div>
+      <label class="chk"><input type="checkbox" id="c_showTitle" checked> Show title</label>
+      <label class="chk"><input type="checkbox" id="c_rules" checked> Hairline rules beside title</label>
+      <label class="chk"><input type="checkbox" id="c_showFoot" checked> Show &ldquo;Forecast open-meteo&rdquo; footer</label>
+      <p class="note" style="margin:6px 0 0">Open-Meteo's free tier is CC-BY 4.0 — attribution is expected. Removing it is your call.</p>
+    </fieldset>
+
+    <fieldset>
+      <legend>Rows — drag to reorder</legend>
+      <p class="note" style="margin:0 0 10px">Day name is pinned first. Drag the grip, or use the arrows. Untick <b>SHOW</b> to drop a row, untick the label box to drop just its caption.</p>
+      <ul id="rowlist"></ul>
+    </fieldset>
+
+    <fieldset>
+      <legend>Sizes</legend>
+      <label>Day name</label>
+      <div class="rng"><input type="range" id="c_sDow" min="0.5" max="1.8" step="0.02" value="0.82"><output id="o_sDow"></output></div>
+      <label>Date</label>
+      <div class="rng"><input type="range" id="c_sDate" min="0.4" max="1.2" step="0.02" value="0.62"><output id="o_sDate"></output></div>
+      <label>Stars</label>
+      <div class="rng"><input type="range" id="c_sStar" min="0.4" max="1.6" step="0.02" value="0.72"><output id="o_sStar"></output></div>
+      <label>Row labels</label>
+      <div class="rng"><input type="range" id="c_sLbl" min="0.35" max="1.1" step="0.01" value="0.55"><output id="o_sLbl"></output></div>
+      <label>Big numbers (swell, temp)</label>
+      <div class="rng"><input type="range" id="c_sVal" min="0.7" max="2.6" step="0.02" value="1.28"><output id="o_sVal"></output></div>
+      <label>Small values (period, wind)</label>
+      <div class="rng"><input type="range" id="c_sSub" min="0.45" max="1.5" step="0.02" value="0.74"><output id="o_sSub"></output></div>
+      <label>Weather symbol</label>
+      <div class="rng"><input type="range" id="c_sIco" min="0.7" max="4" step="0.05" value="1.7"><output id="o_sIco"></output></div>
+      <label>Compass text</label>
+      <div class="rng"><input type="range" id="c_sDir" min="0.45" max="1.4" step="0.02" value="0.68"><output id="o_sDir"></output></div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Swell unit</legend>
+      <label class="chk"><input type="checkbox" id="c_showUnit" checked> Small <b style="color:var(--ed-gold);margin:0 2px">m</b> / <b style="color:var(--ed-gold);margin:0 2px">ft</b> after the number</label>
+      <label>Unit size (relative to the number)</label>
+      <div class="rng"><input type="range" id="c_sUnit" min="0.25" max="1" step="0.01" value="0.52"><output id="o_sUnit"></output></div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Direction arrow</legend>
+      <label class="chk"><input type="checkbox" id="c_showArrow" checked> Show arrow</label>
+      <label>Style — click to choose</label>
+      <div id="arrowpick"></div>
+      <label>Arrow size</label>
+      <div class="rng"><input type="range" id="c_sArr" min="0.6" max="3.5" step="0.05" value="1.5"><output id="o_sArr"></output></div>
+      <label>Arrow points</label>
+      <select id="c_arrFrom">
+        <option value="to">Where the swell is heading (toward shore)</option>
+        <option value="from">Where the swell is coming from</option>
+      </select>
+      <p class="note" style="margin:8px 0 0">The compass letters always name the direction the swell comes <b>from</b> — that's the surf convention. This only flips the arrow.</p>
+    </fieldset>
+
+    <fieldset>
+      <legend>Gold</legend>
+      <label>Highlight (top of gradient)</label>
+      <div class="clr"><input type="color" data-for="c_goldHi" value="#f6e7b0"><input type="text" id="c_goldHi" value="#f6e7b0"></div>
+      <label>Core gold</label>
+      <div class="clr"><input type="color" data-for="c_gold" value="#d4af37"><input type="text" id="c_gold" value="#d4af37"></div>
+      <label>Deep (bottom of gradient)</label>
+      <div class="clr"><input type="color" data-for="c_goldLo" value="#a2761f"><input type="text" id="c_goldLo" value="#a2761f"></div>
+      <label class="chk"><input type="checkbox" id="c_metal" checked> Metallic gradient on numbers &amp; headings</label>
+      <div class="swatches">
+        <button data-preset="classic">Classic</button>
+        <button data-preset="champagne">Champagne</button>
+        <button data-preset="rose">Rose gold</button>
+        <button data-preset="brass">Antique brass</button>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Surface</legend>
+      <label>Background</label>
+      <div class="clr"><input type="color" data-for="c_bg" value="#000000"><input type="text" id="c_bg" value="#000000"></div>
+      <label>Sand (body text)</label>
+      <div class="clr"><input type="color" data-for="c_sand" value="#e8dcbe"><input type="text" id="c_sand" value="#e8dcbe"></div>
+      <label>Muted (labels)</label>
+      <div class="clr"><input type="color" data-for="c_muted" value="#8b7c56"><input type="text" id="c_muted" value="#8b7c56"></div>
+      <label>Lines / borders</label>
+      <div class="clr"><input type="color" data-for="c_line" value="#33291a"><input type="text" id="c_line" value="#33291a"></div>
+      <label>Glow</label>
+      <div class="rng"><input type="range" id="c_glow" min="0" max="24" step="1" value="10"><output id="o_glow"></output></div>
+      <label>Outer halo</label>
+      <div class="rng"><input type="range" id="c_halo" min="0" max="100" step="5" value="45"><output id="o_halo"></output></div>
+      <label>Grain</label>
+      <div class="rng"><input type="range" id="c_grain" min="0" max="0.3" step="0.01" value="0.09"><output id="o_grain"></output></div>
+      <label>Inner vignette</label>
+      <div class="rng"><input type="range" id="c_vig" min="0" max="0.3" step="0.01" value="0.07"><output id="o_vig"></output></div>
+      <label class="chk"><input type="checkbox" id="c_todayHl" checked> Highlight today</label>
+    </fieldset>
+
+    <fieldset>
+      <legend>Typography</legend>
+      <label>Display font — title, days, numbers</label>
+      <select id="c_fontD"></select>
+      <label>Body font — labels, values</label>
+      <select id="c_fontB"></select>
+      <label>Base size</label>
+      <div class="rng"><input type="range" id="c_fs" min="11" max="22" step="1" value="15"><output id="o_fs"></output></div>
+      <label>Letter spacing (headings)</label>
+      <div class="rng"><input type="range" id="c_track" min="0" max="0.5" step="0.01" value="0.22"><output id="o_track"></output></div>
+      <label>Corner radius</label>
+      <div class="rng"><input type="range" id="c_radius" min="0" max="28" step="1" value="14"><output id="o_radius"></output></div>
+      <label>Max width</label>
+      <div class="rng"><input type="range" id="c_maxw" min="320" max="900" step="10" value="660"><output id="o_maxw"></output></div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Units &amp; rating</legend>
+      <div class="row2">
+        <div><label>Swell units</label><select id="c_unitH"><option value="m">metres</option><option value="ft">feet</option></select></div>
+        <div><label>Temp units</label><select id="c_unitT"><option value="c">°C</option><option value="f">°F</option></select></div>
+      </div>
+      <label class="chk" style="margin-top:10px"><input type="checkbox" id="c_showLow"> Also show overnight low</label>
+      <label>Height for 5★ (m)</label>
+      <div class="rng"><input type="range" id="c_hMax" min="0.8" max="4" step="0.1" value="2"><output id="o_hMax"></output></div>
+      <label>Wind penalty</label>
+      <div class="rng"><input type="range" id="c_windPen" min="0" max="1" step="0.05" value="0.55"><output id="o_windPen"></output></div>
+    </fieldset>
+
+    <button class="ghost" id="reset">Reset to defaults</button>
+  </div>
+
+  <div class="stage">
+    <div class="bar"><h2>Live preview</h2><span class="note" id="status"></span></div>
+    <div id="preview"></div>
+
+    <div class="bar">
+      <h2>Embed code — paste into your page</h2>
+      <div style="display:flex;gap:8px">
+        <button id="copy">Copy code</button>
+        <button class="ghost" id="download">Download .html</button>
+      </div>
+    </div>
+    <textarea id="out" spellcheck="false" readonly></textarea>
+    <p class="note">Self-contained: one <code>&lt;div&gt;</code>, one <code>&lt;style&gt;</code>, one <code>&lt;script&gt;</code>. No jQuery, no API key, no build step. Everything is namespaced to <code>#surf-widget</code>. Grain, arrows and weather symbols are inline SVG — no image files. If you pick a Google font an <code>@import</code> is added at the top of the CSS; choose a System option to keep it fully offline.</p>
+  </div>
+</div>
+
+<!-- ============ WIDGET CSS TEMPLATE ============ -->
+<script type="text/plain" id="tpl-css">
+__IMPORT__
+#__ID__{
+  --sfw-bg:__BG__; --sfw-gold:__GOLD__; --sfw-gold-hi:__GOLDHI__; --sfw-gold-lo:__GOLDLO__;
+  --sfw-gold-rgb:__GOLDRGB__; --sfw-sand:__SAND__; --sfw-muted:__MUTED__; --sfw-line:__LINE__;
+  --sfw-glow:__GLOW__px; --sfw-track:__TRACK__em;
+  --sfw-s-dow:__SDOW__em; --sfw-s-date:__SDATE__em; --sfw-s-star:__SSTAR__em;
+  --sfw-s-lbl:__SLBL__em;  --sfw-s-val:__SVAL__em;  --sfw-s-sub:__SSUB__em;
+  --sfw-s-ico:__SICO__em;  --sfw-s-dir:__SDIR__em;  --sfw-s-arr:__SARR__em;
+  --sfw-s-unit:__SUNIT__em;
+  position:relative; isolation:isolate;
+  background:
+    radial-gradient(120% 90% at 50% -10%, rgba(var(--sfw-gold-rgb),.10) 0%, rgba(var(--sfw-gold-rgb),0) 55%),
+    var(--sfw-bg);
+  color:var(--sfw-sand);
+  font-family:__FONTB__; font-size:__FS__px; line-height:1.4;
+  border:1px solid var(--sfw-line); border-radius:__RADIUS__px;
+  max-width:__MAXW__px; margin:0 auto; padding:20px 16px 16px;
+  box-shadow:0 0 __HALO__px rgba(var(--sfw-gold-rgb),.13), 0 12px 40px rgba(0,0,0,.55);
+  -webkit-font-smoothing:antialiased;
+}
+#__ID__ *{box-sizing:border-box}
+#__ID__::before{
+  content:""; position:absolute; inset:0; border-radius:inherit; pointer-events:none; z-index:2;
+  opacity:__GRAIN__; mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+#__ID__::after{
+  content:""; position:absolute; inset:0; border-radius:inherit; pointer-events:none; z-index:1;
+  box-shadow:inset 0 0 70px rgba(0,0,0,__VIG__), inset 0 1px 0 rgba(var(--sfw-gold-rgb),.16);
+}
+#__ID__ .sfw-inner{position:relative; z-index:3}
+
+#__ID__ .sfw-head{display:flex; align-items:center; gap:14px; margin:0 0 16px}
+#__ID__ .sfw-rule{flex:1; height:1px; background:linear-gradient(90deg,rgba(var(--sfw-gold-rgb),0),rgba(var(--sfw-gold-rgb),.55))}
+#__ID__ .sfw-rule.r2{background:linear-gradient(90deg,rgba(var(--sfw-gold-rgb),.55),rgba(var(--sfw-gold-rgb),0))}
+#__ID__ .sfw-title{
+  font-family:__FONTD__; font-size:.9em; letter-spacing:var(--sfw-track); text-transform:uppercase;
+  font-weight:500; text-align:center; white-space:nowrap;
+  __METAL__
+  filter:drop-shadow(0 0 var(--sfw-glow) rgba(var(--sfw-gold-rgb),.45));
+}
+#__ID__ .sfw-grid{display:grid; grid-template-columns:repeat(5,1fr)}
+#__ID__ .sfw-day{
+  position:relative; text-align:center; padding:10px 4px 12px; min-width:0;
+  display:flex; flex-direction:column; align-items:center; gap:6px;
+}
+#__ID__ .sfw-day + .sfw-day::before{
+  content:""; position:absolute; left:0; top:8%; bottom:8%; width:1px;
+  background:linear-gradient(180deg,rgba(var(--sfw-gold-rgb),0),rgba(var(--sfw-gold-rgb),.28),rgba(var(--sfw-gold-rgb),0));
+}
+#__ID__ .sfw-day.sfw-today{
+  background:linear-gradient(180deg,rgba(var(--sfw-gold-rgb),.10),rgba(var(--sfw-gold-rgb),0) 70%);
+  border-radius:8px;
+}
+#__ID__ .sfw-dow{
+  font-family:__FONTD__; font-size:var(--sfw-s-dow); letter-spacing:calc(var(--sfw-track) * .7);
+  text-transform:uppercase; font-weight:500; display:inline-block;
+  __METAL__
+  filter:drop-shadow(0 0 var(--sfw-glow) rgba(var(--sfw-gold-rgb),.4));
+}
+#__ID__ .sfw-date{font-size:var(--sfw-s-date); letter-spacing:.16em; text-transform:uppercase; color:var(--sfw-muted); margin-top:-2px}
+#__ID__ .sfw-stars{position:relative; display:inline-block; font-size:var(--sfw-s-star); letter-spacing:.14em;
+  color:rgba(var(--sfw-gold-rgb),.22); white-space:nowrap; margin:2px 0}
+#__ID__ .sfw-stars::before{content:"\2605\2605\2605\2605\2605"}
+#__ID__ .sfw-fill{position:absolute; left:0; top:0; overflow:hidden; white-space:nowrap;
+  color:var(--sfw-gold); filter:drop-shadow(0 0 calc(var(--sfw-glow) * .7) rgba(var(--sfw-gold-rgb),.6))}
+#__ID__ .sfw-fill::before{content:"\2605\2605\2605\2605\2605"}
+#__ID__ .sfw-sep{width:26px; height:1px; margin:3px 0 1px;
+  background:linear-gradient(90deg,rgba(var(--sfw-gold-rgb),0),rgba(var(--sfw-gold-rgb),.45),rgba(var(--sfw-gold-rgb),0))}
+#__ID__ .sfw-lbl{font-size:var(--sfw-s-lbl); letter-spacing:.24em; text-transform:uppercase;
+  color:var(--sfw-muted); margin-bottom:-3px}
+#__ID__ .sfw-val{
+  font-family:__FONTD__; font-size:var(--sfw-s-val); font-weight:500; line-height:1.1; display:inline-block;
+  font-variant-numeric:tabular-nums;
+  __METAL__
+  filter:drop-shadow(0 0 var(--sfw-glow) rgba(var(--sfw-gold-rgb),.4));
+}
+#__ID__ .sfw-val u{text-decoration:none; font-size:var(--sfw-s-unit); letter-spacing:.06em; opacity:.82; margin-left:.06em}
+#__ID__ .sfw-dir{display:flex; align-items:center; justify-content:center; gap:.3em; margin-top:1px; line-height:1}
+#__ID__ .sfw-dirtext{font-size:var(--sfw-s-dir); letter-spacing:.14em; color:var(--sfw-sand)}
+#__ID__ .sfw-arrow{display:block; width:var(--sfw-s-arr); height:var(--sfw-s-arr); flex:none;
+  color:var(--sfw-gold); filter:drop-shadow(0 0 calc(var(--sfw-glow) * .8) rgba(var(--sfw-gold-rgb),.5))}
+#__ID__ .sfw-arrow svg{display:block; width:100%; height:100%; overflow:visible}
+#__ID__ .sfw-sub{font-size:var(--sfw-s-sub); letter-spacing:.06em; color:var(--sfw-sand); font-variant-numeric:tabular-nums}
+#__ID__ .sfw-ico{color:var(--sfw-gold); line-height:0; margin:2px 0 -1px;
+  filter:drop-shadow(0 0 var(--sfw-glow) rgba(var(--sfw-gold-rgb),.45))}
+#__ID__ .sfw-ico svg{width:var(--sfw-s-ico); height:var(--sfw-s-ico); display:block}
+#__ID__ .sfw-low{color:var(--sfw-muted); font-size:calc(var(--sfw-s-sub) * .85); letter-spacing:.06em; margin-top:-3px}
+#__ID__ .sfw-foot{
+  margin-top:14px; padding-top:10px; text-align:center;
+  font-size:.56em; letter-spacing:.22em; text-transform:uppercase; color:var(--sfw-muted);
+  border-top:1px solid transparent;
+  border-image:linear-gradient(90deg,rgba(var(--sfw-gold-rgb),0),rgba(var(--sfw-gold-rgb),.3),rgba(var(--sfw-gold-rgb),0)) 1;
+}
+#__ID__ .sfw-foot a{color:var(--sfw-muted); text-decoration:none}
+#__ID__ .sfw-foot a:hover{color:var(--sfw-gold)}
+#__ID__ .sfw-msg{text-align:center; padding:30px 0; color:var(--sfw-muted); font-size:.75em; letter-spacing:.2em; text-transform:uppercase}
+@media (max-width:560px){
+  #__ID__{font-size:calc(__FS__px - 3px); padding:14px 8px 10px}
+  #__ID__ .sfw-day{padding:8px 2px 10px; gap:4px}
+  #__ID__ .sfw-lbl{letter-spacing:.12em}
+  #__ID__ .sfw-dirtext{letter-spacing:.04em}
+  #__ID__ .sfw-dir{gap:.15em}
+}
+</script>
+
+<!-- ============ WIDGET JS TEMPLATE ============ -->
+<script type="text/plain" id="tpl-js">
+var C = __CFG__;
+var root = document.getElementById("__ID__");
+if (root) {
+  root.innerHTML = '<div class="sfw-inner"><div class="sfw-msg">Loading forecast</div></div>';
+
+  var PTS = ["N","NNE","NE","ENE","E","ESE","SE","SSE","S","SSW","SW","WSW","W","WNW","NW","NNW"];
+  function compass(d){ return PTS[Math.round(((d % 360) + 360) % 360 / 22.5) % 16]; }
+  function esc(s){ return String(s).replace(/[&<>"]/g, function(c){
+    return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
+
+  // --- direction arrow: inline SVG, 24x24 box, tip points up at 0deg --------
+  function arrow(deg){
+    return '<span class="sfw-arrow" style="transform:rotate(' + deg + 'deg)">' +
+      '<svg viewBox="0 0 24 24">' + C.arrowSvg + '</svg></span>';
+  }
+
+  // --- weather glyphs: inline SVG, stroked in currentColor -------------------
+  var S = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">';
+  var CLOUD = '<path d="M7.2 17.4h9.4a3.1 3.1 0 0 0 .2-6.2 4.5 4.5 0 0 0-8.6-1.1 3.2 3.2 0 0 0-1 7.3z"/>';
+  var CLOUD_HI = '<g transform="translate(0,-2.6)">' + CLOUD + '</g>';
+  function sun(cx, cy, r){
+    var o = '<circle cx="' + cx + '" cy="' + cy + '" r="' + r + '"/>';
+    var L = r + 1.6, M = r + 3.4;
+    for (var i = 0; i < 8; i++){
+      var a = i * Math.PI / 4;
+      o += '<path d="M' + (cx + Math.cos(a) * L).toFixed(1) + ' ' + (cy + Math.sin(a) * L).toFixed(1) +
+           'L' + (cx + Math.cos(a) * M).toFixed(1) + ' ' + (cy + Math.sin(a) * M).toFixed(1) + '"/>';
+    }
+    return o;
+  }
+  var ICONS = {
+    clear:   S + sun(12, 12, 4) + '</svg>',
+    mostly:  S + sun(9.5, 9.5, 3.1) + CLOUD + '</svg>',
+    partly:  S + sun(8.5, 8, 2.8) + CLOUD + '</svg>',
+    cloud:   S + CLOUD + '</svg>',
+    fog:     S + CLOUD_HI + '<path d="M5.5 17h13M7.5 20h9"/></svg>',
+    drizzle: S + CLOUD_HI + '<path d="M9 17.2v1.6M12 17.6v1.9M15 17.2v1.6"/></svg>',
+    rain:    S + CLOUD_HI + '<path d="M8.6 16.8L7.6 20M12 16.8L11 20M15.4 16.8L14.4 20"/></svg>',
+    showers: S + CLOUD_HI + '<path d="M9 16.8L7.4 20.4M14.4 16.8L12.8 20.4"/>' + sun(17.6, 6.4, 2.1) + '</svg>',
+    snow:    S + CLOUD_HI + '<path d="M9 18.6h.01M12 20h.01M15 18.6h.01M9 20.4h.01M15 20.4h.01"/></svg>',
+    storm:   S + CLOUD_HI + '<path d="M13 15.6l-3 3.6h2.6l-1.4 3.2"/></svg>'
+  };
+  var WMO = {0:"clear",1:"mostly",2:"partly",3:"cloud",45:"fog",48:"fog",
+    51:"drizzle",53:"drizzle",55:"drizzle",56:"drizzle",57:"drizzle",
+    61:"rain",63:"rain",65:"rain",66:"rain",67:"rain",
+    71:"snow",73:"snow",75:"snow",77:"snow",85:"snow",86:"snow",
+    80:"showers",81:"showers",82:"rain",95:"storm",96:"storm",99:"storm"};
+  function icon(code){ return ICONS[WMO[code] || "cloud"]; }
+
+  function rate(h, p, w){
+    if (h == null) return 0;
+    var size = Math.max(0, Math.min(1, h / C.hMax));
+    var per  = Math.max(0, Math.min(1, ((p == null ? 8 : p) - 5) / 9));
+    var wind = w == null ? 0 : Math.max(0, Math.min(1, (w - 15) / 30));
+    var raw  = (size * 0.55 + per * 0.45) * (1 - wind * C.windPen);
+    return Math.max(0, Math.min(5, Math.round(raw * 5 * 2) / 2));
+  }
+
+  var qs = "latitude=" + C.lat + "&longitude=" + C.lon + "&timezone=auto&forecast_days=5";
+  var mUrl = "https://marine-api.open-meteo.com/v1/marine?" + qs +
+    "&daily=swell_wave_height_max,swell_wave_direction_dominant,swell_wave_period_max";
+  var wUrl = "https://api.open-meteo.com/v1/forecast?" + qs +
+    "&daily=weather_code,temperature_2m_max,temperature_2m_min,wind_speed_10m_max,wind_direction_10m_dominant";
+
+  function get(u){ return fetch(u).then(function(r){
+    if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }); }
+
+  Promise.all([get(mUrl), get(wUrl)]).then(function(res){
+    var m = res[0].daily, w = res[1].daily;
+    var html = '<div class="sfw-inner">';
+
+    if (C.showTitle){
+      html += '<div class="sfw-head">';
+      if (C.rules) html += '<span class="sfw-rule"></span>';
+      html += '<div class="sfw-title">' + esc(C.title) + '</div>';
+      if (C.rules) html += '<span class="sfw-rule r2"></span>';
+      html += '</div>';
+    }
+    html += '<div class="sfw-grid">';
+
+    for (var i = 0; i < 5; i++){
+      var parts = m.time[i].split("-");
+      var dt = new Date(+parts[0], +parts[1] - 1, +parts[2]);
+      var h = m.swell_wave_height_max[i];
+      var dir = m.swell_wave_direction_dominant[i];
+      var per = m.swell_wave_period_max[i];
+      var code = w.weather_code[i];
+      var tmax = w.temperature_2m_max[i], tmin = w.temperature_2m_min[i];
+      var wsp = w.wind_speed_10m_max[i], wdir = w.wind_direction_10m_dominant[i];
+
+      var t = function(v){ return v == null ? "–" : Math.round(C.unitT === "f" ? v * 9 / 5 + 32 : v) + "°"; };
+      function L(key){
+        var r = C.rows[key];
+        return (r && r.label && r.text) ? '<div class="sfw-lbl">' + esc(r.text) + '</div>' : '';
+      }
+
+      var CELL = {
+        date: function(){
+          return '<div class="sfw-date">' + dt.getDate() + " " +
+            dt.toLocaleDateString(undefined, {month:"short"}) + '</div>';
+        },
+        rating: function(){
+          var st = rate(h, per, wsp);
+          return L("rating") + '<div class="sfw-stars" title="' + st + '/5">' +
+            '<span class="sfw-fill" style="width:' + (st / 5 * 100) + '%"></span></div>';
+        },
+        divider: function(){ return '<div class="sfw-sep"></div>'; },
+        swell: function(){
+          var hv = h == null ? null : (C.unitH === "ft" ? h * 3.28084 : h);
+          var o = L("swell") + '<div class="sfw-val">' + (hv == null ? "–" : hv.toFixed(1)) +
+            (C.showUnit ? '<u>' + (C.unitH === "ft" ? "ft" : "m") + '</u>' : '') + '</div>';
+          o += '<div class="sfw-dir">';
+          if (C.showArrow && dir != null) o += arrow((dir + (C.arrFrom ? 0 : 180)) % 360);
+          o += '<span class="sfw-dirtext">' + (dir == null ? "–" : compass(dir)) + '</span></div>';
+          return o;
+        },
+        period: function(){
+          return L("period") + '<div class="sfw-sub">' + (per == null ? "–" : Math.round(per) + "s") + '</div>';
+        },
+        icon: function(){ return L("icon") + '<div class="sfw-ico">' + icon(code) + '</div>'; },
+        temp: function(){
+          var o = L("temp") + '<div class="sfw-val">' + t(tmax) + '</div>';
+          if (C.showLow) o += '<div class="sfw-low">' + t(tmin) + ' low</div>';
+          return o;
+        },
+        wind: function(){
+          return L("wind") + '<div class="sfw-sub">' +
+            (wsp == null ? "–" : Math.round(wsp) + " " + compass(wdir)) + '</div>';
+        }
+      };
+
+      html += '<div class="sfw-day' + (i === 0 && C.todayHl ? ' sfw-today' : '') + '">';
+      html += '<div class="sfw-dow">' + (i === 0 ? "Today" : dt.toLocaleDateString(undefined, {weekday:"short"})) + '</div>';
+      for (var k = 0; k < C.order.length; k++){
+        var key = C.order[k];
+        if (C.rows[key] && C.rows[key].show && CELL[key]) html += CELL[key]();
+      }
+      html += '</div>';
+    }
+
+    html += '</div>';
+    if (C.showFoot)
+      html += '<div class="sfw-foot">Forecast <a href="https://open-meteo.com" target="_blank" rel="noopener">open-meteo</a></div>';
+    html += '</div>';
+    root.innerHTML = html;
+  }).catch(function(){
+    root.innerHTML = '<div class="sfw-inner"><div class="sfw-msg">Forecast unavailable</div></div>';
+  });
+}
+</script>
+
+<script>
+(function(){
+  var TPL_CSS = document.getElementById("tpl-css").textContent;
+  var TPL_JS  = document.getElementById("tpl-js").textContent;
+
+  /* ---------------- fonts ---------------- */
+  var FONTS = [
+    ["sys",       "System sans",        "ui-sans-serif,system-ui,'Segoe UI',Roboto,Helvetica,Arial,sans-serif", null],
+    ["sysserif",  "System serif",       "Georgia,'Times New Roman',serif", null],
+    ["cinzel",    "Cinzel",             "'Cinzel',Georgia,serif", "Cinzel:wght@400;500;600"],
+    ["cormorant", "Cormorant Garamond", "'Cormorant Garamond',Georgia,serif", "Cormorant+Garamond:wght@300;400;600"],
+    ["playfair",  "Playfair Display",   "'Playfair Display',Georgia,serif", "Playfair+Display:wght@400;500;600"],
+    ["bodoni",    "Bodoni Moda",        "'Bodoni Moda',Georgia,serif", "Bodoni+Moda:wght@400;500;600"],
+    ["marcellus", "Marcellus",          "'Marcellus',Georgia,serif", "Marcellus"],
+    ["forum",     "Forum",              "'Forum',Georgia,serif", "Forum"],
+    ["italiana",  "Italiana",           "'Italiana',Georgia,serif", "Italiana"],
+    ["tenor",     "Tenor Sans",         "'Tenor Sans',Helvetica,sans-serif", "Tenor+Sans"],
+    ["jost",      "Jost",               "'Jost',Helvetica,sans-serif", "Jost:wght@300;400;500"],
+    ["outfit",    "Outfit",             "'Outfit',Helvetica,sans-serif", "Outfit:wght@200;300;400;500"]
+  ];
+  var FMAP = {};
+  FONTS.forEach(function(f){ FMAP[f[0]] = {stack:f[2], g:f[3]}; });
+  ["c_fontD","c_fontB"].forEach(function(id){
+    var sel = document.getElementById(id);
+    FONTS.forEach(function(f){
+      var o = document.createElement("option");
+      o.value = f[0]; o.textContent = f[1]; o.style.fontFamily = f[2];
+      sel.appendChild(o);
+    });
+  });
+  document.getElementById("c_fontD").value = "cinzel";
+  document.getElementById("c_fontB").value = "jost";
+
+  /* ---------------- direction arrows ---------------- */
+  var ARROWS = [
+    ["needle",  "Needle",        '<path d="M12 1.8 18.4 21.4 12 17.1 5.6 21.4Z" fill="currentColor"/>'],
+    ["slim",    "Slim needle",   '<path d="M12 1.8 16.4 21.4 12 18.1 7.6 21.4Z" fill="currentColor"/>'],
+    ["outline", "Open needle",   '<path d="M12 2.6 17.9 20.9 12 17.4 6.1 20.9Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>'],
+    ["triangle","Triangle",      '<path d="M12 3.2 19.6 20.4 4.4 20.4Z" fill="currentColor"/>'],
+    ["kite",    "Kite",          '<path d="M12 2.2 17.4 12 12 21.8 6.6 12Z" fill="currentColor"/>'],
+    ["arrow",   "Line arrow",    '<g fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20.6V4.2"/><path d="M5.9 10.3 12 3.9l6.1 6.4"/></g>'],
+    ["solid",   "Solid arrow",   '<path d="M12 2.6 19 11.4h-4.2v9.8H9.2V11.4H5Z" fill="currentColor"/>'],
+    ["chevron", "Chevron",       '<g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 15.6 12 8.4l7 7.2"/></g>'],
+    ["chevron2","Double chevron",'<g fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 12.6 12 6.2l6.5 6.4"/><path d="M5.5 18.4 12 12l6.5 6.4"/></g>'],
+    ["circle",  "Circled",       '<g fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9.2"/><path d="M12 17.6V7.2" stroke-linecap="round"/><path d="M8.3 10.9 12 7l3.7 3.9" stroke-linecap="round" stroke-linejoin="round"/></g>']
+  ];
+  var AMAP = {};
+  ARROWS.forEach(function(a){ AMAP[a[0]] = a[2]; });
+  var arrStyle = "needle";
+  var pick = document.getElementById("arrowpick");
+  ARROWS.forEach(function(a){
+    var b = document.createElement("button");
+    b.type = "button"; b.dataset.k = a[0]; b.title = a[1];
+    b.innerHTML = '<svg viewBox="0 0 24 24">' + a[2] + '</svg>';
+    if (a[0] === arrStyle) b.className = "on";
+    pick.appendChild(b);
+  });
+  pick.addEventListener("click", function(e){
+    var b = e.target.closest("button"); if (!b) return;
+    arrStyle = b.dataset.k;
+    pick.querySelectorAll("button").forEach(function(n){ n.classList.toggle("on", n === b); });
+    render();
+  });
+
+  var PRESETS = {
+    classic:   {c_goldHi:"#f6e7b0", c_gold:"#d4af37", c_goldLo:"#a2761f", c_sand:"#e8dcbe", c_muted:"#8b7c56", c_line:"#33291a"},
+    champagne: {c_goldHi:"#fbf3d5", c_gold:"#e3cd92", c_goldLo:"#b39a5c", c_sand:"#efe6cd", c_muted:"#9a8a63", c_line:"#332e21"},
+    rose:      {c_goldHi:"#f7dcc4", c_gold:"#d9a273", c_goldLo:"#a86f45", c_sand:"#eeddcc", c_muted:"#94765f", c_line:"#372a21"},
+    brass:     {c_goldHi:"#e8d08a", c_gold:"#b8912f", c_goldLo:"#7d5c15", c_sand:"#ddcda2", c_muted:"#7b6c46", c_line:"#2c2415"}
+  };
+
+  /* ---------------- reorderable rows ---------------- */
+  var ROW_DEFS = {
+    date:    {name:"Date",                labelable:true,  text:"" },
+    rating:  {name:"Star rating",         labelable:true,  text:"Rating"},
+    divider: {name:"Divider line",        labelable:false},
+    swell:   {name:"Swell height + dir",  labelable:true,  text:"Swell"},
+    period:  {name:"Swell period",        labelable:true,  text:"Period"},
+    icon:    {name:"Weather symbol",      labelable:true,  text:"Sky"},
+    temp:    {name:"Air temperature",     labelable:true,  text:"Air"},
+    wind:    {name:"Wind",                labelable:true,  text:"Wind"}
+  };
+  var ROW_DEFAULTS = {
+    order: ["date","rating","divider","swell","period","icon","temp","wind"],
+    rows: {
+      date:    {show:true,  label:false, text:"Date"},
+      rating:  {show:true,  label:false, text:"Rating"},
+      divider: {show:true,  label:false, text:""},
+      swell:   {show:true,  label:true,  text:"Swell"},
+      period:  {show:true,  label:true,  text:"Period"},
+      icon:    {show:true,  label:false, text:"Sky"},
+      temp:    {show:true,  label:true,  text:"Air"},
+      wind:    {show:false, label:true,  text:"Wind"}
+    }
+  };
+  var order, rows;
+  function resetRows(){
+    order = ROW_DEFAULTS.order.slice();
+    rows = {};
+    Object.keys(ROW_DEFAULTS.rows).forEach(function(k){
+      rows[k] = {show:ROW_DEFAULTS.rows[k].show, label:ROW_DEFAULTS.rows[k].label, text:ROW_DEFAULTS.rows[k].text};
+    });
+  }
+  resetRows();
+
+  var list = document.getElementById("rowlist");
+  var dragKey = null;
+
+  function buildList(){
+    list.innerHTML = "";
+    order.forEach(function(key, idx){
+      var def = ROW_DEFS[key], st = rows[key];
+      var li = document.createElement("li");
+      li.draggable = true;
+      li.dataset.key = key;
+      if (!st.show) li.className = "off";
+
+      var top = document.createElement("div");
+      top.className = "r-top";
+      top.innerHTML =
+        '<span class="r-grip" title="Drag to reorder">&#9776;</span>' +
+        '<span class="r-name">' + def.name + '</span>' +
+        '<span class="r-move"><button type="button" data-mv="-1" ' + (idx === 0 ? "disabled" : "") + '>&#9650;</button>' +
+        '<button type="button" data-mv="1" ' + (idx === order.length - 1 ? "disabled" : "") + '>&#9660;</button></span>' +
+        '<label class="r-show"><input type="checkbox" data-show ' + (st.show ? "checked" : "") + '> show</label>';
+      li.appendChild(top);
+
+      if (def.labelable){
+        var lb = document.createElement("div");
+        lb.className = "r-lbl";
+        lb.innerHTML =
+          '<input type="text" data-text value="' + st.text.replace(/"/g, "&quot;") + '" placeholder="label text">' +
+          '<label class="r-show"><input type="checkbox" data-label ' + (st.label ? "checked" : "") + '> label</label>';
+        li.appendChild(lb);
+      }
+      list.appendChild(li);
+    });
+  }
+
+  list.addEventListener("click", function(e){
+    var btn = e.target.closest("button[data-mv]");
+    if (!btn) return;
+    var key = btn.closest("li").dataset.key;
+    var i = order.indexOf(key), j = i + (+btn.dataset.mv);
+    if (j < 0 || j >= order.length) return;
+    order.splice(i, 1); order.splice(j, 0, key);
+    buildList(); render();
+  });
+
+  list.addEventListener("change", function(e){
+    var li = e.target.closest("li"); if (!li) return;
+    var st = rows[li.dataset.key];
+    if (e.target.hasAttribute("data-show")){ st.show = e.target.checked; li.classList.toggle("off", !st.show); }
+    if (e.target.hasAttribute("data-label")) st.label = e.target.checked;
+    schedule();
+  });
+  list.addEventListener("input", function(e){
+    var li = e.target.closest("li"); if (!li) return;
+    if (e.target.hasAttribute("data-text")){ rows[li.dataset.key].text = e.target.value; schedule(); }
+  });
+
+  list.addEventListener("dragstart", function(e){
+    var li = e.target.closest("li"); if (!li) return;
+    dragKey = li.dataset.key; li.classList.add("drag");
+    e.dataTransfer.effectAllowed = "move";
+    try { e.dataTransfer.setData("text/plain", dragKey); } catch (err) {}
+  });
+  list.addEventListener("dragend", function(){
+    dragKey = null;
+    list.querySelectorAll("li").forEach(function(n){ n.classList.remove("drag", "over"); });
+  });
+  list.addEventListener("dragover", function(e){
+    e.preventDefault();
+    var li = e.target.closest("li");
+    list.querySelectorAll("li").forEach(function(n){ n.classList.toggle("over", n === li && li.dataset.key !== dragKey); });
+  });
+  list.addEventListener("drop", function(e){
+    e.preventDefault();
+    var li = e.target.closest("li");
+    if (!li || !dragKey || li.dataset.key === dragKey) { buildList(); return; }
+    var from = order.indexOf(dragKey), to = order.indexOf(li.dataset.key);
+    order.splice(from, 1); order.splice(to, 0, dragKey);
+    dragKey = null;
+    buildList(); render();
+  });
+
+  /* ---------------- plain fields ---------------- */
+  var FIELDS = ["c_title","c_lat","c_lon","c_showTitle","c_rules","c_showFoot",
+    "c_sDow","c_sDate","c_sStar","c_sLbl","c_sVal","c_sSub","c_sIco","c_sDir",
+    "c_showUnit","c_sUnit","c_showArrow","c_sArr","c_arrFrom",
+    "c_goldHi","c_gold","c_goldLo","c_metal",
+    "c_bg","c_sand","c_muted","c_line","c_glow","c_halo","c_grain","c_vig","c_todayHl",
+    "c_fontD","c_fontB","c_fs","c_track","c_radius","c_maxw",
+    "c_unitH","c_unitT","c_showLow","c_hMax","c_windPen"];
+
+  var DEFAULTS = {};
+  FIELDS.forEach(function(id){
+    var el = document.getElementById(id);
+    DEFAULTS[id] = el.type === "checkbox" ? el.checked : el.value;
+  });
+
+  function v(id){ var el = document.getElementById(id); return el.type === "checkbox" ? el.checked : el.value; }
+
+  function rgb(hex){
+    var h = String(hex).replace("#", "").trim();
+    if (h.length === 3) h = h[0]+h[0]+h[1]+h[1]+h[2]+h[2];
+    if (!/^[0-9a-f]{6}$/i.test(h)) h = "d4af37";
+    return [parseInt(h.slice(0,2),16), parseInt(h.slice(2,4),16), parseInt(h.slice(4,6),16)].join(",");
+  }
+
+  function cfg(){
+    var r = {};
+    Object.keys(rows).forEach(function(k){ r[k] = {show:rows[k].show, label:rows[k].label, text:rows[k].text}; });
+    return {
+      title: v("c_title"), lat: parseFloat(v("c_lat")) || 0, lon: parseFloat(v("c_lon")) || 0,
+      showTitle: v("c_showTitle"), rules: v("c_rules"), showFoot: v("c_showFoot"),
+      todayHl: v("c_todayHl"),
+      showArrow: v("c_showArrow"), arrowSvg: AMAP[arrStyle], arrFrom: v("c_arrFrom") === "from",
+      showUnit: v("c_showUnit"),
+      order: order.slice(), rows: r,
+      unitH: v("c_unitH"), unitT: v("c_unitT"), showLow: v("c_showLow"),
+      hMax: parseFloat(v("c_hMax")), windPen: parseFloat(v("c_windPen"))
+    };
+  }
+
+  function build(id){
+    var fd = FMAP[v("c_fontD")], fb = FMAP[v("c_fontB")];
+    var fams = [];
+    if (fd.g) fams.push(fd.g);
+    if (fb.g && fb.g !== fd.g) fams.push(fb.g);
+    var imp = fams.length
+      ? "@import url('https://fonts.googleapis.com/css2?family=" + fams.join("&family=") + "&display=swap');\n"
+      : "";
+
+    var metal = v("c_metal")
+      ? "background:linear-gradient(180deg,var(--sfw-gold-hi) 0%,var(--sfw-gold) 48%,var(--sfw-gold-lo) 100%);" +
+        "-webkit-background-clip:text;background-clip:text;color:transparent;"
+      : "color:var(--sfw-gold);";
+
+    var css = TPL_CSS
+      .replace(/__IMPORT__/g, imp)
+      .replace(/__ID__/g, id)
+      .replace(/__METAL__/g, metal)
+      .replace(/__GOLDRGB__/g, rgb(v("c_gold")))
+      .replace(/__GOLDHI__/g, v("c_goldHi")).replace(/__GOLDLO__/g, v("c_goldLo"))
+      .replace(/__GOLD__/g, v("c_gold"))
+      .replace(/__BG__/g, v("c_bg")).replace(/__SAND__/g, v("c_sand"))
+      .replace(/__MUTED__/g, v("c_muted")).replace(/__LINE__/g, v("c_line"))
+      .replace(/__GLOW__/g, v("c_glow")).replace(/__HALO__/g, v("c_halo"))
+      .replace(/__GRAIN__/g, v("c_grain")).replace(/__VIG__/g, v("c_vig"))
+      .replace(/__SDOW__/g, v("c_sDow")).replace(/__SDATE__/g, v("c_sDate"))
+      .replace(/__SSTAR__/g, v("c_sStar")).replace(/__SLBL__/g, v("c_sLbl"))
+      .replace(/__SVAL__/g, v("c_sVal")).replace(/__SSUB__/g, v("c_sSub"))
+      .replace(/__SICO__/g, v("c_sIco")).replace(/__SDIR__/g, v("c_sDir"))
+      .replace(/__SARR__/g, v("c_sArr")).replace(/__SUNIT__/g, v("c_sUnit"))
+      .replace(/__FONTD__/g, fd.stack).replace(/__FONTB__/g, fb.stack)
+      .replace(/__FS__/g, v("c_fs")).replace(/__TRACK__/g, v("c_track"))
+      .replace(/__RADIUS__/g, v("c_radius")).replace(/__MAXW__/g, v("c_maxw"))
+      .trim();
+
+    var js = TPL_JS.replace(/__ID__/g, id).replace("__CFG__", JSON.stringify(cfg())).trim();
+    return { css: css, js: js };
+  }
+
+  function snippet(){
+    var id = "surf-widget";
+    var b = build(id);
+    return '<!-- 5-day surf forecast widget -->\n<div id="' + id + '"></div>\n\n<style>\n' + b.css +
+      '\n</style>\n\n<scr' + 'ipt>\n(function(){\n' + b.js + '\n})();\n</scr' + 'ipt>';
+  }
+
+  var preview = document.getElementById("preview");
+  var status  = document.getElementById("status");
+  var out     = document.getElementById("out");
+  var run     = 0;
+
+  function render(){
+    var id = "sfw-live-" + (++run);
+    var b = build(id);
+    preview.innerHTML = "";
+    var st = document.createElement("style");
+    st.textContent = b.css;
+    var host = document.createElement("div");
+    host.id = id;
+    preview.appendChild(st);
+    preview.appendChild(host);
+    status.textContent = "";
+    try { new Function(b.js)(); } catch (e) { status.textContent = "preview error: " + e.message; }
+    out.value = snippet();
+    autosave();
+  }
+
+  var t;
+  function schedule(){ clearTimeout(t); t = setTimeout(render, 200); }
+
+  FIELDS.forEach(function(id){
+    var el = document.getElementById(id);
+    el.addEventListener("input", schedule);
+    el.addEventListener("change", schedule);
+  });
+
+  document.querySelectorAll('input[type=color]').forEach(function(sw){
+    var txt = document.getElementById(sw.dataset.for);
+    sw.addEventListener("input", function(){ txt.value = sw.value; schedule(); });
+    txt.addEventListener("input", function(){
+      if (/^#[0-9a-f]{6}$/i.test(txt.value)) sw.value = txt.value;
+    });
+  });
+
+  document.querySelectorAll('.swatches button').forEach(function(b){
+    b.addEventListener("click", function(){
+      var p = PRESETS[b.dataset.preset];
+      Object.keys(p).forEach(function(k){
+        document.getElementById(k).value = p[k];
+        var sw = document.querySelector('input[type=color][data-for="' + k + '"]');
+        if (sw) sw.value = p[k];
+      });
+      render();
+    });
+  });
+
+  var RANGES = [["c_fs","o_fs","px"],["c_radius","o_radius","px"],["c_maxw","o_maxw","px"],
+    ["c_hMax","o_hMax",""],["c_windPen","o_windPen",""],["c_glow","o_glow",""],
+    ["c_halo","o_halo",""],["c_grain","o_grain",""],["c_vig","o_vig",""],["c_track","o_track",""],
+    ["c_sDow","o_sDow","em"],["c_sDate","o_sDate","em"],["c_sStar","o_sStar","em"],
+    ["c_sLbl","o_sLbl","em"],["c_sVal","o_sVal","em"],["c_sSub","o_sSub","em"],
+    ["c_sIco","o_sIco","em"],["c_sDir","o_sDir","em"],["c_sArr","o_sArr","em"],
+    ["c_sUnit","o_sUnit","em"]];
+  RANGES.forEach(function(p){
+    var r = document.getElementById(p[0]), o = document.getElementById(p[1]);
+    function sync(){ o.textContent = r.value + p[2]; }
+    r.addEventListener("input", sync); sync();
+  });
+
+  document.getElementById("copy").addEventListener("click", function(){
+    out.select(); out.setSelectionRange(0, out.value.length);
+    navigator.clipboard.writeText(out.value).then(function(){
+      var b = document.getElementById("copy"); b.textContent = "Copied";
+      setTimeout(function(){ b.textContent = "Copy code"; }, 1400);
+    }, function(){ document.execCommand("copy"); });
+  });
+
+  document.getElementById("download").addEventListener("click", function(){
+    var page = '<!DOCTYPE html>\n<html><head><meta charset="utf-8">' +
+      '<meta name="viewport" content="width=device-width,initial-scale=1">' +
+      '<title>' + v("c_title") + ' — surf forecast</title></head>\n' +
+      '<body style="margin:0;padding:48px 16px;background:' + v("c_bg") + '">\n' +
+      snippet() + '\n</body></html>';
+    var url = URL.createObjectURL(new Blob([page], {type:"text/html"}));
+    var a = document.createElement("a");
+    a.href = url; a.download = "surf-widget.html"; a.click();
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 2000);
+  });
+
+  document.getElementById("reset").addEventListener("click", function(){
+    FIELDS.forEach(function(id){
+      var el = document.getElementById(id);
+      if (el.type === "checkbox") el.checked = DEFAULTS[id]; else el.value = DEFAULTS[id];
+    });
+    document.querySelectorAll('input[type=color]').forEach(function(sw){
+      sw.value = document.getElementById(sw.dataset.for).value;
+    });
+    RANGES.forEach(function(p){ document.getElementById(p[0]).dispatchEvent(new Event("input")); });
+    arrStyle = "needle";
+    pick.querySelectorAll("button").forEach(function(n){ n.classList.toggle("on", n.dataset.k === arrStyle); });
+    resetRows(); buildList(); render();
+  });
+
+  /* ---------------- save / load layouts ---------------- */
+  var LS_AUTO  = "sfw-editor-autosave-v1";
+  var LS_SAVED = "sfw-editor-layouts-v1";
+  var stamp = document.getElementById("lay_stamp");
+  var laySel = document.getElementById("lay_list");
+  var booting = true;
+
+  function collectState(){
+    var s = { v:1, savedAt:new Date().toISOString(), fields:{}, order:order.slice(), rows:{}, arrStyle:arrStyle };
+    FIELDS.forEach(function(id){
+      var el = document.getElementById(id);
+      s.fields[id] = el.type === "checkbox" ? el.checked : el.value;
+    });
+    Object.keys(rows).forEach(function(k){
+      s.rows[k] = { show:rows[k].show, label:rows[k].label, text:rows[k].text };
+    });
+    return s;
+  }
+
+  function applyState(s){
+    if (!s || !s.fields) return false;
+    FIELDS.forEach(function(id){
+      if (!(id in s.fields)) return;
+      var el = document.getElementById(id);
+      if (el.type === "checkbox") el.checked = !!s.fields[id]; else el.value = s.fields[id];
+    });
+    document.querySelectorAll('input[type=color]').forEach(function(sw){
+      var t = document.getElementById(sw.dataset.for);
+      if (/^#[0-9a-f]{6}$/i.test(t.value)) sw.value = t.value;
+    });
+    if (Array.isArray(s.order)){
+      var seen = {}, next = [];
+      s.order.forEach(function(k){ if (ROW_DEFS[k] && !seen[k]){ seen[k] = 1; next.push(k); } });
+      ROW_DEFAULTS.order.forEach(function(k){ if (!seen[k]) next.push(k); });   // tolerate older files
+      order = next;
+    }
+    if (s.rows) Object.keys(rows).forEach(function(k){
+      var r = s.rows[k]; if (!r) return;
+      rows[k].show = !!r.show; rows[k].label = !!r.label;
+      rows[k].text = typeof r.text === "string" ? r.text : rows[k].text;
+    });
+    if (s.arrStyle && AMAP[s.arrStyle]) arrStyle = s.arrStyle;
+    pick.querySelectorAll("button").forEach(function(n){ n.classList.toggle("on", n.dataset.k === arrStyle); });
+    RANGES.forEach(function(p){ document.getElementById(p[0]).dispatchEvent(new Event("input")); });
+    buildList(); render();
+    return true;
+  }
+
+  function autosave(){
+    if (booting) return;
+    try {
+      localStorage.setItem(LS_AUTO, JSON.stringify(collectState()));
+      stamp.textContent = "Saved " + new Date().toLocaleTimeString();
+      stamp.style.color = "var(--ed-gold)";
+    } catch (e) {
+      stamp.textContent = "(browser storage unavailable — use Export)";
+    }
+  }
+
+  function readSaved(){
+    try { return JSON.parse(localStorage.getItem(LS_SAVED)) || {}; } catch (e) { return {}; }
+  }
+  function writeSaved(o){
+    try { localStorage.setItem(LS_SAVED, JSON.stringify(o)); return true; } catch (e) { return false; }
+  }
+  function refreshList(sel){
+    var all = readSaved(), names = Object.keys(all).sort();
+    laySel.innerHTML = names.length
+      ? names.map(function(n){ return '<option>' + n.replace(/</g,"&lt;") + '</option>'; }).join("")
+      : '<option value="">— none saved yet —</option>';
+    if (sel && names.indexOf(sel) > -1) laySel.value = sel;
+  }
+
+  document.getElementById("lay_save").addEventListener("click", function(){
+    var box = document.getElementById("lay_name");
+    var name = box.value.trim();
+    if (!name){ box.focus(); stamp.textContent = "Name it first"; stamp.style.color = "#c96"; return; }
+    var all = readSaved();
+    all[name] = collectState();
+    if (writeSaved(all)){ refreshList(name); box.value = ""; stamp.textContent = 'Saved layout "' + name + '"'; stamp.style.color = "var(--ed-gold)"; }
+    else stamp.textContent = "Could not save — storage blocked";
+  });
+
+  document.getElementById("lay_load").addEventListener("click", function(){
+    var all = readSaved(), n = laySel.value;
+    if (all[n] && applyState(all[n])){ stamp.textContent = 'Loaded "' + n + '"'; stamp.style.color = "var(--ed-gold)"; }
+  });
+
+  document.getElementById("lay_del").addEventListener("click", function(){
+    var all = readSaved(), n = laySel.value;
+    if (!all[n]) return;
+    delete all[n]; writeSaved(all); refreshList();
+    stamp.textContent = 'Deleted "' + n + '"'; stamp.style.color = "var(--ed-dim)";
+  });
+
+  document.getElementById("lay_exp").addEventListener("click", function(){
+    var s = collectState();
+    var safe = (v("c_title") || "surf-widget").replace(/[^a-z0-9]+/gi, "-").toLowerCase();
+    var url = URL.createObjectURL(new Blob([JSON.stringify(s, null, 2)], {type:"application/json"}));
+    var a = document.createElement("a");
+    a.href = url; a.download = safe + "-layout.json"; a.click();
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 2000);
+  });
+
+  var layFile = document.getElementById("lay_file");
+  document.getElementById("lay_imp").addEventListener("click", function(){ layFile.click(); });
+  layFile.addEventListener("change", function(){
+    var f = layFile.files && layFile.files[0]; if (!f) return;
+    var fr = new FileReader();
+    fr.onload = function(){
+      try {
+        if (applyState(JSON.parse(fr.result))){ stamp.textContent = "Imported " + f.name; stamp.style.color = "var(--ed-gold)"; }
+        else throw new Error("not a layout file");
+      } catch (e){ stamp.textContent = "Import failed: " + e.message; stamp.style.color = "#c96"; }
+      layFile.value = "";
+    };
+    fr.readAsText(f);
+  });
+
+  /* ---------------- boot ---------------- */
+  refreshList();
+  buildList();
+  var restored = null;
+  try { restored = JSON.parse(localStorage.getItem(LS_AUTO)); } catch (e) {}
+  booting = false;
+  if (!(restored && applyState(restored))) render();
+})();
+</script>
+</body>
+</html>

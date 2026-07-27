@@ -1,0 +1,696 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Villa 25 Ekas — Decisions to Sign Off</title>
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body>
+
+<div class="wrap">
+
+  <header class="head">
+    <div class="mark">
+      <span class="m1">Villa</span><span class="m2">25</span><span class="m3">Ekas</span>
+    </div>
+    <p class="eyebrow">Decisions to sign off</p>
+    <h1>A few things only<br>you three can decide</h1>
+    <div class="lede">
+      <p>Every open question on the website and booking setup is below. Each one has the
+         options, the reasoning behind them, and a recommendation. Pick one, add a comment
+         if you disagree, move on.</p>
+      <p><b>It takes about fifteen minutes.</b> Your answers save automatically in this
+         browser, so you can stop and come back to the same link — nothing is lost. Nothing
+         is sent to anyone until you press <i>Send my answers</i> at the bottom, and you can
+         send again later if you change your mind.</p>
+      <p class="warn">Six of these are marked <b class="urgent">Blocks launch</b>. If you
+         only have five minutes, do those.</p>
+    </div>
+
+    <div class="who">
+      <p class="wholab">Who are you?</p>
+      <div class="whopick" id="whopick"></div>
+      <input type="text" id="whoOther" placeholder="Or type your name" aria-label="Your name">
+    </div>
+
+    <div class="bar">
+      <div class="meter"><i id="fill"></i></div>
+      <p class="stat"><b id="pct">0%</b><span id="cnt">0 of 0 decided</span><em id="saved"></em></p>
+    </div>
+  </header>
+
+  <main id="main"></main>
+
+  <section class="finish">
+    <h2>Send it back</h2>
+    <p>Press send and your answers go straight through. Partial answers are genuinely
+       useful — send it even if you've skipped things, and send again later once you've
+       made up your mind on the rest.</p>
+    <div class="acts">
+      <button type="button" class="btn primary" id="bSend">Send my answers</button>
+      <button type="button" class="btn" id="bSave">Save a copy</button>
+      <button type="button" class="btn" id="bCopy">Copy to clipboard</button>
+      <button type="button" class="btn quiet" id="bClear">Clear everything</button>
+    </div>
+    <p class="status" id="status" role="status" aria-live="polite"></p>
+  </section>
+
+  <form id="post" action="https://formsubmit.co/milkysbeta@gmail.com" method="POST" hidden>
+    <input type="hidden" name="_subject" id="pSubject" value="Villa 25 Ekas decisions">
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_template" value="box">
+    <input type="hidden" name="_next" id="pNext" value="">
+    <input type="hidden" name="From" id="pWho" value="">
+    <input type="hidden" name="Progress" id="pProg" value="">
+    <input type="hidden" name="Decisions" id="pBody" value="">
+  </form>
+
+</div>
+
+<button class="up" id="up" aria-label="Back to top">↑</button>
+
+<style>
+:root{
+  --ink:#16130E; --ink2:#3A3327; --paper:#F7F2E7; --card:#FFFDF7; --card2:#F0E9D9;
+  --line:#DED3BC; --line2:#C6B899; --bronze:#9C6C36; --bronze2:#845A2A;
+  --reef:#1D5450; --muted:#6F6555; --urgent:#8C3A22; --field:#FFFEFB;
+  --fd:'Iowan Old Style','Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif;
+  --ft:'Segoe UI',system-ui,-apple-system,'Helvetica Neue',sans-serif;
+  --fu:ui-monospace,'Cascadia Mono',Consolas,'SF Mono',monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --ink:#F0E8D7; --ink2:#C8BCA5; --paper:#0F0D0A; --card:#191510; --card2:#221C15;
+    --line:#302A21; --line2:#473E31; --bronze:#C99A5C; --bronze2:#E2B87E;
+    --reef:#66B2A8; --muted:#94886F; --urgent:#D07E5F; --field:#151109;
+  }
+}
+:root[data-theme="light"]{
+  --ink:#16130E; --ink2:#3A3327; --paper:#F7F2E7; --card:#FFFDF7; --card2:#F0E9D9;
+  --line:#DED3BC; --line2:#C6B899; --bronze:#9C6C36; --bronze2:#845A2A;
+  --reef:#1D5450; --muted:#6F6555; --urgent:#8C3A22; --field:#FFFEFB;
+}
+:root[data-theme="dark"]{
+  --ink:#F0E8D7; --ink2:#C8BCA5; --paper:#0F0D0A; --card:#191510; --card2:#221C15;
+  --line:#302A21; --line2:#473E31; --bronze:#C99A5C; --bronze2:#E2B87E;
+  --reef:#66B2A8; --muted:#94886F; --urgent:#D07E5F; --field:#151109;
+}
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--ft);
+  font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+body::before{content:'';position:fixed;inset:0 0 auto 0;height:3px;z-index:80;
+  background:linear-gradient(90deg,var(--reef),var(--bronze) 48%,var(--line2) 72%,var(--reef))}
+
+.wrap{max-width:820px;margin:0 auto;padding:0 24px 120px}
+
+/* ---- header ---- */
+.head{padding:60px 0 0}
+.mark{display:flex;align-items:baseline;gap:9px;margin-bottom:36px}
+.m1,.m3{font-family:var(--fd);font-size:14px;letter-spacing:.4em;text-transform:uppercase;color:var(--ink2)}
+.m2{font-family:var(--fd);font-size:30px;color:var(--bronze);line-height:1}
+.eyebrow{margin:0 0 16px;font-family:var(--fu);font-size:11px;letter-spacing:.26em;
+  text-transform:uppercase;color:var(--bronze)}
+h1{font-family:var(--fd);font-weight:400;font-size:clamp(34px,5.4vw,54px);line-height:1.06;
+  margin:0 0 26px;letter-spacing:-.015em;text-wrap:balance}
+.lede{max-width:62ch;color:var(--ink2)}
+.lede p{margin:0 0 13px}
+.warn{padding:13px 17px;background:var(--card2);border-left:2px solid var(--urgent);
+  border-radius:0 3px 3px 0;font-size:15.5px}
+.urgent{color:var(--urgent)}
+
+.who{margin:38px 0 0;padding:22px 24px;background:var(--card);border:1px solid var(--line);
+  border-radius:4px}
+.wholab{margin:0 0 13px;font-family:var(--fu);font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--muted)}
+.whopick{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.whopick button{font-family:var(--ft);font-size:15px;padding:8px 18px;border-radius:999px;
+  border:1px solid var(--line2);background:transparent;color:var(--ink);cursor:pointer;
+  transition:background .15s,border-color .15s,color .15s}
+.whopick button:hover{border-color:var(--bronze)}
+.whopick button[aria-pressed="true"]{background:var(--bronze);border-color:var(--bronze);
+  color:#FFFAF1;font-weight:600}
+.whopick button:focus-visible,input:focus-visible,textarea:focus-visible,.btn:focus-visible,
+.opt:focus-visible{outline:2px solid var(--reef);outline-offset:2px}
+
+.bar{position:sticky;top:0;z-index:70;margin:34px -24px 0;padding:14px 24px;
+  background:var(--paper);border-bottom:1px solid var(--line)}
+.meter{height:3px;background:var(--line);border-radius:2px;overflow:hidden}
+.meter i{display:block;height:100%;width:0;background:var(--bronze);transition:width .35s ease}
+.stat{margin:9px 0 0;display:flex;gap:14px;align-items:baseline;font-family:var(--fu);
+  font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.stat b{color:var(--ink);font-size:13px}
+.stat em{margin-left:auto;font-style:normal;color:var(--reef)}
+
+/* ---- groups & cards ---- */
+.grp{margin:64px 0 0}
+.grp > h2{font-family:var(--fd);font-weight:400;font-size:15px;letter-spacing:.24em;
+  text-transform:uppercase;color:var(--bronze);margin:0 0 4px}
+.grp > p{margin:0;color:var(--muted);font-size:15px;max-width:60ch}
+
+.card{margin:26px 0 0;padding:26px 28px;background:var(--card);border:1px solid var(--line);
+  border-radius:4px}
+.card.block{border-left:3px solid var(--urgent)}
+.card.done{border-color:var(--line2)}
+.chead{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:8px}
+.cn{font-family:var(--fu);font-size:11px;color:var(--bronze);letter-spacing:.1em}
+.chead h3{font-family:var(--fd);font-weight:400;font-size:25px;margin:0;flex:1;
+  letter-spacing:-.01em;min-width:200px;text-wrap:balance}
+.tag{font-family:var(--fu);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;
+  padding:4px 9px;border-radius:2px;background:var(--urgent);color:#FFF6F2;white-space:nowrap}
+.q{margin:0 0 6px;color:var(--ink2);max-width:62ch}
+.ctx{margin:0;color:var(--muted);font-size:15px;max-width:62ch}
+.ctx code{font-family:var(--fu);font-size:13.5px;background:var(--card2);padding:1px 5px;border-radius:2px}
+
+.opts{display:flex;flex-direction:column;gap:9px;margin:20px 0 0}
+.opt{display:block;width:100%;text-align:left;font-family:inherit;font-size:inherit;
+  padding:14px 17px;background:var(--card2);border:1px solid transparent;border-radius:3px;
+  cursor:pointer;color:var(--ink);transition:border-color .15s,background .15s}
+.opt:hover{border-color:var(--line2)}
+.opt[aria-pressed="true"]{border-color:var(--bronze);background:var(--field);
+  box-shadow:inset 3px 0 0 var(--bronze)}
+.olab{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap}
+.otick{font-family:var(--fu);font-size:13px;color:var(--muted);width:14px;flex:none}
+.opt[aria-pressed="true"] .otick{color:var(--bronze)}
+.otxt{font-weight:600;flex:1;min-width:160px}
+.orec{font-family:var(--fu);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--reef);border:1px solid var(--reef);padding:2px 7px;border-radius:2px}
+.owhy{margin:6px 0 0 23px;font-size:14.5px;color:var(--muted);line-height:1.5;max-width:60ch}
+
+.note{margin:16px 0 0}
+.note label{display:block;font-family:var(--fu);font-size:10.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+input[type=text],textarea{width:100%;font-family:inherit;font-size:16px;color:var(--ink);
+  background:var(--field);border:1px solid var(--line2);border-radius:3px;padding:10px 13px;
+  line-height:1.5}
+textarea{resize:vertical;min-height:88px}
+input::placeholder,textarea::placeholder{color:var(--muted);opacity:.75}
+input:focus-visible,textarea:focus-visible{border-color:var(--bronze)}
+
+/* ---- finish ---- */
+.finish{margin:80px 0 0;padding:32px 30px;background:var(--card2);border:1px solid var(--line2);
+  border-radius:4px}
+.finish h2{font-family:var(--fd);font-weight:400;font-size:27px;margin:0 0 11px}
+.finish p{margin:0 0 20px;max-width:58ch;color:var(--ink2)}
+.finish a{color:var(--bronze2);text-underline-offset:3px}
+.acts{display:flex;flex-wrap:wrap;gap:11px}
+.btn{font-family:var(--fu);font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+  padding:14px 24px;border-radius:3px;cursor:pointer;background:transparent;
+  border:1px solid var(--line2);color:var(--ink);transition:background .16s,border-color .16s,color .16s}
+.btn:hover{border-color:var(--bronze);color:var(--bronze2)}
+.btn.primary{background:var(--bronze);border-color:var(--bronze);color:#FFFAF1;font-weight:600}
+.btn.primary:hover{background:var(--bronze2);border-color:var(--bronze2);color:#FFFAF1}
+.btn.quiet{color:var(--muted);border-color:transparent}
+.btn.quiet:hover{color:var(--ink);border-color:var(--line2)}
+.status{margin:17px 0 0 !important;font-family:var(--fu);font-size:12px;color:var(--reef);min-height:17px}
+
+.up{position:fixed;right:20px;bottom:20px;width:42px;height:42px;border-radius:50%;
+  border:1px solid var(--line2);background:var(--card);color:var(--ink);cursor:pointer;
+  font-size:17px;opacity:0;pointer-events:none;transition:opacity .25s;z-index:60}
+.up.show{opacity:1;pointer-events:auto}
+.up:hover{border-color:var(--bronze);color:var(--bronze2)}
+
+@media (max-width:620px){
+  body{font-size:16px}
+  .wrap{padding:0 18px 100px}
+  .bar{margin:30px -18px 0;padding:12px 18px}
+  .card{padding:22px 19px}
+  .chead h3{font-size:22px}
+  .acts .btn{flex:1 1 100%}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none !important;scroll-behavior:auto !important}}
+</style>
+
+<script>
+(function(){
+"use strict";
+
+function o(v,txt,why,rec){ return {v:v,txt:txt,why:why||'',rec:!!rec}; }
+
+var GROUPS = [
+
+{ name:'Money & policy', intro:'Nothing here can wait — the site cannot take a deposit without these four.', items:[
+
+ {id:'deposit', block:true, t:'How much deposit to hold a booking?',
+  q:'What a guest pays up front, and when the rest is due.',
+  opts:[
+   o('30_70','30% on booking · 70% due 14 days before arrival','Industry standard for Indonesian villas. Low enough that guests do not hesitate, high enough that a no-show costs them more than it costs you.',true),
+   o('50_50','50% on booking · 50% on arrival','More cash up front, but noticeably more booking hesitation. Worth it only if you need deposits to fund operations.'),
+   o('100','Full payment on booking','Best cash position, worst conversion. Recommended as a rule for short stays (under 3 nights) or last-minute bookings, not as the default.')
+  ]},
+
+ {id:'cancel', block:true, t:'What is the cancellation policy?',
+  q:'One cancellation is 20% of your inventory, so this matters more for you than for a big hotel.',
+  ctx:'Whichever you pick, we will also offer a date-change credit valid 12 months. It costs you nothing, prevents most arguments, and reads as generous.',
+  opts:[
+   o('flex','Flexible — full refund up to 14 days out','Maximum bookings, maximum exposure. A late cancellation in high season is very hard to refill in Ekas.'),
+   o('mod','Moderate — full refund to 30 days · 50% to 14 days · nothing inside 14',"Standard for boutique villas. Guests accept it without complaint, and you are protected in the months that matter.",true),
+   o('strict','Strict — deposit non-refundable, date changes offered instead','Best cash protection, but you will lose bookings to the villa listed next to you on the same search page.')
+  ]},
+
+ {id:'pay', block:true, t:'How do guests actually pay the deposit?',
+  q:'This is a real constraint, not a preference.',
+  ctx:'Stripe does not onboard Indonesian-registered businesses. So the choice depends on which entity is contracting with the guest — which also has to match the T&Cs.',
+  opts:[
+   o('wise','Wise / bank transfer, confirmed by hand','Zero setup, near-zero fees, live this week. But you chase every deposit manually and a fair share of guests abandon at the "please transfer" step. Right answer for the soft opening.',true),
+   o('stripe','Card payments via Stripe, held by the NZ company','Cleanest guest experience by far — pay on the site, done. Requires the NZ company to be the contracting party. Worth asking the accountant before committing.'),
+   o('xendit','Xendit — Indonesian gateway','Built for Indonesia, takes cards plus GoPay, OVO and bank transfer. Around 3.5% per card transaction. The right long-term answer if the business is Indonesian.')
+  ]},
+
+ {id:'rates', t:'How do we publish the rates?',
+  q:'Current working numbers: lower rooms 1,600,000 · two-bedroom villa 2,500,000 · upstairs apartment 2,000,000 IDR per night.',
+  opts:[
+   o('intro','Publish them as "introductory rates — opening 2026"','Creates urgency now and lets you raise prices later without anyone feeling misled. Costs nothing.',true),
+   o('standard','Publish them as standard rates','Simpler and more confident, but a rise in six months looks like a rise.'),
+   o('hide','Show no prices — "rates on request"','Signals exclusivity, but roughly a third of people leave a villa site rather than send an email to find out the price.')
+  ]},
+
+ {id:'buyout', t:'Discount for booking the whole property?',
+  q:'Everything at full price comes to 9,300,000 IDR per night.',
+  ctx:'Worth thinking about: a buyout guest is your least price-sensitive customer and creates the least work — one arrival, one departure, one set of expectations.',
+  opts:[
+   o('25','25% off — about 6,975,000 IDR per night','Generous without giving away your easiest booking. Keeps 40% in your pocket as a negotiating card for long or low-season stays.',true),
+   o('40','40% off — about 5,580,000 IDR per night','The number discussed so far. Fills the calendar fast, but you are discounting hardest to the guest who needed it least.'),
+   o('none','No standard discount — negotiate each one','Maximum flexibility, but people will not enquire if there is no signal that a buyout is welcome.')
+  ]},
+
+ {id:'minnights', t:'Minimum nights?',
+  opts:[
+   o('2_3','2 nights normally · 3 in high season and for buyouts','Balanced. Add 5–7 nights over Christmas and New Year.',true),
+   o('3','3 nights always','Fewer changeovers, less staff churn, but you lose weekend traffic from Bali.'),
+   o('none','No minimum','Maximum bookings, maximum laundry.')
+  ]},
+
+ {id:'season', t:'Seasonal pricing?',
+  ctx:'Typical Lombok pattern is +20–30% June to September and December to January, and about −15% February to March.',
+  opts:[
+   o('later','Build the capability now, leave it switched off','No data yet to price against. Revisit after six months of real bookings. Costs nothing to have ready.',true),
+   o('now','Set high and low season now','Only worth it if someone already has a firm view on the calendar.'),
+   o('never','Flat rate year-round','Simplest to run and to explain.')
+  ]}
+]},
+
+{ name:'Commercial', intro:'Arrangements between the three of you and the people you work with.', items:[
+
+ {id:'commission', t:'Booking commission against the design invoice',
+  q:'Proposal: a share of direct bookings goes toward settling the web and graphic design bill, stopping automatically once it is paid in full.',
+  ctx:'Fully transparent and visible in the admin portal — every booking it applies to, the running total, and what is left owing. It stops by itself; nobody has to remember to switch it off.',
+  opts:[
+   o('10','10% of direct bookings until the invoice is settled','Clears a typical invoice in a few months of moderate occupancy without being noticeable against a nightly rate.',true),
+   o('5','5% of direct bookings','Gentler on cash flow, takes roughly twice as long.'),
+   o('flat','No commission — pay the invoice on normal terms','Cleanest if the cash is there. No ongoing arrangement to track or explain.'),
+   o('other','Something else — see my comment','')
+  ]},
+
+ {id:'neighbour', block:true, t:'Who invoices for a combined booking with the villa next door?',
+  q:'When a large group takes both properties, whose name is on the bill?',
+  ctx:'This changes the enquiry form, the T&Cs, and who carries the risk if the group cancels — so it needs settling before either property advertises the other.',
+  opts:[
+   o('we','We invoice for both and settle with them afterwards','One price, one payment, one point of contact — much the better guest experience. But you are carrying their cancellation risk and holding their money.'),
+   o('refer','We refer the enquiry and they bill separately','No risk, no admin, no awkward conversations. The guest gets two invoices and two conversations, which feels less premium.'),
+   o('ask','Undecided — need to talk to them first','Reasonable. Nothing else is blocked by this except the wording on the large-groups page.',true)
+  ]},
+
+ {id:'neighbourwords', t:'How should the villa next door be described?',
+  q:'They are friends who are helping you set up, so their own words should lead.',
+  ctx:'Ask them to write two or three sentences describing their place, and tell us whether they want to be named or referred to as "our neighbouring villa". Paste their exact wording below — we will use it as close to verbatim as the layout allows.',
+  type:'long', ph:'Their name, and how they describe themselves…'},
+
+ {id:'transfer', t:'Airport transfers — free, or charged?',
+  q:'Lombok International to Ekas is about 40 km and takes 1 to 1.5 hours. Local operators charge 200,000–500,000 IDR per vehicle each way.',
+  opts:[
+   o('5plus','Free for stays of 5 nights or more · 400,000 IDR otherwise','Nudges people toward longer stays, which are far more profitable per hour of staff time. "Free transfer" is a strong line on the booking page.',true),
+   o('all','Free for everyone','Generous, but you absorb around 800,000 IDR return on a two-night booking.'),
+   o('paid','Always charged','Simplest, but throws away a persuasive selling point for very little money.')
+  ]},
+
+ {id:'partners', t:'Pursue a 10% guest discount with local businesses?',
+  q:'Warungs, board hire, boat charter, massage, scooter rental.',
+  opts:[
+   o('yes','Yes — approach them before opening','Costs them little, guarantees them traffic, costs you nothing, and gives the site an "Eat & Drink in Ekas" section no competitor will have.',true),
+   o('later','Later, once we are open and have something to offer them','Fair — the conversation is easier when you can point to real guests.'),
+   o('no','Skip it','')
+  ]}
+]},
+
+{ name:'The website', intro:'Things that shape what gets built, and in what order.', items:[
+
+ {id:'domain', block:true, t:'Buy villa25ekas.com — five years?',
+  q:'This is the only item on the list that somebody else can take from you.',
+  ctx:'Cheapest honest option is Porkbun at roughly USD $11 per year, the same price every year, with WHOIS privacy included. Five years is about USD $55. Cloudflare is marginally cheaper but only accepts transfers, not new registrations, so it cannot be the starting point. Avoid GoDaddy — cheap for year one, then roughly double.',
+  opts:[
+   o('5yr','Yes — five years at Porkbun, about USD $55','Locks the name down, removes any renewal risk, and helps slightly with search rankings.',true),
+   o('1yr','Just one year for now, about USD $11','Lower commitment, but it is a renewal date somebody has to remember.'),
+   o('other','I want to check somewhere else first','')
+  ]},
+
+ {id:'emails', t:'Which email addresses do you want?',
+  q:'Basic mailboxes on the villa25ekas.com domain.',
+  ctx:'Cheapest workable option is around USD $2 per mailbox per month, or free forwarding if you are happy for replies to come from a Gmail address. Suggested set: bookings@, info@, and one each for the three of you.',
+  type:'long', ph:'e.g. bookings@, info@, john@, alison@, manager@'},
+
+ {id:'hosting', t:'Set up a Cloudflare account for hosting?',
+  q:'We need somewhere to put the site.',
+  ctx:'Cloudflare Pages is free at this scale with no realistic ceiling. It also gives two things we specifically need: free country detection, which is what makes the currency switch to the visitor\'s own automatically, and a fast connection from Asia and Australia — where most of your guests will be browsing from. Setup takes about five minutes and needs an email and a card for verification, even on the free plan.',
+  opts:[
+   o('yes','Yes — set it up','',true),
+   o('walk','Yes, but send me step-by-step instructions first',''),
+   o('later','Later — build the site first','Fine. The site can be developed and previewed locally without it.')
+  ]},
+
+ {id:'map', t:'How should the "getting here" map look?',
+  q:'From the airport, and from the ferry terminal.',
+  opts:[
+   o('illus','Hand-illustrated map in the brand palette, with a "open in Google Maps" button underneath','Beautiful, ownable, and the thing people screenshot and send to each other. The button handles actual navigation, so the illustration never has to be accurate enough to drive by.',true),
+   o('interactive','A real interactive map, styled in black and gold','Practical and always current, but it looks like every other villa site.'),
+   o('both','Both — illustrated at the top, interactive below','More work, but genuinely the best of both.')
+  ]},
+
+ {id:'ferry', block:true, t:'Which arrival routes do guests actually use?',
+  q:'The map is drawn around these, so the wrong list means the wrong map.',
+  ctx:'Lembar handles ferries from Bali and Padangbai. Kayangan connects to Sumbawa. Bangsal is the jumping-off point for the Gilis. Which of these do your guests really arrive through, and roughly how long is each drive to Ekas?',
+  type:'long', ph:'e.g. Lembar — 2.5 hrs. Airport — 1.5 hrs. Bangsal — rarely used.'},
+
+ {id:'hotspots', t:'What should the map mark, besides the villa?',
+  q:'A map that shows the surf breaks is a reason for people to share the page.',
+  ctx:'Suggestions: Inside Ekas, Outside Ekas, beach access, the nearest warung, a viewpoint, the villa next door.',
+  type:'long', ph:'List the places worth marking…'},
+
+ {id:'blognav', t:'Blog in the main navigation from launch?',
+  opts:[
+   o('yes','Yes, from day one','Confident, and it signals an active, living property.',true),
+   o('footer','Footer only until there are three or four posts','Safer — an empty blog in the main nav reads as abandoned.')
+  ]},
+
+ {id:'blogposts', block:true, t:'Three opening stories — please sign these off',
+  q:'Rather than invented filler, three short real posts. They hold the space, and you never have to delete them.',
+  ctx:'Proposed: (1) John on building the villa and what it took. (2) Alison on working with local trades and neighbours through the build. (3) A guest, or one of you, on a good swell at Inside Ekas. Give three or four sentences of real detail on each and we will write them properly. Note who each is by — Alison, John, or a guest with name and country.',
+  type:'long', ph:'Post 1 — by …\nPost 2 — by …\nPost 3 — by …'},
+
+ {id:'currency', t:'Currency display',
+  ctx:'Prices are set in IDR and always shown in IDR. On top of that, the site can show a converted price in the visitor\'s own currency, guessed from their browser and switchable by hand.',
+  opts:[
+   o('auto','IDR always, plus auto-detected currency the visitor can change — NZD, AUD, EUR, GBP, USD','Removes the mental arithmetic that makes people hesitate, without ever hiding the real price.',true),
+   o('idr','IDR only','Simplest and most honest, but most guests will have to open a converter in another tab.')
+  ]},
+
+ {id:'reviews', t:'What goes where reviews would normally go?',
+  q:'There are no guests yet, so there are no reviews yet.',
+  opts:[
+   o('omit','Leave the section out until real reviews exist','Placeholder or invented testimonials are a serious trust risk, and guests are very good at spotting them.',true),
+   o('why','Replace it with "Why guests choose Ekas"','Does similar persuasive work, honestly, and can stay on the page afterwards.')
+  ]},
+
+ {id:'guide', t:'When do we build the Ekas Guide?',
+  q:'Local history, what to do, old photographs.',
+  ctx:'It is the strongest long-term search asset on the site — far more people search "things to do in Ekas" than search for the villa by name. It is also several thousand words.',
+  opts:[
+   o('p2','Build the page and the nav slot now, write it after opening','Nothing gets rebuilt later, and it does not hold up the launch.',true),
+   o('now','Write it before launch',''),
+   o('no','Skip it','')
+  ]}
+]},
+
+{ name:'Property facts', intro:'Small things that need one clear answer before they can be written down.', items:[
+
+ {id:'walk', t:'The four-minute walk — to what, exactly?',
+  q:'Guests will time it, so it needs to be right.',
+  opts:[
+   o('sand','Four minutes to the sand',''),
+   o('break','Four minutes to the surf break',''),
+   o('both','Both, and they are different — see my comment','')
+  ]},
+
+ {id:'holds', t:'How do we stop two people booking the same room?',
+  q:'Until a real booking engine is in place, this is handled by people rather than software.',
+  ctx:'Proposal: enquiries are requests, never confirmations. The site says "we will confirm within 24 hours". The admin calendar warns loudly when two requests overlap, and only a confirmation makes a booking real. Popular dates are flagged to the guest — "three other people are asking about these dates" — which is true, useful, and creates urgency without pressure.',
+  opts:[
+   o('hold48','Requests place a soft 48-hour hold, and overlaps are flagged to everyone','Nobody misses out unfairly, and you can still take a second request on the same dates as a backup.',true),
+   o('noholds','No holds — first confirmed booking wins','Simplest. Slight risk of an awkward conversation.'),
+   o('deposit','Only a paid deposit holds dates','Cleanest of all, but it needs the payment method sorted first.')
+  ]},
+
+ {id:'gapfill', t:'Offer cheaper nights to fill gaps between bookings?',
+  q:'When a two-night gap sits between two bookings, nobody can use it.',
+  opts:[
+   o('auto','Yes — automatically offer those nights at a discount','Turns dead calendar into revenue. Suggest 20% off, and only for gaps of three nights or fewer.',true),
+   o('manual','Yes, but only when we choose to','More control, but in practice nobody remembers to look.'),
+   o('no','No','')
+  ]},
+
+ {id:'languages', t:'Who checks the German and French?',
+  ctx:'The site will be in English, Indonesian, German and French. Machine translation gets us a first draft, but one clumsy French sentence does more damage to a luxury brand than having no French at all.',
+  opts:[
+   o('someone','Someone we know can check them — see my comment',''),
+   o('pro','Pay a translator, roughly USD $150–250 for the whole site','Cheap insurance for a brand that is trying to look expensive.',true),
+   o('en','Launch in English only, add the others later','Perfectly reasonable. Nothing is lost by waiting.')
+  ]},
+
+ {id:'openday', t:'When is the soft opening?',
+  q:'Everything else is scheduled backwards from this date.',
+  type:'text', ph:'e.g. 17 August 2026 — or "not fixed yet"'},
+
+ {id:'anything', t:'Anything else?',
+  q:'Disagreements, worries, things nobody has asked about.',
+  type:'long', ph:''}
+]}
+];
+
+/* ---------- state ---------- */
+var KEY='villa25-decisions-v1', data={};
+try{ data=JSON.parse(localStorage.getItem(KEY)||'{}')||{}; }catch(e){ data={}; }
+
+function el(t,c,x){ var n=document.createElement(t); if(c)n.className=c; if(x!=null)n.textContent=x; return n; }
+
+/* ---------- who ---------- */
+var WHO=['Alison','John','Milky','Guest / other'];
+var whoBox=document.getElementById('whopick'), whoOther=document.getElementById('whoOther');
+WHO.forEach(function(name){
+  var b=el('button',null,name); b.type='button';
+  b.setAttribute('aria-pressed', data.who===name?'true':'false');
+  b.addEventListener('click',function(){
+    data.who = data.who===name ? '' : name;
+    Array.prototype.forEach.call(whoBox.children,function(c){c.setAttribute('aria-pressed','false');});
+    if(data.who) b.setAttribute('aria-pressed','true');
+    save();
+  });
+  whoBox.appendChild(b);
+});
+whoOther.value=data.whoName||'';
+whoOther.addEventListener('input',function(){ data.whoName=whoOther.value; save(); });
+
+/* ---------- render ---------- */
+var main=document.getElementById('main'), N=0, ALL=[];
+
+GROUPS.forEach(function(g){
+  var gs=el('section','grp');
+  gs.appendChild(el('h2',null,g.name));
+  if(g.intro) gs.appendChild(el('p',null,g.intro));
+
+  g.items.forEach(function(it){
+    N++; it.n=N; ALL.push(it);
+    var c=el('div','card'); if(it.block) c.classList.add('block');
+    c.id='d_'+it.id;
+
+    var h=el('div','chead');
+    h.appendChild(el('span','cn',String(N).padStart(2,'0')));
+    h.appendChild(el('h3',null,it.t));
+    if(it.block) h.appendChild(el('span','tag','Blocks launch'));
+    c.appendChild(h);
+
+    if(it.q)   c.appendChild(el('p','q',it.q));
+    if(it.ctx) c.appendChild(el('p','ctx',it.ctx));
+
+    if(it.opts){
+      var box=el('div','opts');
+      it.opts.forEach(function(op){
+        var b=el('button','opt'); b.type='button';
+        b.setAttribute('aria-pressed', data[it.id]===op.v?'true':'false');
+        var lab=el('div','olab');
+        lab.appendChild(el('span','otick', data[it.id]===op.v?'●':'○'));
+        lab.appendChild(el('span','otxt',op.txt));
+        if(op.rec) lab.appendChild(el('span','orec','Recommended'));
+        b.appendChild(lab);
+        if(op.why) b.appendChild(el('p','owhy',op.why));
+        b.addEventListener('click',function(){
+          var same=data[it.id]===op.v;
+          data[it.id]= same?'':op.v;
+          Array.prototype.forEach.call(box.children,function(x){
+            x.setAttribute('aria-pressed','false');
+            x.querySelector('.otick').textContent='○';
+          });
+          if(!same){ b.setAttribute('aria-pressed','true'); b.querySelector('.otick').textContent='●'; }
+          save();
+        });
+        box.appendChild(b);
+      });
+      c.appendChild(box);
+    }
+
+    var nb=el('div','note');
+    var isFree = it.type==='long'||it.type==='text';
+    var lb=el('label',null, isFree ? 'Your answer' : 'Comment (optional)');
+    lb.htmlFor='f_'+it.id;
+    nb.appendChild(lb);
+    var f=document.createElement(it.type==='text'?'input':'textarea');
+    if(it.type==='text') f.type='text';
+    f.id='f_'+it.id;
+    f.placeholder=it.ph||'';
+    f.value=data[it.id+'_c']||'';
+    f.addEventListener('input',function(){ data[it.id+'_c']=f.value; save(); });
+    nb.appendChild(f);
+    c.appendChild(nb);
+
+    gs.appendChild(c);
+  });
+
+  main.appendChild(gs);
+});
+
+/* ---------- progress ---------- */
+var fill=document.getElementById('fill'), pct=document.getElementById('pct'),
+    cnt=document.getElementById('cnt'), sv=document.getElementById('saved'), timer=null;
+
+function isDone(it){
+  if(it.opts) return !!data[it.id];
+  return !!((data[it.id+'_c']||'').trim());
+}
+function progress(){
+  var d=0;
+  ALL.forEach(function(it){
+    var ok=isDone(it);
+    if(ok) d++;
+    var card=document.getElementById('d_'+it.id);
+    if(card) card.classList.toggle('done', ok);
+  });
+  var p=ALL.length?Math.round(d/ALL.length*100):0;
+  fill.style.width=p+'%'; pct.textContent=p+'%';
+  cnt.textContent=d+' of '+ALL.length+' decided';
+}
+function save(){
+  progress();
+  clearTimeout(timer);
+  timer=setTimeout(function(){
+    try{
+      localStorage.setItem(KEY,JSON.stringify(data));
+      var t=new Date();
+      sv.textContent='Saved '+t.getHours()+':'+String(t.getMinutes()).padStart(2,'0');
+    }catch(e){ sv.textContent='Cannot save here'; }
+  },400);
+}
+progress();
+if(Object.keys(data).length) sv.textContent='Answers restored';
+
+/* ---------- output ---------- */
+function build(){
+  var w=(data.who||'').trim(), n=(data.whoName||'').trim();
+  var who=(n && n.toLowerCase()!==w.toLowerCase()) ? (w?w+' ('+n+')':n) : (w||n);
+  var L=[];
+  L.push('VILLA 25 EKAS — DECISIONS');
+  L.push('==========================');
+  L.push('From: '+(who.trim()||'(not given)'));
+  L.push('Date: '+new Date().toLocaleDateString('en-NZ',{day:'numeric',month:'long',year:'numeric'}));
+  L.push('Decided: '+pct.textContent+' ('+cnt.textContent+')');
+
+  GROUPS.forEach(function(g){
+    L.push(''); L.push(g.name.toUpperCase());
+    L.push('--------------------------');
+    g.items.forEach(function(it){
+      var chosen='', c=(data[it.id+'_c']||'').trim();
+      if(it.opts){
+        for(var i=0;i<it.opts.length;i++) if(it.opts[i].v===data[it.id]) chosen=it.opts[i].txt;
+      }
+      if(!chosen && !c) return;
+      L.push('');
+      L.push(String(it.n).padStart(2,'0')+'. '+it.t+(it.block?'   [BLOCKS LAUNCH]':''));
+      if(it.opts) L.push('    Choice: '+(chosen||'(not chosen)'));
+      if(c){
+        L.push(it.opts?'    Comment:':'    Answer:');
+        c.split('\n').forEach(function(x){ L.push('      '+x); });
+      }
+    });
+  });
+
+  var missed=ALL.filter(function(it){ return !isDone(it); });
+  if(missed.length){
+    L.push(''); L.push('STILL UNDECIDED');
+    L.push('--------------------------');
+    missed.forEach(function(it){ L.push('  '+String(it.n).padStart(2,'0')+'. '+it.t+(it.block?'  [BLOCKS LAUNCH]':'')); });
+  }
+  return L.join('\n');
+}
+
+var status=document.getElementById('status');
+function say(m){ status.textContent=m; }
+
+/* --- send by email (FormSubmit — no account needed either end) --- */
+document.getElementById('bSend').addEventListener('click',function(){
+  var who=(data.who||'').trim(), nm=(data.whoName||'').trim();
+  if(!who && !nm){
+    say('Please tell us who you are at the top first.');
+    whoOther.focus();
+    whoOther.scrollIntoView({block:'center',behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
+    return;
+  }
+  var label=(nm && nm.toLowerCase()!==who.toLowerCase()) ? (who?who+' ('+nm+')':nm) : (who||nm);
+  document.getElementById('pSubject').value='Villa 25 Ekas decisions — '+label;
+  document.getElementById('pNext').value   = new URL('thanks.html',location.href).href;
+  document.getElementById('pWho').value    = label;
+  document.getElementById('pProg').value   = pct.textContent+' ('+cnt.textContent+')';
+  document.getElementById('pBody').value   = build();
+  say('Sending…');
+  try{ localStorage.setItem(KEY,JSON.stringify(data)); }catch(e){}
+  document.getElementById('post').submit();
+});
+
+document.getElementById('bSave').addEventListener('click',function(){
+  var who=((data.who||'')+'-'+(data.whoName||'')).toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')||'answers';
+  var file='villa-25-ekas-decisions-'+who+'.txt', text=build();
+
+  if(window.claude&&window.claude.downloads&&window.claude.downloads.save){
+    say('Waiting for you to confirm the download…');
+    window.claude.downloads.save({filename:file,data:text}).then(function(){
+      say('Saved to your device.');
+    },function(){ say('Download cancelled. You can use "Copy to clipboard" instead.'); });
+  } else {
+    try{
+      var blob=new Blob([text],{type:'text/plain;charset=utf-8'}), url=URL.createObjectURL(blob);
+      var a=document.createElement('a'); a.href=url; a.download=file;
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      setTimeout(function(){URL.revokeObjectURL(url);},1000);
+      say('Saved to your device.');
+    }catch(e){ say('Could not save a file here — please use "Copy to clipboard".'); }
+  }
+});
+
+document.getElementById('bCopy').addEventListener('click',function(){
+  var text=build();
+  function ok(){ say('Copied — you can paste it into WhatsApp or an email.'); }
+  function legacy(){
+    var ta=document.createElement('textarea'); ta.value=text;
+    ta.style.position='fixed'; ta.style.opacity='0';
+    document.body.appendChild(ta); ta.select();
+    try{ document.execCommand('copy'); ok(); }catch(e){ say('Could not copy — please select manually.'); }
+    document.body.removeChild(ta);
+  }
+  if(navigator.clipboard&&navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(ok,legacy);
+  else legacy();
+});
+
+document.getElementById('bClear').addEventListener('click',function(){
+  if(!window.confirm('This erases every answer on this device and cannot be undone. Continue?')) return;
+  data={}; try{ localStorage.removeItem(KEY); }catch(e){}
+  window.location.reload();
+});
+
+var up=document.getElementById('up');
+window.addEventListener('scroll',function(){ up.classList.toggle('show',window.scrollY>700); },{passive:true});
+up.addEventListener('click',function(){
+  window.scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
+});
+
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,919 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Villa 25 Ekas — Property Questionnaire</title>
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body>
+
+<div class="shell">
+
+  <aside class="rail">
+    <div class="mark">
+      <span class="mark-top">Villa</span>
+      <span class="mark-num">25</span>
+      <span class="mark-btm">Ekas</span>
+      <span class="mark-sub">Lombok · Indonesia</span>
+    </div>
+
+    <div class="rail-progress">
+      <div class="meter"><i id="meterFill"></i></div>
+      <p class="meter-label"><b id="pctDone">0%</b> complete · <span id="countDone">0 of 0</span></p>
+    </div>
+
+    <nav id="nav" aria-label="Sections"></nav>
+
+    <div class="rail-foot">
+      <p class="saved" id="savedFlag">Not started</p>
+    </div>
+  </aside>
+
+  <main class="page">
+
+    <header class="head">
+      <p class="eyebrow">Property questionnaire</p>
+      <h1>Tell us about<br>Villa 25 Ekas</h1>
+      <div class="lede">
+        <p>These answers become the actual words on the website. Anything left blank gets
+           either omitted or written vaguely — and vague copy is what makes villa websites
+           forgettable.</p>
+        <p><b>Please don't write marketing language.</b> Write plain facts and honest
+           opinions; the copywriting happens afterwards. If the three of you disagree on
+           something, put all three answers in — disagreements are usually where the
+           interesting material is.</p>
+      </div>
+
+      <div class="notice">
+        <p><b>Your answers save automatically in this browser.</b> You can close the tab and
+           come back to the same link later — nothing is lost. Nothing is sent to anyone
+           until you press <i>Send my answers</i> at the bottom, and you can send more than
+           once if you fill in the rest later.</p>
+      </div>
+
+      <div class="who">
+        <label for="who_name">Who is filling this in?</label>
+        <input type="text" id="who_name" data-key="meta_name" placeholder="Your name">
+      </div>
+    </header>
+
+    <form id="form" autocomplete="off"></form>
+
+    <section class="finish" id="finish">
+      <h2>Finished — or finished for now</h2>
+      <p>Press send and your answers go straight through. Partial answers are genuinely
+         useful, so send it even if there are gaps — and you can send again later once
+         you've filled in more.</p>
+      <div class="actions">
+        <button type="button" class="btn btn-primary" id="btnSend">Send my answers</button>
+        <button type="button" class="btn" id="btnSave">Save a copy</button>
+        <button type="button" class="btn" id="btnCopy">Copy to clipboard</button>
+        <button type="button" class="btn btn-quiet" id="btnClear">Clear all answers</button>
+      </div>
+      <p class="status" id="status" role="status" aria-live="polite"></p>
+    </section>
+
+    <form id="post" action="https://formsubmit.co/milkysbeta@gmail.com" method="POST" hidden>
+      <input type="hidden" name="_subject" id="pSubject" value="Villa 25 Ekas questionnaire">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_template" value="box">
+      <input type="hidden" name="_next" id="pNext" value="">
+      <input type="hidden" name="Completed by" id="pWho" value="">
+      <input type="hidden" name="Progress" id="pProg" value="">
+      <input type="hidden" name="Answers" id="pBody" value="">
+    </form>
+
+  </main>
+</div>
+
+<button class="totop" id="totop" aria-label="Back to top">↑</button>
+
+<style>
+/* ============================================================
+   Villa 25 Ekas — questionnaire
+   Palette taken from the bay: volcanic sand, bronze, reef teal.
+   ============================================================ */
+:root{
+  --ink:      #16130E;
+  --ink-2:    #2A251C;
+  --paper:    #F6F1E6;
+  --paper-2:  #EFE8D9;
+  --line:     #D8CDB6;
+  --line-2:   #C4B698;
+  --bronze:   #A0703A;
+  --bronze-2: #8A5F2E;
+  --reef:     #1E5551;
+  --sand:     #C9B893;
+  --muted:    #6E6455;
+  --field:    #FFFDF8;
+  --shadow:   0 1px 2px rgba(22,19,14,.05), 0 8px 24px -16px rgba(22,19,14,.28);
+
+  --f-display: 'Iowan Old Style','Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif;
+  --f-text: 'Segoe UI',system-ui,-apple-system,'Helvetica Neue',sans-serif;
+  --f-util: ui-monospace,'Cascadia Mono',Consolas,'SF Mono',monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --ink:      #EFE7D6;
+    --ink-2:    #CFC4AE;
+    --paper:    #100E0B;
+    --paper-2:  #191510;
+    --line:     #2F2921;
+    --line-2:   #443C30;
+    --bronze:   #C99A5C;
+    --bronze-2: #E0B478;
+    --reef:     #63AFA6;
+    --sand:     #9E8E6C;
+    --muted:    #968973;
+    --field:    #1B1712;
+    --shadow:   0 1px 2px rgba(0,0,0,.4), 0 8px 24px -16px rgba(0,0,0,.8);
+  }
+}
+:root[data-theme="light"]{
+  --ink:#16130E; --ink-2:#2A251C; --paper:#F6F1E6; --paper-2:#EFE8D9;
+  --line:#D8CDB6; --line-2:#C4B698; --bronze:#A0703A; --bronze-2:#8A5F2E;
+  --reef:#1E5551; --sand:#C9B893; --muted:#6E6455; --field:#FFFDF8;
+  --shadow:0 1px 2px rgba(22,19,14,.05), 0 8px 24px -16px rgba(22,19,14,.28);
+}
+:root[data-theme="dark"]{
+  --ink:#EFE7D6; --ink-2:#CFC4AE; --paper:#100E0B; --paper-2:#191510;
+  --line:#2F2921; --line-2:#443C30; --bronze:#C99A5C; --bronze-2:#E0B478;
+  --reef:#63AFA6; --sand:#9E8E6C; --muted:#968973; --field:#1B1712;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -16px rgba(0,0,0,.8);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:var(--f-text); font-size:17px; line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+/* horizon band — the one decorative flourish, echoing the logo */
+body::before{
+  content:''; position:fixed; inset:0 0 auto 0; height:3px; z-index:60;
+  background:linear-gradient(90deg,var(--reef),var(--bronze) 45%,var(--sand) 70%,var(--reef));
+  opacity:.85;
+}
+
+.shell{display:flex; align-items:flex-start; gap:0; max-width:1500px; margin:0 auto}
+
+/* ---------- rail ---------- */
+.rail{
+  position:sticky; top:0; flex:0 0 300px; height:100vh; overflow-y:auto;
+  padding:44px 26px 26px; border-right:1px solid var(--line);
+  background:var(--paper-2); display:flex; flex-direction:column; gap:26px;
+}
+.mark{display:flex; flex-direction:column; align-items:center; text-align:center; line-height:1;
+  padding-bottom:22px; border-bottom:1px solid var(--line)}
+.mark-top{font-family:var(--f-display); font-size:19px; letter-spacing:.42em; text-indent:.42em;
+  text-transform:uppercase; color:var(--ink-2)}
+.mark-num{font-family:var(--f-display); font-size:60px; color:var(--bronze); margin:6px 0 2px;
+  font-variant-numeric:lining-nums}
+.mark-btm{font-family:var(--f-display); font-size:19px; letter-spacing:.42em; text-indent:.42em;
+  text-transform:uppercase; color:var(--ink-2)}
+.mark-sub{font-family:var(--f-util); font-size:9.5px; letter-spacing:.24em; text-transform:uppercase;
+  color:var(--muted); margin-top:12px}
+
+.rail-progress{display:flex; flex-direction:column; gap:8px}
+.meter{height:3px; background:var(--line); border-radius:2px; overflow:hidden}
+.meter i{display:block; height:100%; width:0; background:var(--bronze); transition:width .35s ease}
+.meter-label{margin:0; font-family:var(--f-util); font-size:11px; letter-spacing:.08em;
+  color:var(--muted); text-transform:uppercase}
+.meter-label b{color:var(--ink); font-weight:600}
+
+#nav{display:flex; flex-direction:column; gap:1px; flex:1}
+.navlink{
+  display:flex; align-items:baseline; gap:10px; padding:7px 10px; border-radius:3px;
+  color:var(--ink-2); text-decoration:none; font-size:14.5px; line-height:1.35;
+  border-left:2px solid transparent; transition:background .15s, color .15s;
+}
+.navlink:hover{background:var(--paper); color:var(--ink)}
+.navlink.on{border-left-color:var(--bronze); background:var(--paper); color:var(--ink)}
+.navlink em{font-family:var(--f-util); font-style:normal; font-size:11px; color:var(--muted);
+  min-width:16px; font-variant-numeric:tabular-nums}
+.navlink span{flex:1}
+.navlink u{text-decoration:none; font-family:var(--f-util); font-size:10.5px; color:var(--muted);
+  font-variant-numeric:tabular-nums}
+.navlink.full u{color:var(--bronze)}
+
+.rail-foot{border-top:1px solid var(--line); padding-top:16px}
+.saved{margin:0; font-family:var(--f-util); font-size:11px; letter-spacing:.06em;
+  text-transform:uppercase; color:var(--muted)}
+.saved.ok{color:var(--reef)}
+
+/* ---------- page ---------- */
+.page{flex:1; min-width:0; padding:56px 6vw 120px; max-width:900px}
+
+.eyebrow{margin:0 0 18px; font-family:var(--f-util); font-size:11px; letter-spacing:.26em;
+  text-transform:uppercase; color:var(--bronze)}
+h1{font-family:var(--f-display); font-weight:400; font-size:clamp(38px,5.6vw,62px);
+  line-height:1.04; margin:0 0 26px; letter-spacing:-.015em; text-wrap:balance}
+.lede{max-width:62ch; color:var(--ink-2)}
+.lede p{margin:0 0 14px}
+
+.notice{
+  max-width:62ch; margin:26px 0 0; padding:16px 20px; background:var(--paper-2);
+  border-left:2px solid var(--bronze); border-radius:0 3px 3px 0;
+}
+.notice p{margin:0; font-size:15.5px; color:var(--ink-2)}
+
+.who{margin:34px 0 0; max-width:420px; display:flex; flex-direction:column; gap:7px}
+.who label{font-family:var(--f-util); font-size:11px; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--muted)}
+
+/* ---------- sections ---------- */
+.sec{margin-top:76px; scroll-margin-top:24px}
+.sec-head{display:flex; align-items:baseline; gap:14px; padding-bottom:14px;
+  border-bottom:1px solid var(--line-2); margin-bottom:8px}
+.sec-n{font-family:var(--f-util); font-size:12px; color:var(--bronze);
+  letter-spacing:.1em; font-variant-numeric:tabular-nums}
+.sec-head h2{font-family:var(--f-display); font-weight:400; font-size:31px; margin:0;
+  letter-spacing:-.01em; flex:1; text-wrap:balance}
+.sec-note{max-width:62ch; color:var(--muted); font-size:15.5px; margin:14px 0 0}
+
+.sub{font-family:var(--f-util); font-size:11px; letter-spacing:.2em; text-transform:uppercase;
+  color:var(--ink-2); margin:40px 0 -6px; padding-bottom:8px; border-bottom:1px dotted var(--line-2)}
+
+.fields{display:flex; flex-direction:column; gap:24px; margin-top:28px}
+
+.f{display:flex; flex-direction:column; gap:8px}
+.f > label, .f > .q{font-size:16px; color:var(--ink); line-height:1.45; max-width:64ch}
+.f .hint{font-size:14px; color:var(--muted); font-style:italic}
+
+input[type=text], textarea{
+  width:100%; font-family:inherit; font-size:16.5px; color:var(--ink);
+  background:var(--field); border:1px solid var(--line-2); border-radius:3px;
+  padding:11px 13px; line-height:1.5; transition:border-color .15s, box-shadow .15s;
+}
+textarea{resize:vertical; min-height:104px}
+input[type=text]::placeholder, textarea::placeholder{color:var(--muted); opacity:.7}
+input[type=text]:focus-visible, textarea:focus-visible{
+  outline:none; border-color:var(--bronze); box-shadow:0 0 0 3px color-mix(in srgb,var(--bronze) 22%,transparent);
+}
+input.done, textarea.done{border-left:2px solid var(--reef)}
+
+.pair{display:grid; grid-template-columns:1fr 1fr; gap:10px}
+
+/* three-way tick rows */
+.tri{display:grid; grid-template-columns:1fr auto; gap:12px 16px; align-items:center;
+  padding:10px 0; border-bottom:1px solid var(--line)}
+.tri .q{font-size:16px; margin:0}
+.seg{display:flex; border:1px solid var(--line-2); border-radius:3px; overflow:hidden;
+  background:var(--field)}
+.seg button{
+  font-family:var(--f-util); font-size:11px; letter-spacing:.08em; text-transform:uppercase;
+  padding:7px 13px; border:0; background:transparent; color:var(--muted); cursor:pointer;
+  border-right:1px solid var(--line-2); transition:background .14s, color .14s;
+}
+.seg button:last-child{border-right:0}
+.seg button:hover{background:var(--paper-2); color:var(--ink)}
+.seg button[aria-pressed="true"]{background:var(--bronze); color:var(--paper); font-weight:600}
+:root[data-theme="dark"] .seg button[aria-pressed="true"],
+.seg button[aria-pressed="true"]{color:#fff}
+.seg button:focus-visible{outline:2px solid var(--reef); outline-offset:-2px}
+.tri .note{grid-column:1/-1}
+.tri .note input{font-size:15px; padding:8px 11px; background:transparent; border-style:dashed}
+
+/* ---------- finish ---------- */
+.finish{margin-top:90px; padding:34px 36px; background:var(--paper-2);
+  border:1px solid var(--line-2); border-radius:4px}
+.finish h2{font-family:var(--f-display); font-weight:400; font-size:29px; margin:0 0 12px}
+.finish p{margin:0 0 22px; max-width:60ch; color:var(--ink-2)}
+.finish a{color:var(--bronze-2); text-underline-offset:3px}
+.actions{display:flex; flex-wrap:wrap; gap:12px}
+.btn{
+  font-family:var(--f-util); font-size:12px; letter-spacing:.14em; text-transform:uppercase;
+  padding:14px 24px; border-radius:3px; cursor:pointer; background:transparent;
+  border:1px solid var(--line-2); color:var(--ink); transition:background .16s, border-color .16s, color .16s;
+}
+.btn:hover{border-color:var(--bronze); color:var(--bronze-2)}
+.btn:focus-visible{outline:2px solid var(--reef); outline-offset:2px}
+.btn-primary{background:var(--bronze); border-color:var(--bronze); color:#FFF9EF; font-weight:600}
+.btn-primary:hover{background:var(--bronze-2); border-color:var(--bronze-2); color:#FFF9EF}
+.btn-quiet{color:var(--muted); border-color:transparent}
+.btn-quiet:hover{color:var(--ink); border-color:var(--line-2)}
+.status{margin:18px 0 0 !important; font-family:var(--f-util); font-size:12px;
+  letter-spacing:.06em; color:var(--reef); min-height:18px}
+
+.totop{
+  position:fixed; right:22px; bottom:22px; width:42px; height:42px; border-radius:50%;
+  border:1px solid var(--line-2); background:var(--paper-2); color:var(--ink); cursor:pointer;
+  font-size:17px; opacity:0; pointer-events:none; transition:opacity .25s; z-index:50; box-shadow:var(--shadow);
+}
+.totop.show{opacity:1; pointer-events:auto}
+.totop:hover{border-color:var(--bronze); color:var(--bronze-2)}
+
+@media (max-width:1080px){
+  .shell{flex-direction:column}
+  .rail{position:static; height:auto; width:100%; flex:none; border-right:0;
+    border-bottom:1px solid var(--line); padding:34px 6vw 22px}
+  .mark{align-items:flex-start; text-align:left}
+  #nav{flex-direction:row; flex-wrap:wrap; gap:6px}
+  .navlink{border-left:0; border-bottom:2px solid transparent; padding:6px 10px; font-size:13.5px}
+  .navlink.on{border-left:0; border-bottom-color:var(--bronze)}
+  .navlink u{display:none}
+  .page{padding:40px 6vw 100px; max-width:none}
+}
+@media (max-width:620px){
+  body{font-size:16px}
+  .pair{grid-template-columns:1fr}
+  .tri{grid-template-columns:1fr}
+  .seg{justify-self:start}
+  .finish{padding:26px 22px}
+  .actions .btn{flex:1 1 100%; text-align:center}
+}
+@media (prefers-reduced-motion:reduce){
+  *{transition:none !important; scroll-behavior:auto !important}
+}
+</style>
+
+<script>
+(function(){
+"use strict";
+
+/* ---------- content ---------- */
+var T = {
+  txt:  function(id,q,ph,hint){ return {t:'txt', id:id, q:q, ph:ph||'', hint:hint||''}; },
+  lng:  function(id,q,ph,hint){ return {t:'lng', id:id, q:q, ph:ph||'', hint:hint||''}; },
+  pair: function(id,q,a,b,hint){ return {t:'pair', id:id, q:q, a:a, b:b, hint:hint||''}; },
+  tri:  function(id,q,ph){ return {t:'tri', id:id, q:q, ph:ph||'Notes'}; },
+  sub:  function(label){ return {t:'sub', label:label}; }
+};
+
+var SECTIONS = [
+{ title:'The basics', fields:[
+  T.txt('b_name','Full property name as it should appear'),
+  T.txt('b_addr','Street / village address'),
+  T.txt('b_gps','GPS coordinates','-8.901632, 116.450201','Please confirm this is right.'),
+  T.txt('b_village','Nearest village or town, and how far'),
+  T.txt('b_year','What year was it built or finished?'),
+  T.txt('b_land','Total land size (m² or are)'),
+  T.txt('b_built','Total built area (m²)'),
+  T.txt('b_localname','Does the property have a Sasak or Indonesian name that locals use?')
+]},
+
+{ title:'Distances & the journey', note:'Guests plan around these numbers, and they check them. Approximate is fine; wrong is not.', fields:[
+  T.pair('d_beach','The beach','Distance','Walk / drive time','You estimated a 4-minute walk — is that to the sand, or to the surf break? They are different claims.'),
+  T.pair('d_inside','Inside Ekas (the main break)','Distance','Walk / drive time'),
+  T.pair('d_outside','Outside Ekas','Distance','How long by boat'),
+  T.pair('d_warung','Nearest warung or place to eat','Distance','Walk / drive time'),
+  T.pair('d_shop','Nearest shop or minimart','Distance','Walk / drive time'),
+  T.pair('d_atm','Nearest ATM','Distance','Drive time'),
+  T.pair('d_clinic','Nearest clinic or hospital','Distance','Drive time'),
+  T.pair('d_airport','Lombok International Airport (LOP)','~40 km','1–1.5 hrs','Our research says 40 km and 1–1.5 hours. Please confirm or correct.'),
+  T.pair('d_kuta','Kuta / Mandalika','Distance','Drive time'),
+  T.pair('d_senggigi','Senggigi','Distance','Drive time'),
+  T.lng('d_road','What is the road in actually like?','',
+    'Be honest. Guests hate surprises far more than they hate bad roads — "the last 20 minutes are rough, and that is exactly why it is still quiet" is better copy than pretending it is smooth.')
+]},
+
+{ title:'The rooms', note:'One block per unit. Sizes and bed configurations are the two things guests filter on hardest.', fields:[
+  T.sub('Three lower-level rooms — 1,600,000 IDR / night'),
+  T.txt('r1_names','Do the three rooms have individual names or numbers?'),
+  T.txt('r1_beds','Bed configuration in each','King / queen / twin / bunk'),
+  T.txt('r1_max','Maximum occupancy per room'),
+  T.txt('r1_bath','Ensuite bathroom, or shared?'),
+  T.txt('r1_hot','Hot water?'),
+  T.txt('r1_ac','Air conditioning? Ceiling fan?'),
+  T.txt('r1_view','View from the room'),
+  T.txt('r1_outdoor','Private outdoor space or balcony?'),
+  T.txt('r1_size','Room size (m²)'),
+  T.lng('r1_best','What is the single nicest thing about these rooms?'),
+
+  T.sub('Two-bedroom villa — 2,500,000 IDR / night'),
+  T.txt('r2_beds','Bed configuration'),
+  T.txt('r2_max','Maximum occupancy'),
+  T.txt('r2_bath','Bathrooms — how many, ensuite?'),
+  T.txt('r2_kitchen','Own kitchen, or shared?'),
+  T.txt('r2_living','Living area?'),
+  T.txt('r2_outdoor','Private outdoor space'),
+  T.txt('r2_view','View'),
+  T.txt('r2_size','Size (m²)'),
+  T.lng('r2_best','Best feature'),
+
+  T.sub('Upstairs one-bed apartment — 2,000,000 IDR / night'),
+  T.txt('r3_beds','Bed configuration'),
+  T.txt('r3_max','Maximum occupancy'),
+  T.txt('r3_kitchen','Own kitchen?'),
+  T.lng('r3_bay','Can you see the bay from it?','','This is what justifies the rate — be specific about exactly what you can see and from where.'),
+  T.txt('r3_balcony','Private balcony or terrace?'),
+  T.txt('r3_size','Size (m²)'),
+  T.lng('r3_best','Best feature'),
+
+  T.sub('The next-door property — for large groups'),
+  T.txt('r4_brand','Is it branded as part of Villa 25, or does it have its own name?'),
+  T.txt('r4_beds','How many bedrooms does it add?'),
+  T.txt('r4_max','Maximum total occupancy across both properties'),
+  T.txt('r4_pool','Does it have its own pool?'),
+  T.txt('r4_rate','Nightly rate, or enquiry-only?')
+]},
+
+{ title:'Pools & outdoors', fields:[
+  T.txt('p_big_dim','Big pool — dimensions'),
+  T.txt('p_big_depth','Big pool — depth, shallow end to deep end'),
+  T.txt('p_big_type','Big pool — heated? Salt or chlorine?'),
+  T.txt('p_small','Small pool — dimensions and depth'),
+  T.txt('p_share','Which units share which pool?'),
+  T.txt('p_kids','Are the pools safe for young children? Any fencing?','','Families will ask. A clear answer wins bookings; a vague one loses them.'),
+  T.txt('p_loungers','Sun loungers — how many?'),
+  T.txt('p_shower','Outdoor shower?'),
+  T.txt('p_bbq','BBQ or outdoor kitchen?'),
+  T.lng('p_garden','The garden — what is planted? Any mature trees worth mentioning?'),
+  T.txt('p_lighting','Outdoor lighting at night?')
+]},
+
+{ title:'Amenities', note:'Tick only what genuinely exists today. "Coming" is fine if you know roughly when — put the month in the notes.', fields:[
+  T.tri('a_ac','Air conditioning','All rooms, or only some?'),
+  T.tri('a_hot','Hot water','All bathrooms?'),
+  T.tri('a_wifi','Wifi','Actual speed in Mbps — please test it, this matters enormously'),
+  T.tri('a_gen','Backup generator / power during outages'),
+  T.tri('a_water','Water filter or drinking water provided'),
+  T.tri('a_ice','Ice machine'),
+  T.tri('a_kitchen','Full shared kitchen'),
+  T.tri('a_fridge','Fridge / freezer'),
+  T.tri('a_coffee','Coffee machine','What kind?'),
+  T.tri('a_safe','In-room safe'),
+  T.tri('a_laundry','Laundry service','Cost?'),
+  T.tri('a_house','Daily housekeeping'),
+  T.tri('a_linen','Fresh towels & linen','How often are they changed?'),
+  T.tri('a_beachtowel','Beach towels'),
+  T.tri('a_mozzie','Mosquito nets or screens'),
+  T.tri('a_park','Car parking','How many cars? Secure?'),
+  T.tri('a_scooterpark','Scooter parking'),
+  T.tri('a_boardstore','Surfboard storage or rack'),
+  T.tri('a_boardrepair','Board repair kit / wax'),
+  T.tri('a_rinse','Outdoor rinse for boards'),
+  T.tri('a_firstaid','First aid kit'),
+  T.tri('a_fire','Fire extinguishers'),
+  T.tri('a_cot','Baby cot / high chair'),
+  T.tri('a_access','Any wheelchair access at all')
+]},
+
+{ title:'Entertainment', note:'Only the "have it" column goes on the website. Anything with a firm date can be written as "arriving [month]".', fields:[
+  T.tri('e_pool','Pool table'),
+  T.tri('e_console','Games console','Which one?'),
+  T.tri('e_dj','DJ decks'),
+  T.tri('e_sound','Sound system / speakers'),
+  T.tri('e_tv','TV','Smart TV? Netflix?'),
+  T.tri('e_proj','Projector / movie nights'),
+  T.tri('e_games','Board games / cards'),
+  T.tri('e_books','Book exchange or library'),
+  T.tri('e_hammock','Hammocks'),
+  T.tri('e_yoga','Yoga deck or mats'),
+  T.tri('e_gym','Gym equipment')
+]},
+
+{ title:'Surf', note:'This section is what separates the site from every other villa listing in Lombok. Detail is worth more than polish here.', fields:[
+  T.lng('s_breaks','Which breaks are realistically accessible from the villa?'),
+  T.txt('s_swell','Best swell direction and size for Inside Ekas'),
+  T.txt('s_tide','Best tide for Inside Ekas'),
+  T.txt('s_wind','Best wind direction'),
+  T.txt('s_months','Best months of the year'),
+  T.txt('s_level','Skill level — is Inside genuinely beginner-friendly?'),
+  T.txt('s_access','How do guests get to Outside Ekas — boat, paddle, or both?'),
+  T.txt('s_boat','Boat cost, and how it gets arranged'),
+  T.txt('s_guide','Do you work with a surf guide? Name and rate'),
+  T.txt('s_hire','Board hire — available? Which boards? Rate?'),
+  T.txt('s_lessons','Lessons — available? Instructor? Rate?'),
+  T.lng('s_other','Other breaks worth listing — name them'),
+  T.lng('s_hazard','Any hazards guests must know about','','Reef, currents, sea urchins, crowds. Naming these honestly builds trust; hiding them creates one-star reviews.')
+]},
+
+{ title:'Food & drink', fields:[
+  T.txt('f_bfast','Is breakfast provided? What is it, exactly?'),
+  T.txt('f_bfast_inc','Is breakfast included in the rate, or extra?','','"Free breakfast" is one of the strongest conversion phrases in villa marketing.'),
+  T.txt('f_chef','Private chef — do you have one? Name, rate per meal, type of food'),
+  T.txt('f_selfcook','Can guests cook for themselves? Which units?'),
+  T.txt('f_warung','Nearest warung — name, walk time, and what is good there'),
+  T.txt('f_local','Best local restaurant within 15 minutes'),
+  T.txt('f_west','Best Western food within 30 minutes'),
+  T.txt('f_grocery','Where do guests buy groceries?'),
+  T.txt('f_preshop','Can you arrange a grocery shop before arrival?'),
+  T.txt('f_booze','Alcohol — available locally? Can guests bring their own?')
+]},
+
+{ title:'Activities & local partners', note:'For each: can you arrange it, roughly what does it cost, and do you have a person for it?', fields:[
+  T.tri('x_guide','Surf guiding','Cost (IDR) · who'),
+  T.tri('x_boat','Boat charter','Cost (IDR) · who'),
+  T.tri('x_spear','Spearfishing','Cost (IDR) · who'),
+  T.tri('x_fish','Fishing','Cost (IDR) · who'),
+  T.tri('x_snorkel','Snorkelling','Cost (IDR) · who'),
+  T.tri('x_cook','Cooking class','Cost (IDR) · who'),
+  T.tri('x_massage','Massage / spa','Cost (IDR) · who'),
+  T.tri('x_yoga','Yoga class','Cost (IDR) · who'),
+  T.tri('x_scooter','Scooter hire','Cost (IDR) · who'),
+  T.tri('x_driver','Car and driver, day hire','Cost (IDR) · who'),
+  T.tri('x_water','Waterfall trip','Cost (IDR) · who'),
+  T.tri('x_rinjani','Rinjani trek','Cost (IDR) · who'),
+  T.tri('x_gili','Gili Islands day trip','Cost (IDR) · who'),
+  T.tri('x_culture','Traditional village or cultural tour','Cost (IDR) · who'),
+  T.tri('x_sunset','Sunrise or sunset viewpoint','Cost (IDR) · who'),
+  T.sub('Our favourites'),
+  T.lng('x_fav1','First thing you would personally recommend to a first-time guest — and why','',
+    'These three answers become the most-read section on the whole site. Write them the way you would say them out loud to a friend.'),
+  T.lng('x_fav2','Second recommendation — and why'),
+  T.lng('x_fav3','Third recommendation — and why'),
+  T.sub('Discounts with local businesses'),
+  T.lng('x_partners','Which local businesses might agree a 10% discount for Villa 25 guests?','',
+    'List names and whether you have spoken to them yet. Costs them little, guarantees them traffic, and gives the website an "Eat & Drink in Ekas" section no competitor will have.')
+]},
+
+{ title:'Staff & service', fields:[
+  T.txt('t_greet','Who greets guests on arrival?'),
+  T.txt('t_onsite','Is someone on-site 24/7?'),
+  T.txt('t_count','How many staff in total?'),
+  T.txt('t_english','Do staff speak English? What level?'),
+  T.txt('t_mgr','Manager name(s) and role'),
+  T.lng('t_ritual','What is the arrival ritual?','','Cold drink? Welcome towel? A tour? This is a small detail that does a lot of work in the copy.'),
+  T.txt('t_times','Check-in time and check-out time'),
+  T.txt('t_bags','Can guests store bags after checkout?')
+]},
+
+{ title:'Guests & positioning', note:'Being clear about who the villa is not for is as valuable as knowing who it is for.', fields:[
+  T.lng('g_ideal','Who is your ideal guest? Be specific.'),
+  T.lng('g_not','Who is not a good fit?','','Equally important. Turning the wrong guest away protects the reviews.'),
+  T.txt('g_family','Families with young children — yes or no?'),
+  T.txt('g_surfers','Groups of young surfers — yes or no?'),
+  T.txt('g_couples','Couples / honeymoon?'),
+  T.txt('g_solo','Solo travellers?'),
+  T.txt('g_nomad','Digital nomads and long stays?'),
+  T.txt('g_pets','Pets — allowed?'),
+  T.txt('g_smoke','Smoking policy'),
+  T.txt('g_party','Parties and events policy'),
+  T.txt('g_quiet','Quiet hours?'),
+  T.sub('Benchmarks'),
+  T.txt('g_bench1','A property anywhere in the world you would like to be compared to — and why'),
+  T.txt('g_bench2','A second one — and why'),
+  T.txt('g_bench3','A third one — and why')
+]},
+
+{ title:'The story', note:'These are the questions that produce copy nobody else can imitate. Answer in your own words — length does not matter, honesty does.', fields:[
+  T.lng('y_how','How did you end up in Ekas?'),
+  T.lng('y_land','What made you choose this specific piece of land?'),
+  T.lng('y_moment','What is the single best moment of a day at Villa 25?','',
+    'A time of day, a spot, a view, a sound. Be specific — specificity is what makes a reader believe you.'),
+  T.lng('y_arrive','What do people say when they arrive and see it for the first time?'),
+  T.lng('y_hard','What was the hardest part of building it?'),
+  T.lng('y_feel','What do you want guests to feel that they would not get at a hotel in Kuta or Bali?'),
+  T.lng('y_future','What is changing in Ekas? What will be different in five years?'),
+  T.lng('y_warn','Is there anything a guest should know before they book, so they are not disappointed?','',
+    'Road, power cuts, mosquitoes, remoteness. Naming these honestly builds far more trust than hiding them — and it filters out the guests who would have complained.')
+]},
+
+{ title:'Brand & design', fields:[
+  T.txt('z_words','Three words that describe the feeling of the place'),
+  T.txt('z_hate_colour','Any colours you strongly dislike?'),
+  T.lng('z_hate_sites','Any villa websites you hate — and why?'),
+  T.txt('z_identity','Is "surf" the primary identity, or is it "a luxury retreat that happens to have surf"?'),
+  T.txt('z_tone','Should the site feel more Aman (restrained, quiet) or more Habitas (warm, social)?'),
+  T.txt('z_owners','Should the owners be visible on the site — photos, names, story?')
+]},
+
+{ title:'Anything we have not asked', fields:[
+  T.lng('w_free','Free space','',
+    'Anything you think matters, anything you are worried about, anything you have seen elsewhere that you want.')
+]}
+];
+
+/* ---------- state ---------- */
+var KEY = 'villa25-questionnaire-v1';
+var data = {};
+try { data = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch(e){ data = {}; }
+
+var TRI = [['have','Have it'],['coming','Coming'],['no','No']];
+
+function el(tag, cls, txt){
+  var n = document.createElement(tag);
+  if(cls) n.className = cls;
+  if(txt != null) n.textContent = txt;
+  return n;
+}
+
+/* ---------- render ---------- */
+var form = document.getElementById('form');
+var nav  = document.getElementById('nav');
+
+SECTIONS.forEach(function(sec, i){
+  var n = i + 1;
+  sec.key = 's' + n;
+
+  var s = el('section','sec');
+  s.id = sec.key;
+
+  var head = el('div','sec-head');
+  head.appendChild(el('span','sec-n', String(n).padStart(2,'0')));
+  head.appendChild(el('h2', null, sec.title));
+  s.appendChild(head);
+  if(sec.note) s.appendChild(el('p','sec-note', sec.note));
+
+  var wrap = el('div','fields');
+  s.appendChild(wrap);
+
+  sec.fields.forEach(function(f){
+    if(f.t === 'sub'){ wrap.appendChild(el('p','sub', f.label)); return; }
+
+    if(f.t === 'tri'){
+      var row = el('div','tri');
+      row.appendChild(el('p','q', f.q));
+
+      var seg = el('div','seg');
+      seg.setAttribute('role','group');
+      seg.setAttribute('aria-label', f.q);
+      TRI.forEach(function(opt){
+        var b = el('button', null, opt[1]);
+        b.type = 'button';
+        b.setAttribute('aria-pressed', data[f.id] === opt[0] ? 'true' : 'false');
+        b.addEventListener('click', function(){
+          var already = data[f.id] === opt[0];
+          data[f.id] = already ? '' : opt[0];
+          Array.prototype.forEach.call(seg.children, function(c){ c.setAttribute('aria-pressed','false'); });
+          if(!already) b.setAttribute('aria-pressed','true');
+          save();
+        });
+        seg.appendChild(b);
+      });
+      row.appendChild(seg);
+
+      var note = el('div','note');
+      var ni = document.createElement('input');
+      ni.type = 'text'; ni.placeholder = f.ph; ni.value = data[f.id + '_n'] || '';
+      ni.setAttribute('aria-label', f.q + ' — notes');
+      ni.addEventListener('input', function(){ data[f.id + '_n'] = ni.value; save(); });
+      note.appendChild(ni);
+      row.appendChild(note);
+
+      wrap.appendChild(row);
+      return;
+    }
+
+    var d = el('div','f');
+    var lab = el('label', null, f.q);
+    lab.htmlFor = f.id;
+    d.appendChild(lab);
+    if(f.hint) d.appendChild(el('p','hint', f.hint));
+
+    if(f.t === 'pair'){
+      var g = el('div','pair');
+      [['_a', f.a], ['_b', f.b]].forEach(function(p, idx){
+        var inp = document.createElement('input');
+        inp.type = 'text'; inp.placeholder = p[1];
+        inp.id = idx === 0 ? f.id : f.id + p[0];
+        inp.value = data[f.id + p[0]] || '';
+        inp.setAttribute('aria-label', f.q + ' — ' + p[1]);
+        inp.addEventListener('input', function(){
+          data[f.id + p[0]] = inp.value; mark(inp); save();
+        });
+        mark(inp);
+        g.appendChild(inp);
+      });
+      d.appendChild(g);
+    } else {
+      var inp2 = document.createElement(f.t === 'lng' ? 'textarea' : 'input');
+      if(f.t !== 'lng') inp2.type = 'text';
+      inp2.id = f.id;
+      inp2.placeholder = f.ph;
+      inp2.value = data[f.id] || '';
+      inp2.addEventListener('input', function(){ data[f.id] = inp2.value; mark(inp2); save(); });
+      mark(inp2);
+      d.appendChild(inp2);
+    }
+
+    wrap.appendChild(d);
+  });
+
+  form.appendChild(s);
+
+  var a = el('a','navlink');
+  a.href = '#' + sec.key;
+  a.appendChild(el('em', null, String(n).padStart(2,'0')));
+  a.appendChild(el('span', null, sec.title));
+  a.appendChild(el('u', null, ''));
+  a.dataset.key = sec.key;
+  nav.appendChild(a);
+});
+
+/* name field */
+var nameIn = document.getElementById('who_name');
+nameIn.value = data.meta_name || '';
+nameIn.addEventListener('input', function(){ data.meta_name = nameIn.value; save(); });
+
+function mark(input){
+  if(input.value && input.value.trim()) input.classList.add('done');
+  else input.classList.remove('done');
+}
+
+/* ---------- progress + save ---------- */
+var flag  = document.getElementById('savedFlag');
+var fill  = document.getElementById('meterFill');
+var pctEl = document.getElementById('pctDone');
+var cntEl = document.getElementById('countDone');
+var timer = null;
+
+function countable(sec){
+  return sec.fields.filter(function(f){ return f.t !== 'sub'; });
+}
+function answered(f){
+  if(f.t === 'tri')  return !!data[f.id];
+  if(f.t === 'pair') return !!((data[f.id + '_a'] || '').trim() || (data[f.id + '_b'] || '').trim());
+  return !!((data[f.id] || '').trim());
+}
+
+function progress(){
+  var total = 0, done = 0;
+  SECTIONS.forEach(function(sec){
+    var fs = countable(sec), d = 0;
+    fs.forEach(function(f){ if(answered(f)) d++; });
+    total += fs.length; done += d;
+    var link = nav.querySelector('[data-key="' + sec.key + '"]');
+    if(link){
+      link.querySelector('u').textContent = d + '/' + fs.length;
+      link.classList.toggle('full', d === fs.length && fs.length > 0);
+    }
+  });
+  var pct = total ? Math.round(done / total * 100) : 0;
+  fill.style.width = pct + '%';
+  pctEl.textContent = pct + '%';
+  cntEl.textContent = done + ' of ' + total;
+}
+
+function save(){
+  progress();
+  clearTimeout(timer);
+  flag.textContent = 'Saving…';
+  flag.classList.remove('ok');
+  timer = setTimeout(function(){
+    try{
+      localStorage.setItem(KEY, JSON.stringify(data));
+      var t = new Date();
+      flag.textContent = 'Saved ' + t.getHours() + ':' + String(t.getMinutes()).padStart(2,'0');
+      flag.classList.add('ok');
+    } catch(e){
+      flag.textContent = 'Could not save locally';
+    }
+  }, 400);
+}
+
+progress();
+if(Object.keys(data).length) { flag.textContent = 'Answers restored'; flag.classList.add('ok'); }
+
+/* ---------- output ---------- */
+function triLabel(v){
+  for(var i=0;i<TRI.length;i++) if(TRI[i][0] === v) return TRI[i][1];
+  return '—';
+}
+
+function build(){
+  var out = [];
+  out.push('VILLA 25 EKAS — PROPERTY QUESTIONNAIRE');
+  out.push('=======================================');
+  out.push('Completed by: ' + (data.meta_name || '(not given)'));
+  out.push('Date: ' + new Date().toLocaleDateString('en-NZ', {day:'numeric', month:'long', year:'numeric'}));
+  out.push('Completion: ' + pctEl.textContent + ' (' + cntEl.textContent + ' questions answered)');
+  out.push('');
+
+  SECTIONS.forEach(function(sec, i){
+    var lines = [];
+    sec.fields.forEach(function(f){
+      if(f.t === 'sub'){ lines.push(''); lines.push('-- ' + f.label.toUpperCase() + ' --'); return; }
+
+      if(f.t === 'tri'){
+        var v = data[f.id], note = (data[f.id + '_n'] || '').trim();
+        if(!v && !note) return;
+        lines.push(f.q + ': ' + triLabel(v) + (note ? '  [' + note + ']' : ''));
+        return;
+      }
+      if(f.t === 'pair'){
+        var a = (data[f.id + '_a'] || '').trim(), b = (data[f.id + '_b'] || '').trim();
+        if(!a && !b) return;
+        lines.push(f.q + ': ' + (a || '—') + '  /  ' + (b || '—'));
+        return;
+      }
+      var val = (data[f.id] || '').trim();
+      if(!val) return;
+      if(f.t === 'lng'){
+        lines.push(f.q);
+        val.split('\n').forEach(function(l){ lines.push('    ' + l); });
+        lines.push('');
+      } else {
+        lines.push(f.q + ': ' + val);
+      }
+    });
+
+    out.push('');
+    out.push(String(i + 1).padStart(2,'0') + '. ' + sec.title.toUpperCase());
+    out.push('---------------------------------------');
+    if(lines.length) out = out.concat(lines);
+    else out.push('(no answers yet)');
+  });
+
+  return out.join('\n');
+}
+
+var status = document.getElementById('status');
+function say(msg){ status.textContent = msg; }
+
+/* --- send by email (FormSubmit — no account needed either end) --- */
+document.getElementById('btnSend').addEventListener('click', function(){
+  var who = (data.meta_name || '').trim();
+  if(!who){
+    say('Please put your name at the top first, so we know whose answers these are.');
+    nameIn.focus();
+    nameIn.scrollIntoView({ block:'center', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+    return;
+  }
+  var f = document.getElementById('post');
+  document.getElementById('pSubject').value = 'Villa 25 Ekas questionnaire — ' + who;
+  document.getElementById('pNext').value    = new URL('thanks.html', location.href).href;
+  document.getElementById('pWho').value     = who;
+  document.getElementById('pProg').value    = pctEl.textContent + ' (' + cntEl.textContent + ')';
+  document.getElementById('pBody').value    = build();
+  say('Sending…');
+  try{ localStorage.setItem(KEY, JSON.stringify(data)); }catch(e){}
+  f.submit();
+});
+
+document.getElementById('btnSave').addEventListener('click', function(){
+  var who = (data.meta_name || 'answers').trim().toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'') || 'answers';
+  var file = 'villa-25-ekas-questionnaire-' + who + '.txt';
+  var text = build();
+
+  if(window.claude && window.claude.downloads && window.claude.downloads.save){
+    say('Waiting for you to confirm the download…');
+    window.claude.downloads.save({ filename: file, data: text }).then(function(){
+      say('Saved to your device.');
+    }).catch(function(){
+      say('Download was cancelled. You can use "Copy to clipboard" instead.');
+    });
+  } else {
+    fallbackDownload(file, text);
+  }
+});
+
+function fallbackDownload(file, text){
+  try{
+    var blob = new Blob([text], {type:'text/plain;charset=utf-8'});
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url; a.download = file;
+    document.body.appendChild(a); a.click();
+    document.body.removeChild(a);
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 1000);
+    say('Saved to your device.');
+  } catch(e){
+    say('Could not save a file here — please use "Copy to clipboard" instead.');
+  }
+}
+
+document.getElementById('btnCopy').addEventListener('click', function(){
+  var text = build();
+  function ok(){ say('Copied — you can paste it anywhere.'); }
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(ok, legacy);
+  } else legacy();
+
+  function legacy(){
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.select();
+    try{ document.execCommand('copy'); ok(); }
+    catch(e){ say('Could not copy automatically — please select and copy manually.'); }
+    document.body.removeChild(ta);
+  }
+});
+
+document.getElementById('btnClear').addEventListener('click', function(){
+  if(!window.confirm('This erases every answer on this device and cannot be undone. Continue?')) return;
+  data = {};
+  try{ localStorage.removeItem(KEY); }catch(e){}
+  say('Cleared.');
+  window.location.reload();
+});
+
+/* ---------- nav highlighting ---------- */
+var links = Array.prototype.slice.call(nav.querySelectorAll('.navlink'));
+var secs  = SECTIONS.map(function(s){ return document.getElementById(s.key); });
+
+if('IntersectionObserver' in window){
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if(!en.isIntersecting) return;
+      links.forEach(function(l){ l.classList.toggle('on', l.dataset.key === en.target.id); });
+    });
+  }, { rootMargin:'-15% 0px -70% 0px' });
+  secs.forEach(function(s){ if(s) io.observe(s); });
+}
+
+var toTop = document.getElementById('totop');
+window.addEventListener('scroll', function(){
+  toTop.classList.toggle('show', window.scrollY > 700);
+}, {passive:true});
+toTop.addEventListener('click', function(){
+  window.scrollTo({ top:0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+});
+
+})();
+</script>
+</body>
+</html>
