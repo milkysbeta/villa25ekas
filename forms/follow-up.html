@@ -1,0 +1,545 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Villa 25 Ekas — Follow-up Questions</title>
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body>
+
+<div class="wrap">
+
+  <header class="head">
+    <div class="mark"><span class="m1">Villa</span><span class="m2">25</span><span class="m3">Ekas</span></div>
+    <p class="eyebrow">Round three — follow-ups</p>
+    <h1>The things your<br>answers opened up</h1>
+    <div class="lede">
+      <p>John's answers turned up something nobody had mentioned: the villa runs on
+         <b>off-grid solar, recycles its water into the gardens, is built from local timber,
+         and will rent electric bikes.</b> That isn't a blog post — it is one of the best
+         reasons anyone has to choose you over Kuta, and it is currently nowhere on the site.</p>
+      <p>Most of this round is about that, plus a few gaps that turned up along the way.
+         About twenty minutes. Saves as you go.</p>
+      <p class="warn">Four of these are marked <b class="urgent">Blocks launch</b> —
+         1 September is five weeks away.</p>
+    </div>
+
+    <div class="who">
+      <p class="wholab">Who are you?</p>
+      <div class="whopick" id="whopick"></div>
+      <input type="text" id="whoOther" placeholder="Or type your name" aria-label="Your name">
+    </div>
+
+    <div class="bar">
+      <div class="meter"><i id="fill"></i></div>
+      <p class="stat"><b id="pct">0%</b><span id="cnt">0 of 0 answered</span><em id="saved"></em></p>
+    </div>
+  </header>
+
+  <main id="main"></main>
+
+  <section class="finish">
+    <h2>Send it back</h2>
+    <p>Press send and your answers come straight through. Partial is fine — send it and top
+       it up later.</p>
+    <div class="acts">
+      <button type="button" class="btn primary" id="bSend">Send my answers</button>
+      <button type="button" class="btn" id="bSave">Save a copy</button>
+      <button type="button" class="btn" id="bCopy">Copy to clipboard</button>
+      <button type="button" class="btn quiet" id="bClear">Clear everything</button>
+    </div>
+    <p class="status" id="status" role="status" aria-live="polite"></p>
+  </section>
+
+</div>
+
+<form id="post" action="https://formsubmit.co/milkysbeta@gmail.com" method="POST" hidden>
+  <input type="hidden" name="_subject" id="pSubject" value="Villa 25 Ekas follow-ups">
+  <input type="hidden" name="_captcha" value="false">
+  <input type="hidden" name="_template" value="box">
+  <input type="hidden" name="_next" id="pNext" value="">
+  <input type="hidden" name="From" id="pWho" value="">
+  <input type="hidden" name="Progress" id="pProg" value="">
+  <input type="hidden" name="Answers" id="pBody" value="">
+</form>
+
+<button class="up" id="up" aria-label="Back to top">↑</button>
+
+<style>
+:root{
+  --ink:#16130E; --ink2:#3A3327; --paper:#F7F2E7; --card:#FFFDF7; --card2:#F0E9D9;
+  --line:#DED3BC; --line2:#C6B899; --bronze:#9C6C36; --bronze2:#845A2A;
+  --reef:#1D5450; --muted:#6F6555; --urgent:#8C3A22; --field:#FFFEFB;
+  --fd:'Iowan Old Style','Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif;
+  --ft:'Segoe UI',system-ui,-apple-system,'Helvetica Neue',sans-serif;
+  --fu:ui-monospace,'Cascadia Mono',Consolas,'SF Mono',monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root{ --ink:#F0E8D7; --ink2:#C8BCA5; --paper:#0F0D0A; --card:#191510; --card2:#221C15;
+    --line:#302A21; --line2:#473E31; --bronze:#C99A5C; --bronze2:#E2B87E;
+    --reef:#66B2A8; --muted:#94886F; --urgent:#D07E5F; --field:#151109; }
+}
+:root[data-theme="light"]{ --ink:#16130E; --ink2:#3A3327; --paper:#F7F2E7; --card:#FFFDF7;
+  --card2:#F0E9D9; --line:#DED3BC; --line2:#C6B899; --bronze:#9C6C36; --bronze2:#845A2A;
+  --reef:#1D5450; --muted:#6F6555; --urgent:#8C3A22; --field:#FFFEFB; }
+:root[data-theme="dark"]{ --ink:#F0E8D7; --ink2:#C8BCA5; --paper:#0F0D0A; --card:#191510;
+  --card2:#221C15; --line:#302A21; --line2:#473E31; --bronze:#C99A5C; --bronze2:#E2B87E;
+  --reef:#66B2A8; --muted:#94886F; --urgent:#D07E5F; --field:#151109; }
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--ft);
+  font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+body::before{content:'';position:fixed;inset:0 0 auto 0;height:3px;z-index:80;
+  background:linear-gradient(90deg,var(--reef),var(--bronze) 48%,var(--line2) 72%,var(--reef))}
+.wrap{max-width:820px;margin:0 auto;padding:0 24px 120px}
+
+.head{padding:60px 0 0}
+.mark{display:flex;align-items:baseline;gap:9px;margin-bottom:36px}
+.m1,.m3{font-family:var(--fd);font-size:14px;letter-spacing:.4em;text-transform:uppercase;color:var(--ink2)}
+.m2{font-family:var(--fd);font-size:30px;color:var(--bronze);line-height:1}
+.eyebrow{margin:0 0 16px;font-family:var(--fu);font-size:11px;letter-spacing:.26em;
+  text-transform:uppercase;color:var(--bronze)}
+h1{font-family:var(--fd);font-weight:400;font-size:clamp(34px,5.4vw,54px);line-height:1.06;
+  margin:0 0 26px;letter-spacing:-.015em;text-wrap:balance}
+.lede{max-width:62ch;color:var(--ink2)} .lede p{margin:0 0 13px}
+.warn{padding:13px 17px;background:var(--card2);border-left:2px solid var(--urgent);
+  border-radius:0 3px 3px 0;font-size:15.5px}
+.urgent{color:var(--urgent)}
+
+.who{margin:38px 0 0;padding:22px 24px;background:var(--card);border:1px solid var(--line);border-radius:4px}
+.wholab{margin:0 0 13px;font-family:var(--fu);font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--muted)}
+.whopick{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.whopick button{font-family:var(--ft);font-size:15px;padding:8px 18px;border-radius:999px;
+  border:1px solid var(--line2);background:transparent;color:var(--ink);cursor:pointer;
+  transition:background .15s,border-color .15s,color .15s}
+.whopick button:hover{border-color:var(--bronze)}
+.whopick button[aria-pressed="true"]{background:var(--bronze);border-color:var(--bronze);
+  color:#FFFAF1;font-weight:600}
+.whopick button:focus-visible,input:focus-visible,textarea:focus-visible,.btn:focus-visible,
+.opt:focus-visible{outline:2px solid var(--reef);outline-offset:2px}
+
+.bar{position:sticky;top:0;z-index:70;margin:34px -24px 0;padding:14px 24px;
+  background:var(--paper);border-bottom:1px solid var(--line)}
+.meter{height:3px;background:var(--line);border-radius:2px;overflow:hidden}
+.meter i{display:block;height:100%;width:0;background:var(--bronze);transition:width .35s ease}
+.stat{margin:9px 0 0;display:flex;gap:14px;align-items:baseline;font-family:var(--fu);
+  font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.stat b{color:var(--ink);font-size:13px} .stat em{margin-left:auto;font-style:normal;color:var(--reef)}
+
+.grp{margin:64px 0 0}
+.grp>h2{font-family:var(--fd);font-weight:400;font-size:15px;letter-spacing:.24em;
+  text-transform:uppercase;color:var(--bronze);margin:0 0 4px}
+.grp>p{margin:0;color:var(--muted);font-size:15px;max-width:60ch}
+
+.card{margin:26px 0 0;padding:26px 28px;background:var(--card);border:1px solid var(--line);border-radius:4px}
+.card.block{border-left:3px solid var(--urgent)}
+.chead{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:8px}
+.cn{font-family:var(--fu);font-size:11px;color:var(--bronze);letter-spacing:.1em}
+.chead h3{font-family:var(--fd);font-weight:400;font-size:25px;margin:0;flex:1;
+  letter-spacing:-.01em;min-width:200px;text-wrap:balance}
+.tag{font-family:var(--fu);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;
+  padding:4px 9px;border-radius:2px;background:var(--urgent);color:#FFF6F2;white-space:nowrap}
+.q{margin:0 0 6px;color:var(--ink2);max-width:62ch}
+.ctx{margin:0;color:var(--muted);font-size:15px;max-width:62ch}
+
+.opts{display:flex;flex-direction:column;gap:9px;margin:20px 0 0}
+.opt{display:block;width:100%;text-align:left;font-family:inherit;font-size:inherit;
+  padding:14px 17px;background:var(--card2);border:1px solid transparent;border-radius:3px;
+  cursor:pointer;color:var(--ink);transition:border-color .15s,background .15s}
+.opt:hover{border-color:var(--line2)}
+.opt[aria-pressed="true"]{border-color:var(--bronze);background:var(--field);
+  box-shadow:inset 3px 0 0 var(--bronze)}
+.olab{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap}
+.otick{font-family:var(--fu);font-size:13px;color:var(--muted);width:14px;flex:none}
+.opt[aria-pressed="true"] .otick{color:var(--bronze)}
+.otxt{font-weight:600;flex:1;min-width:160px}
+.orec{font-family:var(--fu);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--reef);border:1px solid var(--reef);padding:2px 7px;border-radius:2px}
+.owhy{margin:6px 0 0 23px;font-size:14.5px;color:var(--muted);line-height:1.5;max-width:60ch}
+
+.note{margin:16px 0 0}
+.note label{display:block;font-family:var(--fu);font-size:10.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+input[type=text],textarea{width:100%;font-family:inherit;font-size:16px;color:var(--ink);
+  background:var(--field);border:1px solid var(--line2);border-radius:3px;padding:10px 13px;line-height:1.5}
+textarea{resize:vertical;min-height:96px}
+input::placeholder,textarea::placeholder{color:var(--muted);opacity:.75}
+input:focus-visible,textarea:focus-visible{border-color:var(--bronze)}
+
+.finish{margin:80px 0 0;padding:32px 30px;background:var(--card2);border:1px solid var(--line2);border-radius:4px}
+.finish h2{font-family:var(--fd);font-weight:400;font-size:27px;margin:0 0 11px}
+.finish p{margin:0 0 20px;max-width:58ch;color:var(--ink2)}
+.acts{display:flex;flex-wrap:wrap;gap:11px}
+.btn{font-family:var(--fu);font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+  padding:14px 24px;border-radius:3px;cursor:pointer;background:transparent;
+  border:1px solid var(--line2);color:var(--ink);transition:background .16s,border-color .16s,color .16s}
+.btn:hover{border-color:var(--bronze);color:var(--bronze2)}
+.btn.primary{background:var(--bronze);border-color:var(--bronze);color:#FFFAF1;font-weight:600}
+.btn.primary:hover{background:var(--bronze2);border-color:var(--bronze2)}
+.btn.quiet{color:var(--muted);border-color:transparent}
+.btn.quiet:hover{color:var(--ink);border-color:var(--line2)}
+.status{margin:17px 0 0 !important;font-family:var(--fu);font-size:12px;color:var(--reef);min-height:17px}
+
+.up{position:fixed;right:20px;bottom:20px;width:42px;height:42px;border-radius:50%;
+  border:1px solid var(--line2);background:var(--card);color:var(--ink);cursor:pointer;
+  font-size:17px;opacity:0;pointer-events:none;transition:opacity .25s;z-index:60}
+.up.show{opacity:1;pointer-events:auto}
+.up:hover{border-color:var(--bronze);color:var(--bronze2)}
+
+@media (max-width:620px){
+  body{font-size:16px} .wrap{padding:0 18px 100px} .bar{margin:30px -18px 0;padding:12px 18px}
+  .card{padding:22px 19px} .chead h3{font-size:22px} .acts .btn{flex:1 1 100%}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+
+<script>
+(function(){
+"use strict";
+function o(v,txt,why,rec){ return {v:v,txt:txt,why:why||'',rec:!!rec}; }
+
+var GROUPS = [
+
+{ name:'Power, water & the building', intro:'The part of the story that is currently missing from the website entirely.', items:[
+
+ {id:'solar', t:'The solar system — have we got this right?',
+  q:'John gave us: 16 kW inverter, two arrays at 412 V, 2 × 6,300 W of panels, 46 kWh of battery.',
+  ctx:'That is roughly 12.6 kW of panels and a very large battery by domestic standards — enough to run air conditioning overnight. Worth stating plainly, because most villas claiming to be "eco" have a token panel on the roof. Correct anything wrong below, and tell us whether it is genuinely fully off-grid or grid-tied with battery backup.',
+  type:'long', ph:'Corrections, and: fully off-grid, or grid-tied?'},
+
+ {id:'solarruns', t:'What does the system actually run?',
+  q:'Air conditioning in every room? Pool pumps? Hot water? Induction cooking? All of it, all night?',
+  ctx:'This is the difference between "solar powered" and a claim guests can feel. If the aircon runs all night on batteries, say so — nobody else in Ekas can.',
+  type:'long'},
+
+ {id:'generator', t:'Is there a generator as backup?',
+  ctx:'No shame either way. Guests care far more about whether the power stays on than about how.',
+  opts:[
+   o('yes','Yes, there is a backup generator',''),
+   o('no','No — battery only',''),
+   o('grid','Grid connection is the backup','')
+  ]},
+
+ {id:'water', t:'What happens to the water?',
+  q:'John mentioned recycling water back into the gardens.',
+  ctx:'Please cover: is it greywater only, or is blackwater treated as well? Is rainwater captured? Is drinking water filtered on site — and does that mean guests are not handed plastic bottles? Where does the fresh water come from — a well, a bore, mains?',
+  type:'long'},
+
+ {id:'bikes', t:'The electric bikes',
+  q:'How many, what are they, and what will you charge per day?',
+  ctx:'And are they charged from the solar? If they are, that is a genuinely lovely line — guests touring Lombok on sunlight.',
+  type:'long', ph:'Number, model, daily rate, charged from solar?'},
+
+ {id:'timber', t:'The timber',
+  q:'Which species, where did it come from, and who milled it?',
+  ctx:'Specifics are what separate this from greenwashing. "Local timber" means nothing; "bengkirai from a mill forty minutes up the coast" means everything.',
+  type:'long'},
+
+ {id:'greenelse', t:'What else?',
+  ctx:'Composting, waste separation, no single-use plastic, refillable bathroom amenities, local staff and suppliers, native planting, reef-safe sunscreen for guests — anything that is true.',
+  type:'long'},
+
+ {id:'greennav', t:'Where should this live on the site?',
+  opts:[
+   o('section','Its own section in the main navigation','It is a booking reason and the most search-friendly thing you have. People actively search for off-grid and eco stays.',true),
+   o('woven','Woven through the other pages, no dedicated section','More subtle, less likely to read as boasting — but far easier to miss.'),
+   o('both','A short section, plus mentions where relevant','')
+  ]}
+]},
+
+{ name:'MotoGP & event pricing', intro:'John said rates rise for MotoGP week, which means seasonal pricing cannot stay switched off.', items:[
+
+ {id:'motogp', t:'MotoGP — dates and rates', block:true,
+  q:'Which week, and what do you charge?',
+  ctx:'Mandalika is about an hour and a half away, and accommodation across southern Lombok fills months ahead. Give us the dates you know and the multiplier — double, triple, or a flat nightly figure.',
+  type:'long', ph:'Dates, multiplier or flat rate, and minimum stay that week'},
+
+ {id:'events', t:'Any other dates that spike?',
+  ctx:'Christmas and New Year, Eid, Nyepi, Australian and European school holidays, surf competitions.',
+  type:'long'},
+
+ {id:'seasonon', t:'Turn seasonal pricing on at launch after all?',
+  ctx:'John chose "build it, leave it off" — but MotoGP pricing needs it working from day one.',
+  opts:[
+   o('on','Yes — switch it on for launch','Your own answer requires it. The alternative is editing rates by hand every time an event comes round.',true),
+   o('off','No — handle MotoGP manually for now','Workable if it is only one week a year.')
+  ]}
+]},
+
+{ name:'Deposits & holding dates', intro:'Two of John\'s answers pull against each other, and this is the gap where you lose a booking.', items:[
+
+ {id:'holdgap', t:'What holds a room while a bank transfer clears?', block:true,
+  q:'You chose "only a paid deposit holds dates", and payment by Wise or bank transfer.',
+  ctx:'An international transfer takes two to three days. Someone enquiring on a Friday cannot hold anything until Tuesday — and in that window a second guest asks for the same room. Proposal: an enquiry creates a provisional 72-hour hold, the guest gets bank details straight away, and the hold releases itself if nothing arrives. Pending transfers show in the admin portal so you can see what is in flight.',
+  opts:[
+   o('72','Yes — 72-hour provisional hold, then automatic release','Solves it without any payment integration. Nobody misses out and nothing sits blocked indefinitely.',true),
+   o('48','Same idea, but 48 hours',''),
+   o('none','No holds — first cleared payment wins','Simplest, but you will lose bookings to whoever replies faster.')
+  ]},
+
+ {id:'carddeposit', t:'A small card deposit purely to hold dates?',
+  q:'Say 1,000,000 IDR on a card to lock the dates, balance by transfer.',
+  ctx:'Removes the problem completely, but needs Stripe through the NZ company, or Xendit.',
+  opts:[
+   o('yes','Yes — worth setting up',''),
+   o('later','Good idea, but after launch','',true),
+   o('no','No — transfers only','')
+  ]},
+
+ {id:'gavmax', t:'When are you speaking to Gavin and Max?', block:true,
+  q:'Their systems may answer both of the questions above outright.',
+  ctx:'Both are launch-blockers, so a rough date is genuinely useful.',
+  type:'text', ph:'e.g. this week / next Tuesday'},
+
+ {id:'cancelwho', t:'Cancellation policy — who decides, and when?', block:true,
+  q:'The last launch-blocker with nobody assigned to it.',
+  ctx:'John deferred the deposit split to Alison as the Booking.com expert. The cancellation policy probably belongs with her too. When can she do the decisions form?',
+  type:'text', ph:'e.g. Alison, by Friday'}
+]},
+
+{ name:'Getting here', intro:'John wants guests to be able to compare all three ways in, with real prices and times.', items:[
+
+ {id:'transfer', t:'Confirm the transfer offer',
+  q:'You said always charged. Drivers get 350,000, the going rate is 450,000.',
+  ctx:'Is 450,000 per vehicle each way? How many passengers and boards fit? Is there a larger vehicle for groups, and what does that cost?',
+  type:'long'},
+
+ {id:'transferpub', t:'Publish the transfer price openly?',
+  opts:[
+   o('yes','Yes — show "450,000 IDR per vehicle each way"','A hidden price reads as something to hide, and it is a fair price honestly arrived at.',true),
+   o('from','Show "transfers arranged — from 450,000 IDR"','Keeps room to move for bigger vehicles.'),
+   o('no','No price — "transfers arranged on request"','')
+  ]},
+
+ {id:'routes', t:'The three ways in — real numbers please', block:true,
+  q:'Fast boat, slow boat, and flying.',
+  ctx:'For each: which operator, roughly what it costs, how long it takes, and where it lands. John\'s framing was good — fast boat if you have lots of boards and heavy luggage, slow boat if you are bringing a motorbike or want it cheaper, fly if you want it quick. We can research this, but your numbers will be current and ours will not.',
+  type:'long', ph:'Fast boat —\nSlow boat —\nFly —'},
+
+ {id:'senggigi', t:'Senggigi — why do guests arrive that way?',
+  q:'And how long is the drive from there to Ekas?',
+  type:'text'}
+]},
+
+{ name:'Scope & the 1st of September', intro:'Five weeks. What has to be true on the day.', items:[
+
+ {id:'i18n', t:'English only at launch — but build the language plumbing?',
+  ctx:'Adding the machinery for other languages now costs almost nothing. Retrofitting it later means touching every page.',
+  opts:[
+   o('build','Build it now, ship English only','Cheap now, expensive later. Indonesian, German and French drop in whenever you are ready.',true),
+   o('skip','Skip it — English only, deal with it later','')
+  ]},
+
+ {id:'sept1', t:'What has to be live on 1 September?', block:true,
+  opts:[
+   o('full','The full site, taking enquiries','Realistic in five weeks. Booking engine follows once you have talked to Gavin and Max.',true),
+   o('coming','Coming-soon page plus an email address','Safe, but you are already taking bookings, so it wastes the moment.'),
+   o('booking','The full site with a working booking engine','Possible, but it depends on the payment decision being made in the next week or so.')
+  ]},
+
+ {id:'walk', t:'The four-minute walk — to what?',
+  q:'You picked "both, and they are different" but the comment came through empty.',
+  ctx:'Guests will time it, so it needs to be right.',
+  type:'text', ph:'e.g. 4 min to the sand, 12 min to the break'}
+]},
+
+{ name:'The one that matters most', items:[
+
+ {id:'whyekas', t:'Why bother with Ekas instead of Kuta?',
+  q:'Answer it the way you would to a friend over a beer, not the way you would write an advert.',
+  ctx:'John half-answered this already. Whatever the three of you say to this question becomes the most important section on the site — the one that replaces the reviews you do not have yet. Your words will be better than anything we invent, so please do not polish it.',
+  type:'long'},
+
+ {id:'anything', t:'Anything else?',
+  type:'long', ph:'"3am, I\'m sure something will come up." — John'}
+]}
+];
+
+var KEY='villa25-followup-v1', data={};
+try{ data=JSON.parse(localStorage.getItem(KEY)||'{}')||{}; }catch(e){ data={}; }
+function el(t,c,x){ var n=document.createElement(t); if(c)n.className=c; if(x!=null)n.textContent=x; return n; }
+
+var WHO=['Alison','John','Milky','Guest / other'];
+var whoBox=document.getElementById('whopick'), whoOther=document.getElementById('whoOther');
+WHO.forEach(function(name){
+  var b=el('button',null,name); b.type='button';
+  b.setAttribute('aria-pressed', data.who===name?'true':'false');
+  b.addEventListener('click',function(){
+    data.who = data.who===name?'':name;
+    Array.prototype.forEach.call(whoBox.children,function(c){c.setAttribute('aria-pressed','false');});
+    if(data.who) b.setAttribute('aria-pressed','true');
+    save();
+  });
+  whoBox.appendChild(b);
+});
+whoOther.value=data.whoName||'';
+whoOther.addEventListener('input',function(){ data.whoName=whoOther.value; save(); });
+
+var main=document.getElementById('main'), N=0, ALL=[];
+GROUPS.forEach(function(g){
+  var gs=el('section','grp');
+  gs.appendChild(el('h2',null,g.name));
+  if(g.intro) gs.appendChild(el('p',null,g.intro));
+
+  g.items.forEach(function(it){
+    N++; it.n=N; ALL.push(it);
+    var c=el('div','card'); if(it.block) c.classList.add('block'); c.id='d_'+it.id;
+
+    var h=el('div','chead');
+    h.appendChild(el('span','cn',String(N).padStart(2,'0')));
+    h.appendChild(el('h3',null,it.t));
+    if(it.block) h.appendChild(el('span','tag','Blocks launch'));
+    c.appendChild(h);
+    if(it.q)   c.appendChild(el('p','q',it.q));
+    if(it.ctx) c.appendChild(el('p','ctx',it.ctx));
+
+    if(it.opts){
+      var box=el('div','opts');
+      it.opts.forEach(function(op){
+        var b=el('button','opt'); b.type='button';
+        b.setAttribute('aria-pressed', data[it.id]===op.v?'true':'false');
+        var lab=el('div','olab');
+        lab.appendChild(el('span','otick', data[it.id]===op.v?'●':'○'));
+        lab.appendChild(el('span','otxt',op.txt));
+        if(op.rec) lab.appendChild(el('span','orec','Recommended'));
+        b.appendChild(lab);
+        if(op.why) b.appendChild(el('p','owhy',op.why));
+        b.addEventListener('click',function(){
+          var same=data[it.id]===op.v;
+          data[it.id]=same?'':op.v;
+          Array.prototype.forEach.call(box.children,function(x){
+            x.setAttribute('aria-pressed','false'); x.querySelector('.otick').textContent='○';
+          });
+          if(!same){ b.setAttribute('aria-pressed','true'); b.querySelector('.otick').textContent='●'; }
+          save();
+        });
+        box.appendChild(b);
+      });
+      c.appendChild(box);
+    }
+
+    var nb=el('div','note');
+    var free = it.type==='long'||it.type==='text';
+    var lb=el('label',null, free?'Your answer':'Comment (optional)'); lb.htmlFor='f_'+it.id;
+    nb.appendChild(lb);
+    var f=document.createElement(it.type==='text'?'input':'textarea');
+    if(it.type==='text') f.type='text';
+    f.id='f_'+it.id; f.placeholder=it.ph||''; f.value=data[it.id+'_c']||'';
+    f.addEventListener('input',function(){ data[it.id+'_c']=f.value; save(); });
+    nb.appendChild(f); c.appendChild(nb);
+    gs.appendChild(c);
+  });
+  main.appendChild(gs);
+});
+
+var fill=document.getElementById('fill'), pct=document.getElementById('pct'),
+    cnt=document.getElementById('cnt'), sv=document.getElementById('saved'), timer=null;
+
+function isDone(it){ return it.opts ? !!data[it.id] : !!((data[it.id+'_c']||'').trim()); }
+function progress(){
+  var d=0; ALL.forEach(function(it){ if(isDone(it)) d++; });
+  var p=ALL.length?Math.round(d/ALL.length*100):0;
+  fill.style.width=p+'%'; pct.textContent=p+'%'; cnt.textContent=d+' of '+ALL.length+' answered';
+}
+function save(){
+  progress(); clearTimeout(timer);
+  timer=setTimeout(function(){
+    try{ localStorage.setItem(KEY,JSON.stringify(data));
+      var t=new Date(); sv.textContent='Saved '+t.getHours()+':'+String(t.getMinutes()).padStart(2,'0');
+    }catch(e){ sv.textContent='Cannot save here'; }
+  },400);
+}
+progress();
+if(Object.keys(data).length) sv.textContent='Answers restored';
+
+function build(){
+  var w=(data.who||'').trim(), n=(data.whoName||'').trim();
+  var who=(n && n.toLowerCase()!==w.toLowerCase()) ? (w?w+' ('+n+')':n) : (w||n);
+  var L=['VILLA 25 EKAS — FOLLOW-UP ANSWERS','==================================',
+    'From: '+(who||'(not given)'),
+    'Date: '+new Date().toLocaleDateString('en-NZ',{day:'numeric',month:'long',year:'numeric'}),
+    'Answered: '+pct.textContent+' ('+cnt.textContent+')'];
+
+  GROUPS.forEach(function(g){
+    L.push(''); L.push(g.name.toUpperCase()); L.push('--------------------------');
+    g.items.forEach(function(it){
+      var chosen='', c=(data[it.id+'_c']||'').trim();
+      if(it.opts) for(var i=0;i<it.opts.length;i++) if(it.opts[i].v===data[it.id]) chosen=it.opts[i].txt;
+      if(!chosen && !c) return;
+      L.push('');
+      L.push(String(it.n).padStart(2,'0')+'. '+it.t+(it.block?'   [BLOCKS LAUNCH]':''));
+      if(it.opts) L.push('    Choice: '+(chosen||'(not chosen)'));
+      if(c){ L.push(it.opts?'    Comment:':'    Answer:');
+        c.split('\n').forEach(function(x){ L.push('      '+x); }); }
+    });
+  });
+
+  var missed=ALL.filter(function(it){ return !isDone(it); });
+  if(missed.length){
+    L.push(''); L.push('STILL UNANSWERED'); L.push('--------------------------');
+    missed.forEach(function(it){ L.push('  '+String(it.n).padStart(2,'0')+'. '+it.t+(it.block?'  [BLOCKS LAUNCH]':'')); });
+  }
+  return L.join('\n');
+}
+
+var status=document.getElementById('status');
+function say(m){ status.textContent=m; }
+
+document.getElementById('bSend').addEventListener('click',function(){
+  var w=(data.who||'').trim(), n=(data.whoName||'').trim();
+  if(!w && !n){ say('Please tell us who you are at the top first.'); whoOther.focus();
+    whoOther.scrollIntoView({block:'center',behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'}); return; }
+  var label=(n && n.toLowerCase()!==w.toLowerCase()) ? (w?w+' ('+n+')':n) : (w||n);
+  document.getElementById('pSubject').value='Villa 25 Ekas follow-ups — '+label;
+  document.getElementById('pNext').value = new URL('thanks.html',location.href).href;
+  document.getElementById('pWho').value  = label;
+  document.getElementById('pProg').value = pct.textContent+' ('+cnt.textContent+')';
+  document.getElementById('pBody').value = build();
+  say('Sending…');
+  try{ localStorage.setItem(KEY,JSON.stringify(data)); }catch(e){}
+  document.getElementById('post').submit();
+});
+
+document.getElementById('bSave').addEventListener('click',function(){
+  var who=((data.who||'')+'-'+(data.whoName||'')).toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')||'answers';
+  var file='villa-25-ekas-followups-'+who+'.txt', text=build();
+  try{
+    var blob=new Blob([text],{type:'text/plain;charset=utf-8'}), url=URL.createObjectURL(blob);
+    var a=document.createElement('a'); a.href=url; a.download=file;
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    setTimeout(function(){URL.revokeObjectURL(url);},1000);
+    say('Saved to your device.');
+  }catch(e){ say('Could not save a file here — please use "Copy to clipboard".'); }
+});
+
+document.getElementById('bCopy').addEventListener('click',function(){
+  var text=build();
+  function ok(){ say('Copied — you can paste it into WhatsApp or an email.'); }
+  function legacy(){
+    var ta=document.createElement('textarea'); ta.value=text;
+    ta.style.position='fixed'; ta.style.opacity='0';
+    document.body.appendChild(ta); ta.select();
+    try{ document.execCommand('copy'); ok(); }catch(e){ say('Could not copy — please select manually.'); }
+    document.body.removeChild(ta);
+  }
+  if(navigator.clipboard&&navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(ok,legacy);
+  else legacy();
+});
+
+document.getElementById('bClear').addEventListener('click',function(){
+  if(!window.confirm('This erases every answer on this device and cannot be undone. Continue?')) return;
+  data={}; try{ localStorage.removeItem(KEY); }catch(e){}
+  window.location.reload();
+});
+
+var up=document.getElementById('up');
+window.addEventListener('scroll',function(){ up.classList.toggle('show',window.scrollY>700); },{passive:true});
+up.addEventListener('click',function(){
+  window.scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
+});
+})();
+</script>
+</body>
+</html>
