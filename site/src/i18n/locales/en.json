@@ -1,0 +1,66 @@
+{
+  "nav": {
+    "stay": "Stay",
+    "surf": "Surf",
+    "sustainability": "Off-grid",
+    "experiences": "Experiences",
+    "gettingHere": "Getting here",
+    "gallery": "Gallery",
+    "journal": "Journal",
+    "guide": "Ekas Guide",
+    "contact": "Contact",
+    "enquire": "Enquire"
+  },
+  "home": {
+    "eyebrow": "Ekas Bay · Lombok",
+    "headline": "Five rooms, one bay,\nand nothing plugged into the grid",
+    "sub": "Built from local timber above Ekas Bay. Run on sunlight. Four minutes from the sand and a long way from everywhere else.",
+    "cta": "Check availability"
+  },
+  "stay": {
+    "title": "The rooms",
+    "intro": "Three rooms on the lower level, a two-bedroom villa, and an apartment upstairs with the view. Take one, or take the lot.",
+    "perNight": "per night",
+    "from": "from",
+    "introRates": "Introductory rates — opening 2026",
+    "buyout": "The whole property",
+    "buyoutNote": "Every room, both pools, the run of the place."
+  },
+  "surf": {
+    "title": "The surf",
+    "intro": "Inside Ekas breaks in front of the villa. Outside is a boat ride away, and empties out the moment the day-trippers go home.",
+    "forecast": "Five-day forecast"
+  },
+  "sustainability": {
+    "title": "Off the grid",
+    "intro": "Not a solar panel on the roof and a sign about towels. The whole property runs on sunlight, the water goes back into the gardens, and the timber came from up the road.",
+    "solar": "of solar",
+    "battery": "of battery",
+    "grid": "grid connection"
+  },
+  "gettingHere": {
+    "title": "Getting here",
+    "intro": "It takes a bit of doing. That is the point — the road is the reason the bay is still quiet.",
+    "byAir": "By air",
+    "byFastBoat": "By fast boat",
+    "bySlowBoat": "By slow boat",
+    "openInMaps": "Open in Google Maps"
+  },
+  "contact": {
+    "title": "Get in touch",
+    "intro": "Send a message and we will come back to you within a day. Tell us your dates and how many of you there are.",
+    "whatsapp": "Message on WhatsApp",
+    "email": "Send an email"
+  },
+  "common": {
+    "comingSoon": "Coming soon",
+    "night": "night",
+    "approx": "approx.",
+    "readMore": "Read more",
+    "backHome": "Back to the start"
+  },
+  "footer": {
+    "rights": "Villa 25 Ekas",
+    "builtBy": "Ekas Bay, Lombok, Indonesia"
+  }
+}

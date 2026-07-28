@@ -1,0 +1,120 @@
+@import "tailwindcss";
+
+/* ============================================================================
+   VILLA 25 EKAS — DESIGN TOKENS
+
+   This is the ONE file to edit when the clients' colour board lands.
+   Every colour and typeface on the site resolves through these names, so
+   changing a value here changes it everywhere. Nothing hard-codes a hex.
+
+   Palette is drawn from the logo and the place itself: volcanic sand, bronze,
+   the green-blue of the bay, warm limestone.
+   ========================================================================= */
+
+@theme {
+  /* -- ground ------------------------------------------------------------ */
+  --color-ink:        #12100C;   /* deepest — hero grounds, footer          */
+  --color-ink-soft:   #1A1712;   /* raised surfaces on dark                 */
+  --color-ink-line:   #2C2620;   /* hairlines on dark                       */
+
+  /* -- warm light ground ------------------------------------------------- */
+  --color-sand:       #F5F0E4;   /* page ground for light sections          */
+  --color-sand-deep:  #EAE2CF;   /* cards and wells on sand                 */
+  --color-sand-line:  #D6CAB0;   /* hairlines on sand                       */
+
+  /* -- accent ------------------------------------------------------------ */
+  --color-bronze:     #A9763C;   /* the gold — restrained, not yellow       */
+  --color-bronze-lit: #C99A5C;   /* on dark grounds                         */
+  --color-bronze-dim: #8A5F2E;   /* hover on light grounds                  */
+
+  /* -- the bay ----------------------------------------------------------- */
+  --color-reef:       #1D5450;   /* deep teal — focus rings, links          */
+  --color-reef-lit:   #66B2A8;   /* on dark grounds                         */
+
+  /* -- type -------------------------------------------------------------- */
+  --color-text:       #16130E;   /* body on sand                            */
+  --color-text-soft:  #4A4235;
+  --color-text-mute:  #6F6555;
+  --color-text-inv:   #F0E8D7;   /* body on ink                             */
+  --color-text-inv-s: #BFB4A0;
+
+  /* -- state ------------------------------------------------------------- */
+  --color-alert:      #8C3A22;
+  --color-good:       #3F6B45;
+
+  /* -- typefaces --------------------------------------------------------- */
+  /* Serif carries the brand. System stack for now — swap for a self-hosted
+     Cormorant Garamond or Canela once licensing is settled. Never load fonts
+     from a CDN: it leaks visitor IPs to a third party and breaks under CSP. */
+  --font-display: 'Iowan Old Style', 'Palatino Linotype', Palatino,
+                  'Book Antiqua', Georgia, serif;
+  --font-body:    'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', sans-serif;
+  --font-util:    ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace;
+
+  /* -- scale ------------------------------------------------------------- */
+  --spacing-section: 7rem;
+  --radius-card: 4px;
+}
+
+/* ---------------------------------------------------------------------------
+   Base
+   Slightly larger than default throughout — the owners specifically asked for
+   this to stay readable for older guests without looking like a large-print
+   edition. 17px base, generous line-height, nothing thinner than 400.
+   ------------------------------------------------------------------------ */
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+  body {
+    background: var(--color-sand);
+    color: var(--color-text);
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-reef);
+    outline-offset: 3px;
+  }
+  ::selection {
+    background: var(--color-bronze);
+    color: #fff;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  /* small caps label used for eyebrows, nav utilities, data */
+  .label {
+    font-family: var(--font-util);
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+  /* the horizon rule — echoes the logo's skyline. Used sparingly. */
+  .horizon {
+    height: 2px;
+    background: linear-gradient(
+      90deg,
+      var(--color-reef),
+      var(--color-bronze) 48%,
+      var(--color-sand-line) 72%,
+      var(--color-reef)
+    );
+  }
+}
