@@ -100,9 +100,11 @@ export default function ComingSoon() {
               Your perfect Island getaway
             </h2>
 
-            <p className="mx-auto mt-8 max-w-xl text-xl leading-relaxed text-(--color-text-soft) sm:text-[1.4rem]">
-              Five rooms above Ekas Bay, Lombok. Run on sunlight, built from
-              local timber, four minutes from the sand.
+            <p className="mx-auto mt-8 max-w-2xl text-xl leading-relaxed text-(--color-text-soft) sm:text-[1.4rem]">
+              Perched above the turquoise waters of Ekas Beach Lombok, Villa 25
+              Ekas is a luxurious five bedroom escape. Built with locally sourced
+              timber, featuring spectacular indoor and outdoor entertainment
+              areas, a private pool, and only a four minute walk to the beach.
             </p>
 
             <div className="mt-12 flex flex-wrap items-center justify-center gap-3">

@@ -20,8 +20,8 @@ export default function Footer() {
               </span>
             </a>
             <p className="mt-7 max-w-xs text-[15px] text-(--color-text-soft)">
-              Five rooms above Ekas Bay, run on sunlight and built from local
-              timber. Four minutes from the sand.
+              A luxurious five bedroom escape above the turquoise waters of
+              Ekas Beach. Four minutes' walk from the sand.
             </p>
           </div>
 

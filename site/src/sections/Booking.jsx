@@ -3,37 +3,42 @@ import {
   getBookings, buildCalendar, findGapNights,
   todayIso, addDays, nightsBetween,
 } from '../lib/availability.js';
-import { UNITS, PRICING, whatsappLink } from '../data/villa.js';
+import { lookup } from '../lib/promo.js';
+import { UNITS, PRICING, CONTACT, whatsappLink } from '../data/villa.js';
 import Price from '../components/Price.jsx';
+import { formatIdr } from '../lib/currency.js';
 
 /* ============================================================================
-   Booking calendar
+   Availability, estimate and enquiry
 
-   Two months side by side, pick a check-in then a check-out. Because there is
-   no payment engine yet, this produces an ENQUIRY, not a booking — the wording
-   says so throughout, so nobody arrives thinking they have a confirmed room.
+   Pick dates, apply a friends code if you have one, see what it comes to, then
+   send it. Because there is no payment engine yet, this produces an ENQUIRY
+   rather than a booking — the wording says so at every step, so nobody leaves
+   thinking they have a confirmed room.
 
-   Nights sitting in a gap of three or fewer between two bookings are marked and
-   discounted, which turns dead calendar into revenue (John's decision 26).
+   The enquiry posts to FormSubmit, which emails it straight through and sends
+   the guest an automatic acknowledgement. No backend, no account, and it works
+   from a static host.
    ========================================================================= */
 
-const MONTH_NAMES = ['January','February','March','April','May','June',
+const MONTHS = ['January','February','March','April','May','June',
   'July','August','September','October','November','December'];
 const DOW = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
 
 function monthGrid(year, month) {
   const first = new Date(year, month, 1);
   const days = new Date(year, month + 1, 0).getDate();
-  // Monday-first, which is what everyone outside the US expects
-  const lead = (first.getDay() + 6) % 7;
+  const lead = (first.getDay() + 6) % 7;         // Monday-first
   const cells = Array(lead).fill(null);
   for (let d = 1; d <= days; d++) {
-    cells.push(
-      `${year}-${String(month + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`
-    );
+    cells.push(`${year}-${String(month + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`);
   }
   return cells;
 }
+
+const pretty = (d) =>
+  new Date(d + 'T00:00:00').toLocaleDateString('en-NZ',
+    { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' });
 
 export default function Booking() {
   const [bookings, setBookings] = useState([]);
@@ -44,6 +49,16 @@ export default function Booking() {
   });
   const [from, setFrom] = useState(null);
   const [to, setTo] = useState(null);
+  const [guests, setGuests] = useState(2);
+
+  const [codeInput, setCodeInput] = useState('');
+  const [promo, setPromo] = useState(null);      // {label, discount, note}
+  const [codeError, setCodeError] = useState('');
+
+  const [showForm, setShowForm] = useState(false);
+  const [sent, setSent] = useState(
+    () => new URLSearchParams(window.location.search).get('sent') === '1'
+  );
 
   useEffect(() => { getBookings().then(setBookings); }, []);
 
@@ -52,17 +67,11 @@ export default function Booking() {
     [bookings, unitId]
   );
 
-  const horizon = useMemo(() => {
-    const t = todayIso();
-    return { from: t, to: addDays(t, 400) };
-  }, []);
-
-  const gaps = useMemo(
-    () => findGapNights(calendar, horizon.from, horizon.to),
-    [calendar, horizon]
-  );
-
   const today = todayIso();
+  const gaps = useMemo(
+    () => findGapNights(calendar, today, addDays(today, 400)),
+    [calendar, today]
+  );
 
   const pick = (day) => {
     if (!from || (from && to)) { setFrom(day); setTo(null); return; }
@@ -71,37 +80,57 @@ export default function Booking() {
   };
 
   const nights = from && to ? nightsBetween(from, to) : 0;
-  const minNights = PRICING.minNights.standard;
+  const unit = unitId === 'all' ? null : UNITS.find((u) => u.id === unitId);
+  const baseRate = unit ? unit.rate : Math.min(...UNITS.map((u) => u.rate));
 
-  const nightly = useMemo(() => {
-    if (unitId === 'all') return Math.min(...UNITS.map((u) => u.rate));
-    return UNITS.find((u) => u.id === unitId)?.rate ?? 0;
-  }, [unitId]);
+  /* Gap nights and friends codes both discount the nightly rate. They stack,
+     because a friend filling an awkward two-night hole is doing you a favour
+     twice over. */
+  const inGap = nights > 0 && [...Array(nights)].every((_, i) => gaps.has(addDays(from, i)));
+  const gapCut = inGap ? PRICING.gapFill.discount : 0;
+  const codeCut = promo ? promo.discount : 0;
 
-  const inGap = from && to && [...Array(nights)].every((_, i) => gaps.has(addDays(from, i)));
-  const rate = inGap ? Math.round(nightly * (1 - PRICING.gapFill.discount)) : nightly;
-  const total = rate * nights;
+  const nightly = Math.round(baseRate * (1 - gapCut) * (1 - codeCut));
+  const subtotal = baseRate * nights;
+  const total = nightly * nights;
+  const saved = subtotal - total;
+  const deposit = Math.round(total * PRICING.deposit);
 
-  const label = (d) =>
-    new Date(d + 'T00:00:00').toLocaleDateString('en-NZ', {
-      day: 'numeric', month: 'short', year: 'numeric',
-    });
-
-  const enquiry = () => {
-    const unit = unitId === 'all'
-      ? 'Villa 25 Ekas'
-      : UNITS.find((u) => u.id === unitId)?.name;
-    return whatsappLink(
-      `Enquiry — ${unit}\nCheck in: ${label(from)}\nCheck out: ${label(to)}\n${nights} night${nights === 1 ? '' : 's'}`
-    );
+  const applyCode = (e) => {
+    e.preventDefault();
+    const res = lookup(codeInput);
+    if (res.ok) { setPromo(res); setCodeError(''); }
+    else { setPromo(null); setCodeError(res.reason); }
   };
 
-  const months = [cursor, { y: cursor.m === 11 ? cursor.y + 1 : cursor.y, m: (cursor.m + 1) % 12 }];
+  const clearCode = () => { setPromo(null); setCodeInput(''); setCodeError(''); };
 
+  const months = [cursor, { y: cursor.m === 11 ? cursor.y + 1 : cursor.y, m: (cursor.m + 1) % 12 }];
   const step = (n) => setCursor((c) => {
     const d = new Date(c.y, c.m + n, 1);
     return { y: d.getFullYear(), m: d.getMonth() };
   });
+
+  const minNights = PRICING.minNights.standard;
+  const tooShort = nights > 0 && nights < minNights;
+
+  /* Everything the enquiry email needs, assembled once so the hidden form and
+     the WhatsApp fallback cannot drift apart. */
+  const summaryText = () => [
+    `Room: ${unit ? unit.name : 'Any room — happy to be advised'}`,
+    `Check in: ${from ? pretty(from) : '—'}`,
+    `Check out: ${to ? pretty(to) : '—'}`,
+    `Nights: ${nights}`,
+    `Guests: ${guests}`,
+    promo ? `Friends code: ${promo.code} — ${promo.label} (${Math.round(promo.discount * 100)}% off)` : null,
+    inGap ? `Gap nights: yes (${Math.round(gapCut * 100)}% off)` : null,
+    '',
+    `Nightly: ${formatIdr(nightly)}`,
+    `Estimated total: ${formatIdr(total)}`,
+    `Deposit to confirm (${Math.round(PRICING.deposit * 100)}%): ${formatIdr(deposit)}`,
+  ].filter(Boolean).join('\n');
+
+  const nextUrl = `${window.location.origin}${import.meta.env.BASE_URL}?sent=1#booking`;
 
   return (
     <section id="booking" className="bg-(--color-shell) px-5 py-28 lg:px-10 lg:py-40">
@@ -109,21 +138,18 @@ export default function Booking() {
         <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
           <div>
             <p className="label text-(--color-bronze-lit)">Availability</p>
-            <h2 className="mt-6 max-w-2xl text-[clamp(2.1rem,4.4vw,3.6rem)]">
-              Find your dates
-            </h2>
+            <h2 className="mt-6 max-w-2xl text-[clamp(2.1rem,4.4vw,3.6rem)]">Find your dates</h2>
           </div>
           <p className="max-w-sm text-(--color-text-soft)">
-            Pick your nights and send them over. We confirm within a day — this
-            reserves nothing until we have replied, so nobody loses a room to a
-            form.
+            Pick your nights and send them over. We answer within a day — nothing
+            is charged and nothing is held until we have written back.
           </p>
         </div>
 
-        <div className="mt-14 grid gap-10 lg:grid-cols-[1.6fr_1fr] lg:gap-14">
-          {/* ---- calendar ---- */}
+        <div className="mt-14 grid gap-10 lg:grid-cols-[1.55fr_1fr] lg:gap-14">
+
+          {/* ------------------------------- calendar ------------------------------ */}
           <div className="border border-(--color-line) bg-(--color-ink) p-5 lg:p-8">
-            {/* unit filter */}
             <div className="flex flex-wrap gap-2">
               {[{ id: 'all', name: 'Any room' }, ...UNITS].map((u) => (
                 <button
@@ -142,55 +168,35 @@ export default function Booking() {
               ))}
             </div>
 
-            {/* month nav */}
             <div className="mt-7 flex items-center justify-between">
-              <button
-                type="button"
-                onClick={() => step(-1)}
-                className="label-sm rounded-xs border border-(--color-line-lit) px-3 py-2 text-(--color-text-soft) hover:text-(--color-bronze-lit)"
-                aria-label="Previous month"
-              >
-                ←
-              </button>
+              <button type="button" onClick={() => step(-1)} aria-label="Previous month"
+                className="label-sm rounded-xs border border-(--color-line-lit) px-3 py-2 text-(--color-text-soft) hover:text-(--color-bronze-lit)">←</button>
               <p className="label text-(--color-text-mute)">
-                {nights > 0 ? `${nights} night${nights === 1 ? '' : 's'} selected` : 'Select check-in'}
+                {nights > 0
+                  ? `${nights} night${nights === 1 ? '' : 's'}`
+                  : from ? 'Now pick your check-out' : 'Pick your check-in'}
               </p>
-              <button
-                type="button"
-                onClick={() => step(1)}
-                className="label-sm rounded-xs border border-(--color-line-lit) px-3 py-2 text-(--color-text-soft) hover:text-(--color-bronze-lit)"
-                aria-label="Next month"
-              >
-                →
-              </button>
+              <button type="button" onClick={() => step(1)} aria-label="Next month"
+                className="label-sm rounded-xs border border-(--color-line-lit) px-3 py-2 text-(--color-text-soft) hover:text-(--color-bronze-lit)">→</button>
             </div>
 
             <div className="mt-7 grid gap-8 sm:grid-cols-2">
               {months.map(({ y, m }) => (
                 <div key={`${y}-${m}`}>
                   <p className="font-(family-name:--font-display) text-lg">
-                    {MONTH_NAMES[m]} <span className="text-(--color-text-mute)">{y}</span>
+                    {MONTHS[m]} <span className="text-(--color-text-mute)">{y}</span>
                   </p>
-
                   <div className="mt-4 grid grid-cols-7 gap-y-1">
                     {DOW.map((d, i) => (
-                      <span
-                        key={i}
-                        className="pb-2 text-center text-[10px] uppercase tracking-[0.16em] text-(--color-text-mute)"
-                      >
-                        {d}
-                      </span>
+                      <span key={i} className="pb-2 text-center text-[10px] uppercase tracking-[0.16em] text-(--color-text-mute)">{d}</span>
                     ))}
-
                     {monthGrid(y, m).map((day, i) => {
                       if (!day) return <span key={`e${i}`} />;
-
                       const past = day < today;
                       const state = calendar.get(day);
                       const full = state?.free === 0;
                       const partial = state && state.free > 0 && state.free < state.total;
                       const gap = gaps.has(day);
-
                       const selected = from && to && day >= from && day < to;
                       const isEdge = day === from || day === to;
                       const disabled = past || full;
@@ -201,7 +207,7 @@ export default function Booking() {
                           type="button"
                           disabled={disabled}
                           onClick={() => pick(day)}
-                          aria-label={`${label(day)}${full ? ' — fully booked' : gap ? ' — discounted' : ''}`}
+                          aria-label={`${pretty(day)}${full ? ' — fully booked' : gap ? ' — discounted' : ''}`}
                           className={[
                             'relative aspect-square text-[13px] tabular-nums transition-colors',
                             disabled && 'cursor-not-allowed text-(--color-text-mute)/35 line-through',
@@ -211,7 +217,6 @@ export default function Booking() {
                           ].filter(Boolean).join(' ')}
                         >
                           {new Date(day + 'T00:00:00').getDate()}
-                          {/* dots: gap night, or partly booked */}
                           {!disabled && gap && !isEdge && (
                             <span className="absolute inset-x-0 bottom-1 mx-auto block h-1 w-1 rounded-full bg-(--color-reef)" />
                           )}
@@ -226,11 +231,10 @@ export default function Booking() {
               ))}
             </div>
 
-            {/* key */}
             <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-2 border-t border-(--color-line) pt-5">
               {[
                 ['bg-(--color-bronze)', 'Your dates'],
-                ['bg-(--color-reef)', 'Gap night — 20% off'],
+                ['bg-(--color-reef)', `Gap night — ${Math.round(PRICING.gapFill.discount * 100)}% off`],
                 ['bg-(--color-bronze)/60', 'Some rooms left'],
                 ['bg-(--color-text-mute)/35', 'Fully booked'],
               ].map(([dot, text]) => (
@@ -242,73 +246,215 @@ export default function Booking() {
             </ul>
           </div>
 
-          {/* ---- summary ---- */}
+          {/* ------------------------------- summary ------------------------------- */}
           <aside className="flex h-fit flex-col border border-(--color-line) bg-(--color-raise) p-7 lg:sticky lg:top-28 lg:p-8">
-            <p className="label text-(--color-bronze-lit)">Your enquiry</p>
 
-            <dl className="mt-6 flex flex-col">
-              {[
-                ['Check in', from ? label(from) : '—'],
-                ['Check out', to ? label(to) : '—'],
-                ['Nights', nights || '—'],
-                ['Room', unitId === 'all' ? 'Any' : UNITS.find((u) => u.id === unitId)?.name],
-              ].map(([k, v]) => (
-                <div key={k} className="flex items-baseline justify-between gap-4 border-b border-(--color-line) py-3">
-                  <dt className="label-sm text-(--color-text-mute)">{k}</dt>
-                  <dd className="text-right text-[15px]">{v}</dd>
+            {sent ? (
+              <div>
+                <p className="label text-(--color-bronze-lit)">Enquiry sent</p>
+                <h3 className="mt-4 text-2xl">Thank you — we have it</h3>
+                <p className="mt-4 text-(--color-text-soft)">
+                  We will come back to you within a day, usually sooner, with
+                  confirmation and how to pay the deposit. Check your junk folder
+                  if nothing has arrived by tomorrow.
+                </p>
+                <button
+                  type="button"
+                  onClick={() => { setSent(false); setShowForm(false); setFrom(null); setTo(null); }}
+                  className="label btn btn-line mt-7"
+                >
+                  Make another enquiry
+                </button>
+              </div>
+            ) : (
+              <>
+                <p className="label text-(--color-bronze-lit)">Your stay</p>
+
+                <dl className="mt-6 flex flex-col">
+                  {[
+                    ['Check in', from ? pretty(from) : '—'],
+                    ['Check out', to ? pretty(to) : '—'],
+                    ['Nights', nights || '—'],
+                    ['Room', unit ? unit.name : 'Any'],
+                  ].map(([k, v]) => (
+                    <div key={k} className="flex items-baseline justify-between gap-4 border-b border-(--color-line) py-3">
+                      <dt className="label-sm text-(--color-text-mute)">{k}</dt>
+                      <dd className="text-right text-[15px]">{v}</dd>
+                    </div>
+                  ))}
+                  <div className="flex items-center justify-between gap-4 border-b border-(--color-line) py-3">
+                    <dt className="label-sm text-(--color-text-mute)">Guests</dt>
+                    <dd className="flex items-center gap-2">
+                      <button type="button" aria-label="Fewer guests"
+                        onClick={() => setGuests((g) => Math.max(1, g - 1))}
+                        className="h-7 w-7 rounded-xs border border-(--color-line-lit) text-(--color-text-soft) hover:text-(--color-bronze-lit)">−</button>
+                      <span className="w-6 text-center tabular-nums">{guests}</span>
+                      <button type="button" aria-label="More guests"
+                        onClick={() => setGuests((g) => Math.min(14, g + 1))}
+                        className="h-7 w-7 rounded-xs border border-(--color-line-lit) text-(--color-text-soft) hover:text-(--color-bronze-lit)">+</button>
+                    </dd>
+                  </div>
+                </dl>
+
+                {/* friends code */}
+                <div className="mt-6">
+                  {promo ? (
+                    <div className="flex items-start justify-between gap-3 border-l-2 border-(--color-reef) pl-3">
+                      <div>
+                        <p className="text-[14px] text-(--color-text)">{promo.label}</p>
+                        <p className="text-[13px] text-(--color-text-mute)">
+                          {Math.round(promo.discount * 100)}% off · {promo.note}
+                        </p>
+                      </div>
+                      <button type="button" onClick={clearCode}
+                        className="label-sm shrink-0 text-(--color-text-mute) hover:text-(--color-text)">Remove</button>
+                    </div>
+                  ) : (
+                    <form onSubmit={applyCode} className="flex gap-2">
+                      <input
+                        type="text"
+                        value={codeInput}
+                        onChange={(e) => { setCodeInput(e.target.value); setCodeError(''); }}
+                        placeholder="Friends code"
+                        aria-label="Friends code"
+                        className="min-w-0 flex-1 rounded-xs border border-(--color-line-lit) bg-(--color-ink) px-3 py-2.5 text-[15px] uppercase tracking-[0.1em] text-(--color-text) placeholder:normal-case placeholder:tracking-normal placeholder:text-(--color-text-mute)"
+                      />
+                      <button type="submit"
+                        className="label-sm shrink-0 rounded-xs border border-(--color-line-lit) px-4 text-(--color-text-soft) hover:border-(--color-bronze) hover:text-(--color-bronze-lit)">Apply</button>
+                    </form>
+                  )}
+                  {codeError && <p className="mt-2 text-[13px] text-(--color-alert)">{codeError}</p>}
                 </div>
-              ))}
-            </dl>
 
-            {nights > 0 && (
-              <div className="mt-6">
-                {inGap && (
-                  <p className="mb-4 border-l-2 border-(--color-reef) pl-3 text-[14px] text-(--color-text-soft)">
-                    These nights sit in a gap between bookings, so they are{' '}
-                    {Math.round(PRICING.gapFill.discount * 100)}% off.
+                {/* estimate */}
+                {nights > 0 && (
+                  <div className="mt-7 border-t border-(--color-line) pt-5">
+                    <div className="flex items-baseline justify-between gap-4 py-1">
+                      <span className="text-[14px] text-(--color-text-soft)">
+                        {nights} night{nights === 1 ? '' : 's'} × {unit ? '' : 'from '}
+                      </span>
+                      <Price amount={baseRate} className="text-[14px] text-(--color-text-soft)" />
+                    </div>
+
+                    {inGap && (
+                      <div className="flex items-baseline justify-between gap-4 py-1">
+                        <span className="text-[14px] text-(--color-reef)">
+                          Gap nights −{Math.round(gapCut * 100)}%
+                        </span>
+                      </div>
+                    )}
+                    {promo && (
+                      <div className="flex items-baseline justify-between gap-4 py-1">
+                        <span className="text-[14px] text-(--color-reef)">
+                          {promo.label} −{Math.round(codeCut * 100)}%
+                        </span>
+                      </div>
+                    )}
+                    {saved > 0 && (
+                      <div className="flex items-baseline justify-between gap-4 py-1">
+                        <span className="text-[14px] text-(--color-text-mute)">You save</span>
+                        <Price amount={saved} className="text-[14px] text-(--color-reef)" />
+                      </div>
+                    )}
+
+                    <div className="mt-3 flex items-baseline justify-between gap-4 border-t border-(--color-line-lit) pt-4">
+                      <span className="label text-(--color-text)">Estimate</span>
+                      <Price amount={total} className="font-(family-name:--font-display) text-2xl" />
+                    </div>
+                    <p className="label-sm mt-2 text-(--color-text-mute)">
+                      {Math.round(PRICING.deposit * 100)}% deposit — {formatIdr(deposit)}
+                    </p>
+                    {!unit && (
+                      <p className="mt-3 text-[13px] text-(--color-text-mute)">
+                        Based on the lowest nightly rate. We will confirm the exact
+                        figure with the room.
+                      </p>
+                    )}
+                  </div>
+                )}
+
+                {tooShort && (
+                  <p className="mt-5 text-[14px] text-(--color-alert)">
+                    Minimum stay is {minNights} nights — send it anyway and we will
+                    see what we can do.
                   </p>
                 )}
-                <div className="flex items-baseline justify-between gap-4">
-                  <span className="label-sm text-(--color-text-mute)">
-                    {nights} × {unitId === 'all' ? 'from' : ''}
-                  </span>
-                  <Price amount={rate} className="text-[15px]" />
-                </div>
-                <div className="mt-3 flex items-baseline justify-between gap-4 border-t border-(--color-line-lit) pt-4">
-                  <span className="label text-(--color-text)">Total</span>
-                  <Price amount={total} className="font-(family-name:--font-display) text-2xl" />
-                </div>
-                <p className="label-sm mt-3 text-(--color-text-mute)">
-                  {Math.round(PRICING.deposit * 100)}% deposit to confirm
-                </p>
-              </div>
+
+                {/* ---- checkout ---- */}
+                {!showForm ? (
+                  <button
+                    type="button"
+                    disabled={!from || !to}
+                    onClick={() => setShowForm(true)}
+                    className={`label btn mt-7 text-center ${
+                      from && to ? 'btn-solid' : 'btn-line cursor-not-allowed opacity-45'
+                    }`}
+                  >
+                    {from && to ? 'Request these dates' : 'Pick your dates'}
+                  </button>
+                ) : (
+                  <form
+                    action={`https://formsubmit.co/${CONTACT.email}`}
+                    method="POST"
+                    className="mt-7 border-t border-(--color-line) pt-6"
+                  >
+                    <input type="hidden" name="_subject"
+                      value={`Booking enquiry — ${from ? pretty(from) : ''} · ${nights} nights`} />
+                    <input type="hidden" name="_captcha" value="false" />
+                    <input type="hidden" name="_template" value="box" />
+                    <input type="hidden" name="_next" value={nextUrl} />
+                    <input type="hidden" name="Stay" value={summaryText()} />
+                    <input
+                      type="hidden"
+                      name="_autoresponse"
+                      value={
+                        `Thank you for your enquiry about Villa 25 Ekas.\n\n` +
+                        `${summaryText()}\n\n` +
+                        `This is an automatic acknowledgement — it does not confirm your ` +
+                        `booking. We will write back within a day with availability and ` +
+                        `how to pay the deposit.\n\n` +
+                        `Villa 25 Ekas · Ekas Bay, Lombok\n${CONTACT.phoneShow}`
+                      }
+                    />
+
+                    <p className="label mb-4 text-(--color-bronze-lit)">Your details</p>
+
+                    <div className="flex flex-col gap-3">
+                      <input required type="text" name="Name" placeholder="Your name" aria-label="Your name"
+                        className="w-full rounded-xs border border-(--color-line-lit) bg-(--color-ink) px-3 py-2.5 text-[15px] text-(--color-text) placeholder:text-(--color-text-mute)" />
+                      <input required type="email" name="Email" placeholder="Email" aria-label="Email"
+                        className="w-full rounded-xs border border-(--color-line-lit) bg-(--color-ink) px-3 py-2.5 text-[15px] text-(--color-text) placeholder:text-(--color-text-mute)" />
+                      <input type="tel" name="Phone" placeholder="Phone or WhatsApp (optional)" aria-label="Phone"
+                        className="w-full rounded-xs border border-(--color-line-lit) bg-(--color-ink) px-3 py-2.5 text-[15px] text-(--color-text) placeholder:text-(--color-text-mute)" />
+                      <textarea name="Message" rows="3" placeholder="Anything we should know? Flights, surf ability, dietary needs…"
+                        aria-label="Message"
+                        className="w-full resize-y rounded-xs border border-(--color-line-lit) bg-(--color-ink) px-3 py-2.5 text-[15px] text-(--color-text) placeholder:text-(--color-text-mute)" />
+                    </div>
+
+                    <button type="submit" className="label btn btn-solid mt-5 w-full text-center">
+                      Send enquiry
+                    </button>
+
+                    <p className="mt-4 text-[13px] leading-relaxed text-(--color-text-mute)">
+                      This sends us your dates — it does not book or charge anything.
+                      We confirm by email, then send deposit details.
+                    </p>
+
+                    <p className="mt-4 text-center text-[13px] text-(--color-text-mute)">
+                      Rather message?{' '}
+                      <a
+                        href={whatsappLink(`Villa 25 Ekas enquiry\n\n${summaryText()}`)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-(--color-bronze-lit) underline underline-offset-4"
+                      >
+                        Send this on WhatsApp
+                      </a>
+                    </p>
+                  </form>
+                )}
+              </>
             )}
-
-            {nights > 0 && nights < minNights && (
-              <p className="mt-5 text-[14px] text-(--color-alert)">
-                Minimum stay is {minNights} nights — send it anyway and we will
-                see what we can do.
-              </p>
-            )}
-
-            <a
-              href={from && to ? enquiry() : undefined}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-disabled={!from || !to}
-              className={`label btn mt-7 text-center ${
-                from && to
-                  ? 'btn-solid'
-                  : 'btn-line pointer-events-none opacity-45'
-              }`}
-            >
-              {from && to ? 'Send this enquiry' : 'Pick your dates'}
-            </a>
-
-            <p className="mt-4 text-[13px] leading-relaxed text-(--color-text-mute)">
-              This sends a message on WhatsApp — it does not book anything.
-              We will confirm availability and send payment details.
-            </p>
           </aside>
         </div>
       </div>

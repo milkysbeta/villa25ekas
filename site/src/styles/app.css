@@ -79,9 +79,9 @@
   --color-line-lit:   #443C30;   /* hairlines that need to be seen          */
 
   /* -- accent ------------------------------------------------------------ */
-  --color-bronze:     #B08A55;   /* the gold — warm, restrained             */
-  --color-bronze-lit: #D0A96E;   /* hover, and small text that must read    */
-  --color-bronze-dim: #8E6D3F;
+  --color-bronze:     #B58E55;   /* the gold — warm, restrained             */
+  --color-bronze-lit: #DCBB83;   /* hover, and small text that must read    */
+  --color-bronze-dim: #937140;
 
   /* -- the bay ----------------------------------------------------------- */
   --color-reef:       #5FA79E;   /* focus rings, the occasional cool note   */
@@ -91,10 +91,13 @@
   --color-sand-deep:  #E2D9C6;
   --color-sand-line:  #CFC3A9;
 
-  /* -- type -------------------------------------------------------------- */
-  --color-text:       #F1EADC;   /* body on dark                            */
-  --color-text-soft:  #BFB4A0;
-  --color-text-mute:  #8B8170;
+  /* -- type --------------------------------------------------------------
+     Warmed toward sand rather than paper. Every one of these is a warm
+     off-white or tan with no blue in it, so the whole page reads as lamplight
+     on limestone instead of white text on a dark screen. */
+  --color-text:       #F2E7D0;   /* body on dark — warm sand                */
+  --color-text-soft:  #CBBB9C;
+  --color-text-mute:  #948872;
   --color-text-dark:  #1A1611;   /* body on sand                            */
 
   --color-alert:      #C4714E;
@@ -112,10 +115,15 @@
      --font-body    all running text.
 
      Never load fonts from a CDN — it leaks visitor IPs and breaks under CSP. */
-  /* Licensed face first, free equivalent behind it, system serif last. Swap the
-     order to try a different pairing — the font test page prints these two
-     lines for whatever combination you settle on. */
-  --font-brand:   'Transcity', 'Fraunces', 'Iowan Old Style',
+  /* Transcity is deliberately NOT in this stack. Its demo release has no
+     digits, so "Villa 25 Ekas" rendered the letters in Transcity and the 2 and
+     the 5 in whatever came next — a visible typeface change mid-name. A font
+     listed first still gets used for every glyph it *does* have, so the only
+     fix is to leave it out. Yeseva One is the nearest free vintage display
+     serif that carries a full set of numerals.
+
+     Buy the full Transcity and it can go back at the front of this line. */
+  --font-brand:   'Yeseva One', 'Fraunces', 'Iowan Old Style',
                   'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif;
   --font-tagline: 'Priestacy', 'Parisienne', 'Iowan Old Style',
                   'Palatino Linotype', Palatino, Georgia, serif;
