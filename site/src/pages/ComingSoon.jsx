@@ -97,7 +97,7 @@ export default function ComingSoon() {
             </h1>
 
             <h2 className="mt-5 text-[1.6rem] leading-tight text-(--color-bronze-lit) sm:text-4xl">
-              Your perfect inland getaway
+              Your perfect Island getaway
             </h2>
 
             <p className="mx-auto mt-8 max-w-xl text-xl leading-relaxed text-(--color-text-soft) sm:text-[1.4rem]">
@@ -138,41 +138,47 @@ export default function ComingSoon() {
               >
                 {CONTACT.email}
               </a>
+              <a
+                href={`https://instagram.com/${CONTACT.instagram}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2.5 rounded-xs border border-(--color-line-lit) px-8 py-4 text-[13px] uppercase tracking-[0.2em] text-(--color-text) transition-colors hover:border-(--color-bronze-lit) hover:text-(--color-bronze-lit)"
+              >
+                <InstagramMark className="h-[17px] w-[17px]" />
+                @{CONTACT.instagram}
+              </a>
             </div>
 
-            <p className="mt-9 text-[13px] uppercase tracking-[0.24em] text-(--color-text-soft)">
+            <p className="mt-7 text-[13px] uppercase tracking-[0.24em] text-(--color-text-soft)">
               {CONTACT.location}
             </p>
 
-            {/* Small, and below the contact details on purpose — it proves the
-                site is alive without competing with the reason people came. */}
-            <div className="mt-20 w-full border-t border-(--color-line) pt-10">
+            {/* Below the contact details on purpose — it proves the site is
+                alive without competing with the reason people came. */}
+            <div className="mt-8 w-full border-t border-(--color-line) pt-7">
               <p className="mb-6 text-[15px] uppercase tracking-[0.24em] text-(--color-bronze-lit)">
                 The swell this week
               </p>
               <SurfForecast days={5} />
             </div>
 
-            <a
-              href={`https://instagram.com/${CONTACT.instagram}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-14 inline-flex items-center gap-3 rounded-xs border border-(--color-line-lit) px-7 py-3.5 text-[13px] uppercase tracking-[0.2em] text-(--color-text-soft) transition-colors hover:border-(--color-bronze-lit) hover:text-(--color-bronze-lit)"
-            >
-              <InstagramMark className="h-[18px] w-[18px]" />
-              @{CONTACT.instagram}
-            </a>
-
-            {/* A quiet reprise of the mark to close the page off. Held back to
-                about a third of the opening size and dimmed, so it reads as a
-                full stop rather than a second entrance. */}
+            {/* A reprise of the mark to close the page off, tight against the
+                notes beneath it so the three read as one sign-off rather than
+                three separate things at the bottom of the page. */}
             <img
               src={LOGO}
               alt=""
               width="72"
               height="72"
-              className="mx-auto mt-20 h-16 w-auto object-contain opacity-45"
+              className="mx-auto mt-6 mb-0 h-16 w-auto object-contain"
             />
+
+            <p className="mt-1 text-[11px] uppercase tracking-[0.2em] text-(--color-text-mute)">
+              Full booking website coming soon
+            </p>
+            <p className="mt-2 text-[10px] uppercase tracking-[0.2em] text-(--color-text-mute)/70">
+              Web design by Milky
+            </p>
           </div>
         </div>
       </div>
