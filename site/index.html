@@ -13,6 +13,30 @@
     <style>
       html, body { background: #100E0B; }
     </style>
+
+    <!-- Stale-HTML guard.
+
+         GitHub Pages caches this file for ten minutes, but every deploy emits
+         new hashed asset filenames and deletes the old ones. So anyone holding
+         a cached copy of this page asks for a bundle that no longer exists,
+         gets a 404, and sees a blank screen until their cache expires.
+
+         Nothing in the app can recover from that, because the app is the thing
+         that failed to load. So the guard has to live here, inline, and run
+         before anything else: if the bundle 404s, reload once past the cache.
+         sessionStorage stops it looping if the file is genuinely broken. -->
+    <script>
+      window.addEventListener('error', function (e) {
+        var el = e.target;
+        if (!el || (el.tagName !== 'SCRIPT' && el.tagName !== 'LINK')) return;
+        if (sessionStorage.getItem('v25-reloaded')) return;
+        sessionStorage.setItem('v25-reloaded', '1');
+        location.replace(location.pathname + '?v=' + Date.now() + location.hash);
+      }, true);
+      window.addEventListener('load', function () {
+        sessionStorage.removeItem('v25-reloaded');
+      });
+    </script>
     <title>Villa 25 Ekas — Off-grid surf villas in Ekas Bay, Lombok</title>
     <meta name="description" content="Five rooms above Ekas Bay, Lombok. Run entirely on solar, built from local timber, four minutes from the sand." />
     <meta name="theme-color" content="#12100C" />

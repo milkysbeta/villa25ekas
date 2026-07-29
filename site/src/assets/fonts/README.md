@@ -4,6 +4,10 @@ Self-hosted only. Never link a font from a CDN — it leaks every visitor's IP
 address to a third party, adds a DNS round trip before any text can paint, and
 fails outright under a strict content security policy.
 
+Font files live **here**, not in `public/`. That puts them through Vite, which
+rewrites their paths for whatever base the site is served from — necessary on
+GitHub Pages, where the site sits at /villa25ekas/ rather than a domain root.
+
 ## Which font goes where
 
 | Slot | CSS token | Font | Status |
@@ -13,7 +17,7 @@ fails outright under a strict content security policy.
 | Card titles, prices, figures | `--font-display` | system serif stack | fine as-is |
 | All running text | `--font-body` | system sans stack | fine as-is |
 
-`app.css` already declares all of them. Drop the `.woff2` files in this folder
+`../../styles/app.css` already declares all of them. Drop the `.woff2` files in this folder
 with the exact names below and they appear on the next reload. Until then each
 one quietly falls through to the next family in its stack, so nothing breaks.
 
