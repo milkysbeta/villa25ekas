@@ -64,7 +64,7 @@ export default function ComingSoon() {
 
       <div className="horizon absolute inset-x-0 top-0 z-20" />
 
-      <div className="relative z-10 mx-auto flex min-h-svh max-w-3xl flex-col items-center justify-center px-6 py-20 text-center">
+      <div className="relative z-10 mx-auto flex min-h-svh max-w-4xl flex-col items-center justify-center px-6 py-20 text-center">
         {/* Decorative: the H1 below now carries the name, so announcing it here
             too would just make a screen reader say it twice. */}
         <img
@@ -100,11 +100,13 @@ export default function ComingSoon() {
               Your perfect Island getaway
             </h2>
 
-            <p className="mx-auto mt-8 max-w-2xl text-xl leading-relaxed text-(--color-text-soft) sm:text-[1.4rem]">
-              Perched above the turquoise waters of Ekas Beach Lombok, Villa 25
-              Ekas is a luxurious five bedroom escape. Built with locally sourced
-              timber, featuring spectacular indoor and outdoor entertainment
-              areas, a private pool, and only a four minute walk to the beach.
+            <p className="mx-auto mt-8 max-w-3xl text-xl leading-relaxed text-(--color-text-soft) sm:text-[1.4rem]">
+              Perched above the turquoise waters of Ekas Beach Lombok.
+              <br className="hidden sm:block" /> Villa 25 Ekas is a luxurious
+              five bedroom escape artisan crafted for locally sourced timber
+              &amp; stone, featuring spectacular views, indoor and outdoor
+              entertainment areas, 2 private pools, and only a four minute walk
+              to the beach.
             </p>
 
             <div className="mt-12 flex flex-wrap items-center justify-center gap-3">
