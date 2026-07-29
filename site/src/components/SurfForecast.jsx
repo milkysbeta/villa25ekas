@@ -67,11 +67,66 @@ export default function SurfForecast({ days = 5 }) {
     return () => { alive = false; };
   }, [days]);
 
+  /* The forecast is fetched, so it arrives after first paint. Without
+     something holding its place the page grows when it lands — and on the
+     holding page, where the photograph is sized to the container, that makes
+     the whole background visibly jump and rescale.
+
+     So the skeleton is not decoration: it is the same grid, the same number of
+     rows, at the same sizes, so the space is already the right shape before
+     any data exists. Nothing moves when the real thing replaces it. */
   if (state.status !== 'ok') {
+    const failed = state.status === 'error';
     return (
-      <p className="label py-10 text-center text-(--color-text-mute)">
-        {state.status === 'loading' ? 'Reading the swell…' : 'Forecast unavailable just now'}
-      </p>
+      <div>
+        <div className="grid grid-cols-5" aria-hidden={!failed}>
+          {Array.from({ length: days }).map((_, i) => (
+            <div
+              key={i}
+              className={`relative flex min-w-0 flex-col items-center gap-1.5 px-1 py-3 ${
+                failed ? 'opacity-30' : 'animate-pulse'
+              }`}
+            >
+              {i > 0 && (
+                <span
+                  aria-hidden="true"
+                  className="absolute left-0 top-[8%] bottom-[8%] w-px"
+                  style={{
+                    background:
+                      'linear-gradient(180deg, transparent, color-mix(in srgb, var(--color-bronze) 18%, transparent), transparent)',
+                  }}
+                />
+              )}
+              {/* heights mirror the real rows exactly, in the same order */}
+              <span className="h-[13px] w-10 rounded-xs bg-(--color-text-mute)/20" />
+              <span className="h-[9.5px] w-9 rounded-xs bg-(--color-text-mute)/12" />
+              <span className="my-0.5 h-[13px] w-14 rounded-xs bg-(--color-text-mute)/15" />
+              <Rule />
+              <span className="h-[9px] w-8 rounded-xs bg-(--color-text-mute)/12" />
+              <span className="h-[29px] w-12 rounded-xs bg-(--color-text-mute)/18" />
+              <span className="h-[11px] w-9 rounded-xs bg-(--color-text-mute)/12" />
+              <span className="h-[9px] w-9 rounded-xs bg-(--color-text-mute)/12" />
+              <span className="h-[13px] w-7 rounded-xs bg-(--color-text-mute)/12" />
+              <span className="my-0.5 h-6 w-6 rounded-full bg-(--color-text-mute)/15" />
+              <span className="h-[19px] w-9 rounded-xs bg-(--color-text-mute)/18" />
+              <span className="h-[10px] w-10 rounded-xs bg-(--color-text-mute)/12" />
+              <span className="h-[9px] w-8 rounded-xs bg-(--color-text-mute)/12" />
+              <span className="h-[13px] w-11 rounded-xs bg-(--color-text-mute)/12" />
+            </div>
+          ))}
+        </div>
+
+        <p
+          className="mt-3.5 pt-2.5 text-right text-[8px] uppercase tracking-[0.18em] text-(--color-text-mute)"
+          style={{
+            borderTop: '1px solid transparent',
+            borderImage:
+              'linear-gradient(90deg, transparent, color-mix(in srgb, var(--color-bronze) 32%, transparent), transparent) 1',
+          }}
+        >
+          {failed ? 'Forecast unavailable just now' : 'Reading the swell…'}
+        </p>
+      </div>
     );
   }
 

@@ -41,7 +41,7 @@ function Gate() {
   }
 
   return (
-    <div className="flex min-h-dvh items-center justify-center bg-(--color-ink) px-6">
+    <div className="flex min-h-svh items-center justify-center bg-(--color-ink) px-6">
       <form
         onSubmit={(e) => {
           e.preventDefault();

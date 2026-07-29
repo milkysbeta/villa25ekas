@@ -42,7 +42,7 @@ const MessageMark = ({ className = '' }) => (
 
 export default function ComingSoon() {
   return (
-    <div className="relative min-h-dvh overflow-hidden bg-(--color-ink)">
+    <div className="relative min-h-svh overflow-hidden bg-(--color-ink)">
       {/* photograph */}
       <div
         className="absolute inset-0 bg-cover bg-center"
@@ -64,7 +64,7 @@ export default function ComingSoon() {
 
       <div className="horizon absolute inset-x-0 top-0 z-20" />
 
-      <div className="relative z-10 mx-auto flex min-h-dvh max-w-3xl flex-col items-center justify-center px-6 py-20 text-center">
+      <div className="relative z-10 mx-auto flex min-h-svh max-w-3xl flex-col items-center justify-center px-6 py-20 text-center">
         {/* Decorative: the H1 below now carries the name, so announcing it here
             too would just make a screen reader say it twice. */}
         <img
@@ -168,9 +168,14 @@ export default function ComingSoon() {
             <img
               src={LOGO}
               alt=""
-              width="72"
-              height="72"
-              className="mx-auto mt-6 mb-0 h-16 w-auto object-contain"
+              width="176"
+              height="176"
+              /* Source is 640px wide for a 70px slot, so it is heavily
+                 downscaled. high-quality asks the browser for a proper
+                 resample rather than the fast one, which is what stops fine
+                 gold linework going mushy at this size. */
+              style={{ imageRendering: 'high-quality' }}
+              className="mx-auto mt-6 mb-0 h-[70px] w-auto object-contain"
             />
 
             <p className="mt-1 text-[11px] uppercase tracking-[0.2em] text-(--color-text-mute)">

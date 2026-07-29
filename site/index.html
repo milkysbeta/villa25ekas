@@ -4,6 +4,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="/logo.png" />
+    <!-- The hero is a CSS background, so the browser cannot discover it until
+         the stylesheet has parsed. Preloading starts the download with the
+         HTML instead, which is what removes the flash-then-settle on load. -->
+    <link rel="preload" as="image" href="/images/hero.jpg" fetchpriority="high" />
+    <!-- Paint the page ink-dark from the very first frame so there is no white
+         flash before the photograph arrives. -->
+    <style>
+      html, body { background: #100E0B; }
+    </style>
     <title>Villa 25 Ekas — Off-grid surf villas in Ekas Bay, Lombok</title>
     <meta name="description" content="Five rooms above Ekas Bay, Lombok. Run entirely on solar, built from local timber, four minutes from the sand." />
     <meta name="theme-color" content="#12100C" />

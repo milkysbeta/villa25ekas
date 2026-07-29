@@ -14,7 +14,7 @@ export default function Hero() {
   const lift = useTransform(scrollYProgress, [0, 0.7], ['0px', '-70px']);
 
   return (
-    <section id="top" ref={ref} className="relative h-dvh min-h-[620px] overflow-hidden">
+    <section id="top" ref={ref} className="relative h-svh min-h-[620px] overflow-hidden">
       <motion.div
         aria-hidden="true"
         style={{
