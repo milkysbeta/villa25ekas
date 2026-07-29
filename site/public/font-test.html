@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Villa 25 Ekas — font test</title>
+<meta name="robots" content="noindex, nofollow">
+
+<style>
+  /* All self-hosted from ./fonts — nothing is fetched from Google at runtime,
+     so this page shows exactly what the real site will show. */
+  @font-face { font-family:'Fraunces';    src:url('fonts/Fraunces.woff2')   format('woff2'); font-display:block; }
+  @font-face { font-family:'YesevaOne';   src:url('fonts/YesevaOne.woff2')  format('woff2'); font-display:block; }
+  @font-face { font-family:'Parisienne';  src:url('fonts/Parisienne.woff2') format('woff2'); font-display:block; }
+  @font-face { font-family:'GreatVibes';  src:url('fonts/GreatVibes.woff2') format('woff2'); font-display:block; }
+  /* These two only render if you have dropped the licensed files in. */
+  @font-face { font-family:'Transcity';   src:url('fonts/Transcity.woff2')  format('woff2'); font-display:block; }
+  @font-face { font-family:'Priestacy';   src:url('fonts/Priestacy.woff2')  format('woff2'); font-display:block; }
+
+  :root{
+    --ink:#100E0B; --shell:#17140F; --raise:#1E1A14; --line:#2E2820; --line-lit:#443C30;
+    --bronze:#B08A55; --bronze-lit:#D0A96E; --text:#F1EADC; --soft:#BFB4A0; --mute:#8B8170;
+    --body:'Segoe UI',system-ui,-apple-system,sans-serif;
+    --util:ui-monospace,'Cascadia Mono',Consolas,monospace;
+    --sysserif:'Iowan Old Style','Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--ink);color:var(--text);font-family:var(--body);
+    font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1100px;margin:0 auto;padding:48px 24px 120px}
+
+  .label{font-family:var(--util);font-size:11px;letter-spacing:.24em;text-transform:uppercase}
+  h1.page{font-family:var(--sysserif);font-weight:400;font-size:38px;margin:0 0 8px;letter-spacing:-.015em}
+  .lede{color:var(--soft);max-width:60ch;margin:0 0 40px}
+
+  /* ---------- live combination ---------- */
+  .stage{position:sticky;top:0;z-index:10;background:var(--ink);
+    border-bottom:1px solid var(--line);padding:34px 0 28px;margin-bottom:44px;text-align:center}
+  .stage .name{font-size:clamp(2.6rem,7vw,5.2rem);line-height:1.06;margin:0;color:var(--text)}
+  .stage .tag{font-size:clamp(1.5rem,3.6vw,2.6rem);line-height:1.2;margin:14px 0 0;color:var(--bronze-lit)}
+  .stage .sub{font-family:var(--body);font-size:17px;color:var(--soft);margin:20px auto 0;max-width:34rem}
+
+  .pickers{display:flex;flex-wrap:wrap;gap:26px;justify-content:center;margin-top:26px}
+  .picker{display:flex;flex-direction:column;gap:8px;align-items:flex-start}
+  .picker span{color:var(--mute)}
+  select{font-family:var(--body);font-size:15px;color:var(--text);background:var(--raise);
+    border:1px solid var(--line-lit);border-radius:3px;padding:9px 12px;min-width:210px;cursor:pointer}
+  select:focus-visible{outline:2px solid var(--bronze);outline-offset:2px}
+
+  .sizes{display:flex;flex-wrap:wrap;gap:20px;justify-content:center;margin-top:18px}
+  .sizes label{display:flex;align-items:center;gap:10px;color:var(--mute)}
+  input[type=range]{accent-color:var(--bronze);width:150px}
+  output{font-family:var(--util);font-size:12px;color:var(--text);min-width:46px}
+
+  /* ---------- specimen rows ---------- */
+  h2.sec{font-family:var(--sysserif);font-weight:400;font-size:24px;margin:56px 0 6px}
+  .note{color:var(--mute);font-size:15px;margin:0 0 22px;max-width:62ch}
+
+  .row{border:1px solid var(--line);background:var(--shell);border-radius:4px;
+    padding:26px 28px;margin-bottom:14px}
+  .row header{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+  .row h3{font-family:var(--util);font-size:12px;letter-spacing:.18em;text-transform:uppercase;
+    margin:0;color:var(--bronze)}
+  .meta{font-size:13px;color:var(--mute)}
+  .ok{color:#7FB08A} .warn{color:#C4714E}
+  .sample{margin:0;color:var(--text);line-height:1.1;word-break:break-word}
+  .sample.big{font-size:clamp(2.2rem,5.4vw,3.8rem)}
+  .sample.mid{font-size:clamp(1.5rem,3.4vw,2.4rem);color:var(--bronze-lit);line-height:1.2;margin-top:10px}
+  .glyphs{margin:16px 0 0;font-size:19px;color:var(--soft);letter-spacing:.02em;line-height:1.5}
+
+  .missing{border-style:dashed;opacity:.65}
+  footer{margin-top:64px;border-top:1px solid var(--line);padding-top:22px;color:var(--mute);font-size:14px}
+  code{font-family:var(--util);font-size:13px;background:var(--raise);padding:2px 6px;border-radius:2px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <p class="label" style="color:var(--bronze)">Villa 25 Ekas</p>
+  <h1 class="page">Font test</h1>
+  <p class="lede">
+    Every face below is self-hosted from <code>site/public/fonts</code>, on the real
+    background colour at the real sizes — so what you see here is what the site will do.
+    Pick a pairing at the top, then copy the two lines it gives you into
+    <code>app.css</code>.
+  </p>
+
+  <!-- live pairing -->
+  <div class="stage">
+    <p class="label" style="color:var(--mute);margin:0 0 18px">Live pairing</p>
+    <h2 class="name" id="stageName">Villa 25 Ekas</h2>
+    <p class="tag" id="stageTag">Your perfect Island getaway</p>
+    <p class="sub">Five rooms above Ekas Bay, Lombok. Run on sunlight, built from local
+      timber, four minutes from the sand.</p>
+
+    <div class="pickers">
+      <label class="picker">
+        <span class="label">Villa name</span>
+        <select id="selName"></select>
+      </label>
+      <label class="picker">
+        <span class="label">Tagline</span>
+        <select id="selTag"></select>
+      </label>
+    </div>
+
+    <div class="sizes">
+      <label><span class="label">Name size</span>
+        <input type="range" id="szName" min="30" max="110" value="72">
+        <output id="outName">72px</output></label>
+      <label><span class="label">Tagline size</span>
+        <input type="range" id="szTag" min="16" max="64" value="36">
+        <output id="outTag">36px</output></label>
+      <label><span class="label">Tracking</span>
+        <input type="range" id="trName" min="-40" max="60" value="-5">
+        <output id="outTr">-0.005em</output></label>
+    </div>
+
+    <p id="cssOut" style="font-family:var(--util);font-size:12px;color:var(--mute);
+       margin:22px auto 0;max-width:46rem;line-height:1.8"></p>
+  </div>
+
+  <h2 class="sec">For the villa name</h2>
+  <p class="note">
+    Transcity is a playful vintage display serif with swashes. These are the closest
+    free equivalents — all SIL Open Font License, which permits commercial use and web
+    embedding at no cost.
+  </p>
+  <div id="nameRows"></div>
+
+  <h2 class="sec">For the tagline</h2>
+  <p class="note">
+    Priestacy is a delicate handwritten signature script with tails. Same again — the
+    alternatives below are all OFL.
+  </p>
+  <div id="tagRows"></div>
+
+  <footer>
+    Dashed and dimmed rows are fonts whose file is not in
+    <code>site/public/fonts</code> yet — drop the licensed <code>.woff2</code> in and
+    reload to compare it against the rest.
+  </footer>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var NAME_FONTS = [
+    { id:'Transcity',  label:'Transcity',            licence:'Personal use only — licence needed', free:false },
+    { id:'Fraunces',   label:'Fraunces',             licence:'OFL — free commercial + web',        free:true  },
+    { id:'YesevaOne',  label:'Yeseva One',           licence:'OFL — free commercial + web',        free:true  },
+    { id:'sysserif',   label:'System serif (current)', licence:'No licence needed',                free:true  }
+  ];
+
+  var TAG_FONTS = [
+    { id:'Priestacy',  label:'Priestacy',            licence:'Personal use only — licence needed', free:false },
+    { id:'Parisienne', label:'Parisienne',           licence:'OFL — free commercial + web',        free:true  },
+    { id:'GreatVibes', label:'Great Vibes',          licence:'OFL — free commercial + web',        free:true  },
+    { id:'sysserif',   label:'System serif (current)', licence:'No licence needed',                free:true  }
+  ];
+
+  var stack = function(id){
+    return id === 'sysserif'
+      ? "'Iowan Old Style','Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif"
+      : "'" + id + "', 'Iowan Old Style', Georgia, serif";
+  };
+
+  /* A font is "present" if measuring text in it differs from the same text in a
+     known fallback. Crude, but it is the only way to tell from the page whether
+     a woff2 actually loaded. */
+  function isPresent(id){
+    if (id === 'sysserif') return true;
+    var c = document.createElement('canvas').getContext('2d');
+    var probe = 'ABCWmg1250';
+    c.font = '72px monospace';
+    var base = c.measureText(probe).width;
+    c.font = "72px '" + id + "', monospace";
+    return Math.abs(c.measureText(probe).width - base) > 0.5;
+  }
+
+  function buildRows(list, host, sampleText, secondText){
+    list.forEach(function(f){
+      var present = isPresent(f.id);
+      var row = document.createElement('div');
+      row.className = 'row' + (present ? '' : ' missing');
+      row.innerHTML =
+        '<header><h3>' + f.label + '</h3>' +
+        '<span class="meta ' + (f.free ? 'ok' : 'warn') + '">' + f.licence + '</span>' +
+        (present ? '' : '<span class="meta">file not present</span>') +
+        '</header>' +
+        '<p class="sample big" style="font-family:' + stack(f.id) + '">' + sampleText + '</p>' +
+        (secondText ? '<p class="sample mid" style="font-family:' + stack(f.id) + '">' + secondText + '</p>' : '') +
+        '<p class="glyphs" style="font-family:' + stack(f.id) + '">' +
+        'ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>abcdefghijklmnopqrstuvwxyz<br>0123456789 &amp; ' +
+        'éèüö . , &rsquo; ! ?</p>';
+      host.appendChild(row);
+    });
+  }
+
+  buildRows(NAME_FONTS, document.getElementById('nameRows'), 'Villa 25 Ekas', null);
+  buildRows(TAG_FONTS,  document.getElementById('tagRows'),  'Your perfect Island getaway', null);
+
+  /* ---- live pairing ---- */
+  var selName = document.getElementById('selName');
+  var selTag  = document.getElementById('selTag');
+
+  function fill(sel, list, def){
+    list.forEach(function(f){
+      var o = document.createElement('option');
+      o.value = f.id;
+      o.textContent = f.label + (isPresent(f.id) ? '' : '  (no file)');
+      sel.appendChild(o);
+    });
+    sel.value = def;
+  }
+  fill(selName, NAME_FONTS, isPresent('Transcity') ? 'Transcity' : 'Fraunces');
+  fill(selTag,  TAG_FONTS,  isPresent('Priestacy') ? 'Priestacy' : 'Parisienne');
+
+  var stageName = document.getElementById('stageName');
+  var stageTag  = document.getElementById('stageTag');
+  var szName = document.getElementById('szName'), outName = document.getElementById('outName');
+  var szTag  = document.getElementById('szTag'),  outTag  = document.getElementById('outTag');
+  var trName = document.getElementById('trName'), outTr   = document.getElementById('outTr');
+  var cssOut = document.getElementById('cssOut');
+
+  function apply(){
+    var n = selName.value, t = selTag.value;
+    var tracking = (trName.value / 1000).toFixed(3);
+
+    stageName.style.fontFamily = stack(n);
+    stageName.style.fontSize = szName.value + 'px';
+    stageName.style.letterSpacing = tracking + 'em';
+    stageTag.style.fontFamily = stack(t);
+    stageTag.style.fontSize = szTag.value + 'px';
+
+    outName.textContent = szName.value + 'px';
+    outTag.textContent  = szTag.value + 'px';
+    outTr.textContent   = tracking + 'em';
+
+    cssOut.innerHTML =
+      'Paste into <strong>app.css</strong> &rarr;<br>' +
+      '--font-brand: ' + stack(n) + ';<br>' +
+      '--font-tagline: ' + stack(t) + ';<br>' +
+      'h1 { letter-spacing: ' + tracking + 'em; }';
+  }
+
+  [selName, selTag, szName, szTag, trName].forEach(function(el){
+    el.addEventListener('input', apply);
+  });
+
+  /* Wait for the woff2 files to settle before measuring, or everything reports
+     as missing on a cold load. */
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(function(){
+      document.getElementById('nameRows').innerHTML = '';
+      document.getElementById('tagRows').innerHTML = '';
+      buildRows(NAME_FONTS, document.getElementById('nameRows'), 'Villa 25 Ekas', null);
+      buildRows(TAG_FONTS,  document.getElementById('tagRows'),  'Your perfect Island getaway', null);
+      apply();
+    });
+  }
+  apply();
+})();
+</script>
+</body>
+</html>

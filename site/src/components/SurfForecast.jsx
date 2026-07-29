@@ -126,7 +126,7 @@ function DayCard({ d, index }) {
         {d.periodS != null ? `${Math.round(d.periodS)}s` : '–'}
       </span>
 
-      <WeatherIcon code={d.code} className="my-0.5 h-6 w-6 text-(--color-bronze-lit)" />
+      <WeatherIcon code={d.code} className="my-0.5 h-12 w-12 text-(--color-bronze-lit)" />
 
       <span className="font-(family-name:--font-display) text-[19px] font-medium leading-none tabular-nums text-(--color-text)">
         {d.tempMax != null ? `${Math.round(d.tempMax)}°` : '–'}
