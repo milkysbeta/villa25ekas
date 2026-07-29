@@ -168,7 +168,7 @@ export default function SurfForecast({ days = 5 }) {
       </div>
 
       <p
-        className="mt-3.5 pt-2.5 text-center text-[9.5px] uppercase tracking-[0.22em] text-(--color-text-mute)"
+        className="mt-3.5 pt-2.5 text-right text-[8px] uppercase tracking-[0.18em] text-(--color-text-mute)"
         style={{
           borderTop: '1px solid transparent',
           borderImage:

@@ -147,7 +147,9 @@ export default function ComingSoon() {
             {/* Small, and below the contact details on purpose — it proves the
                 site is alive without competing with the reason people came. */}
             <div className="mt-20 w-full border-t border-(--color-line) pt-10">
-              <p className="label mb-5 text-(--color-bronze-lit)">The swell this week</p>
+              <p className="mb-6 text-[15px] uppercase tracking-[0.24em] text-(--color-bronze-lit)">
+                The swell this week
+              </p>
               <SurfForecast days={5} />
             </div>
 
