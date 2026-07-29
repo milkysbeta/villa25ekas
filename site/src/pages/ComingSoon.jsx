@@ -49,9 +49,11 @@ export default function ComingSoon() {
       <div className="horizon absolute inset-x-0 top-0 z-20" />
 
       <div className="relative z-10 mx-auto flex min-h-dvh max-w-3xl flex-col items-center justify-center px-6 py-20 text-center">
+        {/* Decorative: the H1 below now carries the name, so announcing it here
+            too would just make a screen reader say it twice. */}
         <img
           src={LOGO}
-          alt="Villa 25 Ekas"
+          alt=""
           width="120"
           height="120"
           className="h-28 w-auto object-contain"
@@ -75,8 +77,12 @@ export default function ComingSoon() {
 
           <div className="relative">
             <h1 className="mt-5 text-[2.75rem] leading-[1.06] text-(--color-text) sm:text-7xl">
-              Your perfect getaway
+              Villa 25 Ekas
             </h1>
+
+            <h2 className="mt-5 text-[1.6rem] leading-tight text-(--color-bronze-lit) sm:text-4xl">
+              Your perfect inland getaway
+            </h2>
 
             <p className="mx-auto mt-8 max-w-xl text-xl leading-relaxed text-(--color-text-soft) sm:text-[1.4rem]">
               Five rooms above Ekas Bay, Lombok. Run on sunlight, built from
