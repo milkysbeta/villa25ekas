@@ -1,0 +1,59 @@
+import Parallax from '../components/Parallax.jsx';
+import SurfForecast from '../components/SurfForecast.jsx';
+import { IMAGES } from '../data/images.js';
+import { BREAKS } from '../data/villa.js';
+
+/* The forecast lives here, on the page, rather than on a tab of its own. It is
+   the thing a surfer opens the site to see, and burying it a click away would
+   be the wrong instinct. */
+export default function Surf() {
+  return (
+    <Parallax
+      src={IMAGES.surf.src}
+      alt={IMAGES.surf.alt}
+      speed={0.14}
+      overlay="linear-gradient(to bottom, rgba(16,14,11,.92) 0%, rgba(16,14,11,.86) 50%, rgba(16,14,11,.95) 100%)"
+    >
+      <section id="surf" className="px-5 py-28 lg:px-10 lg:py-40">
+        <div className="mx-auto max-w-[1500px]">
+          <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+            <div>
+              <p className="label text-(--color-bronze-lit)">The surf</p>
+              <h2 className="mt-6 max-w-2xl text-[clamp(2.1rem,4.4vw,3.6rem)]">
+                It breaks in front
+                <br />
+                of the villa
+              </h2>
+            </div>
+            <p className="max-w-sm text-(--color-text-soft)">
+              Inside Ekas is the one you can watch over breakfast. Outside is
+              bigger, heavier and a boat ride away — and it empties out the
+              moment the day boats head home.
+            </p>
+          </div>
+
+          <div className="mt-16">
+            <p className="label mb-6 text-(--color-text-mute)">Five-day forecast</p>
+            <SurfForecast days={5} />
+          </div>
+
+          <ul className="mt-16 grid gap-px border border-(--color-line) bg-(--color-line) sm:grid-cols-2 lg:grid-cols-4">
+            {BREAKS.map((b, i) => (
+              <li key={b.id} className="bg-(--color-ink)/70 p-7 backdrop-blur-xs">
+                <span className="idx">{String(i + 1).padStart(2, '0')}</span>
+                <h3 className="mt-3 text-2xl">{b.name}</h3>
+                {b.note && (
+                  <p className="mt-3 text-[15px] text-(--color-text-soft)">{b.note}</p>
+                )}
+              </li>
+            ))}
+          </ul>
+
+          <p className="label mt-8 text-(--color-text-mute)">
+            Swell direction, tide and season detail to follow
+          </p>
+        </div>
+      </section>
+    </Parallax>
+  );
+}

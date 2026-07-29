@@ -1,12 +1,12 @@
-import { useEffect, useState } from 'react';
-import { useOutletContext } from 'react-router-dom';
+import { useContext, useEffect, useState } from 'react';
+import { Currency } from '../lib/context.js';
 import { formatIdr, formatConverted, loadRates } from '../lib/currency.js';
 
 /* IDR is always the real price. The converted figure sits alongside it, marked
    approximate, and disappears entirely if the rate lookup fails — a stale
-   conversion is worse than none. */
+   conversion on a villa site is worse than none at all. */
 export default function Price({ amount, className = '' }) {
-  const { currency } = useOutletContext() ?? { currency: 'IDR' };
+  const currency = useContext(Currency);
   const [rates, setRates] = useState(null);
 
   useEffect(() => {
@@ -21,9 +21,7 @@ export default function Price({ amount, className = '' }) {
     <span className={className}>
       <span className="tabular-nums">{formatIdr(amount)}</span>
       {converted && (
-        <span className="ml-2 text-sm text-(--color-text-mute) tabular-nums">
-          ≈ {converted}
-        </span>
+        <span className="ml-2 text-sm text-(--color-text-mute) tabular-nums">≈ {converted}</span>
       )}
     </span>
   );

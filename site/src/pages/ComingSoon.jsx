@@ -1,11 +1,8 @@
-import Logo from '../components/Logo.jsx';
 import SurfForecast from '../components/SurfForecast.jsx';
 import { CONTACT, whatsappLink, POWER } from '../data/villa.js';
+import { IMAGES, LOGO } from '../data/images.js';
 
-/* IMAGE SLOT — replace with the real hero. Any 16:9 or wider photograph of the
-   villa at dusk works; the gradient below is tuned to keep text legible over a
-   warm, bright image. Drop the file at site/public/hero.jpg and it appears. */
-const HERO = '/hero.jpg';
+const HERO = IMAGES.hero.src;
 
 export default function ComingSoon() {
   return (
@@ -32,15 +29,15 @@ export default function ComingSoon() {
       <div className="horizon absolute inset-x-0 top-0 z-20" />
 
       <div className="relative z-10 mx-auto flex min-h-dvh max-w-3xl flex-col items-center justify-center px-6 py-20 text-center">
-        <Logo />
+        <img src={LOGO} alt="Villa 25 Ekas" width="120" height="120" className="h-28 w-auto object-contain" />
 
         <p className="label mt-14 text-(--color-bronze-lit)">Opening 2026</p>
 
-        <h1 className="mt-5 text-4xl leading-[1.08] text-(--color-text-inv) sm:text-6xl">
+        <h1 className="mt-5 text-4xl leading-[1.08] text-(--color-text) sm:text-6xl">
           Your perfect getaway
         </h1>
 
-        <p className="mt-6 max-w-md text-lg text-(--color-text-inv-s)">
+        <p className="mt-6 max-w-md text-lg text-(--color-text-soft)">
           Five rooms above Ekas Bay, Lombok. Run on sunlight, built from local
           timber, four minutes from the sand.
         </p>
@@ -58,7 +55,7 @@ export default function ComingSoon() {
               <dd className="font-(family-name:--font-display) text-3xl text-(--color-bronze-lit) tabular-nums">
                 {value}
               </dd>
-              <dt className="label mt-1 text-(--color-text-inv-s)">{label}</dt>
+              <dt className="label mt-1 text-(--color-text-soft)">{label}</dt>
             </div>
           ))}
         </dl>
@@ -74,17 +71,17 @@ export default function ComingSoon() {
           </a>
           <a
             href={`mailto:${CONTACT.email}`}
-            className="label rounded-xs border border-(--color-ink-line) px-7 py-4 text-(--color-text-inv) transition-colors hover:border-(--color-bronze-lit) hover:text-(--color-bronze-lit)"
+            className="label rounded-xs border border-(--color-line) px-7 py-4 text-(--color-text) transition-colors hover:border-(--color-bronze-lit) hover:text-(--color-bronze-lit)"
           >
             {CONTACT.email}
           </a>
         </div>
 
-        <p className="label mt-8 text-(--color-text-inv-s)">{CONTACT.location}</p>
+        <p className="label mt-8 text-(--color-text-soft)">{CONTACT.location}</p>
 
         {/* Small, and below the contact details on purpose — it proves the site
             is alive without competing with the reason people are here. */}
-        <div className="mt-20 w-full border-t border-(--color-ink-line) pt-10">
+        <div className="mt-20 w-full border-t border-(--color-line) pt-10">
           <p className="label mb-5 text-(--color-bronze-lit)">The swell this week</p>
           <SurfForecast days={5} compact />
         </div>
@@ -93,7 +90,7 @@ export default function ComingSoon() {
           href={`https://instagram.com/${CONTACT.instagram}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="label mt-12 text-(--color-text-inv-s) underline-offset-4 transition-colors hover:text-(--color-bronze-lit) hover:underline"
+          className="label mt-12 text-(--color-text-soft) underline-offset-4 transition-colors hover:text-(--color-bronze-lit) hover:underline"
         >
           @{CONTACT.instagram}
         </a>
