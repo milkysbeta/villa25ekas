@@ -37,7 +37,7 @@ jobs:
         # Pages serves this repo from /villa25ekas/, so every absolute asset
         # path needs that prefix. Drop to "/" when the custom domain is live.
         env:
-          VITE_BASE: /villa25ekas/
+          VITE_BASE: /
         run: npm run build
 
       - name: Add the owner forms alongside the site

@@ -15,7 +15,6 @@
    ------------------------------------------------------------------------- */
 
 const { execSync } = require('child_process');
-const dns = require('dns').promises;
 const fs = require('fs');
 const path = require('path');
 
@@ -56,13 +55,27 @@ async function api(method, urlPath, body) {
   return { status: res.status, json: text ? JSON.parse(text) : null };
 }
 
+/* Resolved over HTTPS rather than through the system resolver. This machine
+   blocks outbound DNS on port 53 — even long-established domains fail to
+   resolve locally — so dns.resolve4 reports NXDOMAIN for names that are
+   perfectly live. DNS-over-HTTPS goes out over 443 and tells the truth. */
+async function lookup(name, type) {
+  const res = await fetch(
+    `https://cloudflare-dns.com/dns-query?name=${name}&type=${type}`,
+    { headers: { accept: 'application/dns-json' } }
+  );
+  if (!res.ok) throw new Error(`DoH HTTP ${res.status}`);
+  const j = await res.json();
+  return (j.Answer || []).map((a) => a.data.replace(/\.$/, ''));
+}
+
 async function checkDns() {
   const report = { apex: [], www: null, ok: false };
   try {
-    report.apex = await dns.resolve4(DOMAIN);
+    report.apex = await lookup(DOMAIN, 'A');
   } catch { /* not there yet */ }
   try {
-    report.www = (await dns.resolveCname(`www.${DOMAIN}`))[0];
+    report.www = (await lookup(`www.${DOMAIN}`, 'CNAME'))[0] ?? null;
   } catch { /* optional */ }
 
   const hit = report.apex.filter((ip) => PAGES_IPS.includes(ip));
