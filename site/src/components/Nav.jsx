@@ -59,7 +59,7 @@ export default function Nav({ currency, onCurrency }) {
             className="h-11 w-auto object-contain"
           />
           <span className="hidden flex-col leading-none sm:flex">
-            <span className="font-(family-name:--font-display) text-[15px] uppercase tracking-[0.34em] text-(--color-text)">
+            <span className="font-(family-name:--font-brand) text-[15px] uppercase tracking-[0.34em] text-(--color-text)">
               Villa 25
             </span>
             <span className="label-sm mt-1 text-(--color-text-mute)">Ekas · Lombok</span>

@@ -1,5 +1,32 @@
 @import "tailwindcss";
 
+/* ----------------------------------------------------------------------------
+   Papeterie Dupont — the brand face, used for the villa name and section
+   headings. Commercial font by Elvina Gafarova; see public/fonts/README.md for
+   how to install it and which licence you actually need.
+
+   These declarations are live now and harmless while the files are missing:
+   the browser tries the file, fails quietly, and falls through to the next
+   family in --font-brand. Nothing to switch on later.
+
+   `swap` means text paints immediately in the fallback and re-renders when the
+   font arrives, rather than sitting invisible for up to three seconds.
+   ------------------------------------------------------------------------- */
+@font-face {
+  font-family: 'Papeterie Dupont';
+  src: url('/fonts/PapeterieDupont-Serif.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Papeterie Dupont Script';
+  src: url('/fonts/PapeterieDupont-Script.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* ============================================================================
    VILLA 25 EKAS — DESIGN TOKENS
 
@@ -43,12 +70,23 @@
   --color-alert:      #C4714E;
 
   /* -- typefaces --------------------------------------------------------- */
-  /* Serif carries the brand, as in the reference sites. System stack for now;
-     swap for a self-hosted Cormorant Garamond or Canela once licensing is
-     settled. Never load fonts from a CDN — it leaks visitor IPs and breaks
-     under a strict content security policy. */
+  /* Three roles, deliberately separated.
+
+     --font-brand   the villa name and the big section headings. This is where
+                    a decorative face earns its keep. Papeterie Dupont sits
+                    first; the stack behind it is close enough in colour and
+                    proportion that the layout does not jump when it loads.
+     --font-display everything else set in serif — card titles, figures. Kept
+                    plain on purpose: a vintage face at 20px in a price row is
+                    hard work, and the owners asked for this to stay readable.
+     --font-body    all running text.
+
+     Never load fonts from a CDN — it leaks visitor IPs and breaks under CSP. */
+  --font-brand:   'Papeterie Dupont', 'Iowan Old Style', 'Palatino Linotype',
+                  Palatino, 'Book Antiqua', Georgia, serif;
   --font-display: 'Iowan Old Style', 'Palatino Linotype', Palatino,
                   'Book Antiqua', Georgia, serif;
+  --font-script:  'Papeterie Dupont Script', 'Segoe Script', cursive;
   --font-body:    'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', sans-serif;
   --font-util:    ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace;
 
@@ -72,11 +110,21 @@
     overflow-x: hidden;           /* parallax layers overhang by design       */
   }
   h1, h2, h3, h4 {
-    font-family: var(--font-display);
     font-weight: 400;
-    letter-spacing: -0.018em;
     line-height: 1.08;
     text-wrap: balance;
+  }
+  /* The two big ones carry the brand face. */
+  h1, h2 {
+    font-family: var(--font-brand);
+    /* Vintage faces are usually drawn with their spacing already right, so the
+       tightening a modern serif wants would close them up too far. Nudge this
+       once the real file is in — it is the one number worth revisiting. */
+    letter-spacing: -0.005em;
+  }
+  h3, h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.018em;
   }
   :focus-visible {
     outline: 2px solid var(--color-reef);

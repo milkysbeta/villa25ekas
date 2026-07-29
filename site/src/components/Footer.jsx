@@ -13,7 +13,7 @@ export default function Footer() {
             <a href="#top" className="flex items-center gap-3" aria-label="Villa 25 Ekas — top">
               <img src={LOGO} alt="" width="52" height="52" className="h-13 w-auto object-contain" />
               <span className="flex flex-col leading-none">
-                <span className="font-(family-name:--font-display) text-base uppercase tracking-[0.34em]">
+                <span className="font-(family-name:--font-brand) text-base uppercase tracking-[0.34em]">
                   Villa 25
                 </span>
                 <span className="label-sm mt-1.5 text-(--color-text-mute)">Ekas · Lombok</span>
