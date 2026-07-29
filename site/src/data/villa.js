@@ -12,6 +12,11 @@ export const CONTACT = {
   email: 'villa25ekas@gmail.com',
   whatsapp: '628213103303',
   whatsappText: 'Bookings Villa 25 Ekas',
+  /* Same line as the WhatsApp number. Kept as two fields: `phone` must stay in
+     full international form for tel: and sms: to work from abroad, `phoneShow`
+     is spaced for reading. */
+  phone: '+628213103303',
+  phoneShow: '+62 821 3103 303',
   instagram: 'villa_25_ekas',
   location: 'Ekas Bay, Lombok, Indonesia',
   coords: { lat: -8.901632, lng: 116.450201 },

@@ -33,6 +33,12 @@ export default function Contact() {
               >
                 Message on WhatsApp
               </a>
+              <a href={`tel:${CONTACT.phone}`} className="label btn btn-line">
+                Call us
+              </a>
+              <a href={`sms:${CONTACT.phone}`} className="label btn btn-line">
+                Text us
+              </a>
               <a href={`mailto:${CONTACT.email}`} className="label btn btn-line">
                 Send an email
               </a>
@@ -42,8 +48,8 @@ export default function Contact() {
           <dl className="flex flex-col self-center">
             {[
               ['Where', CONTACT.location],
+              ['Phone', CONTACT.phoneShow],
               ['Email', CONTACT.email],
-              ['WhatsApp', `+${CONTACT.whatsapp}`],
               ['Instagram', `@${CONTACT.instagram}`],
             ].map(([term, value]) => (
               <div

@@ -24,6 +24,22 @@ const InstagramMark = ({ className = '' }) => (
   </svg>
 );
 
+/* Same 1.4 stroke as the Instagram mark and the weather icons, so the three
+   button rows read as one set rather than three borrowed icon packs. */
+const PhoneMark = ({ className = '' }) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4"
+       strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+    <path d="M6.2 3.6h3l1.5 3.8-2 1.3a11.5 11.5 0 0 0 5.6 5.6l1.3-2 3.8 1.5v3a1.8 1.8 0 0 1-2 1.8A15.8 15.8 0 0 1 4.4 5.6a1.8 1.8 0 0 1 1.8-2Z" />
+  </svg>
+);
+
+const MessageMark = ({ className = '' }) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4"
+       strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+    <path d="M20.5 12.4c0 3.9-3.8 7-8.5 7a9.8 9.8 0 0 1-2.6-.35L4.5 20.5l1.2-3.4A6.6 6.6 0 0 1 3.5 12.4c0-3.9 3.8-7 8.5-7s8.5 3.1 8.5 7Z" />
+  </svg>
+);
+
 export default function ComingSoon() {
   return (
     <div className="relative min-h-dvh overflow-hidden bg-(--color-ink)">
@@ -54,12 +70,12 @@ export default function ComingSoon() {
         <img
           src={LOGO}
           alt=""
-          width="120"
-          height="120"
-          className="h-28 w-auto object-contain"
+          width="220"
+          height="220"
+          className="h-44 w-auto object-contain sm:h-56"
         />
 
-        <p className="label mt-14 text-(--color-bronze-lit)">Opening 2026</p>
+        <p className="label mt-5 text-(--color-bronze-lit)">Opening 2026</p>
 
         {/* Everything from the headline down sits on a sand-coloured scrim that
             starts at nothing and deepens as it falls, so the text further down
@@ -98,6 +114,24 @@ export default function ComingSoon() {
               >
                 Enquire on WhatsApp
               </a>
+              {/* Two targets on one line: tel: opens the dialler, sms: opens a
+                  message. Split so nobody has to copy the number out by hand —
+                  and on a desktop, where neither does anything useful, the
+                  number is still right there to read. */}
+              <a
+                href={`tel:${CONTACT.phone}`}
+                className="inline-flex items-center gap-2.5 rounded-xs border border-(--color-line-lit) px-8 py-4 text-[13px] uppercase tracking-[0.2em] text-(--color-text) transition-colors hover:border-(--color-bronze-lit) hover:text-(--color-bronze-lit)"
+              >
+                <PhoneMark className="h-[17px] w-[17px]" />
+                {CONTACT.phoneShow}
+              </a>
+              <a
+                href={`sms:${CONTACT.phone}`}
+                className="inline-flex items-center gap-2.5 rounded-xs border border-(--color-line-lit) px-8 py-4 text-[13px] uppercase tracking-[0.2em] text-(--color-text) transition-colors hover:border-(--color-bronze-lit) hover:text-(--color-bronze-lit)"
+              >
+                <MessageMark className="h-[17px] w-[17px]" />
+                Text us
+              </a>
               <a
                 href={`mailto:${CONTACT.email}`}
                 className="rounded-xs border border-(--color-line-lit) px-8 py-4 text-[13px] uppercase tracking-[0.2em] text-(--color-text) transition-colors hover:border-(--color-bronze-lit) hover:text-(--color-bronze-lit)"
@@ -126,6 +160,17 @@ export default function ComingSoon() {
               <InstagramMark className="h-[18px] w-[18px]" />
               @{CONTACT.instagram}
             </a>
+
+            {/* A quiet reprise of the mark to close the page off. Held back to
+                about a third of the opening size and dimmed, so it reads as a
+                full stop rather than a second entrance. */}
+            <img
+              src={LOGO}
+              alt=""
+              width="72"
+              height="72"
+              className="mx-auto mt-20 h-16 w-auto object-contain opacity-45"
+            />
           </div>
         </div>
       </div>
