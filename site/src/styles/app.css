@@ -27,6 +27,29 @@
   font-display: swap;
 }
 
+/* Transcity — the villa name. Dharmas Foundry.
+   Priestacy — the tagline. Sronstudio.
+
+   BOTH ARE PERSONAL-USE ONLY as distributed on 1001fonts. A villa website
+   selling rooms is commercial use, so both need a paid commercial licence AND
+   a webfont licence before this site goes public. See public/fonts/README.md.
+   Files are absent by design until that is sorted — the stack behind each one
+   carries the page in the meantime. */
+@font-face {
+  font-family: 'Transcity';
+  src: url('/fonts/Transcity.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Priestacy';
+  src: url('/fonts/Priestacy.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* ============================================================================
    VILLA 25 EKAS — DESIGN TOKENS
 
@@ -82,11 +105,12 @@
      --font-body    all running text.
 
      Never load fonts from a CDN — it leaks visitor IPs and breaks under CSP. */
-  --font-brand:   'Papeterie Dupont', 'Iowan Old Style', 'Palatino Linotype',
-                  Palatino, 'Book Antiqua', Georgia, serif;
+  --font-brand:   'Transcity', 'Papeterie Dupont', 'Iowan Old Style',
+                  'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif;
+  --font-tagline: 'Priestacy', 'Papeterie Dupont Script', 'Iowan Old Style',
+                  'Palatino Linotype', Palatino, Georgia, serif;
   --font-display: 'Iowan Old Style', 'Palatino Linotype', Palatino,
                   'Book Antiqua', Georgia, serif;
-  --font-script:  'Papeterie Dupont Script', 'Segoe Script', cursive;
   --font-body:    'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', sans-serif;
   --font-util:    ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace;
 
@@ -114,13 +138,18 @@
     line-height: 1.08;
     text-wrap: balance;
   }
-  /* The two big ones carry the brand face. */
-  h1, h2 {
+  /* The villa name. */
+  h1 {
     font-family: var(--font-brand);
-    /* Vintage faces are usually drawn with their spacing already right, so the
+    /* Display faces are usually drawn with their spacing already right, so the
        tightening a modern serif wants would close them up too far. Nudge this
        once the real file is in — it is the one number worth revisiting. */
     letter-spacing: -0.005em;
+  }
+  /* The tagline, in the second display face. */
+  h2 {
+    font-family: var(--font-tagline);
+    letter-spacing: 0;
   }
   h3, h4 {
     font-family: var(--font-display);
