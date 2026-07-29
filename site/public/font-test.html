@@ -13,9 +13,11 @@
   @font-face { font-family:'YesevaOne';   src:url('fonts/YesevaOne.woff2')  format('woff2'); font-display:block; }
   @font-face { font-family:'Parisienne';  src:url('fonts/Parisienne.woff2') format('woff2'); font-display:block; }
   @font-face { font-family:'GreatVibes';  src:url('fonts/GreatVibes.woff2') format('woff2'); font-display:block; }
-  /* These two only render if you have dropped the licensed files in. */
-  @font-face { font-family:'Transcity';   src:url('fonts/Transcity.woff2')  format('woff2'); font-display:block; }
-  @font-face { font-family:'Priestacy';   src:url('fonts/Priestacy.woff2')  format('woff2'); font-display:block; }
+  /* The two personal-use faces, as downloaded from 1001fonts. */
+  @font-face { font-family:'Transcity';   src:url('fonts/Transcity.woff2')  format('woff2'),
+                                              url('fonts/Transcity.otf')    format('opentype'); font-display:block; }
+  @font-face { font-family:'Priestacy';   src:url('fonts/Priestacy.woff2')  format('woff2'),
+                                              url('fonts/Priestacy.otf')    format('opentype'); font-display:block; }
 
   :root{
     --ink:#100E0B; --shell:#17140F; --raise:#1E1A14; --line:#2E2820; --line-lit:#443C30;
@@ -147,7 +149,8 @@
   "use strict";
 
   var NAME_FONTS = [
-    { id:'Transcity',  label:'Transcity',            licence:'Personal use only — licence needed', free:false },
+    { id:'Transcity',  label:'Transcity (DEMO)',     licence:'Personal use only — licence needed', free:false,
+      warn:'DEMO file has NO DIGITS — the 2 and 5 fall back to another font mid-word. Paid release includes them.' },
     { id:'Fraunces',   label:'Fraunces',             licence:'OFL — free commercial + web',        free:true  },
     { id:'YesevaOne',  label:'Yeseva One',           licence:'OFL — free commercial + web',        free:true  },
     { id:'sysserif',   label:'System serif (current)', licence:'No licence needed',                free:true  }
@@ -189,6 +192,7 @@
         '<span class="meta ' + (f.free ? 'ok' : 'warn') + '">' + f.licence + '</span>' +
         (present ? '' : '<span class="meta">file not present</span>') +
         '</header>' +
+        (f.warn ? '<p class="meta warn" style="margin:-6px 0 14px">⚠ ' + f.warn + '</p>' : '') +
         '<p class="sample big" style="font-family:' + stack(f.id) + '">' + sampleText + '</p>' +
         (secondText ? '<p class="sample mid" style="font-family:' + stack(f.id) + '">' + secondText + '</p>' : '') +
         '<p class="glyphs" style="font-family:' + stack(f.id) + '">' +

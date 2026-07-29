@@ -1,53 +1,60 @@
 @import "tailwindcss";
 
 /* ----------------------------------------------------------------------------
-   Papeterie Dupont — the brand face, used for the villa name and section
-   headings. Commercial font by Elvina Gafarova; see public/fonts/README.md for
-   how to install it and which licence you actually need.
+   FONTS
 
-   These declarations are live now and harmless while the files are missing:
-   the browser tries the file, fails quietly, and falls through to the next
-   family in --font-brand. Nothing to switch on later.
+   Paths are relative to this file, which puts them through Vite's asset
+   pipeline. That matters: it means they resolve correctly both locally and on
+   GitHub Pages, where the site is served from /villa25ekas/ rather than a
+   domain root. An absolute /fonts/… path would 404 there.
 
    `swap` means text paints immediately in the fallback and re-renders when the
    font arrives, rather than sitting invisible for up to three seconds.
+
+   Any face whose file is missing fails quietly and falls through to the next
+   family in its stack, so nothing breaks while licensing is sorted out.
    ------------------------------------------------------------------------- */
+
+/* -- free, SIL Open Font License: commercial use and web embedding, no fee -- */
 @font-face {
-  font-family: 'Papeterie Dupont';
-  src: url('/fonts/PapeterieDupont-Serif.woff2') format('woff2');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
+  font-family: 'Fraunces';
+  src: url('../assets/fonts/Fraunces.woff2') format('woff2');
+  font-weight: 400; font-style: normal; font-display: swap;
 }
 @font-face {
-  font-family: 'Papeterie Dupont Script';
-  src: url('/fonts/PapeterieDupont-Script.woff2') format('woff2');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
+  font-family: 'Yeseva One';
+  src: url('../assets/fonts/YesevaOne.woff2') format('woff2');
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Parisienne';
+  src: url('../assets/fonts/Parisienne.woff2') format('woff2');
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Great Vibes';
+  src: url('../assets/fonts/GreatVibes.woff2') format('woff2');
+  font-weight: 400; font-style: normal; font-display: swap;
 }
 
-/* Transcity — the villa name. Dharmas Foundry.
-   Priestacy — the tagline. Sronstudio.
+/* -- personal-use-only, licence required before launch ---------------------
+   Transcity (Dharmas Foundry) and Priestacy (Sronstudio) are both free for
+   personal use only. Selling villa rooms is commercial use, so both need a
+   commercial AND a webfont licence before this site is public.
 
-   BOTH ARE PERSONAL-USE ONLY as distributed on 1001fonts. A villa website
-   selling rooms is commercial use, so both need a paid commercial licence AND
-   a webfont licence before this site goes public. See public/fonts/README.md.
-   Files are absent by design until that is sorted — the stack behind each one
-   carries the page in the meantime. */
+   Note the Transcity file here is the DEMO, which contains no digits at all.
+   "Villa 25 Ekas" has a 2 and a 5 in it, so the browser renders those two
+   characters from the next font in the stack — visibly a different typeface
+   mid-word. The paid release includes digits. */
 @font-face {
   font-family: 'Transcity';
-  src: url('/fonts/Transcity.woff2') format('woff2');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
+  src: url('../assets/fonts/Transcity.otf') format('opentype');
+  font-weight: 400; font-style: normal; font-display: swap;
 }
 @font-face {
   font-family: 'Priestacy';
-  src: url('/fonts/Priestacy.woff2') format('woff2');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
+  src: url('../assets/fonts/Priestacy.otf') format('opentype');
+  font-weight: 400; font-style: normal; font-display: swap;
 }
 
 /* ============================================================================
@@ -105,9 +112,12 @@
      --font-body    all running text.
 
      Never load fonts from a CDN — it leaks visitor IPs and breaks under CSP. */
-  --font-brand:   'Transcity', 'Papeterie Dupont', 'Iowan Old Style',
+  /* Licensed face first, free equivalent behind it, system serif last. Swap the
+     order to try a different pairing — the font test page prints these two
+     lines for whatever combination you settle on. */
+  --font-brand:   'Transcity', 'Fraunces', 'Iowan Old Style',
                   'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif;
-  --font-tagline: 'Priestacy', 'Papeterie Dupont Script', 'Iowan Old Style',
+  --font-tagline: 'Priestacy', 'Parisienne', 'Iowan Old Style',
                   'Palatino Linotype', Palatino, Georgia, serif;
   --font-display: 'Iowan Old Style', 'Palatino Linotype', Palatino,
                   'Book Antiqua', Georgia, serif;
