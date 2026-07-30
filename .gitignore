@@ -39,3 +39,4 @@ npm-debug.log*
 # Master image library — originals stay local, web-ready copies live in
 # site/public/images/ and are committed.
 images/unsorted images/
+/PHOTOS unsorted
