@@ -55,3 +55,30 @@ jobs:
         run: |
           mkdir -p site/dist/demo
           cp site/dist/index.html site/dist/demo/index.html
+
+      - name: Check the build produced what we expect
+        # A deploy that silently ships the wrong thing is worse than one that
+        # fails loudly. These four files are the ones whose absence would not
+        # be obvious until someone opened the site.
+        run: |
+          set -e
+          for f in index.html demo/index.html assets/app.js forms/index.html; do
+            test -f "site/dist/$f" || { echo "MISSING: $f"; exit 1; }
+            echo "ok  $f"
+          done
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site/dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
