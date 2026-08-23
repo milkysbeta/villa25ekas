@@ -1,18 +1,22 @@
 import { useEffect, useState } from 'react';
+import { Link, NavLink, useLocation } from 'react-router-dom';
+
 import { LOGO } from '../data/images.js';
 import { whatsappLink } from '../data/villa.js';
 import { CURRENCIES } from '../lib/currency.js';
-import { SECTIONS } from '../lib/context.js';
-
+import { NAV_PAGES } from '../lib/routes.js';
 
 export default function Nav({ currency, onCurrency }) {
   const [open, setOpen] = useState(false);
   const [solid, setSolid] = useState(false);
-  const [active, setActive] = useState('');
+  const { pathname } = useLocation();
 
-  /* The header is transparent over the hero and fills in once you leave it —
-     the same behaviour as both reference sites, and it keeps the logo legible
-     against a bright sky. */
+  /* Transparent over the home page's hero, filled in everywhere else and once
+     you scroll. Every page other than home opens with text rather than a
+     photograph, so the header has to be solid from the first pixel or the two
+     collide. */
+  const isHome = pathname === '/' || pathname === '';
+
   useEffect(() => {
     const onScroll = () => setSolid(window.scrollY > 80);
     onScroll();
@@ -20,65 +24,49 @@ export default function Nav({ currency, onCurrency }) {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  useEffect(() => {
-    const targets = SECTIONS
-      .map((s) => document.getElementById(s.id))
-      .filter(Boolean);
-    if (!targets.length) return;
-
-    const io = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => { if (e.isIntersecting) setActive(e.target.id); });
-      },
-      { rootMargin: '-45% 0px -50% 0px' }
-    );
-    targets.forEach((t) => io.observe(t));
-    return () => io.disconnect();
-  }, []);
+  useEffect(() => { setOpen(false); }, [pathname]);
 
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
   }, [open]);
 
+  const filled = solid || open || !isHome;
+
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
-        solid || open
+        filled
           ? 'border-b border-(--color-line) bg-(--color-ink)/95 backdrop-blur'
           : 'bg-linear-to-b from-black/55 to-transparent'
       }`}
     >
       <div className="mx-auto flex max-w-[1500px] items-center gap-6 px-5 py-3.5 lg:px-10">
-        <a href="#top" className="flex shrink-0 items-center gap-3" aria-label="Villa 25 Ekas — top">
-          <img
-            src={LOGO}
-            alt="Villa 25 Ekas"
-            width="44"
-            height="44"
-            className="h-11 w-auto object-contain"
-          />
+        <Link to="/" className="flex shrink-0 items-center gap-3" aria-label="Villa 25 Ekas — home">
+          <img src={LOGO} alt="" width="44" height="44" className="h-11 w-auto object-contain" />
           <span className="hidden flex-col leading-none sm:flex">
             <span className="font-(family-name:--font-brand) text-[15px] uppercase tracking-[0.34em] text-(--color-text)">
               Villa 25
             </span>
             <span className="label-sm mt-1 text-(--color-text-mute)">Ekas · Lombok</span>
           </span>
-        </a>
+        </Link>
 
-        <nav className="ml-auto hidden items-center gap-7 xl:flex">
-          {SECTIONS.map((s) => (
-            <a
-              key={s.id}
-              href={`#${s.id}`}
-              className={`label transition-colors ${
-                active === s.id
-                  ? 'text-(--color-bronze-lit)'
-                  : 'text-(--color-text-soft) hover:text-(--color-text)'
-              }`}
+        <nav className="ml-auto hidden items-center gap-6 xl:flex">
+          {NAV_PAGES.map((p) => (
+            <NavLink
+              key={p.slug}
+              to={`/${p.slug}`}
+              className={({ isActive }) =>
+                `label transition-colors ${
+                  isActive
+                    ? 'text-(--color-bronze-lit)'
+                    : 'text-(--color-text-soft) hover:text-(--color-text)'
+                }`
+              }
             >
-              {s.label}
-            </a>
+              {p.label}
+            </NavLink>
           ))}
         </nav>
 
@@ -117,17 +105,20 @@ export default function Nav({ currency, onCurrency }) {
       </div>
 
       {open && (
-        <nav className="border-t border-(--color-line) bg-(--color-ink) px-5 pb-6 xl:hidden">
+        <nav className="max-h-[calc(100svh-4.5rem)] overflow-y-auto border-t border-(--color-line) bg-(--color-ink) px-5 pb-6 xl:hidden">
           <ul className="flex flex-col">
-            {SECTIONS.map((s) => (
-              <li key={s.id}>
-                <a
-                  href={`#${s.id}`}
-                  onClick={() => setOpen(false)}
-                  className="block border-b border-(--color-line) py-4 font-(family-name:--font-display) text-2xl text-(--color-text)"
+            {NAV_PAGES.map((p) => (
+              <li key={p.slug}>
+                <NavLink
+                  to={`/${p.slug}`}
+                  className={({ isActive }) =>
+                    `block border-b border-(--color-line) py-3.5 font-(family-name:--font-display) text-2xl ${
+                      isActive ? 'text-(--color-bronze-lit)' : 'text-(--color-text)'
+                    }`
+                  }
                 >
-                  {s.label}
-                </a>
+                  {p.label}
+                </NavLink>
               </li>
             ))}
           </ul>

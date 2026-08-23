@@ -1,26 +1,25 @@
 import { useState } from 'react';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
 import { isPreviewPath, isUnlocked, unlock } from './lib/gate.js';
 import { guessCurrency, rememberCurrency } from './lib/currency.js';
 import { Currency } from './lib/context.js';
+import { BASENAME } from './lib/routes.js';
 
-import Nav from './components/Nav.jsx';
-import Footer from './components/Footer.jsx';
+import Layout from './components/Layout.jsx';
 import ComingSoon from './pages/ComingSoon.jsx';
 
-import Hero from './sections/Hero.jsx';
-import Welcome from './sections/Welcome.jsx';
-import Offerings from './sections/Offerings.jsx';
-import Stay from './sections/Stay.jsx';
-import Booking from './sections/Booking.jsx';
-import Surf from './sections/Surf.jsx';
-import OffGrid from './sections/OffGrid.jsx';
-import Experiences from './sections/Experiences.jsx';
-import Gallery from './sections/Gallery.jsx';
-import Journey from './sections/Journey.jsx';
-import Guide from './sections/Guide.jsx';
-import Journal from './sections/Journal.jsx';
-import Contact from './sections/Contact.jsx';
+import Home from './pages/Home.jsx';
+import Stay from './pages/Stay.jsx';
+import Availability from './pages/Availability.jsx';
+import Surf from './pages/Surf.jsx';
+import OffGridPage from './pages/OffGridPage.jsx';
+import Experiences from './pages/Experiences.jsx';
+import Gallery from './pages/Gallery.jsx';
+import Guide from './pages/Guide.jsx';
+import GettingHere from './pages/GettingHere.jsx';
+import Journal from './pages/Journal.jsx';
+import Contact from './pages/Contact.jsx';
 
 function Lock() {
   const [value, setValue] = useState('');
@@ -48,9 +47,7 @@ function Lock() {
           aria-label="Password"
           className="w-full rounded-xs border border-(--color-line-lit) bg-(--color-raise) px-4 py-3 text-center text-(--color-text) placeholder:text-(--color-text-mute)"
         />
-        {wrong && (
-          <p className="mt-3 text-sm text-(--color-alert)">That password is not right.</p>
-        )}
+        {wrong && <p className="mt-3 text-sm text-(--color-alert)">That password is not right.</p>}
         <button type="submit" className="label btn btn-solid mt-4 w-full">Enter</button>
 
         <p className="mt-8 text-[13px] text-(--color-text-mute)">
@@ -70,34 +67,32 @@ export default function App() {
     rememberCurrency(code);
   };
 
-  /* The root is always the holding page — there is no way to unlock into the
-     full site from it. The full site lives only at /test and /demo. */
+  /* The root is always the holding page — there is no route into the full site
+     from it. The full site lives under /demo, behind the password. */
   if (!isPreviewPath()) return <ComingSoon />;
   if (!isUnlocked()) return <Lock />;
 
-  /* One page. Every section is an anchor target; nothing is a route.
-     Order is the order a guest reads it in: what the place is, what you get,
-     what it costs, then why you would come, then how you get here. */
   return (
     <Currency value={currency}>
-      <div className="horizon fixed inset-x-0 top-0 z-60" />
-      <Nav currency={currency} onCurrency={onCurrency} />
-      <main>
-        <Hero />
-        <Welcome />
-        <Offerings />
-        <Stay />
-        <Booking />
-        <Surf />
-        <OffGrid />
-        <Experiences />
-        <Gallery />
-        <Guide />
-        <Journey />
-        <Journal />
-        <Contact />
-      </main>
-      <Footer />
+      <BrowserRouter basename={BASENAME}>
+        <Routes>
+          <Route element={<Layout currency={currency} onCurrency={onCurrency} />}>
+            <Route index element={<Home />} />
+            <Route path="stay" element={<Stay />} />
+            <Route path="availability" element={<Availability />} />
+            <Route path="surf" element={<Surf />} />
+            <Route path="off-grid" element={<OffGridPage />} />
+            <Route path="experiences" element={<Experiences />} />
+            <Route path="gallery" element={<Gallery />} />
+            <Route path="guide" element={<Guide />} />
+            <Route path="getting-here" element={<GettingHere />} />
+            <Route path="journal" element={<Journal />} />
+            <Route path="contact" element={<Contact />} />
+            {/* anything unknown goes home rather than showing nothing */}
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </Currency>
   );
 }

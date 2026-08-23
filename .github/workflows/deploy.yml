@@ -45,16 +45,11 @@ jobs:
         # so they are copied in rather than bundled.
         run: cp -r forms site/dist/forms
 
-      - name: Publish the password-gated preview path
+      - name: Write a real HTML file for every page
         # Pages has no server-side routing — a URL only exists if a file exists
-        # at it. So /demo gets a copy of index.html; the app reads the path and
-        # decides whether to show the holding page or the locked full site.
-        #
-        # This works because the entry bundle has a FIXED name (assets/app.js),
-        # so a copied index.html cannot go stale against a rebuilt bundle.
-        run: |
-          mkdir -p site/dist/demo
-          cp site/dist/index.html site/dist/demo/index.html
+        # at it. Without this /demo/stay would 404 on a hard refresh or a shared
+        # link, working only if you clicked through from another page.
+        run: node tools/write-pages.mjs
 
       - name: Check the build produced what we expect
         # A deploy that silently ships the wrong thing is worse than one that
@@ -62,7 +57,7 @@ jobs:
         # be obvious until someone opened the site.
         run: |
           set -e
-          for f in index.html demo/index.html assets/app.js forms/index.html; do
+          for f in index.html demo/index.html demo/stay/index.html demo/contact/index.html assets/app.js forms/index.html; do
             test -f "site/dist/$f" || { echo "MISSING: $f"; exit 1; }
             echo "ok  $f"
           done

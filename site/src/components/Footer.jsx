@@ -1,16 +1,19 @@
+import { Link } from 'react-router-dom';
 import { LOGO } from '../data/images.js';
 import { CONTACT, whatsappLink } from '../data/villa.js';
-import { SECTIONS } from '../lib/context.js';
+import { NAV_PAGES } from '../lib/routes.js';
 
 export default function Footer() {
   const year = new Date().getFullYear();
+  const half = Math.ceil(NAV_PAGES.length / 2);
+  const columns = [NAV_PAGES.slice(0, half), NAV_PAGES.slice(half)];
 
   return (
     <footer className="border-t border-(--color-line) bg-(--color-ink) px-5 py-16 lg:px-10 lg:py-20">
       <div className="mx-auto max-w-[1500px]">
-        <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr]">
+        <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
           <div>
-            <a href="#top" className="flex items-center gap-3" aria-label="Villa 25 Ekas — top">
+            <Link to="/" className="flex items-center gap-3" aria-label="Villa 25 Ekas — home">
               <img src={LOGO} alt="" width="52" height="52" className="h-13 w-auto object-contain" />
               <span className="flex flex-col leading-none">
                 <span className="font-(family-name:--font-brand) text-base uppercase tracking-[0.34em]">
@@ -18,28 +21,32 @@ export default function Footer() {
                 </span>
                 <span className="label-sm mt-1.5 text-(--color-text-mute)">Ekas · Lombok</span>
               </span>
-            </a>
+            </Link>
             <p className="mt-7 max-w-xs text-[15px] text-(--color-text-soft)">
-              A luxurious five bedroom escape above the turquoise waters of
-              Ekas Beach. Four minutes' walk from the sand.
+              A luxurious five bedroom escape above the turquoise waters of Ekas
+              Beach. Four minutes&rsquo; walk from the sand.
             </p>
           </div>
 
-          <nav aria-label="Sections">
-            <p className="label text-(--color-bronze)">The villa</p>
-            <ul className="mt-5 flex flex-col gap-3">
-              {SECTIONS.map((s) => (
-                <li key={s.id}>
-                  <a
-                    href={`#${s.id}`}
-                    className="text-[15px] text-(--color-text-soft) transition-colors hover:text-(--color-bronze-lit)"
-                  >
-                    {s.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </nav>
+          {columns.map((group, i) => (
+            <nav key={i} aria-label={i === 0 ? 'Pages' : 'More pages'}>
+              <p className={`label text-(--color-bronze) ${i === 0 ? '' : 'invisible hidden lg:block'}`}>
+                The villa
+              </p>
+              <ul className="mt-5 flex flex-col gap-3">
+                {group.map((p) => (
+                  <li key={p.slug}>
+                    <Link
+                      to={`/${p.slug}`}
+                      className="text-[15px] text-(--color-text-soft) transition-colors hover:text-(--color-bronze-lit)"
+                    >
+                      {p.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          ))}
 
           <div>
             <p className="label text-(--color-bronze)">Get in touch</p>
@@ -52,6 +59,14 @@ export default function Footer() {
                   className="text-[15px] text-(--color-text-soft) transition-colors hover:text-(--color-bronze-lit)"
                 >
                   WhatsApp
+                </a>
+              </li>
+              <li>
+                <a
+                  href={`tel:${CONTACT.phone}`}
+                  className="text-[15px] text-(--color-text-soft) transition-colors hover:text-(--color-bronze-lit)"
+                >
+                  {CONTACT.phoneShow}
                 </a>
               </li>
               <li>

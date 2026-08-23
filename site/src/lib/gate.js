@@ -21,9 +21,12 @@ const KEY = 'v25-demo';
 
 const PASSWORD = import.meta.env.VITE_DEMO_PASSWORD ?? 'acid1234';
 
-/** True when the current URL is the demo path. */
+/** True at /demo and anywhere beneath it — /demo/stay, /demo/contact, and so
+    on. Matching the exact path only meant every sub-page silently fell through
+    to the holding page, which looked like the site had simply gone blank. */
 export function isPreviewPath() {
-  return window.location.pathname.replace(/\/+$/, '').endsWith('/demo');
+  const p = window.location.pathname.replace(/\/+$/, '');
+  return p.endsWith('/demo') || p.includes('/demo/');
 }
 
 export function isUnlocked() {
