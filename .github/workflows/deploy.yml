@@ -42,22 +42,16 @@ jobs:
 
       - name: Add the owner forms alongside the site
         # They are plain static HTML and have nothing to do with the Vite build,
-        # so they are copied in rather than bundled. Keeps
-        # /villa25ekas/forms/ working exactly as it does today.
+        # so they are copied in rather than bundled.
         run: cp -r forms site/dist/forms
 
-      - uses: actions/configure-pages@v5
-
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: site/dist
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - id: deployment
-        uses: actions/deploy-pages@v4
+      - name: Publish the password-gated preview path
+        # Pages has no server-side routing — a URL only exists if a file exists
+        # at it. So /demo gets a copy of index.html; the app reads the path and
+        # decides whether to show the holding page or the locked full site.
+        #
+        # This works because the entry bundle has a FIXED name (assets/app.js),
+        # so a copied index.html cannot go stale against a rebuilt bundle.
+        run: |
+          mkdir -p site/dist/demo
+          cp site/dist/index.html site/dist/demo/index.html

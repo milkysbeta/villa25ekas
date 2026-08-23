@@ -8,11 +8,14 @@ export const Currency = createContext('IDR');
 
 /* One page, so navigation is anchors rather than routes. */
 export const SECTIONS = [
-  { id: 'welcome',  label: 'Welcome' },
-  { id: 'stay',     label: 'Stay' },
-  { id: 'booking',  label: 'Availability' },
-  { id: 'surf',     label: 'Surf' },
-  { id: 'off-grid', label: 'Off-grid' },
-  { id: 'journey',  label: 'Getting here' },
-  { id: 'contact',  label: 'Contact' },
+  { id: 'stay',        label: 'Stay' },
+  { id: 'booking',     label: 'Availability' },
+  { id: 'surf',        label: 'Surf' },
+  { id: 'off-grid',    label: 'Off-grid' },
+  { id: 'experiences', label: 'Experiences' },
+  { id: 'gallery',     label: 'Gallery' },
+  { id: 'guide',       label: 'Ekas Guide' },
+  { id: 'journey',     label: 'Getting here' },
+  { id: 'journal',     label: 'Journal' },
+  { id: 'contact',     label: 'Contact' },
 ];

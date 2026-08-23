@@ -1,31 +1,38 @@
 /* ============================================================================
-   Preview gate
+   Where the two sites live
 
-   While the site is in coming-soon mode the public sees only the holding page.
-   Anyone with the preview password sees the whole site, on the same domain,
-   so it can be shown to friends and clients before launch.
+     /        the holding page. Public, always. This is what a guest, a client
+              or a search engine sees.
+     /demo    the full site, behind a password. What you show people while it
+              is still being built.
 
-   This is a soft gate, not security. The built JavaScript is public, so anyone
-   determined can read the password out of it. That is an acceptable trade for
-   "stop the site being indexed and gawped at before it is ready" — but nothing
-   private must ever sit behind it. Real authentication (Supabase) guards the
-   admin portal, which is a different thing entirely.
+   /demo is served by a copy of index.html that the deploy places there — see
+   .github/workflows/deploy.yml. GitHub Pages has no server-side routing, so a
+   path only exists if a file exists at it.
+
+   The password is a KEEP-OUT SIGN, NOT SECURITY. The built JavaScript is
+   public, so anyone who opens the developer tools can read it. That is an
+   acceptable trade for "do not gawp at this before it is ready" — but nothing
+   private may ever sit behind it. Real authentication (Supabase) will guard
+   the admin portal, which is a different thing entirely.
    ========================================================================= */
 
-const KEY = 'v25-preview';
+const KEY = 'v25-demo';
 
-export const COMING_SOON =
-  (import.meta.env.VITE_COMING_SOON ?? 'true') !== 'false';
+const PASSWORD = import.meta.env.VITE_DEMO_PASSWORD ?? 'acid1234';
 
-const PASSWORD = import.meta.env.VITE_PREVIEW_PASSWORD ?? 'ekasadmin123';
+/** True when the current URL is the demo path. */
+export function isPreviewPath() {
+  return window.location.pathname.replace(/\/+$/, '').endsWith('/demo');
+}
 
 export function isUnlocked() {
-  if (!COMING_SOON) return true;
   try {
     if (localStorage.getItem(KEY) === PASSWORD) return true;
   } catch { /* private browsing */ }
-  // ?preview=… lets a link be shared without anyone typing anything
-  const fromUrl = new URLSearchParams(window.location.search).get('preview');
+
+  /* ?key=… lets a link be shared without anyone having to type anything. */
+  const fromUrl = new URLSearchParams(window.location.search).get('key');
   if (fromUrl && fromUrl === PASSWORD) {
     unlock(fromUrl);
     return true;
