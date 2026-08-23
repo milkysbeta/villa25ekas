@@ -16,7 +16,18 @@
 
 import { PRICING, UNITS } from '../data/villa.js';
 
-const iso = (d) => d.toISOString().slice(0, 10);
+/* Format from LOCAL date parts, never toISOString().
+
+   toISOString() converts to UTC first. A Date built at local midnight in a
+   UTC+ timezone is still the previous day in UTC, so `addDays(x, 1)` returned
+   x unchanged — and every loop that advances a cursor by calling it spun
+   forever, hung the renderer and killed the tab. It only showed up east of
+   Greenwich, which is where the owners are.
+
+   Calendar dates here are civil dates — "the night of the 3rd" — not instants.
+   They must never touch a timezone conversion. */
+const iso = (d) =>
+  `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
 
 export const todayIso = () => iso(new Date());
 
@@ -45,11 +56,23 @@ export async function getBookings() {
   ];
 }
 
+/* Belt and braces: a date cursor that fails to advance used to spin forever
+   and take the page down with it. This throws instead, so the same class of
+   bug shows up as a visible error rather than a frozen browser. */
+function* eachDay(from, to, cap = 1000) {
+  let d = from;
+  for (let i = 0; d < to; i += 1) {
+    if (i > cap) throw new Error(`eachDay: cursor stuck at ${d} (from ${from} to ${to})`);
+    yield d;
+    const next = addDays(d, 1);
+    if (next <= d) throw new Error(`eachDay: addDays did not advance past ${d}`);
+    d = next;
+  }
+}
+
 /** Every date in [from, to) — checkout day is free for the next guest. */
 function expand(from, to) {
-  const out = [];
-  for (let d = from; d < to; d = addDays(d, 1)) out.push(d);
-  return out;
+  return [...eachDay(from, to)];
 }
 
 /**
@@ -90,7 +113,7 @@ export function buildCalendar(bookings, unitId = null) {
 export function findGapNights(calendar, from, to) {
   const gaps = new Set();
   let run = [];
-  for (let d = from; d < to; d = addDays(d, 1)) {
+  for (const d of eachDay(from, to, 2000)) {
     const busy = calendar.get(d)?.free === 0;
     if (busy) {
       if (run.length && run.length <= PRICING.gapFill.maxGapNights) {
