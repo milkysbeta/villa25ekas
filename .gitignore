@@ -40,3 +40,8 @@ npm-debug.log*
 # site/public/images/ and are committed.
 images/unsorted images/
 /PHOTOS unsorted
+
+# Windows shortcut — regenerate with tools/make-shortcut.ps1 if it goes missing.
+# .lnk files store absolute paths, so one made on this machine is meaningless
+# on another.
+/START DEMO.lnk
