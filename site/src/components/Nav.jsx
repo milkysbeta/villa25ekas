@@ -83,14 +83,6 @@ export default function Nav({ currency, onCurrency }) {
             ))}
           </select>
 
-          <a
-            href={whatsappLink()}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn btn-solid hidden !py-2.5 !px-6 text-[14px] uppercase tracking-[0.12em] sm:inline-block"
-          >
-            Enquire
-          </a>
 
           <button
             type="button"
