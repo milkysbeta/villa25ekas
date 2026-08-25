@@ -14,7 +14,7 @@ export default function Footer() {
         <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
           <div>
             <Link to="/" className="flex items-center gap-3" aria-label="Villa 25 Ekas — home">
-              <img src={LOGO} alt="" width="52" height="52" className="h-13 w-auto object-contain" />
+              <img src={LOGO} alt="" width="72" height="72" className="h-18 w-auto object-contain" />
               <span className="flex flex-col leading-none">
                 <span className="font-(family-name:--font-brand) text-base uppercase tracking-[0.34em]">
                   Villa 25
