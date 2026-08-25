@@ -1,5 +1,6 @@
 import Price from '../components/Price.jsx';
 import { UNITS, PRICING, buyoutRate, whatsappLink } from '../data/villa.js';
+import { NEIGHBOUR } from '../data/content.js';
 import { IMAGES } from '../data/images.js';
 
 export default function Stay() {
@@ -112,6 +113,24 @@ export default function Stay() {
             )}
           </div>
         </div>
+
+        {/* The villa next door. Alison: "The neighbouring villa not our" — so it
+            is described as a neighbour, and nothing is promised on their behalf
+            while question 09 (who invoices) is still open. */}
+        {NEIGHBOUR.show && (
+          <div className="mt-10 border-t border-(--color-line) pt-10">
+            <h3 className="text-2xl">{NEIGHBOUR.heading}</h3>
+            <p className="mt-3 max-w-xl text-(--color-text-soft)">{NEIGHBOUR.body}</p>
+            <a
+              href={whatsappLink('Villa 25 Ekas — enquiry for a larger group')}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="label btn btn-line mt-6 inline-block"
+            >
+              Ask about a larger group
+            </a>
+          </div>
+        )}
 
         {PRICING.introductory && (
           <p className="label mt-10 text-(--color-text-mute)">

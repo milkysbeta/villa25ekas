@@ -1,35 +1,15 @@
 import { CONTACT, TRANSFER } from '../data/villa.js';
+import { ROUTES } from '../data/content.js';
 import { formatIdr } from '../lib/currency.js';
 
 const MAPS = `https://www.google.com/maps/search/?api=1&query=${CONTACT.coords.lat},${CONTACT.coords.lng}`;
 
-/* Three ways in, laid out so they can be compared rather than just listed.
-   Operators and prices are still with the owners — where a number is unknown
-   it says so, because a wrong ferry price strands somebody. */
-const ROUTES = [
-  {
-    n: '01',
-    name: 'Fly',
-    best: 'Quickest, and usually cheapest once you count the time.',
-    detail: 'Into Lombok International, then about an hour and a half by road.',
-    known: true,
-  },
-  {
-    n: '02',
-    name: 'Fast boat',
-    best: 'Best if you are travelling with a quiver and heavy bags.',
-    detail: 'Operator, price and crossing time to be confirmed.',
-    known: false,
-  },
-  {
-    n: '03',
-    name: 'Slow boat',
-    best: 'Cheapest, and the only option if you are bringing a motorbike.',
-    detail: 'Operator, price and crossing time to be confirmed.',
-    known: false,
-  },
-];
+/* John asked for the three ways in to be comparable — "fast boat if you have
+   lots of boards and heavy luggage, slow boat if you are bringing a bike, or
+   fly, cheaper, quicker" — so they sit side by side rather than in a list.
 
+   Routes whose price and duration are still unknown say so in the alert colour
+   rather than guessing. A wrong ferry price strands somebody. */
 export default function Journey() {
   return (
     <section id="journey" className="bg-(--color-ink) px-5 py-28 lg:px-10 lg:py-40">
@@ -47,7 +27,7 @@ export default function Journey() {
           </p>
         </div>
 
-        {/* IMAGE SLOT — the hand-illustrated map.
+        {/* IMAGE SLOT — the hand-illustrated map, which both owners chose.
             site/public/images/map.png, around 2400px wide. */}
         <div
           className="mt-14 aspect-16/9 w-full border border-(--color-line) bg-(--color-plate) bg-contain bg-center bg-no-repeat"
@@ -56,15 +36,15 @@ export default function Journey() {
           aria-label="Illustrated map of the routes to Villa 25 Ekas"
         />
 
-        <ul className="mt-14 grid gap-px border border-(--color-line) bg-(--color-line) lg:grid-cols-3">
-          {ROUTES.map((r) => (
-            <li key={r.n} className="bg-(--color-raise) p-8 lg:p-10">
-              <span className="idx">{r.n}</span>
+        <ul className="mt-14 grid gap-px border border-(--color-line) bg-(--color-line) sm:grid-cols-2 lg:grid-cols-4">
+          {ROUTES.map((r, i) => (
+            <li key={r.id} className="bg-(--color-raise) p-8 lg:p-9">
+              <span className="idx">{String(i + 1).padStart(2, '0')}</span>
               <h3 className="mt-3 text-2xl">{r.name}</h3>
               <p className="mt-4 text-[15.5px] text-(--color-text-soft)">{r.best}</p>
               <p
                 className={`mt-4 text-[14px] ${
-                  r.known ? 'text-(--color-text-mute)' : 'text-(--color-alert)'
+                  r.known ? 'text-(--color-text-soft)' : 'text-(--color-alert)'
                 }`}
               >
                 {r.detail}
@@ -85,7 +65,9 @@ export default function Journey() {
             <p className="font-(family-name:--font-display) text-3xl tabular-nums">
               {formatIdr(TRANSFER.priceIdr)}
             </p>
-            <p className="label-sm mt-1 text-(--color-text-mute)">per vehicle, each way</p>
+            <p className="mt-1 text-[14px] text-(--color-text-soft)">
+              per vehicle, each way
+            </p>
           </div>
         </div>
 

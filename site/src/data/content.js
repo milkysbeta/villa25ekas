@@ -7,13 +7,13 @@
 
    HONESTY RULE for this file: prices and facts the owners have not confirmed
    are marked `onRequest: true` or carry a `todo` note rather than being
-   invented. A guest who is quoted a made-up price and then charged a different
-   one has been lied to, and it is the kind of thing that ends up in a review.
+   invented. A guest quoted a made-up price and then charged a different one has
+   been lied to, and it is the kind of thing that ends up in a review.
    ========================================================================= */
 
 /* -- Experiences ----------------------------------------------------------
-   Prices from John where given. Everything else is on request until the
-   follow-up form comes back.                                              */
+   Transfers are John's confirmed figure. Everything else stays on request
+   until the follow-up form comes back.                                     */
 export const EXPERIENCES = [
   {
     id: 'surf-guiding',
@@ -91,48 +91,59 @@ export const EXPERIENCES = [
 ];
 
 /* -- Journal --------------------------------------------------------------
-   Three opening posts, from John's own list of subjects. Written as outlines
-   with a real angle, not filler — they are placeholders for his words, not a
-   substitute for them.                                                     */
+   Authorship is Alison's call (question 20): "1 by guest, 2 by john, 3 surf
+   coach. Not keen to have me on post." Subjects are John's own list — local
+   timber, off-grid solar, water back into the gardens, electric bikes, and the
+   difficulties of building in a foreign country.
+
+   These are outlines with a real angle, not filler. Nobody's words are being
+   invented for them: each says plainly that the piece is coming.            */
 export const JOURNAL = [
   {
-    id: 'local-timber',
-    title: 'The timber came from up the road',
-    author: 'John',
-    date: null,
-    standfirst:
-      'Why we milled locally instead of shipping in, and what that cost us in '
-      + 'time versus what it gave the building.',
-    draft: true,
-    todo: 'John — species, which mill, and what the trade-off actually was',
-  },
-  {
-    id: 'off-grid',
-    title: 'Running a villa on sunlight',
-    author: 'John',
-    date: null,
-    standfirst:
-      'Twelve and a half kilowatts of panels, forty-six kilowatt hours of '
-      + 'battery, and no grid connection at all. What it takes to keep the air '
-      + 'conditioning on until morning.',
-    draft: true,
-    todo: 'John — confirm fully off-grid vs grid-tied, and the water recycling detail',
-  },
-  {
-    id: 'building-here',
-    title: 'Building in someone else’s country',
+    id: 'first-morning',
+    title: 'The first morning',
     author: 'A guest',
     date: null,
     standfirst:
-      'On local trades, neighbours, and the parts of the build that no amount '
-      + 'of planning prepares you for.',
+      'What it is like to arrive after a long road, wake up above the bay, and '
+      + 'work out that the break you are looking at is the one you are about to '
+      + 'paddle out on.',
     draft: true,
-    todo: 'A guest — their first impression of the place. Alison asked not to be an author.',
+    todo: 'a guest — their own words, with name and country. Ask after the first stay.',
+  },
+  {
+    id: 'building-here',
+    title: 'Building it',
+    author: 'John',
+    date: null,
+    standfirst:
+      'Local timber and stone, twelve and a half kilowatts of solar with no grid '
+      + 'behind it, water going back into the gardens — and the parts of building '
+      + 'in someone else’s country that no amount of planning prepares you for.',
+    draft: true,
+    todo:
+      'John — timber species and which mill, confirm fully off-grid vs grid-tied, '
+      + 'the water recycling detail, and the electric bikes.',
+  },
+  {
+    id: 'reading-ekas',
+    title: 'Reading Ekas',
+    author: 'The surf coach',
+    date: null,
+    standfirst:
+      'Which break works on which tide, when the wind turns, and why the bay '
+      + 'empties out at exactly the hour it gets good.',
+    draft: true,
+    todo: 'surf coach — name, and the tide and wind detail for each break.',
   },
 ];
 
 /* -- Ekas Guide -----------------------------------------------------------
-   Day trips and breaks from John's list. Drive times are his where given.  */
+   Breaks and day trips from John (question 18). Drive times are his.
+
+   Note Alison would rather this were a printed folder in each room (question
+   23). Both are worth having — a folder cannot be found on Google by someone
+   still deciding where to go. See docs/responses/decisions-summary.md.      */
 export const GUIDE = [
   {
     id: 'inside-ekas',
@@ -192,13 +203,70 @@ export const GUIDE_KINDS = {
   trip: 'Day trips',
 };
 
+/* -- Getting here ---------------------------------------------------------
+   John (question 16): "I want to be able to tell them the options, prices and
+   times — the 3 major ways to get there. Fast boat if you have lots of boards
+   and heavy luggage. Slow boat if you are bringing a bike, or fly, cheaper,
+   quicker."
+
+   Senggigi added per question 17. Prices and durations for the boats are still
+   missing, and a wrong ferry price strands somebody — so they say so.       */
+export const ROUTES = [
+  {
+    id: 'fly',
+    name: 'Fly',
+    best: 'Quickest, and usually cheapest once you count the time.',
+    detail: 'Into Lombok International, then about an hour and a half by road.',
+    known: true,
+  },
+  {
+    id: 'fast-boat',
+    name: 'Fast boat',
+    best: 'Best if you are travelling with a quiver and heavy bags.',
+    detail: 'Operator, price and crossing time to be confirmed.',
+    known: false,
+  },
+  {
+    id: 'slow-boat',
+    name: 'Slow boat',
+    best: 'Cheapest, and the only option if you are bringing a motorbike.',
+    detail: 'Operator, price and crossing time to be confirmed.',
+    known: false,
+  },
+  {
+    id: 'senggigi',
+    name: 'Via Senggigi',
+    best: 'If you are already on the island, or coming down from the north.',
+    detail: 'Drive time from Senggigi to be confirmed.',
+    known: false,
+  },
+];
+
+/* -- The neighbouring villa -----------------------------------------------
+   Alison (question 10): "The neighbouring villa not our" — so it is described
+   as a neighbour rather than as part of Villa 25.
+
+   Both owners answered "undecided" on who invoices a combined booking
+   (question 09). John is talking to Mitch, whose place is currently managed by
+   Ekas Surf Resort. Until that is settled, large groups are an enquiry and
+   nothing is promised on someone else's behalf.                             */
+export const NEIGHBOUR = {
+  show: true,
+  heading: 'Larger groups',
+  body:
+    'There is a neighbouring villa a moment away — not ours, but run by people '
+    + 'we know. For a group too big for five rooms, tell us what you need and we '
+    + 'will see what can be arranged between us.',
+  enquireOnly: true,
+};
+
 /* -- Gallery --------------------------------------------------------------
    Populated from the media library once the admin portal is in. Until then it
    reads whatever is in site/public/images, so the layout can be reviewed.
 
    `source` records where a photo came from: our own shoot, a guest who gave
    permission, or the villa's Instagram. Guest photos must never appear without
-   that permission recorded — see docs/DECISIONS.md C6.                     */
+   that permission recorded.                                                 */
 export const GALLERY = [
   { id: 'hero',    src: 'hero.jpg',    alt: 'The villa at dusk, across the pool', source: 'official', tall: true },
   { id: 'welcome', src: 'welcome.jpg', alt: 'The villa and gardens in the evening', source: 'official' },
