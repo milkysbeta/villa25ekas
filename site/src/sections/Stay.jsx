@@ -82,15 +82,34 @@ export default function Stay() {
         <div className="mt-10 flex flex-col gap-6 border border-(--color-line) bg-(--color-raise) p-8 sm:flex-row sm:items-center sm:justify-between lg:p-10">
           <div>
             <h3 className="text-2xl">Take the whole place</h3>
+            {/* No standard discount — Alison's decision (05). A rate is quoted
+                per enquiry rather than published, so a special price stays a
+                choice rather than an expectation. */}
             <p className="mt-3 max-w-lg text-(--color-text-soft)">
-              Every room, both pools, the run of the property —{' '}
-              {Math.round(PRICING.buyoutDiscount * 100)}% off the combined rate.
-              The same discount applies to stays of three weeks or more.
+              {PRICING.buyoutDiscount > 0
+                ? `Every room, both pools, the run of the property — `
+                  + `${Math.round(PRICING.buyoutDiscount * 100)}% off the combined rate.`
+                : 'Every room, both pools, and the run of the property. Tell us '
+                  + 'your dates and how many of you there are, and we will come '
+                  + 'back with a price.'}
             </p>
           </div>
           <div className="shrink-0 sm:text-right">
-            <Price amount={buyoutRate()} className="font-(family-name:--font-display) text-3xl" />
-            <p className="label-sm mt-1 text-(--color-text-mute)">per night</p>
+            {PRICING.buyoutDiscount > 0 ? (
+              <>
+                <Price amount={buyoutRate()} className="font-(family-name:--font-display) text-3xl" />
+                <p className="label-sm mt-1 text-(--color-text-mute)">per night</p>
+              </>
+            ) : (
+              <a
+                href={whatsappLink('Villa 25 Ekas — enquiry about taking the whole property')}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="label btn btn-solid whitespace-nowrap"
+              >
+                Ask for a price
+              </a>
+            )}
           </div>
         </div>
 

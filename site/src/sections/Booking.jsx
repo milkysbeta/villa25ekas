@@ -86,8 +86,10 @@ export default function Booking() {
   /* Gap nights and friends codes both discount the nightly rate. They stack,
      because a friend filling an awkward two-night hole is doing you a favour
      twice over. */
-  const inGap = nights > 0 && [...Array(nights)].every((_, i) => gaps.has(addDays(from, i)));
-  const gapCut = inGap ? PRICING.gapFill.discount : 0;
+  const inGap = PRICING.gapFill.enabled
+    && nights > 0
+    && [...Array(nights)].every((_, i) => gaps.has(addDays(from, i)));
+  const gapCut = inGap && PRICING.gapFill.enabled ? PRICING.gapFill.discount : 0;
   const codeCut = promo ? promo.discount : 0;
 
   const nightly = Math.round(baseRate * (1 - gapCut) * (1 - codeCut));
@@ -127,7 +129,10 @@ export default function Booking() {
     '',
     `Nightly: ${formatIdr(nightly)}`,
     `Estimated total: ${formatIdr(total)}`,
-    `Deposit to confirm (${Math.round(PRICING.deposit * 100)}%): ${formatIdr(deposit)}`,
+    PRICING.deposit > 0
+      ? `Deposit to confirm (${Math.round(PRICING.deposit * 100)}%): ${formatIdr(deposit)}`
+      : `No deposit. Free cancellation until ${PRICING.freeCancellationDays} days before arrival, `
+        + 'paid in full after that.',
   ].filter(Boolean).join('\n');
 
   const nextUrl = `${window.location.origin}${import.meta.env.BASE_URL}?sent=1#booking`;
@@ -234,7 +239,9 @@ export default function Booking() {
             <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-2 border-t border-(--color-line) pt-5">
               {[
                 ['bg-(--color-bronze)', 'Your dates'],
-                ['bg-(--color-reef)', `Gap night — ${Math.round(PRICING.gapFill.discount * 100)}% off`],
+                ...(PRICING.gapFill.enabled
+                  ? [['bg-(--color-reef)', `Gap night — ${Math.round(PRICING.gapFill.discount * 100)}% off`]]
+                  : []),
                 ['bg-(--color-bronze)/60', 'Some rooms left'],
                 ['bg-(--color-text-mute)/35', 'Fully booked'],
               ].map(([dot, text]) => (
@@ -362,7 +369,9 @@ export default function Booking() {
                       <Price amount={total} className="font-(family-name:--font-display) text-2xl" />
                     </div>
                     <p className="mt-2 text-[14px] text-(--color-text-soft)">
-                      {Math.round(PRICING.deposit * 100)}% deposit — {formatIdr(deposit)}
+                      {PRICING.deposit > 0
+                        ? `${Math.round(PRICING.deposit * 100)}% deposit — ${formatIdr(deposit)}`
+                        : `No deposit. Free cancellation until ${PRICING.freeCancellationDays} days before arrival.`}
                     </p>
                     {!unit && (
                       <p className="mt-3 text-[14px] text-(--color-text-soft)">

@@ -79,20 +79,35 @@ export const UNITS = [
    Decided by John, 28 July 2026. See docs/responses/john-2026-07-28.md.     */
 export const PRICING = {
   currency: 'IDR',
-  introductory: true,          // shown as "introductory rates — opening 2026"
+  introductory: true,          // both agreed: "introductory rates — opening 2026"
   minNights: { standard: 2, high: 3, buyout: 3 },
-  buyoutDiscount: 0.25,        // John: 25%, "but maybe 20%" — UNCONFIRMED
-  longStayDiscount: {          // John: buyout discount should apply to long stays too
-    minNights: 21,
-    discount: 0.25,
-  },
-  gapFill: {                   // auto-discount orphaned nights between bookings
-    enabled: true,
-    maxGapNights: 3,
-    discount: 0.2,
-  },
-  deposit: 0.3,                // 30% — Alison to confirm the 70%-at-14-days half
-  holdHours: 72,               // provisional hold while a transfer clears
+
+  /* NO DEPOSIT. John deferred question 01 to Alison — "she'll be better at
+     this one" — and Alison's comment overrides the box she ticked:
+       "30% is too complicated for most. Usually no deposit. Free cancellation
+        up until 21 days then full payment taken."
+     So: nothing up front, free cancellation until 21 days out, full payment
+     then. This supersedes both the 30/70 tick and her separate "Moderate"
+     answer on question 02, which cannot both be true. */
+  deposit: 0,
+  freeCancellationDays: 21,
+  fullPaymentDays: 21,
+
+  /* CONFLICT, left at Alison's answer. John wanted 25% ("maybe 20%"), Alison
+     said "25% is far too much... could be a special price but not encouraged".
+     A discount is easy to add and hard to withdraw once published. */
+  buyoutDiscount: 0,
+  longStayDiscount: null,
+
+  /* CONFLICT, left off. John wanted automatic discounts on orphaned nights,
+     Alison said no — consistent with her line on discounts generally. */
+  gapFill: { enabled: false, maxGapNights: 3, discount: 0.2 },
+
+  /* Holds are moot while there is no deposit to take, and Alison questions
+     whether the calendar should exist at all (question 25). See
+     docs/responses/decisions-summary.md. */
+  holdHours: 0,
+
   // TODO: MotoGP week. John confirmed rates rise; dates and multiplier pending.
   events: [],
 };

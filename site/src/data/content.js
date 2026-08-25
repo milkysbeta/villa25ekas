@@ -121,13 +121,13 @@ export const JOURNAL = [
   {
     id: 'building-here',
     title: 'Building in someone else’s country',
-    author: 'Alison',
+    author: 'A guest',
     date: null,
     standfirst:
       'On local trades, neighbours, and the parts of the build that no amount '
       + 'of planning prepares you for.',
     draft: true,
-    todo: 'Alison — the story of working with the local crew',
+    todo: 'A guest — their first impression of the place. Alison asked not to be an author.',
   },
 ];
 
