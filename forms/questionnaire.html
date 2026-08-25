@@ -172,13 +172,13 @@ body::before{
   font-variant-numeric:lining-nums}
 .mark-btm{font-family:var(--f-display); font-size:19px; letter-spacing:.42em; text-indent:.42em;
   text-transform:uppercase; color:var(--ink-2)}
-.mark-sub{font-family:var(--f-util); font-size:9.5px; letter-spacing:.24em; text-transform:uppercase;
+.mark-sub{font-family:var(--f-util); font-size:13px; letter-spacing:.16em; text-transform:uppercase;
   color:var(--muted); margin-top:12px}
 
 .rail-progress{display:flex; flex-direction:column; gap:8px}
 .meter{height:3px; background:var(--line); border-radius:2px; overflow:hidden}
 .meter i{display:block; height:100%; width:0; background:var(--bronze); transition:width .35s ease}
-.meter-label{margin:0; font-family:var(--f-util); font-size:11px; letter-spacing:.08em;
+.meter-label{margin:0; font-family:var(--f-util); font-size:13px; letter-spacing:.08em;
   color:var(--muted); text-transform:uppercase}
 .meter-label b{color:var(--ink); font-weight:600}
 
@@ -190,22 +190,22 @@ body::before{
 }
 .navlink:hover{background:var(--paper); color:var(--ink)}
 .navlink.on{border-left-color:var(--bronze); background:var(--paper); color:var(--ink)}
-.navlink em{font-family:var(--f-util); font-style:normal; font-size:11px; color:var(--muted);
+.navlink em{font-family:var(--f-util); font-style:normal; font-size:13px; color:var(--muted);
   min-width:16px; font-variant-numeric:tabular-nums}
 .navlink span{flex:1}
-.navlink u{text-decoration:none; font-family:var(--f-util); font-size:10.5px; color:var(--muted);
+.navlink u{text-decoration:none; font-family:var(--f-util); font-size:13px; color:var(--muted);
   font-variant-numeric:tabular-nums}
 .navlink.full u{color:var(--bronze)}
 
 .rail-foot{border-top:1px solid var(--line); padding-top:16px}
-.saved{margin:0; font-family:var(--f-util); font-size:11px; letter-spacing:.06em;
+.saved{margin:0; font-family:var(--f-util); font-size:13px; letter-spacing:.06em;
   text-transform:uppercase; color:var(--muted)}
 .saved.ok{color:var(--reef)}
 
 /* ---------- page ---------- */
 .page{flex:1; min-width:0; padding:56px 6vw 120px; max-width:900px}
 
-.eyebrow{margin:0 0 18px; font-family:var(--f-util); font-size:11px; letter-spacing:.26em;
+.eyebrow{margin:0 0 18px; font-family:var(--f-util); font-size:13px; letter-spacing:.16em;
   text-transform:uppercase; color:var(--bronze)}
 h1{font-family:var(--f-display); font-weight:400; font-size:clamp(38px,5.6vw,62px);
   line-height:1.04; margin:0 0 26px; letter-spacing:-.015em; text-wrap:balance}
@@ -219,20 +219,20 @@ h1{font-family:var(--f-display); font-weight:400; font-size:clamp(38px,5.6vw,62p
 .notice p{margin:0; font-size:15.5px; color:var(--ink-2)}
 
 .who{margin:34px 0 0; max-width:420px; display:flex; flex-direction:column; gap:7px}
-.who label{font-family:var(--f-util); font-size:11px; letter-spacing:.14em;
+.who label{font-family:var(--f-util); font-size:13px; letter-spacing:.14em;
   text-transform:uppercase; color:var(--muted)}
 
 /* ---------- sections ---------- */
 .sec{margin-top:76px; scroll-margin-top:24px}
 .sec-head{display:flex; align-items:baseline; gap:14px; padding-bottom:14px;
   border-bottom:1px solid var(--line-2); margin-bottom:8px}
-.sec-n{font-family:var(--f-util); font-size:12px; color:var(--bronze);
+.sec-n{font-family:var(--f-util); font-size:13.5px; color:var(--bronze);
   letter-spacing:.1em; font-variant-numeric:tabular-nums}
 .sec-head h2{font-family:var(--f-display); font-weight:400; font-size:31px; margin:0;
   letter-spacing:-.01em; flex:1; text-wrap:balance}
 .sec-note{max-width:62ch; color:var(--muted); font-size:15.5px; margin:14px 0 0}
 
-.sub{font-family:var(--f-util); font-size:11px; letter-spacing:.2em; text-transform:uppercase;
+.sub{font-family:var(--f-util); font-size:13px; letter-spacing:.14em; text-transform:uppercase;
   color:var(--ink-2); margin:40px 0 -6px; padding-bottom:8px; border-bottom:1px dotted var(--line-2)}
 
 .fields{display:flex; flex-direction:column; gap:24px; margin-top:28px}
@@ -262,7 +262,7 @@ input.done, textarea.done{border-left:2px solid var(--reef)}
 .seg{display:flex; border:1px solid var(--line-2); border-radius:3px; overflow:hidden;
   background:var(--field)}
 .seg button{
-  font-family:var(--f-util); font-size:11px; letter-spacing:.08em; text-transform:uppercase;
+  font-family:var(--f-util); font-size:13px; letter-spacing:.08em; text-transform:uppercase;
   padding:7px 13px; border:0; background:transparent; color:var(--muted); cursor:pointer;
   border-right:1px solid var(--line-2); transition:background .14s, color .14s;
 }
@@ -283,7 +283,7 @@ input.done, textarea.done{border-left:2px solid var(--reef)}
 .finish a{color:var(--bronze-2); text-underline-offset:3px}
 .actions{display:flex; flex-wrap:wrap; gap:12px}
 .btn{
-  font-family:var(--f-util); font-size:12px; letter-spacing:.14em; text-transform:uppercase;
+  font-family:var(--f-util); font-size:13.5px; letter-spacing:.14em; text-transform:uppercase;
   padding:14px 24px; border-radius:3px; cursor:pointer; background:transparent;
   border:1px solid var(--line-2); color:var(--ink); transition:background .16s, border-color .16s, color .16s;
 }
@@ -293,7 +293,7 @@ input.done, textarea.done{border-left:2px solid var(--reef)}
 .btn-primary:hover{background:var(--bronze-2); border-color:var(--bronze-2); color:#FFF9EF}
 .btn-quiet{color:var(--muted); border-color:transparent}
 .btn-quiet:hover{color:var(--ink); border-color:var(--line-2)}
-.status{margin:18px 0 0 !important; font-family:var(--f-util); font-size:12px;
+.status{margin:18px 0 0 !important; font-family:var(--f-util); font-size:13.5px;
   letter-spacing:.06em; color:var(--reef); min-height:18px}
 
 .totop{

@@ -294,11 +294,11 @@ export default function Booking() {
                     <dd className="flex items-center gap-2">
                       <button type="button" aria-label="Fewer guests"
                         onClick={() => setGuests((g) => Math.max(1, g - 1))}
-                        className="h-7 w-7 rounded-xs border border-(--color-line-lit) text-(--color-text-soft) hover:text-(--color-bronze-lit)">−</button>
-                      <span className="w-6 text-center tabular-nums">{guests}</span>
+                        className="h-11 w-11 rounded-xs border border-(--color-line-lit) text-[18px] text-(--color-text-soft) hover:border-(--color-bronze) hover:text-(--color-bronze-lit)">−</button>
+                      <span className="w-8 text-center text-[17px] tabular-nums">{guests}</span>
                       <button type="button" aria-label="More guests"
                         onClick={() => setGuests((g) => Math.min(14, g + 1))}
-                        className="h-7 w-7 rounded-xs border border-(--color-line-lit) text-(--color-text-soft) hover:text-(--color-bronze-lit)">+</button>
+                        className="h-11 w-11 rounded-xs border border-(--color-line-lit) text-[18px] text-(--color-text-soft) hover:border-(--color-bronze) hover:text-(--color-bronze-lit)">+</button>
                     </dd>
                   </div>
                 </dl>
