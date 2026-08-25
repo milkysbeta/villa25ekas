@@ -51,8 +51,35 @@ export default function Journey() {
               {r.price && (
                 <p className="mt-4 text-[15px] text-(--color-bronze-lit)">{r.price}</p>
               )}
+
+              {/* The slow boat is the one route where getting this wrong strands
+                  someone: ASDP closed the ticket windows, so turning up without a
+                  booking means not boarding. It gets the alert colour. */}
+              {r.warn && (
+                <p className="mt-4 border-l-2 border-(--color-alert) pl-3 text-[14px] text-(--color-alert)">
+                  {r.warn}
+                </p>
+              )}
+
               {r.note && (
-                <p className="mt-2 text-[13px] text-(--color-text-mute)">{r.note}</p>
+                <p className="mt-3 text-[14px] text-(--color-text-mute)">{r.note}</p>
+              )}
+
+              {r.links?.length > 0 && (
+                <ul className="mt-5 flex flex-col gap-2">
+                  {r.links.map((l) => (
+                    <li key={l.href}>
+                      <a
+                        href={l.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-block border-b border-(--color-bronze) pb-0.5 text-[14px] text-(--color-bronze-lit) transition-colors hover:border-(--color-bronze-lit)"
+                      >
+                        {l.label} →
+                      </a>
+                    </li>
+                  ))}
+                </ul>
               )}
             </li>
           ))}

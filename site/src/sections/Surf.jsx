@@ -1,7 +1,7 @@
 import Parallax from '../components/Parallax.jsx';
 import SurfForecast from '../components/SurfForecast.jsx';
 import { IMAGES } from '../data/images.js';
-import { BREAKS } from '../data/villa.js';
+import { BREAKS, SURF_CAM } from '../data/villa.js';
 
 /* The forecast lives here, on the page, rather than on a tab of its own. It is
    the thing a surfer opens the site to see, and burying it a click away would
@@ -32,8 +32,37 @@ export default function Surf() {
             </p>
           </div>
 
+          {/* Live cam, if one ever exists. See SURF_CAM in data/villa.js —
+              there is no camera on this bay at present, so this stays hidden
+              rather than linking somewhere with nothing to show. */}
+          {SURF_CAM.url && (
+            <div className="mt-16">
+              <p className="mb-5 text-[15px] uppercase tracking-[0.2em] text-(--color-bronze-lit)">
+                Live from the bay
+              </p>
+              <div className="overflow-hidden border border-(--color-line) bg-(--color-plate)">
+                {SURF_CAM.kind === 'iframe' ? (
+                  <iframe
+                    src={SURF_CAM.url}
+                    title="Live view of Ekas Bay"
+                    allow="autoplay; fullscreen"
+                    loading="lazy"
+                    className="aspect-video w-full border-0"
+                  />
+                ) : (
+                  <img src={SURF_CAM.url} alt="Live view of Ekas Bay" className="block w-full" />
+                )}
+              </div>
+              {SURF_CAM.credit && (
+                <p className="mt-3 text-[14px] text-(--color-text-mute)">{SURF_CAM.credit}</p>
+              )}
+            </div>
+          )}
+
           <div className="mt-16">
-            <p className="label mb-6 text-(--color-text-mute)">Five-day forecast</p>
+            <p className="mb-6 text-[15px] uppercase tracking-[0.2em] text-(--color-text-soft)">
+              Five-day forecast
+            </p>
             <SurfForecast days={5} />
           </div>
 

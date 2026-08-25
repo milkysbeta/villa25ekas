@@ -83,7 +83,7 @@ export const EXPERIENCES = [
     id: 'transfers',
     name: 'Airport transfers',
     blurb:
-      'We will have a driver waiting. Lombok International is about 40 km — an '
+      'We will have a driver waiting. Lombok International is about 35 km — an '
       + 'hour to an hour and a half, depending on the road.',
     priceIdr: 450_000,
     priceNote: 'per vehicle, each way',
@@ -218,9 +218,13 @@ export const ROUTES = [
     best: 'Quickest, and usually cheapest once you count the time.',
     legs: [
       { label: 'Flight', detail: 'Into Lombok International (LOP)' },
-      { label: 'Road', detail: '40 km · 1 to 1.5 hrs' },
+      { label: 'Road', detail: '35 km · 1 to 1.5 hrs' },
     ],
     price: 'Transfer 450,000 IDR per vehicle',
+    links: [
+      { label: 'Find flights', href: 'https://www.google.com/travel/flights?q=flights%20to%20LOP' },
+      { label: 'Lombok airport', href: 'https://lombok-airport.co.id/' },
+    ],
     known: true,
   },
   {
@@ -232,6 +236,9 @@ export const ROUTES = [
       { label: 'Road', detail: 'Senggigi to Ekas · 79 km · about 1 hr 20' },
     ],
     price: 'From ~400,000 IDR from Padangbai, ~560,000 from Sanur',
+    links: [
+      { label: 'Compare crossings', href: 'https://www.giliferries.com/fast-boat/bali/senggigi' },
+    ],
     known: true,
     note: 'Luggage 20–25 kg. Cancellations are more common in the wet season.',
   },
@@ -244,8 +251,15 @@ export const ROUTES = [
       { label: 'Road', detail: 'Lembar to Ekas · about 2 hrs' },
     ],
     price: '46,000 IDR on foot · about 150,000 with a motorbike',
+    links: [
+      { label: 'Book on Ferizy', href: 'https://trip.ferizy.com/' },
+    ],
     known: true,
-    note: 'Runs every 60 to 90 minutes, around the clock.',
+    /* This is the one thing on the page that will actually strand somebody:
+       ASDP closed the ticket windows at Padangbai and Lembar, so a guest who
+       turns up expecting to buy a ticket cannot board. */
+    warn: 'Book online before you travel — there are no ticket counters at either port.',
+    note: 'Runs every 60 to 90 minutes, around the clock. Tickets open 60 days ahead.',
   },
   {
     id: 'senggigi',
@@ -255,6 +269,7 @@ export const ROUTES = [
       { label: 'Road', detail: 'Senggigi to Ekas · 79 km · about 1 hr 20' },
     ],
     price: null,
+    links: [],
     known: true,
   },
 ];

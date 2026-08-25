@@ -242,3 +242,24 @@ export const NEARBY_PLACES = [
   { name: 'Mangrove park',         km: 13,   kind: 'trip' },
   { name: 'Lombok International',  km: 35,   kind: 'gate' },
 ];
+
+/* -- Surf cam --------------------------------------------------------------
+   Checked 25 Aug 2026: there is NO live webcam at Ekas. Surf-forecast has no
+   cam source for Inside or Outside — they only link cams owned by locals, and
+   nobody has put one up. Surfline and Magicseaweed carry forecasts for Ekas
+   but no feed.
+
+   So the section stays hidden rather than linking to a page that says "no
+   cams here". Set `url` and it appears.
+
+   Worth thinking about: the villa looks straight at Inside Ekas, has power
+   and wifi, and there is no competing cam on the bay. A camera on the roof
+   would be the only live view of this break anywhere — surfers would check it
+   daily, and every one of them would be looking at your terrace. It is the
+   cheapest marketing on this list.                                          */
+export const SURF_CAM = {
+  url: null,          // an embeddable stream URL, or a still image that refreshes
+  kind: null,         // 'iframe' | 'image'
+  credit: null,       // whose camera it is
+  refreshSeconds: 60, // only used for 'image'
+};

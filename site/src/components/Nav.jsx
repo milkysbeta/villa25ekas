@@ -4,7 +4,7 @@ import { Link, NavLink, useLocation } from 'react-router-dom';
 import { LOGO } from '../data/images.js';
 import { whatsappLink } from '../data/villa.js';
 import { CURRENCIES } from '../lib/currency.js';
-import { NAV_PAGES } from '../lib/routes.js';
+import { NAV_PAGES, PRIMARY_PAGES } from '../lib/routes.js';
 
 export default function Nav({ currency, onCurrency }) {
   const [open, setOpen] = useState(false);
@@ -52,13 +52,13 @@ export default function Nav({ currency, onCurrency }) {
           </span>
         </Link>
 
-        <nav className="ml-auto hidden items-center gap-6 xl:flex">
-          {NAV_PAGES.map((p) => (
+        <nav className="ml-auto hidden items-center gap-5 xl:flex 2xl:gap-7">
+          {PRIMARY_PAGES.map((p) => (
             <NavLink
               key={p.slug}
               to={`/${p.slug}`}
               className={({ isActive }) =>
-                `label transition-colors ${
+                `text-[15px] uppercase tracking-[0.12em] transition-colors ${
                   isActive
                     ? 'text-(--color-bronze-lit)'
                     : 'text-(--color-text-soft) hover:text-(--color-text)'
@@ -76,7 +76,7 @@ export default function Nav({ currency, onCurrency }) {
             id="currency"
             value={currency}
             onChange={(e) => onCurrency(e.target.value)}
-            className="label cursor-pointer rounded-xs border border-(--color-line-lit) bg-(--color-ink)/60 px-2.5 py-2 text-(--color-text-soft) hover:text-(--color-text)"
+            className="cursor-pointer rounded-xs border border-(--color-line-lit) bg-(--color-ink)/60 px-3 py-2.5 text-[14px] uppercase tracking-[0.1em] text-(--color-text-soft) hover:text-(--color-text)"
           >
             {CURRENCIES.map((c) => (
               <option key={c} value={c} className="bg-(--color-ink)">{c}</option>
@@ -87,7 +87,7 @@ export default function Nav({ currency, onCurrency }) {
             href={whatsappLink()}
             target="_blank"
             rel="noopener noreferrer"
-            className="label btn btn-solid hidden !py-2.5 !px-6 sm:inline-block"
+            className="btn btn-solid hidden !py-2.5 !px-6 text-[14px] uppercase tracking-[0.12em] sm:inline-block"
           >
             Enquire
           </a>
@@ -97,7 +97,7 @@ export default function Nav({ currency, onCurrency }) {
             onClick={() => setOpen((o) => !o)}
             aria-expanded={open}
             aria-label={open ? 'Close menu' : 'Open menu'}
-            className="label rounded-xs border border-(--color-line-lit) px-3.5 py-2.5 text-(--color-text) xl:hidden"
+            className="rounded-xs border border-(--color-line-lit) px-4 py-2.5 text-[14px] uppercase tracking-[0.12em] text-(--color-text) xl:hidden"
           >
             {open ? 'Close' : 'Menu'}
           </button>
