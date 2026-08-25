@@ -59,7 +59,7 @@ const Rule = () => (
 );
 
 const Label = ({ children }) => (
-  <span className="-mb-1 text-[9px] uppercase leading-none tracking-[0.24em] text-(--color-text-mute)">
+  <span className="-mb-1 text-[13px] uppercase leading-none tracking-[0.24em] text-(--color-text-mute)">
     {children}
   </span>
 );
@@ -98,7 +98,7 @@ function DayCard({ d, index }) {
         {today ? 'Today' : day.toLocaleDateString('en-NZ', { weekday: 'short' })}
       </span>
 
-      <span className="-mt-0.5 text-[9.5px] uppercase tracking-[0.16em] text-(--color-text-mute)">
+      <span className="-mt-0.5 text-[13px] uppercase tracking-[0.16em] text-(--color-text-mute)">
         {day.getDate()} {day.toLocaleDateString('en-NZ', { month: 'short' })}
       </span>
 
@@ -116,13 +116,13 @@ function DayCard({ d, index }) {
           deg={d.swellDir != null ? (d.swellDir + 180) % 360 : null}
           className="h-2.5 w-2.5 text-(--color-bronze-lit)"
         />
-        <span className="text-[10px] tracking-[0.14em] text-(--color-text-soft)">
+        <span className="text-[13px] tracking-[0.14em] text-(--color-text-soft)">
           {compass(d.swellDir) || '–'}
         </span>
       </span>
 
       <Label>Period</Label>
-      <span className="text-[12px] tracking-[0.06em] tabular-nums text-(--color-text-soft)">
+      <span className="text-[13px] tracking-[0.06em] tabular-nums text-(--color-text-soft)">
         {d.periodS != null ? `${Math.round(d.periodS)}s` : '–'}
       </span>
 
@@ -131,12 +131,12 @@ function DayCard({ d, index }) {
       <span className="font-(family-name:--font-display) text-[19px] font-medium leading-none tabular-nums text-(--color-text)">
         {d.tempMax != null ? `${Math.round(d.tempMax)}°` : '–'}
       </span>
-      <span className="-mt-1 text-[10px] tracking-[0.06em] text-(--color-text-mute)">
+      <span className="-mt-1 text-[13px] tracking-[0.06em] text-(--color-text-mute)">
         {d.tempMin != null ? `${Math.round(d.tempMin)}° low` : '–'}
       </span>
 
       <Label>Wind</Label>
-      <span className="text-[12px] tracking-[0.06em] tabular-nums text-(--color-text-soft)">
+      <span className="text-[13px] tracking-[0.06em] tabular-nums text-(--color-text-soft)">
         {d.windKmh != null ? `${Math.round(d.windKmh)} ${compass(d.windDir)}` : '–'}
       </span>
     </div>
@@ -145,7 +145,7 @@ function DayCard({ d, index }) {
 
 const Credit = () => (
   <p
-    className="mt-3.5 pt-2.5 text-right text-[8px] uppercase tracking-[0.18em] text-(--color-text-mute)"
+    className="mt-3.5 pt-2.5 text-right text-[13px] uppercase tracking-[0.18em] text-(--color-text-mute)"
     style={{
       borderTop: '1px solid transparent',
       borderImage:
@@ -207,7 +207,7 @@ export default function SurfForecast({ days = 5 }) {
 
       {!ready && (
         <p
-          className="absolute inset-0 flex items-center justify-center text-[12px] uppercase tracking-[0.24em] text-(--color-text-mute)"
+          className="absolute inset-0 flex items-center justify-center text-[13px] uppercase tracking-[0.24em] text-(--color-text-mute)"
           role="status"
         >
           {state.status === 'error' ? 'Forecast unavailable just now' : 'Loading weather'}

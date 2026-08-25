@@ -146,7 +146,7 @@
     background: var(--color-ink);
     color: var(--color-text);
     font-family: var(--font-body);
-    font-size: 17px;              /* generous by default — the owners asked   */
+    font-size: 18px;              /* generous by default — the owners asked   */
     line-height: 1.7;             /* for this to read easily for older guests */
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;           /* parallax layers overhang by design       */
@@ -169,9 +169,15 @@
     font-family: var(--font-tagline);
     letter-spacing: 0;
   }
+  /* h1 and h2 carry the brand in the display face. h3 and h4 switch to the
+     body face at semibold — a serif is lovely at 60px and genuinely hard work
+     at 24px, and the change of voice makes the hierarchy obvious at a glance
+     rather than relying on size alone. */
   h3, h4 {
-    font-family: var(--font-display);
-    letter-spacing: -0.018em;
+    font-family: var(--font-body);
+    font-weight: 600;
+    letter-spacing: -0.005em;
+    line-height: 1.25;
   }
   :focus-visible {
     outline: 2px solid var(--color-reef);
@@ -194,12 +200,12 @@
      considered rather than default. */
   .label {
     font-family: var(--font-util);
-    font-size: 11px;
-    letter-spacing: 0.24em;
+    font-size: 13px;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
     line-height: 1.5;
   }
-  .label-sm { font-size: 10px; letter-spacing: 0.2em; }
+  .label-sm { font-size: 13px; letter-spacing: 0.14em; }
 
   /* The two button weights. */
   .btn {
@@ -224,8 +230,8 @@
      applied where the order genuinely means something. */
   .idx {
     font-family: var(--font-util);
-    font-size: 10px;
-    letter-spacing: 0.18em;
+    font-size: 13px;
+    letter-spacing: 0.14em;
     color: var(--color-bronze);
     font-variant-numeric: tabular-nums;
   }

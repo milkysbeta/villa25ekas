@@ -182,10 +182,10 @@ export default function ComingSoon() {
               className="mx-auto mt-6 mb-0 h-[70px] w-auto object-contain"
             />
 
-            <p className="mt-1 text-[11px] uppercase tracking-[0.2em] text-(--color-text-mute)">
+            <p className="mt-1 text-[13px] uppercase tracking-[0.2em] text-(--color-text-mute)">
               Full booking website coming soon
             </p>
-            <p className="mt-2 text-[10px] uppercase tracking-[0.2em] text-(--color-text-mute)/70">
+            <p className="mt-2 text-[13px] uppercase tracking-[0.2em] text-(--color-text-mute)/70">
               Web design by Milky
             </p>
           </div>
