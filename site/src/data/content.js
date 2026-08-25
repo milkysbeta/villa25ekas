@@ -216,31 +216,56 @@ export const ROUTES = [
     id: 'fly',
     name: 'Fly',
     best: 'Quickest, and usually cheapest once you count the time.',
-    detail: 'Into Lombok International, then about an hour and a half by road.',
+    legs: [
+      { label: 'Flight', detail: 'Into Lombok International (LOP)' },
+      { label: 'Road', detail: '40 km · 1 to 1.5 hrs' },
+    ],
+    price: 'Transfer 450,000 IDR per vehicle',
     known: true,
   },
   {
     id: 'fast-boat',
     name: 'Fast boat',
-    best: 'Best if you are travelling with a quiver and heavy bags.',
-    detail: 'Operator, price and crossing time to be confirmed.',
-    known: false,
+    best: 'Best with a quiver and heavy bags — most operators carry boards free, but tell them when you book.',
+    legs: [
+      { label: 'Crossing', detail: 'Padangbai or Sanur to Senggigi · 1.5 to 3 hrs' },
+      { label: 'Road', detail: 'Senggigi to Ekas · 79 km · about 1 hr 20' },
+    ],
+    price: 'From ~400,000 IDR from Padangbai, ~560,000 from Sanur',
+    known: true,
+    note: 'Luggage 20–25 kg. Cancellations are more common in the wet season.',
   },
   {
     id: 'slow-boat',
     name: 'Slow boat',
-    best: 'Cheapest, and the only option if you are bringing a motorbike.',
-    detail: 'Operator, price and crossing time to be confirmed.',
-    known: false,
+    best: 'Cheapest by a distance, and the only way to bring a motorbike.',
+    legs: [
+      { label: 'Crossing', detail: 'Padangbai to Lembar · 4 to 5 hrs, plus boarding' },
+      { label: 'Road', detail: 'Lembar to Ekas · about 2 hrs' },
+    ],
+    price: '46,000 IDR on foot · about 150,000 with a motorbike',
+    known: true,
+    note: 'Runs every 60 to 90 minutes, around the clock.',
   },
   {
     id: 'senggigi',
-    name: 'Via Senggigi',
-    best: 'If you are already on the island, or coming down from the north.',
-    detail: 'Drive time from Senggigi to be confirmed.',
-    known: false,
+    name: 'Already on Lombok',
+    best: 'Coming down from Senggigi, the Gilis or the north of the island.',
+    legs: [
+      { label: 'Road', detail: 'Senggigi to Ekas · 79 km · about 1 hr 20' },
+    ],
+    price: null,
+    known: true,
   },
 ];
+
+/* Prices and crossing times are researched rather than quoted by an operator,
+   so the page says so. They move with fuel, season and who you book with — and
+   a guest who budgets on a stale number and finds it wrong at the harbour has
+   been let down by us, not by the ferry. */
+export const ROUTES_CAVEAT =
+  'Fares and crossing times are a guide, gathered mid-2026. Confirm with the '
+  + 'operator when you book — they move with the season.';
 
 /* -- The neighbouring villa -----------------------------------------------
    Alison (question 10): "The neighbouring villa not our" — so it is described

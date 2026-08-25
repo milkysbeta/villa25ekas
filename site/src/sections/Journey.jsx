@@ -1,5 +1,6 @@
 import { CONTACT, TRANSFER } from '../data/villa.js';
-import { ROUTES } from '../data/content.js';
+import { ROUTES, ROUTES_CAVEAT } from '../data/content.js';
+import EkasMap from '../components/EkasMap.jsx';
 import { formatIdr } from '../lib/currency.js';
 
 const MAPS = `https://www.google.com/maps/search/?api=1&query=${CONTACT.coords.lat},${CONTACT.coords.lng}`;
@@ -27,14 +28,7 @@ export default function Journey() {
           </p>
         </div>
 
-        {/* IMAGE SLOT — the hand-illustrated map, which both owners chose.
-            site/public/images/map.png, around 2400px wide. */}
-        <div
-          className="mt-14 aspect-16/9 w-full border border-(--color-line) bg-(--color-plate) bg-contain bg-center bg-no-repeat"
-          style={{ backgroundImage: 'url(/images/map.png)' }}
-          role="img"
-          aria-label="Illustrated map of the routes to Villa 25 Ekas"
-        />
+        <EkasMap className="mt-14" />
 
         <ul className="mt-14 grid gap-px border border-(--color-line) bg-(--color-line) sm:grid-cols-2 lg:grid-cols-4">
           {ROUTES.map((r, i) => (
@@ -42,16 +36,29 @@ export default function Journey() {
               <span className="idx">{String(i + 1).padStart(2, '0')}</span>
               <h3 className="mt-3 text-2xl">{r.name}</h3>
               <p className="mt-4 text-[15.5px] text-(--color-text-soft)">{r.best}</p>
-              <p
-                className={`mt-4 text-[14px] ${
-                  r.known ? 'text-(--color-text-soft)' : 'text-(--color-alert)'
-                }`}
-              >
-                {r.detail}
-              </p>
+
+              <dl className="mt-5 flex flex-col gap-1.5">
+                {r.legs.map((leg) => (
+                  <div key={leg.label} className="flex items-baseline gap-3">
+                    <dt className="w-20 shrink-0 text-[13px] uppercase tracking-[0.12em] text-(--color-text-mute)">
+                      {leg.label}
+                    </dt>
+                    <dd className="text-[14px] text-(--color-text-soft)">{leg.detail}</dd>
+                  </div>
+                ))}
+              </dl>
+
+              {r.price && (
+                <p className="mt-4 text-[15px] text-(--color-bronze-lit)">{r.price}</p>
+              )}
+              {r.note && (
+                <p className="mt-2 text-[13px] text-(--color-text-mute)">{r.note}</p>
+              )}
             </li>
           ))}
         </ul>
+
+        <p className="mt-6 text-[14px] text-(--color-text-mute)">{ROUTES_CAVEAT}</p>
 
         <div className="mt-10 flex flex-col gap-6 border border-(--color-line) bg-(--color-raise) p-8 sm:flex-row sm:items-center sm:justify-between lg:p-10">
           <div>

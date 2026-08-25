@@ -19,6 +19,9 @@ export const CONTACT = {
   phoneShow: '+62 821 3103 303',
   instagram: 'villa_25_ekas',
   location: 'Ekas Bay, Lombok, Indonesia',
+  address: 'Lendrang Terak, Ekas Buana, Jerowaru, Lombok, Nusa Tenggara Barat 83672',
+  /* Booking.com licence numbers — required on listings in Indonesia. */
+  licence: '1000000010678606, 55103',
   coords: { lat: -8.901632, lng: 116.450201 },
 };
 
@@ -140,7 +143,7 @@ export const TRANSFER = {
   charged: true,
   priceIdr: 450_000,
   driverPaidIdr: 350_000,
-  airport: { code: 'LOP', name: 'Lombok International', km: 40, hours: [1, 1.5] },
+  airport: { code: 'LOP', name: 'Lombok International', km: 35, hours: [1, 1.5] },
 };
 
 /* -- surf ------------------------------------------------------------------
@@ -159,4 +162,83 @@ export const NEARBY = [
   { name: 'Pink Beach', drive: null },
   { name: 'Kuta', drive: '1 hr' },
   { name: 'Selong Belanak', drive: '1.5 hrs' },
+];
+
+/* ============================================================================
+   CONFIRMED FACTS — from the property's own Booking.com listing, 25 Aug 2026.
+
+   Everything below is what the owners have already published themselves, so
+   unlike the rest of this file it needs no "TODO confirm". Where it disagrees
+   with an earlier guess, this wins.
+   ========================================================================= */
+
+export const STAY_TIMES = {
+  checkInFrom: '14:00',
+  checkInTo: '20:00',
+  checkOutFrom: '10:00',
+  checkOutTo: '12:00',
+  note: 'Let us know roughly when you will arrive, so someone is there to meet you.',
+};
+
+/* Grouped the way a guest reads them, not the way Booking.com lists them. */
+export const AMENITIES = [
+  {
+    group: 'In the room',
+    items: [
+      'Air conditioning',
+      'Private bathroom',
+      'Hot shower',
+      'Towels and linen',
+      'Hairdryer',
+      'Wardrobe and clothes rack',
+      'Desk',
+      'Electric kettle',
+      'Safe',
+    ],
+  },
+  {
+    group: 'Around the villa',
+    items: [
+      'Swimming pool',
+      'Garden and terrace',
+      'Pool views',
+      'Free WiFi throughout',
+      'Free private parking',
+      'Electric vehicle charging',
+      'Non-smoking throughout',
+      'Ground floor throughout',
+    ],
+  },
+  {
+    group: 'Getting here and about',
+    items: [
+      'Airport shuttle',
+      'English and Indonesian spoken',
+      'Family rooms',
+    ],
+  },
+];
+
+/* Said plainly rather than buried. Every one of these is better read before
+   booking than discovered on arrival. */
+export const HOUSE_RULES = [
+  { rule: 'Children of any age are welcome', tone: 'yes' },
+  { rule: 'Under-18s check in with a parent or guardian', tone: 'note' },
+  { rule: 'No cots or extra beds', tone: 'no' },
+  { rule: 'No pets', tone: 'no' },
+  { rule: 'No parties or events', tone: 'no' },
+  { rule: 'Non-smoking throughout', tone: 'no' },
+  { rule: 'Photo ID needed at check-in', tone: 'note' },
+];
+
+/* Distances from the listing. Note the nearest food is 7 km — worth knowing
+   before anyone writes "a warung on the doorstep" into the copy. */
+export const NEARBY_PLACES = [
+  { name: 'Centre of Ekas',        km: 1.1,  kind: 'village' },
+  { name: 'Pantai Kaliantan',      km: 5,    kind: 'beach' },
+  { name: 'Gubuk Kopi',            km: 7,    kind: 'food' },
+  { name: 'Lesehan Cemara',        km: 8,    kind: 'food' },
+  { name: 'Bakso Diagung Arema',   km: 9,    kind: 'food' },
+  { name: 'Mangrove park',         km: 13,   kind: 'trip' },
+  { name: 'Lombok International',  km: 35,   kind: 'gate' },
 ];

@@ -1,5 +1,5 @@
 import Price from '../components/Price.jsx';
-import { UNITS, PRICING, buyoutRate, whatsappLink } from '../data/villa.js';
+import { UNITS, PRICING, buyoutRate, whatsappLink, AMENITIES, HOUSE_RULES, STAY_TIMES } from '../data/villa.js';
 import { NEIGHBOUR } from '../data/content.js';
 import { IMAGES } from '../data/images.js';
 
@@ -132,8 +132,76 @@ export default function Stay() {
           </div>
         )}
 
+        {/* Amenities and rules, from the property's own Booking.com listing —
+            so these are confirmed rather than assumed. Stated plainly, because
+            every one of them is better read before booking than discovered on
+            arrival. */}
+        <div className="mt-16 grid gap-12 border-t border-(--color-line) pt-12 lg:grid-cols-[1.6fr_1fr] lg:gap-20">
+          <div>
+            <h3 className="text-2xl">What is here</h3>
+            <div className="mt-8 grid gap-10 sm:grid-cols-3">
+              {AMENITIES.map((g) => (
+                <div key={g.group}>
+                  <p className="label border-b border-(--color-line) pb-3 text-(--color-bronze)">
+                    {g.group}
+                  </p>
+                  <ul className="mt-4 flex flex-col gap-2">
+                    {g.items.map((item) => (
+                      <li key={item} className="text-[15px] text-(--color-text-soft)">
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <h3 className="text-2xl">Good to know</h3>
+            <dl className="mt-8 flex flex-col">
+              <div className="flex items-baseline justify-between gap-4 border-b border-(--color-line) py-3">
+                <dt className="text-[15px] text-(--color-text-soft)">Check in</dt>
+                <dd className="text-[15px] tabular-nums">
+                  {STAY_TIMES.checkInFrom}–{STAY_TIMES.checkInTo}
+                </dd>
+              </div>
+              <div className="flex items-baseline justify-between gap-4 border-b border-(--color-line) py-3">
+                <dt className="text-[15px] text-(--color-text-soft)">Check out</dt>
+                <dd className="text-[15px] tabular-nums">
+                  {STAY_TIMES.checkOutFrom}–{STAY_TIMES.checkOutTo}
+                </dd>
+              </div>
+            </dl>
+
+            <ul className="mt-6 flex flex-col gap-2.5">
+              {HOUSE_RULES.map((r) => (
+                <li key={r.rule} className="flex items-baseline gap-3 text-[15px]">
+                  <span
+                    aria-hidden="true"
+                    className={
+                      r.tone === 'no'
+                        ? 'text-(--color-alert)'
+                        : r.tone === 'yes'
+                          ? 'text-(--color-reef)'
+                          : 'text-(--color-text-mute)'
+                    }
+                  >
+                    {r.tone === 'no' ? '—' : r.tone === 'yes' ? '·' : '·'}
+                  </span>
+                  <span className="text-(--color-text-soft)">{r.rule}</span>
+                </li>
+              ))}
+            </ul>
+
+            <p className="mt-6 text-[14px] text-(--color-text-mute)">
+              {STAY_TIMES.note}
+            </p>
+          </div>
+        </div>
+
         {PRICING.introductory && (
-          <p className="label mt-10 text-(--color-text-mute)">
+          <p className="label mt-12 text-(--color-text-mute)">
             Introductory rates — opening 2026
           </p>
         )}
