@@ -194,7 +194,7 @@ export const EXPERIENCES = [
     id: 'transfers',
     name: 'Airport transfers',
     blurb:
-      'We will have a driver waiting. Lombok International is about 35 km — an '
+      'We will have a driver waiting. Lombok International is about 42 km by road — an '
       + 'hour to an hour and a half, depending on the road.',
     priceIdr: 450_000,
     priceNote: 'per vehicle, each way',
@@ -329,7 +329,7 @@ export const ROUTES = [
     best: 'Quickest, and usually cheapest once you count the time.',
     legs: [
       { label: 'Flight', detail: 'Into Lombok International (LOP)' },
-      { label: 'Road', detail: '35 km · 1 to 1.5 hrs' },
+      { label: 'Road', detail: '42 km · 1 to 1.5 hrs' },
     ],
     price: 'Transfer 450,000 IDR per vehicle',
     links: [
@@ -344,7 +344,7 @@ export const ROUTES = [
     best: 'Best with a quiver and heavy bags — most operators carry boards free, but tell them when you book.',
     legs: [
       { label: 'Crossing', detail: 'Padangbai or Sanur to Senggigi · 1.5 to 3 hrs' },
-      { label: 'Road', detail: 'Senggigi to Ekas · 79 km · about 1 hr 20' },
+      { label: 'Road', detail: 'Senggigi to Ekas · 82 km · about 1 hr 20' },
     ],
     price: 'From ~400,000 IDR from Padangbai, ~560,000 from Sanur',
     links: [
@@ -377,7 +377,7 @@ export const ROUTES = [
     name: 'Already on Lombok',
     best: 'Coming down from Senggigi, the Gilis or the north of the island.',
     legs: [
-      { label: 'Road', detail: 'Senggigi to Ekas · 79 km · about 1 hr 20' },
+      { label: 'Road', detail: 'Senggigi to Ekas · 82 km · about 1 hr 20' },
     ],
     price: null,
     links: [],

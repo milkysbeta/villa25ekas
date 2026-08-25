@@ -398,7 +398,7 @@ export const HOTSPOTS = [
 /* -- Getting around -------------------------------------------------------
    Prices are the going rate across the island in 2026, quoted as ranges
    because that is honestly how they are quoted on the ground. They are here
-   so nobody arrives without a plan for the 35 km of road — not as a promise
+   so nobody arrives without a plan for the 42 km of road — not as a promise
    of what we will charge. Villa hire rates come from EXPERIENCES.           */
 export const HIRE = [
   {

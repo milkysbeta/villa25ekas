@@ -155,7 +155,14 @@ export const TRANSFER = {
   charged: true,
   priceIdr: 450_000,
   driverPaidIdr: 350_000,
-  airport: { code: 'LOP', name: 'Lombok International', km: 35, hours: [1, 1.5] },
+  /* 42 km is the ROAD distance, from routing the actual drive (OSRM: 41.6 km).
+     The Booking.com listing says 35 km and the site followed it until the map
+     was built on real road geometry, at which point the two contradicted each
+     other on the same page. Straight-line is about 25 km, so 35 is neither
+     measure. The hours are the owners' own and are unchanged — and time is the
+     thing a guest actually plans around.
+     TODO John: confirm 42 km, or tell us where 35 came from. */
+  airport: { code: 'LOP', name: 'Lombok International', km: 42, hours: [1, 1.5] },
 };
 
 /* -- surf ------------------------------------------------------------------
@@ -267,7 +274,7 @@ export const NEARBY_PLACES = [
   { name: 'Lesehan Cemara',        km: 8,    kind: 'food' },
   { name: 'Bakso Diagung Arema',   km: 9,    kind: 'food' },
   { name: 'Mangrove park',         km: 13,   kind: 'trip' },
-  { name: 'Lombok International',  km: 35,   kind: 'gate' },
+  { name: 'Lombok International',  km: 42,   kind: 'gate' },
 ];
 
 /* -- Surf cam --------------------------------------------------------------
