@@ -103,7 +103,7 @@ export default function ComingSoon() {
             <p className="mx-auto mt-8 max-w-3xl text-xl leading-relaxed text-(--color-text-soft) sm:text-[1.4rem]">
               Perched above the pristine turquoise waters of Ekas Beach Lombok.
               <br className="hidden sm:block" /> Villa 25 Ekas is a luxurious
-              five bedroom escape artisan crafted from locally sourced timber
+              five bedroom escape artisan crafted from locally sourced hardwood
               &amp; stone, featuring spectacular views, indoor and outdoor
               entertainment areas, 2 private pools, and only a four minute walk
               to the beach.

@@ -51,19 +51,16 @@ export const BUILDING = [
   {
     id: 'kitchens',
     title: 'Eating',
+    /* CHECKED, and John was right. The Booking.com listing's "nearest food
+       7 km" is about specific named businesses, not about what is actually
+       walkable. Mapping the exact address (3FX2+83W) against OpenStreetMap
+       finds Warung Rizky 160 m away, three more places to eat inside 280 m,
+       and a bar at 310 m — all a two to four minute walk. So his wording
+       stands as written, and the hedge that was here has been removed. */
     body:
       'Cook your own locally sourced seafood and market produce in one of the kitchens, or '
-      + 'eat at one of the many local warungs and western-style restaurants nearby.',
-    /* CHECK BEFORE LAUNCH. John wrote "all only minutes walk away". The villa's
-       own Booking.com listing puts the nearest named food at Gubuk Kopi, 7 km,
-       with Lesehan Cemara at 8 km — which is not a walk. Ekas village is 1.1 km
-       and will have warungs, and the bay's resorts have restaurants, so John may
-       well be right about what is genuinely walkable. But "minutes walk away" is
-       the kind of promise a guest arrives and measures, so it is written as
-       "nearby" until he confirms which places he means. */
-    todo:
-      'John — which warungs and restaurants are within walking distance, and how far? '
-      + 'Booking.com says nearest food is 7 km, which contradicts "minutes walk away".',
+      + 'eat at one of the many local warungs and western-style restaurants, all only '
+      + 'minutes’ walk away.',
   },
 ];
 

@@ -2,7 +2,10 @@ import { useState } from 'react';
 import { CONTACT } from '../data/villa.js';
 
 /* ============================================================================
-   Southern Lombok, drawn rather than tiled.
+   Lombok, drawn rather than tiled.
+
+   The villa is in EAST Lombok — Jerowaru district, Kabupaten Lombok Timur.
+   The map reaches across to the west coast only because the ways in do.
 
    No Leaflet, no Mapbox, no tile server: a tiled map means an API key, a
    third-party request on every page load, and a rectangle of somebody else's
@@ -87,8 +90,8 @@ function curve(a, b, bend) {
   return `M ${a.x} ${a.y} Q ${cx} ${cy}, ${b.x} ${b.y}`;
 }
 
-/* Simplified southern Lombok: the west coast, the south bays, and the Ekas
-   peninsula with its bay. Drawn to read correctly, not to navigate by. */
+/* Simplified Lombok: the west coast, the south bays, and the Ekas peninsula
+   with its bay. Drawn to read correctly, not to navigate by. */
 const COAST =
   'M 30 60 C 90 20, 190 8, 290 34 C 372 56, 430 44, 500 66 '
   + 'C 578 90, 646 82, 716 112 C 796 146, 872 176, 918 236 '
@@ -154,7 +157,7 @@ export default function EkasMap({ className = '' }) {
           viewBox={`0 0 ${W} ${H}`}
           className="block h-auto w-full"
           role="img"
-          aria-label="Illustrated map of southern Lombok showing Villa 25 Ekas, the surf breaks, day trips and the three ways in"
+          aria-label="Illustrated map of Lombok showing Villa 25 Ekas in East Lombok, the surf breaks, day trips and the three ways in"
         >
           <defs>
             <pattern id="swell" width="28" height="28" patternUnits="userSpaceOnUse">

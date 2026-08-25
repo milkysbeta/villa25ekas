@@ -18,8 +18,17 @@ export const CONTACT = {
   phone: '+628213103303',
   phoneShow: '+62 821 3103 303',
   instagram: 'villa_25_ekas',
-  location: 'Ekas Bay, Lombok, Indonesia',
-  address: 'Lendrang Terak, Ekas Buana, Jerowaru, Lombok, Nusa Tenggara Barat 83672',
+  /* EAST Lombok, not southern. Owner's correction, 25 Aug 2026, and confirmed
+     against the coordinates below: Jerowaru district, Kabupaten Lombok Timur.
+     The site said "southern Lombok" in three places and it was simply wrong —
+     Ekas sits on the south coast OF East Lombok, which is a different claim. */
+  location: 'Ekas Bay, East Lombok, Indonesia',
+  /* Exact address as given by the owner, 25 Aug 2026. Supersedes the earlier
+     "Lendrang Terak, Ekas Buana" line. The leading token is a Google Plus Code;
+     decoding it gives -8.901637, 116.450203, which agrees with `coords` below
+     to within about half a metre — so the two are consistent, not competing. */
+  address: '3FX2+83W, Pemongkong, Jerowaru, Kabupaten Lombok Timur, Nusa Tenggara Barat 83672',
+  plusCode: '3FX2+83W Pemongkong',
   /* Booking.com licence numbers — required on listings in Indonesia. */
   licence: '1000000010678606, 55103',
   coords: { lat: -8.901632, lng: 116.450201 },
@@ -243,8 +252,16 @@ export const HOUSE_RULES = [
 
 /* Distances from the listing. Note the nearest food is 7 km — worth knowing
    before anyone writes "a warung on the doorstep" into the copy. */
+/* The Booking.com list started at 7 km, which made it look as though there was
+   nothing to eat nearby. That was an artefact of which businesses Booking.com
+   happens to name. Measured from the villa's exact coordinates against
+   OpenStreetMap, there is a warung 160 m away and three more places to eat
+   inside 280 m. The close ones are added here with `walk` minutes at a
+   deliberately unflattering 4.5 km/h, because the road out is a hill. */
 export const NEARBY_PLACES = [
-  { name: 'Centre of Ekas',        km: 1.1,  kind: 'village' },
+  { name: 'Warung Rizky',          km: 0.16, kind: 'food',    walk: 2 },
+  { name: 'Places to eat nearby',  km: 0.28, kind: 'food',    walk: 4, note: 'three more within 280 m' },
+  { name: 'Centre of Ekas',        km: 1.1,  kind: 'village', walk: 15 },
   { name: 'Pantai Kaliantan',      km: 5,    kind: 'beach' },
   { name: 'Gubuk Kopi',            km: 7,    kind: 'food' },
   { name: 'Lesehan Cemara',        km: 8,    kind: 'food' },

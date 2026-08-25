@@ -47,7 +47,7 @@ export default function Welcome() {
           </h2>
 
           <p className="mt-8 text-lg text-(--color-text-soft)">
-            A quiet corner of southern Lombok, a long way past where the day
+            A quiet corner of East Lombok, a long way past where the day
             trippers turn around. The bay breaks in front of the villa, the
             gardens are kept alive by the water the house gives back, and every
             light in the place is on because the sun came up.
