@@ -49,9 +49,12 @@ export default function Hero() {
           <span className="text-(--color-bronze-lit)">in Ekas Bay</span>
         </h1>
 
+        {/* "timber cut up the road" was John's call to cut, 25 Aug 2026 —
+            "sounds cheap and cheesy". He is right: the hardwood is the luxury
+            argument, and that phrasing made it sound like a saving. */}
         <p className="mt-8 max-w-lg text-lg text-(--color-text-soft)">
           Five rooms above the bay, run entirely on sunlight and built from
-          timber cut up the road. Four minutes from the sand.
+          locally sourced hardwood. Four minutes from the sand.
         </p>
 
         <div className="mt-10 flex flex-wrap items-center gap-4">

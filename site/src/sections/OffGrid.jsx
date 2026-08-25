@@ -12,8 +12,8 @@ const SYSTEM = [
   { n: '01', title: 'Solar', note: `${POWER.panelKwTotal} kW across ${POWER.arrays} arrays` },
   { n: '02', title: 'Storage', note: `${POWER.batteryKwh} kWh — enough for the night` },
   { n: '03', title: 'Inverter', note: `${POWER.inverterKw} kW, the whole property at once` },
-  { n: '04', title: 'Water', note: 'Treated and returned to the gardens' },
-  { n: '05', title: 'Timber', note: 'Cut and milled locally' },
+  { n: '04', title: 'Water', note: 'Reticulated from waste, back to the gardens' },
+  { n: '05', title: 'Hardwood', note: 'Locally sourced, much of it recycled' },
 ];
 
 export default function OffGrid() {

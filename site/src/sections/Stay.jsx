@@ -1,6 +1,6 @@
 import Price from '../components/Price.jsx';
 import { UNITS, PRICING, buyoutRate, whatsappLink, AMENITIES, HOUSE_RULES, STAY_TIMES } from '../data/villa.js';
-import { NEIGHBOUR } from '../data/content.js';
+import { NEIGHBOUR, BUILDING, POSITIONING } from '../data/content.js';
 import { IMAGES } from '../data/images.js';
 
 export default function Stay() {
@@ -16,10 +16,10 @@ export default function Stay() {
               two pools, one bay
             </h2>
           </div>
-          <p className="max-w-sm text-(--color-text-soft)">
-            Three rooms on the lower level sharing a kitchen and the small pool,
-            a two-bedroom villa, and an apartment upstairs with the view.
-          </p>
+          {/* John's positioning line, 25 Aug 2026. It sits here, above the
+              rates, because it is the sentence that makes the rates make
+              sense. */}
+          <p className="max-w-sm text-(--color-text-soft)">{POSITIONING}</p>
         </div>
 
         <ul className="mt-16 grid gap-8 lg:grid-cols-3">
@@ -83,9 +83,10 @@ export default function Stay() {
         <div className="mt-10 flex flex-col gap-6 border border-(--color-line) bg-(--color-raise) p-8 sm:flex-row sm:items-center sm:justify-between lg:p-10">
           <div>
             <h3 className="text-2xl">Take the whole place</h3>
-            {/* No standard discount — Alison's decision (05). A rate is quoted
-                per enquiry rather than published, so a special price stays a
-                choice rather than an expectation. */}
+            {/* No standard discount. Alison's decision (05), and John confirmed
+                it on 25 Aug 2026 — "no discounts for bigger bookings". A rate is
+                quoted per enquiry rather than published, so a special price
+                stays a choice rather than an expectation. */}
             <p className="mt-3 max-w-lg text-(--color-text-soft)">
               {PRICING.buyoutDiscount > 0
                 ? `Every room, both pools, the run of the property — `
@@ -112,6 +113,29 @@ export default function Stay() {
               </a>
             )}
           </div>
+        </div>
+
+        {/* How the place is actually built and what it is like to be in it —
+            John's words, 25 Aug 2026. After the rooms rather than before them,
+            so the rates come first and this is what confirms them. */}
+        <div className="mt-16 border-t border-(--color-line) pt-12">
+          <h3 className="max-w-xl text-[clamp(1.7rem,3.2vw,2.4rem)] font-normal">
+            Built for the light,
+            <br />
+            and for the shade
+          </h3>
+          <ul className="mt-10 grid gap-x-12 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
+            {BUILDING.map((b) => (
+              <li key={b.id}>
+                <p className="label border-b border-(--color-line-lit) pb-3 text-(--color-bronze)">
+                  {b.title}
+                </p>
+                <p className="mt-4 text-[15.5px] leading-relaxed text-(--color-text-soft)">
+                  {b.body}
+                </p>
+              </li>
+            ))}
+          </ul>
         </div>
 
         {/* The villa next door. Alison: "The neighbouring villa not our" — so it

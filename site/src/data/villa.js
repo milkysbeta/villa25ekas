@@ -51,7 +51,7 @@ export const UNITS = [
     name: 'The Two-Bedroom Villa',
     kind: 'villa',
     count: 1,
-    rate: 2_500_000,
+    rate: 3_500_000,      // John, 25 Aug 2026
     sleeps: 4,          // TODO confirm
     pool: 'big',
     blurb:
@@ -65,7 +65,7 @@ export const UNITS = [
     name: 'The Upstairs Apartment',
     kind: 'apartment',
     count: 1,
-    rate: 2_000_000,
+    rate: 3_000_000,      // John, 25 Aug 2026
     sleeps: 2,          // TODO confirm
     pool: 'big',
     blurb:
@@ -96,14 +96,17 @@ export const PRICING = {
   freeCancellationDays: 21,
   fullPaymentDays: 21,
 
-  /* CONFLICT, left at Alison's answer. John wanted 25% ("maybe 20%"), Alison
-     said "25% is far too much... could be a special price but not encouraged".
-     A discount is easy to add and hard to withdraw once published. */
+  /* RESOLVED, 25 Aug 2026. John: "No discounts for bigger bookings." That
+     settles it in Alison's favour and closes the conflict — he had wanted 25%
+     ("maybe 20%"), she said "25% is far too much... could be a special price
+     but not encouraged". Nothing is published; a buyout price is quoted per
+     enquiry, so a special price stays a choice rather than an expectation. */
   buyoutDiscount: 0,
   longStayDiscount: null,
 
-  /* CONFLICT, left off. John wanted automatic discounts on orphaned nights,
-     Alison said no — consistent with her line on discounts generally. */
+  /* Left off, and now consistent with the line above rather than being a
+     standing disagreement. John had wanted automatic discounts on orphaned
+     nights; "no discounts for bigger bookings" covers this too. */
   gapFill: { enabled: false, maxGapNights: 3, discount: 0.2 },
 
   /* Holds are moot while there is no deposit to take, and Alison questions
@@ -149,10 +152,15 @@ export const TRANSFER = {
 /* -- surf ------------------------------------------------------------------
    Breaks shown on the forecast panel and the map. Coordinates are the villa's
    for now; per-break coords to be confirmed.                                */
+/* John, 25 Aug 2026: "Both Inside and Outsides left and right hander breaks
+   bring the swell that people travel the Planet to get to." Inside and Outside
+   each hold a left and a right — worth being precise about, because a surfer
+   choosing between two weeks in Lombok and two weeks somewhere else reads
+   exactly this line. */
 export const BREAKS = [
-  { id: 'inside', name: 'Inside Ekas', note: 'The one you can see from the villa.' },
-  { id: 'outside', name: 'Outside Ekas', note: 'By boat. Bigger, heavier, emptier.' },
-  { id: 'beach', name: 'The Beach Break', note: 'Where you learn, or where you go when it is small.' },
+  { id: 'inside', name: 'Inside Ekas', note: 'Left and right, in front of the villa. The one you watch over breakfast.' },
+  { id: 'outside', name: 'Outside Ekas', note: 'Left and right by boat. Bigger, heavier, emptier.' },
+  { id: 'beach', name: 'The Beach Break', note: 'A short walk down the hill. Where you learn, and where you go when it is small.' },
   { id: 'kura', name: 'Kura Kura', note: '' },
 ];
 
@@ -199,7 +207,9 @@ export const AMENITIES = [
   {
     group: 'Around the villa',
     items: [
-      'Swimming pool',
+      /* The 3 m depth is John's, 25 Aug 2026, and it is not a throwaway detail:
+         it is what makes dive training possible here. See WATER in content.js. */
+      'Two pools — the big one 3 m deep',
       'Garden and terrace',
       'Pool views',
       'Free WiFi throughout',

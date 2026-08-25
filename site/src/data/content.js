@@ -11,6 +11,110 @@
    been lied to, and it is the kind of thing that ends up in a review.
    ========================================================================= */
 
+/* -- The building ---------------------------------------------------------
+   John's copy, 25 August 2026, tidied for spelling and kept in his words.
+
+   His positioning line is the sharpest thing anyone has written for this site
+   so far — "definitely not a local homestay" — and it is doing real work. It
+   sets the expectation that justifies the rates, and it tells the two audiences
+   he actually wants (a group taking the whole place, and a traveller who
+   expects more) that they are in the right place.                           */
+export const POSITIONING =
+  'Definitely not a local homestay. Every effort has been made to create a luxury resort — '
+  + 'for a larger group wanting to stay together and take the entire villa, or for the '
+  + 'discerning traveller who expects a little more.';
+
+export const BUILDING = [
+  {
+    id: 'light',
+    title: 'Light',
+    body:
+      'Natural light streams in and reflects through all the rooms through meticulously '
+      + 'placed coloured glass, to give a feeling of elegance and peace. Blackout curtains '
+      + 'add the ultimate in privacy.',
+  },
+  {
+    id: 'gardens',
+    title: 'Gardens',
+    body:
+      'Bathed in sunlight from morning to night. Every effort has gone into creating shade '
+      + 'and privacy with lush tropical gardens, fed from recycled water reticulated from '
+      + 'waste.',
+  },
+  {
+    id: 'hardwood',
+    title: 'Hardwood',
+    body:
+      'Locally sourced hardwood timber, for colour, strength and durability — much of which '
+      + 'is recycled.',
+  },
+  {
+    id: 'kitchens',
+    title: 'Eating',
+    body:
+      'Cook your own locally sourced seafood and market produce in one of the kitchens, or '
+      + 'eat at one of the many local warungs and western-style restaurants nearby.',
+    /* CHECK BEFORE LAUNCH. John wrote "all only minutes walk away". The villa's
+       own Booking.com listing puts the nearest named food at Gubuk Kopi, 7 km,
+       with Lesehan Cemara at 8 km — which is not a walk. Ekas village is 1.1 km
+       and will have warungs, and the bay's resorts have restaurants, so John may
+       well be right about what is genuinely walkable. But "minutes walk away" is
+       the kind of promise a guest arrives and measures, so it is written as
+       "nearby" until he confirms which places he means. */
+    todo:
+      'John — which warungs and restaurants are within walking distance, and how far? '
+      + 'Booking.com says nearest food is 7 km, which contradicts "minutes walk away".',
+  },
+];
+
+/* -- On the water ---------------------------------------------------------
+   John's copy, 25 August 2026, lightly tidied for spelling and kept otherwise
+   in his words. This is the part of the offer that is genuinely unusual, and
+   it had no home on the site before.
+
+   One thing checked rather than repeated: the hammerhead site John means is
+   The Magnet, in Belongas Bay on the south-west coast. Scalloped and great
+   hammerheads school there roughly June to October, best July to September.
+   It is an advanced dive — strong current, downcurrents and surge, and
+   operators want 100+ logged dives. So it is written as the serious thing it
+   is, next to Pink Beach for beginners, rather than the two being blurred
+   into one sentence a novice might book off.                                */
+export const WATER = [
+  {
+    id: 'surf',
+    title: 'Surf',
+    body:
+      'The Beach Break greets you a short walk down the hill. Both Inside and Outside hold '
+      + 'left and right handers, and bring the swell that people travel the planet to get to.',
+  },
+  {
+    id: 'kite',
+    title: 'Kite surfing',
+    body:
+      'Kite surfers’ heaven is a few minutes away, and is renowned as one of the best — and '
+      + 'most beautiful — spots in the world.',
+  },
+  {
+    id: 'foil',
+    title: 'Foiling',
+    body:
+      'With the new trend in foiling — wing, natural and battery powered — Ekas is becoming a '
+      + 'mecca to learn and experience the phenomenon everybody wants to be part of.',
+  },
+  {
+    id: 'dive',
+    title: 'Diving',
+    body:
+      'Our 3 m deep pool is ideal for dive training, and instructors will be available for '
+      + 'beginners and advanced divers alike. Nearby Pink Beach offers amazing snorkelling and '
+      + 'beginner diving, and trips can be arranged to the best sites in Lombok.',
+    footnote:
+      'Including the famous hammerhead site at Belongas Bay — an advanced dive, and best '
+      + 'between June and October.',
+    todo: 'dive instructor name, certification agency, and day rate',
+  },
+];
+
 /* -- Experiences ----------------------------------------------------------
    Transfers are John's confirmed figure. Everything else stays on request
    until the follow-up form comes back.                                     */
@@ -24,6 +128,16 @@ export const EXPERIENCES = [
       + 'place at the right hour.',
     onRequest: true,
     todo: 'guide name and day rate',
+  },
+  {
+    id: 'dive-training',
+    name: 'Dive training',
+    blurb:
+      'The big pool is 3 metres deep, which is enough to teach in properly. Instructors for '
+      + 'beginners and for divers who already know what they are doing, and trips out to the '
+      + 'best sites on the island.',
+    onRequest: true,
+    todo: 'instructor name, agency (PADI/SSI), course prices and trip rates',
   },
   {
     id: 'boat-charter',

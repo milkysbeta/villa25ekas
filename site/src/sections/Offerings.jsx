@@ -57,7 +57,7 @@ const ITEMS = [
   {
     icon: <Leaf />,
     title: 'Built from here',
-    body: 'Local timber, milled nearby. The water the house uses goes back into the gardens.',
+    body: 'Locally sourced hardwood for colour, strength and durability — much of it recycled. The water the house uses goes back into the gardens.',
   },
 ];
 
