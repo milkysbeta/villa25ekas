@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import Parallax from '../components/Parallax.jsx';
 import SurfForecast from '../components/SurfForecast.jsx';
 import { IMAGES } from '../data/images.js';
@@ -13,6 +14,21 @@ export default function Surf() {
      kite, foil, dive — get the band under the breaks. */
   const surf = WATER.find((w) => w.id === 'surf');
   const rest = WATER.filter((w) => w.id !== 'surf');
+
+  /* Which break the forecast is titled for. Opens on the first one — Inside
+     Ekas, the one you can see from the villa — and the cards below the forecast
+     switch it.
+
+     WHAT THIS DOES AND DOES NOT DO. It changes the title. The numbers are the
+     same numbers, because there is one set: the forecast is fetched for the
+     villa's own coordinates, and Open-Meteo's marine model is a coarse grid
+     that would return the same cell for all four of these anyway — they sit
+     within about five kilometres of each other. Inside really does behave
+     differently from Outside, but that is local sheltering, and no global model
+     resolves it. Wiring four separate fetches would quadruple the requests to
+     produce four identical tables and imply a precision that is not there. */
+  const [breakId, setBreakId] = useState(BREAKS[0].id);
+  const picked = BREAKS.find((b) => b.id === breakId) ?? BREAKS[0];
 
   return (
     <Parallax
@@ -95,32 +111,26 @@ export default function Surf() {
             </div>
           )}
 
-          {/* The forecast sits on its own panel rather than straight on the
-              photograph. Same material as the break cards immediately below —
-              70 per cent ink and a small backdrop blur — so the two read as one
-              surface rather than two different ideas stacked on each other.
-
-              It also does the reading work the overlay cannot: this is the
-              densest, smallest type on the page, and it lands where the
-              photograph is still fading out. */}
           {/* The same wash the forecast puts behind today, scaled up to the
               whole five days: 10 per cent bronze fading out by 70 per cent of
               the height, and the same rounded corner. Warm rather than dark, so
               it lifts the block off the photograph without boxing it in.
 
-              No horizontal padding on purpose. The wash lines up with the five
-              columns exactly, and side padding would squeeze them — at 375 px
-              it took each column from 67 px down to 57, and the star rating is
-              63 wide, so the ratings spilled their cells. */}
+              The horizontal padding is small and it has to stay small. The five
+              columns are the tightest thing on the page: at 375 px they are
+              67 px each, and the star rating inside them is 63 px wide. Every
+              pixel of side padding comes straight off the columns, so anything
+              past about 4 px each side and the ratings spill their cells. */}
           <div
-            className="mt-16 rounded-lg py-5 backdrop-blur-xs"
+            className="mt-16 rounded-lg px-1 py-5 backdrop-blur-xs sm:px-4 lg:px-6"
             style={{
               background:
                 'linear-gradient(180deg, color-mix(in srgb, var(--color-bronze) 10%, transparent), transparent 70%)',
             }}
           >
             <p className="mb-6 text-[15px] uppercase tracking-[0.2em] text-(--color-text-soft)">
-              Five-day forecast
+              Five day surf forecast
+              <span className="text-(--color-bronze-lit)"> · {picked.name}</span>
             </p>
             {/* The footer already credits Open-Meteo site-wide, so it is not
                 repeated here. The holding page keeps its own copy — it has no
@@ -128,17 +138,50 @@ export default function Surf() {
             <SurfForecast days={5} credit={false} />
           </div>
 
+          {/* The cards double as the forecast's break selector. They were
+              already a row of four things named exactly what the title needs,
+              so making them the control is less to learn than a separate row of
+              tabs would be — and they still read as cards if nobody clicks. */}
           <ul className="mt-16 grid gap-px border border-(--color-line) bg-(--color-line) sm:grid-cols-2 lg:grid-cols-4">
-            {BREAKS.map((b, i) => (
-              <li key={b.id} className="bg-(--color-ink)/70 p-7 backdrop-blur-xs">
-                <span className="idx">{String(i + 1).padStart(2, '0')}</span>
-                <h3 className="mt-3 text-2xl">{b.name}</h3>
-                {b.note && (
-                  <p className="mt-3 text-[15px] text-(--color-text-soft)">{b.note}</p>
-                )}
-              </li>
-            ))}
+            {BREAKS.map((b, i) => {
+              const on = b.id === breakId;
+              return (
+                <li key={b.id} className="bg-(--color-ink)/70 backdrop-blur-xs">
+                  <button
+                    type="button"
+                    onClick={() => setBreakId(b.id)}
+                    aria-pressed={on}
+                    className={`flex h-full w-full flex-col p-7 text-left transition-colors ${
+                      on ? 'bg-(--color-bronze)/12' : 'hover:bg-(--color-bronze)/6'
+                    }`}
+                  >
+                    <span className="flex items-center gap-2.5">
+                      <span className="idx">{String(i + 1).padStart(2, '0')}</span>
+                      {/* the marker only appears on the selected one, so the
+                          row does not carry four identical dots doing nothing */}
+                      {on && (
+                        <span
+                          aria-hidden="true"
+                          className="block h-1.5 w-1.5 rounded-full bg-(--color-bronze-lit)"
+                        />
+                      )}
+                    </span>
+                    <h3 className={`mt-3 text-2xl ${on ? 'text-(--color-bronze-lit)' : ''}`}>
+                      {b.name}
+                    </h3>
+                    {b.note && (
+                      <p className="mt-3 text-[15px] text-(--color-text-soft)">{b.note}</p>
+                    )}
+                  </button>
+                </li>
+              );
+            })}
           </ul>
+
+          <p className="mt-5 text-[14px] text-(--color-text-mute)">
+            Pick a break to title the forecast. The readings are for the bay as a
+            whole &mdash; one set of numbers, not four.
+          </p>
 
           <p className="label mt-8 text-(--color-text-mute)">
             Swell direction, tide and season detail to follow
