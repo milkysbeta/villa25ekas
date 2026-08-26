@@ -4,18 +4,17 @@ import { Link, NavLink, useLocation } from 'react-router-dom';
 import { LOGO } from '../data/images.js';
 import { whatsappLink } from '../data/villa.js';
 import { CURRENCIES } from '../lib/currency.js';
-import { NAV_PAGES, PRIMARY_PAGES } from '../lib/routes.js';
+import { NAV_PAGES, PRIMARY_PAGES, pageFor } from '../lib/routes.js';
 
 export default function Nav({ currency, onCurrency }) {
   const [open, setOpen] = useState(false);
   const [solid, setSolid] = useState(false);
   const { pathname } = useLocation();
 
-  /* Transparent over the home page's hero, filled in everywhere else and once
-     you scroll. Every page other than home opens with text rather than a
-     photograph, so the header has to be solid from the first pixel or the two
-     collide. */
-  const isHome = pathname === '/' || pathname === '';
+  /* Transparent over a page that opens with a photograph, filled in everywhere
+     else and once you scroll. A page opening with text needs the header solid
+     from the first pixel or the two collide. */
+  const overPhoto = pageFor(pathname).bleed === true;
 
   useEffect(() => {
     const onScroll = () => setSolid(window.scrollY > 80);
@@ -31,7 +30,7 @@ export default function Nav({ currency, onCurrency }) {
     return () => { document.body.style.overflow = ''; };
   }, [open]);
 
-  const filled = solid || open || !isHome;
+  const filled = solid || open || !overPhoto;
 
   return (
     <header

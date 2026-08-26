@@ -3,7 +3,7 @@ import { Outlet, useLocation } from 'react-router-dom';
 
 import Nav from './Nav.jsx';
 import Footer from './Footer.jsx';
-import { PAGES, BASENAME } from '../lib/routes.js';
+import { pageFor } from '../lib/routes.js';
 
 /* Shared chrome for every page, plus the two things a client-side router has
    to do by hand that a server would have done for you: set the document title,
@@ -12,9 +12,7 @@ import { PAGES, BASENAME } from '../lib/routes.js';
 export default function Layout({ currency, onCurrency }) {
   const { pathname } = useLocation();
 
-  const slug = pathname.replace(BASENAME, '').replace(/^\/|\/$/g, '');
-  const page = PAGES.find((p) => p.slug === slug) ?? PAGES[0];
-  const isHome = page.slug === '';
+  const page = pageFor(pathname);
 
   useEffect(() => { document.title = page.title; }, [page.title]);
 
@@ -27,10 +25,10 @@ export default function Layout({ currency, onCurrency }) {
     <>
       <div className="horizon fixed inset-x-0 top-0 z-60" />
       <Nav currency={currency} onCurrency={onCurrency} />
-      {/* The home page opens with a full-bleed hero that is meant to sit under
-          the transparent header. Every other page starts with text, which is
-          not. */}
-      <main className={isHome ? '' : 'pt-20 lg:pt-24'}>
+      {/* A `bleed` page opens with a full-bleed photograph meant to sit under
+          the transparent header. Everything else starts with text, which needs
+          the header's height clearing first. */}
+      <main className={page.bleed ? '' : 'pt-20 lg:pt-24'}>
         <Outlet />
       </main>
       <Footer />
