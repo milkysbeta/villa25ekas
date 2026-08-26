@@ -1,4 +1,5 @@
 import Price from '../components/Price.jsx';
+import CurrencyPicker from '../components/CurrencyPicker.jsx';
 import Parallax from '../components/Parallax.jsx';
 import { UNITS, PRICING, buyoutRate, whatsappLink, AMENITIES, HOUSE_RULES, STAY_TIMES } from '../data/villa.js';
 import { NEIGHBOUR, BUILDING, POSITIONING } from '../data/content.js';
@@ -47,6 +48,8 @@ export default function Stay() {
               sense. */}
           <p className="max-w-sm text-(--color-text-soft)">{POSITIONING}</p>
         </div>
+
+        <CurrencyPicker className="mt-12" />
 
         <ul className="mt-16 grid gap-8 lg:grid-cols-3">
           {UNITS.map((unit) => {

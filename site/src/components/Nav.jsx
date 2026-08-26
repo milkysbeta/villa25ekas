@@ -3,10 +3,9 @@ import { Link, NavLink, useLocation } from 'react-router-dom';
 
 import { LOGO } from '../data/images.js';
 import { whatsappLink } from '../data/villa.js';
-import { CURRENCIES } from '../lib/currency.js';
 import { NAV_PAGES, PRIMARY_PAGES } from '../lib/routes.js';
 
-export default function Nav({ currency, onCurrency }) {
+export default function Nav() {
   const [open, setOpen] = useState(false);
   const { pathname } = useLocation();
 
@@ -120,19 +119,6 @@ export default function Nav({ currency, onCurrency }) {
         </nav>
 
         <div className="ml-auto flex items-center gap-3 xl:ml-0">
-          <label className="sr-only" htmlFor="currency">Currency</label>
-          <select
-            id="currency"
-            value={currency}
-            onChange={(e) => onCurrency(e.target.value)}
-            className="cursor-pointer rounded-xs border border-(--color-line-lit) bg-(--color-ink)/45 px-3 py-2.5 text-[14px] uppercase tracking-[0.1em] text-(--color-text-soft) hover:text-(--color-text)"
-          >
-            {CURRENCIES.map((c) => (
-              <option key={c} value={c} className="bg-(--color-ink)">{c}</option>
-            ))}
-          </select>
-
-
           <button
             type="button"
             onClick={() => setOpen((o) => !o)}

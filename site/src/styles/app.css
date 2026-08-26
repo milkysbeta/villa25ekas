@@ -487,3 +487,24 @@ a:focus-visible > .milky-mark {
 @media (prefers-reduced-motion: reduce) {
   .milky-mark { transition: none; }
 }
+
+/* -- map, flush to its pane ------------------------------------------------
+   On the getting-here page the map shares a frosted pane with the heading and
+   the view switch. Those want the pane's padding; the map does not — a strip of
+   pane showing around a map reads as a mistake rather than a margin.
+
+   The negative margins cancel the pane's own padding, so only the frame goes
+   edge to edge and the controls above it stay inset. Values match the pane's
+   `p-6 lg:p-10`.                                                            */
+.map-flush > .journey-map-frame {
+  margin-inline: -1.75rem;
+  margin-bottom: -1.75rem;
+  border-radius: 0;
+}
+
+@media (min-width: 1024px) {
+  .map-flush > .journey-map-frame {
+    margin-inline: -3.5rem;
+    margin-bottom: -3.5rem;
+  }
+}

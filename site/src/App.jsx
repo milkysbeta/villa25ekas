@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
 import { isPreviewPath, isUnlocked, unlock } from './lib/gate.js';
 import { guessCurrency, rememberCurrency } from './lib/currency.js';
-import { Currency } from './lib/context.js';
+import { Currency, CurrencySet } from './lib/context.js';
 import { BASENAME } from './lib/routes.js';
 
 import Layout from './components/Layout.jsx';
@@ -74,9 +74,10 @@ export default function App() {
 
   return (
     <Currency value={currency}>
-      <BrowserRouter basename={BASENAME}>
+      <CurrencySet value={onCurrency}>
+        <BrowserRouter basename={BASENAME}>
         <Routes>
-          <Route element={<Layout currency={currency} onCurrency={onCurrency} />}>
+          <Route element={<Layout />}>
             <Route index element={<Home />} />
             <Route path="stay" element={<Stay />} />
             <Route path="availability" element={<Availability />} />
@@ -93,6 +94,7 @@ export default function App() {
           </Route>
         </Routes>
       </BrowserRouter>
+      </CurrencySet>
     </Currency>
   );
 }

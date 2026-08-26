@@ -56,11 +56,11 @@ export default function OffGrid() {
       /* Deliberately light. The pane below carries the contrast. */
       overlay="linear-gradient(to bottom, rgba(16,14,11,.34) 0%, rgba(16,14,11,.40) 30%, rgba(16,14,11,.72) 62%, rgba(16,14,11,.96) 100%)"
     >
-      <section id="off-grid" className="px-5 py-24 lg:px-10 lg:py-32">
+      <section id="off-grid" className="px-5 py-28 lg:px-10 lg:py-36">
         <div className="mx-auto max-w-[1500px]">
 
           {/* the frosted pane */}
-          <div className="rounded-xs border border-(--color-line-lit) bg-(--color-ink)/40 p-7 backdrop-blur-lg lg:p-14">
+          <div className="rounded-xs border border-(--color-line-lit) bg-(--color-ink)/45 p-7 backdrop-blur-lg lg:p-14">
             <div className="grid gap-12 lg:grid-cols-[1fr_1.05fr] lg:gap-20">
               <div>
                 <p className="label text-(--color-bronze-lit)">Off the grid</p>
@@ -111,7 +111,7 @@ export default function OffGrid() {
             ].map(([value, label]) => (
               <div
                 key={label}
-                className="bg-(--color-ink)/50 px-7 py-12 text-center backdrop-blur-lg lg:py-14"
+                className="bg-(--color-ink)/45 px-7 py-12 text-center backdrop-blur-lg lg:py-14"
               >
                 <dd className="font-(family-name:--font-display) text-5xl text-(--color-bronze-lit) tabular-nums lg:text-6xl">
                   {value}

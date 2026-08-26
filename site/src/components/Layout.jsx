@@ -9,7 +9,7 @@ import { pageFor } from '../lib/routes.js';
    to do by hand that a server would have done for you: set the document title,
    and put the reader at the top of the new page rather than wherever they had
    scrolled to on the last one. */
-export default function Layout({ currency, onCurrency }) {
+export default function Layout() {
   const { pathname } = useLocation();
 
   const page = pageFor(pathname);
@@ -24,7 +24,7 @@ export default function Layout({ currency, onCurrency }) {
   return (
     <>
       <div className="horizon fixed inset-x-0 top-0 z-60" />
-      <Nav currency={currency} onCurrency={onCurrency} />
+      <Nav />
       {/* A `bleed` page opens with a full-bleed photograph meant to sit under
           the transparent header. Everything else starts with text, which needs
           the header's height clearing first. */}

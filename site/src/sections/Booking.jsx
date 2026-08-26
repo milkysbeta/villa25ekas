@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
+import CurrencyPicker from '../components/CurrencyPicker.jsx';
 import {
   getBookings, buildCalendar, findGapNights,
   todayIso, addDays, nightsBetween,
@@ -297,6 +298,7 @@ export default function Booking() {
             ) : (
               <>
                 <p className="label text-(--color-bronze-lit)">Your stay</p>
+                <CurrencyPicker className="mt-5" label="Prices in" />
 
                 <dl className="mt-6 flex flex-col">
                   {[

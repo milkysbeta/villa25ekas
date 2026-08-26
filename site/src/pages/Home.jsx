@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import CurrencyPicker from '../components/CurrencyPicker.jsx';
 import Hero from '../sections/Hero.jsx';
 import Welcome from '../sections/Welcome.jsx';
 import Offerings from '../sections/Offerings.jsx';
@@ -73,6 +74,7 @@ export default function Home() {
           <p className="text-(--color-text-soft)">
             Rooms from <Price amount={cheapest} className="text-(--color-text)" /> a night.
           </p>
+          <CurrencyPicker className="sm:ml-auto sm:mr-4" />
           <Link to="/availability" className="label btn btn-solid text-center">
             Check availability
           </Link>

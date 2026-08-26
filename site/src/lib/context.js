@@ -6,6 +6,12 @@ import { createContext } from 'react';
    scroll position each time. */
 export const Currency = createContext('IDR');
 
+/* The setter travels separately from the value. Keeping them apart means Price,
+   which only ever reads, does not re-render when the picker is created, and it
+   left the existing `useContext(Currency)` calls untouched when the picker
+   moved out of the header and onto the pages that actually show money. */
+export const CurrencySet = createContext(() => {});
+
 /* One page, so navigation is anchors rather than routes. */
 export const SECTIONS = [
   { id: 'stay',        label: 'Stay' },

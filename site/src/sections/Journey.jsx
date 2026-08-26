@@ -30,24 +30,30 @@ export default function Journey() {
         than on a pane, so they get the halo. */}
     <section
       id="journey"
-      className="px-5 pb-28 pt-14 lg:px-10 lg:pb-40 lg:pt-20"
+      className="px-5 pb-28 pt-28 lg:px-10 lg:pb-40 lg:pt-36"
       style={{ textShadow: '0 1px 2px rgba(16,14,11,.85), 0 0 16px rgba(16,14,11,.75)' }}
     >
       <div className="mx-auto max-w-[1500px]">
-        <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
-          <div>
-            <p className="label text-(--color-bronze-lit)">Getting here</p>
-            <h2 className="mt-6 max-w-2xl text-[clamp(2.1rem,4.4vw,3.6rem)]">
-              It takes a bit of doing
-            </h2>
+        {/* The heading, the view switch and the map share one pane. They are one
+            thing to a reader — here is where the villa is, look at it — and
+            splitting them across two surfaces made the map read as an
+            attachment rather than the point of the page. */}
+        <div className="overflow-hidden rounded-xs border border-(--color-line-lit) bg-(--color-ink)/45 p-7 backdrop-blur-lg lg:p-14">
+          <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+            <div>
+              <p className="label text-(--color-bronze-lit)">Getting here</p>
+              <h2 className="mt-6 max-w-2xl text-[clamp(2.1rem,4.4vw,3.6rem)]">
+                It takes a bit of doing
+              </h2>
+            </div>
+            <p className="max-w-sm text-(--color-text-soft)">
+              That is rather the point. The road in is the reason the bay is still
+              quiet, and the last twenty minutes are the best part of the trip.
+            </p>
           </div>
-          <p className="max-w-sm text-(--color-text-soft)">
-            That is rather the point. The road in is the reason the bay is still
-            quiet, and the last twenty minutes are the best part of the trip.
-          </p>
-        </div>
 
-        <EkasMap className="mt-9 lg:mt-11" />
+          <EkasMap className="map-flush mt-9 lg:mt-11" />
+        </div>
 
         <ul className="mt-14 grid gap-px overflow-hidden rounded-xs border border-(--color-line-lit) bg-(--color-line-lit) sm:grid-cols-2 lg:grid-cols-4">
           {ROUTES.map((r, i) => (
@@ -106,7 +112,7 @@ export default function Journey() {
 
         <p className="mt-6 text-[14px] text-(--color-text-soft)">{ROUTES_CAVEAT}</p>
 
-        <div className="mt-10 flex flex-col gap-6 border border-(--color-line) bg-(--color-raise) p-8 sm:flex-row sm:items-center sm:justify-between lg:p-10">
+        <div className="mt-10 flex flex-col gap-6 rounded-xs border border-(--color-line-lit) bg-(--color-ink)/45 p-8 backdrop-blur-lg sm:flex-row sm:items-center sm:justify-between lg:p-10">
           <div>
             <h3 className="text-2xl">We will meet you at the airport</h3>
             <p className="mt-3 max-w-lg text-(--color-text-soft)">
