@@ -500,6 +500,11 @@ a:focus-visible > .milky-mark {
   margin-inline: -1.75rem;
   margin-bottom: -1.75rem;
   border-radius: 0;
+  /* The frame carries its own 1px --color-line border. Flush against the pane
+     that lands directly on top of the pane's own --color-line-lit stroke, so
+     three edges of this panel read darker than the identical panel on the
+     contact page. Only the pane draws the outline. */
+  border: 0;
 }
 
 @media (min-width: 1024px) {
