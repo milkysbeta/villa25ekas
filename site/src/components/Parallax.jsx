@@ -19,6 +19,19 @@ export default function Parallax({
   overlay = 'linear-gradient(to bottom, rgba(15,13,10,.55), rgba(15,13,10,.82))',
   children,
   position = 'center',
+  /* 'cover'  fills the section, cropping whatever does not fit. Right for a
+                calm backdrop where no part of the frame matters.
+       'width'  shows the WHOLE width of the photograph and lets its own aspect
+                ratio decide its height, then dissolves it into the ground.
+
+     'width' exists because a tall section crops brutally: the surf section runs
+     over 2,000 px, so `cover` scaled that photograph 2.2x and showed 35 per
+     cent of its width — the sea stack and most of the wave were simply gone.
+     The layer takes the image's aspect ratio so the fade lands in the same
+     place at every viewport width, rather than being a guessed percentage of
+     a section whose height changes with its content. */
+  fit = 'cover',
+  ratio,
 }) {
   const ref = useRef(null);
   const still = useReducedMotion();
@@ -31,18 +44,51 @@ export default function Parallax({
   const travel = `${speed * 100}%`;
   const y = useTransform(scrollYProgress, [0, 1], [`-${travel}`, travel]);
 
+  const byWidth = fit === 'width';
+
   return (
     <div ref={ref} className={`relative overflow-hidden ${className}`}>
       <motion.div
         aria-hidden="true"
-        style={{
-          y: still ? 0 : y,
-          backgroundImage: `url(${src})`,
-          backgroundPosition: position,
-          top: `-${speed * 100}%`,
-          bottom: `-${speed * 100}%`,
-        }}
-        className="absolute inset-x-0 bg-(--color-plate) bg-cover"
+        style={
+          byWidth
+            ? {
+              /* Pinned to the top and NOT translated, which is the one place
+                 this differs from 'cover'.
+
+                 The offset the cover path uses is `top: -speed%`, and a CSS
+                 top percentage resolves against the CONTAINING BLOCK — the
+                 whole section. The transform that pairs with it resolves
+                 against the ELEMENT. When the layer filled the section those
+                 were the same number; here the layer is only as tall as the
+                 photograph, so -6% of a 2,053 px section pushed 166 px of sky
+                 and rock up out of view — a quarter of the image, which is
+                 exactly what showing the full frame was meant to stop.
+
+                 Any translate reintroduces the problem at one end of the
+                 scroll or the other: up crops the top, down opens a gap above.
+                 A full-width photograph dissolving into the page does not need
+                 to move to do its job. */
+              backgroundImage: `url(${src})`,
+              backgroundPosition: 'top center',
+              backgroundSize: '100% auto',
+              backgroundRepeat: 'no-repeat',
+              aspectRatio: ratio,
+              /* dissolves into the section rather than ending on a hard
+                 horizontal edge partway down the page */
+              maskImage: 'linear-gradient(to bottom, #000 0%, #000 72%, transparent 100%)',
+              WebkitMaskImage: 'linear-gradient(to bottom, #000 0%, #000 72%, transparent 100%)',
+              top: 0,
+            }
+            : {
+              y: still ? 0 : y,
+              backgroundImage: `url(${src})`,
+              backgroundPosition: position,
+              top: `-${speed * 100}%`,
+              bottom: `-${speed * 100}%`,
+            }
+        }
+        className={`absolute inset-x-0 ${byWidth ? '' : 'bg-(--color-plate) bg-cover'}`}
       />
       {alt && <span className="sr-only">{alt}</span>}
       <div aria-hidden="true" className="absolute inset-0" style={{ background: overlay }} />

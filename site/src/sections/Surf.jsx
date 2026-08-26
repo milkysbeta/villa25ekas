@@ -18,7 +18,12 @@ export default function Surf() {
     <Parallax
       src={IMAGES.surf.src}
       alt={IMAGES.surf.alt}
-      speed={0.14}
+      /* Full width, so the whole frame is there — the sea stack on the left
+         and the shoulder of the wave on the right were both being cropped
+         away by `cover` on a section this tall. */
+      fit="width"
+      ratio="1672 / 941"
+      /* `fit="width"` does not translate — see the note in Parallax. */
       /* Opened up from 92/86/95 per cent, which was dark enough that the
          photograph behind it may as well not have been there.
 
@@ -30,12 +35,15 @@ export default function Surf() {
          against these stops, 48 per cent leaves body text at roughly 2.4:1
          over the foam — well under the 4.5:1 needed to read.
 
-         These stops keep the 95th-percentile contrast at or above about 4.5
-         the whole way down while still being far lighter than what was here:
-         the wave is clearly present now rather than a rumour. Darkest at the
-         top where the heading sits, and closing to solid so the section below
-         has an edge to start from. */
-      overlay="linear-gradient(to bottom, rgba(16,14,11,.82) 0%, rgba(16,14,11,.66) 28%, rgba(16,14,11,.72) 64%, rgba(16,14,11,.97) 100%)"
+         Retuned again once the photograph went full width. It now occupies the
+         top 35 per cent of the section and fades out, rather than being
+         stretched behind the whole thing, so the gradient is lightest over that
+         band and closes to solid below it — the reverse of what it was.
+
+         66 per cent over the photograph is as light as this image allows: it
+         holds the 95th-percentile contrast at about 4.5:1, and every step
+         lighter takes body text under the line. */
+      overlay="linear-gradient(to bottom, rgba(16,14,11,.66) 0%, rgba(16,14,11,.74) 20%, rgba(16,14,11,.90) 38%, rgba(16,14,11,.97) 100%)"
     >
       {/* A soft shadow on everything that sits straight on the photograph.
           The overlay handles the general case; this covers the few places
