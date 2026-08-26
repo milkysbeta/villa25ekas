@@ -213,7 +213,7 @@ export default function EkasMap({ className = '' }) {
       const map = new maplibregl.Map({
         container: containerRef.current,
         style,
-        center: [116.17, -8.69], zoom: 8.55, pitch: 38, bearing: -8,
+        center: [116.25, -8.63], zoom: 8.81, pitch: 38, bearing: -8,
         minZoom: 7.8, maxZoom: 15,
         attributionControl: false,
       });
@@ -241,10 +241,14 @@ export default function EkasMap({ className = '' }) {
     const map = mapRef.current;
     setView(next);
     if (!map) return;
-    map.fitBounds(next === 'island' ? ISLAND_BOUNDS : BAY_BOUNDS, {
-      padding: next === 'island'
-        ? { top: 70, right: 55, bottom: 90, left: 55 }
-        : { top: 70, right: 55, bottom: 70, left: 55 },
+    const bounds = next === 'island' ? ISLAND_BOUNDS : BAY_BOUNDS;
+    const padding = next === 'island'
+      ? { top: 70, right: 55, bottom: 90, left: 55 }
+      : { top: 70, right: 55, bottom: 70, left: 55 };
+    const camera = map.cameraForBounds(bounds, { padding });
+    map.easeTo({
+      ...camera,
+      zoom: next === 'island' ? camera.zoom + Math.log2(1.2) : camera.zoom,
       pitch: next === 'island' ? 38 : 25,
       bearing: next === 'island' ? -8 : -4,
       duration: 1000,

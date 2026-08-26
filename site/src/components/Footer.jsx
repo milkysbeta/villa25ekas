@@ -3,7 +3,7 @@ import { LOGO } from '../data/images.js';
 import { CONTACT, whatsappLink } from '../data/villa.js';
 import { NAV_PAGES } from '../lib/routes.js';
 
-export default function Footer() {
+export default function Footer({ page }) {
   const year = new Date().getFullYear();
   const half = Math.ceil(NAV_PAGES.length / 2);
   const columns = [NAV_PAGES.slice(0, half), NAV_PAGES.slice(half)];
@@ -95,8 +95,8 @@ export default function Footer() {
           <p className="label-sm text-(--color-text-mute)">
             © {year} Villa 25 Ekas · {CONTACT.location}
           </p>
-          <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-(--color-text-mute)">
-            <p className="label-sm">
+          {page?.slug === 'surf' && (
+            <p className="label-sm text-(--color-text-mute)">
               Forecast{' '}
               <a
                 href="https://open-meteo.com"
@@ -107,8 +107,9 @@ export default function Footer() {
                 Open-Meteo
               </a>
             </p>
-            <span className="hidden text-(--color-line-lit) sm:inline" aria-hidden="true">·</span>
-            <p className="label-sm">
+          )}
+          {page?.slug === 'getting-here' && (
+            <p className="label-sm text-(--color-text-mute)">
               Map by{' '}
               <a href="https://openfreemap.org/" target="_blank" rel="noopener noreferrer" className="underline underline-offset-4 hover:text-(--color-bronze-lit)">OpenFreeMap</a>
               {' · © '}
@@ -116,7 +117,7 @@ export default function Footer() {
               {' · Data from '}
               <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer" className="underline underline-offset-4 hover:text-(--color-bronze-lit)">OpenStreetMap</a>
             </p>
-          </div>
+          )}
         </div>
       </div>
     </footer>

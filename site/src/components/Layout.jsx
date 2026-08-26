@@ -31,7 +31,7 @@ export default function Layout({ currency, onCurrency }) {
       <main className={page.bleed ? '' : 'pt-20 lg:pt-24'}>
         <Outlet />
       </main>
-      <Footer />
+      <Footer page={page} />
     </>
   );
 }
