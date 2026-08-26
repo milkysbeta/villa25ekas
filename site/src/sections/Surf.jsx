@@ -19,14 +19,11 @@ export default function Surf() {
      Ekas, the one you can see from the villa — and the cards below the forecast
      switch it.
 
-     WHAT THIS DOES AND DOES NOT DO. It changes the title. The numbers are the
-     same numbers, because there is one set: the forecast is fetched for the
-     villa's own coordinates, and Open-Meteo's marine model is a coarse grid
-     that would return the same cell for all four of these anyway — they sit
-     within about five kilometres of each other. Inside really does behave
-     differently from Outside, but that is local sheltering, and no global model
-     resolves it. Wiring four separate fetches would quadruple the requests to
-     produce four identical tables and imply a precision that is not there. */
+     Each break is fetched at its own coordinates. The assumption had been that
+     Open-Meteo's marine grid was too coarse to tell four points five kilometres
+     apart apart — it is not. They land in three separate cells and Outside
+     reads about half again the swell of Inside, which is what the bay actually
+     does. See BREAKS in villa.js for the measured figures. */
   const [breakId, setBreakId] = useState(BREAKS[0].id);
   const picked = BREAKS.find((b) => b.id === breakId) ?? BREAKS[0];
 
@@ -135,7 +132,7 @@ export default function Surf() {
             {/* The footer already credits Open-Meteo site-wide, so it is not
                 repeated here. The holding page keeps its own copy — it has no
                 footer, and the attribution is required. */}
-            <SurfForecast days={5} credit={false} />
+            <SurfForecast days={5} credit={false} lat={picked.lat} lng={picked.lng} />
           </div>
 
           {/* The cards double as the forecast's break selector. They were
@@ -178,9 +175,13 @@ export default function Surf() {
             })}
           </ul>
 
+          {/* Inside and the Beach Break land in the same cell of the marine
+              model — 400 m apart and both inshore — so they show the same
+              numbers. Saying so is better than a guest spotting it and
+              wondering which of the two is wrong. */}
           <p className="mt-5 text-[14px] text-(--color-text-mute)">
-            Pick a break to title the forecast. The readings are for the bay as a
-            whole &mdash; one set of numbers, not four.
+            Pick a break to forecast it. Each is read at its own point, though
+            Inside and the Beach Break are close enough to share one.
           </p>
 
           <p className="label mt-8 text-(--color-text-mute)">

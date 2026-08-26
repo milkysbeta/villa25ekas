@@ -184,16 +184,47 @@ function blankDays(n) {
    to avoid saying it twice — but the holding page renders this component with
    no footer at all, and there it is the only attribution there is. Leave the
    default alone. */
-export default function SurfForecast({ days = 5, credit = true }) {
+/* Answers are cached per point for the life of the page, so switching back to a
+   break already looked at is instant and costs no request. Open-Meteo is free
+   and unmetered, but a guest tapping between four breaks should not fire a pair
+   of requests every tap, and a daily forecast does not change inside one visit.
+
+   The cache holds the PROMISE, not the resolved value. Caching the value leaves
+   a window: two effect runs for the same uncached point both miss the cache and
+   both fetch, because neither has resolved yet. That happens on every mount
+   under StrictMode in development, and in production to anyone who taps two
+   breaks quickly. Holding the promise means the second caller joins the first
+   request instead of starting a second one. */
+const cache = new Map();
+
+export default function SurfForecast({ days = 5, credit = true, lat, lng }) {
+  const at = { lat: lat ?? CONTACT.coords.lat, lng: lng ?? CONTACT.coords.lng };
+  const key = `${at.lat},${at.lng},${days}`;
+
   const [state, setState] = useState({ status: 'loading', data: null });
 
   useEffect(() => {
     let alive = true;
-    getForecast({ lat: CONTACT.coords.lat, lng: CONTACT.coords.lng, days })
+
+    let pending = cache.get(key);
+    if (!pending) {
+      pending = getForecast({ lat: at.lat, lng: at.lng, days });
+      cache.set(key, pending);
+      /* A failed request must not poison the cache, or the break stays broken
+         for the rest of the visit with no way to retry. */
+      pending.catch(() => cache.delete(key));
+    }
+
+    setState({ status: 'loading', data: null });
+    pending
       .then((data) => alive && setState({ status: 'ok', data }))
       .catch(() => alive && setState({ status: 'error', data: null }));
+
     return () => { alive = false; };
-  }, [days]);
+    /* `key` carries the point and the day count; at.lat/at.lng are derived
+       from it, so it is the only dependency that can change. */
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [key]);
 
   const ready = state.status === 'ok';
   const rows = ready ? state.data : blankDays(days);

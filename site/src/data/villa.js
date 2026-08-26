@@ -173,11 +173,29 @@ export const TRANSFER = {
    each hold a left and a right — worth being precise about, because a surfer
    choosing between two weeks in Lombok and two weeks somewhere else reads
    exactly this line. */
+/* COORDINATES. Each break is forecast at its own point rather than all four
+   sharing the villa's. The positions were checked against the real coastline
+   when the map was built — every one sits in water on the correct side of the
+   bay, not on a hillside.
+
+   And it matters more than expected. Open-Meteo's marine grid is coarse, so
+   the assumption was that four points five kilometres apart would all land in
+   one cell and return one answer. Queried on 26 Aug 2026 they land in THREE
+   cells, and the answers genuinely differ:
+
+     Inside + Beach Break  cell -8.875, 116.458    swell 1.08-1.46 m
+     Outside Ekas          cell -8.958, 116.375    swell 1.64-2.22 m
+     Kura Kura             cell -8.958, 116.458    swell 1.60-2.22 m
+
+   Outside reading about half again the size of Inside is exactly what the bay
+   actually does. Inside and the Beach Break share a cell and will always show
+   the same numbers — they are 400 m apart and both inshore, so that is honest
+   rather than broken. */
 export const BREAKS = [
-  { id: 'inside', name: 'Inside Ekas', note: 'Left and right, in front of the villa. The one you watch over breakfast.' },
-  { id: 'outside', name: 'Outside Ekas', note: 'Left and right by boat. Bigger, heavier, emptier.' },
-  { id: 'beach', name: 'The Beach Break', note: 'A short walk down the hill. Where you learn, and where you go when it is small.' },
-  { id: 'kura', name: 'Kura Kura', note: '' },
+  { id: 'inside', name: 'Inside Ekas', lat: -8.91017, lng: 116.43612, note: 'Left and right, in front of the villa. The one you watch over breakfast.' },
+  { id: 'outside', name: 'Outside Ekas', lat: -8.93800, lng: 116.41500, note: 'Left and right by boat. Bigger, heavier, emptier.' },
+  { id: 'beach', name: 'The Beach Break', lat: -8.90006, lng: 116.44804, note: 'A short walk down the hill. Where you learn, and where you go when it is small.' },
+  { id: 'kura', name: 'Kura Kura', lat: -8.92700, lng: 116.47600, note: '' },
 ];
 
 /* -- day trips, for the illustrated map ----------------------------------- */
