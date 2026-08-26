@@ -68,7 +68,12 @@ export default function Nav() {
            here — the utility simply does not appear in the built stylesheet, so
            the bar rendered fully transparent with its border falling back to
            currentColor. An inline value cannot be dropped by a scanner. */
-        backgroundColor: 'color-mix(in oklab, var(--color-ink) 72%, transparent)',
+        /* 58 per cent. Measured against the top of the lightest photo page
+           (off-grid, whose wash only starts at 34) with the bar's own 24 px
+           blur: nav links hold 6.5:1 and the active link 6.7. There is room to
+           go further — even 42 per cent keeps 5.2 — so this is a look, not a
+           limit. */
+        backgroundColor: 'color-mix(in oklab, var(--color-ink) 58%, transparent)',
         backdropFilter: 'blur(24px)',
         WebkitBackdropFilter: 'blur(24px)',
         borderBottom: '1px solid var(--color-line-lit)',
