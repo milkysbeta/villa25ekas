@@ -219,7 +219,6 @@ export default function EkasMap({ className = '' }) {
       });
       mapRef.current = map;
       map.addControl(new maplibregl.NavigationControl({ showCompass: true }), 'bottom-right');
-      map.addControl(new maplibregl.AttributionControl({ compact: true }), 'bottom-right');
       map.on('load', async () => {
         if (disposed) return;
         addTerrain(map);
@@ -292,12 +291,6 @@ export default function EkasMap({ className = '' }) {
         <div ref={containerRef} className="journey-map-canvas" aria-label="Topographic map of Lombok showing routes to Villa 25 Ekas" />
         <div className="journey-map-shade" aria-hidden="true" />
 
-        <div className="journey-map-title pointer-events-none">
-          <p className="label text-(--color-bronze-lit)">The way to Ekas</p>
-          <h3>Arrive at<br />the edge.</h3>
-          <p>Three ways across Lombok. One quiet destination on the island’s wild south-east coast.</p>
-        </div>
-
         {!ready && (
           <div className="journey-map-loading" role="status">Drawing Lombok…</div>
         )}
@@ -323,14 +316,6 @@ export default function EkasMap({ className = '' }) {
         </div>
       </div>
 
-      <figcaption className="mt-4 flex flex-wrap items-center justify-between gap-3 text-[13px] text-(--color-text-mute)">
-        <span>Live terrain and road geometry. Fast-boat port shown at Senggigi.</span>
-        <span>
-          Map ©{' '}
-          <a className="underline underline-offset-4 hover:text-(--color-bronze-lit)" href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a>
-          {' '}contributors
-        </span>
-      </figcaption>
     </figure>
   );
 }

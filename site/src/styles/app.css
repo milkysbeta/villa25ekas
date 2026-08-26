@@ -27,32 +27,6 @@
   background: radial-gradient(circle at 61% 48%, transparent 15%, rgba(16, 14, 11, .18) 58%, rgba(16, 14, 11, .72) 100%);
 }
 
-.journey-map-title {
-  position: absolute;
-  z-index: 3;
-  top: 72px;
-  left: clamp(28px, 5vw, 76px);
-  width: min(340px, 32vw);
-}
-
-.journey-map-title h3 {
-  margin-top: 18px;
-  font-family: var(--font-display);
-  font-size: clamp(3.3rem, 5.5vw, 5.8rem);
-  font-weight: 400;
-  line-height: .86;
-  letter-spacing: -.045em;
-}
-
-.journey-map-title > p:last-child {
-  max-width: 290px;
-  margin-top: 24px;
-  color: var(--color-text-mute);
-  font-family: var(--font-display);
-  font-size: 15px;
-  line-height: 1.6;
-}
-
 .journey-map-routes {
   position: absolute;
   z-index: 3;
@@ -206,15 +180,6 @@
   filter: invert(83%) sepia(20%) saturate(450%);
 }
 
-.journey-map-frame .maplibregl-ctrl-attrib {
-  background: rgba(16, 14, 11, .78);
-  color: var(--color-text-mute);
-}
-
-.journey-map-frame .maplibregl-ctrl-attrib a {
-  color: var(--color-bronze-lit);
-}
-
 .journey-map-frame .maplibregl-popup-content {
   padding: 11px 13px;
   border: 1px solid var(--color-line-lit);
@@ -231,9 +196,6 @@
 
 @media (max-width: 760px) {
   .journey-map-frame { min-height: 600px; }
-  .journey-map-title { top: 42px; left: 22px; width: 72vw; }
-  .journey-map-title h3 { font-size: 3.6rem; }
-  .journey-map-title > p:last-child { max-width: 260px; font-size: 13px; }
   .journey-map-routes { left: 10px; right: 10px; bottom: 10px; gap: 4px; }
   .journey-map-routes button { min-width: 0; flex: 1; padding: 10px 8px; }
   .journey-map-routes small { display: none; }

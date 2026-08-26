@@ -13,7 +13,7 @@ const MAPS = `https://www.google.com/maps/search/?api=1&query=${CONTACT.coords.l
    rather than guessing. A wrong ferry price strands somebody. */
 export default function Journey() {
   return (
-    <section id="journey" className="bg-(--color-ink) px-5 py-28 lg:px-10 lg:py-40">
+    <section id="journey" className="bg-(--color-ink) px-5 pb-28 pt-14 lg:px-10 lg:pb-40 lg:pt-20">
       <div className="mx-auto max-w-[1500px]">
         <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
           <div>
@@ -28,7 +28,7 @@ export default function Journey() {
           </p>
         </div>
 
-        <EkasMap className="mt-14" />
+        <EkasMap className="mt-9 lg:mt-11" />
 
         <ul className="mt-14 grid gap-px border border-(--color-line) bg-(--color-line) sm:grid-cols-2 lg:grid-cols-4">
           {ROUTES.map((r, i) => (

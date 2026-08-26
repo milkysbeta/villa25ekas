@@ -95,17 +95,28 @@ export default function Footer() {
           <p className="label-sm text-(--color-text-mute)">
             © {year} Villa 25 Ekas · {CONTACT.location}
           </p>
-          <p className="label-sm text-(--color-text-mute)">
-            Forecast{' '}
-            <a
-              href="https://open-meteo.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="underline underline-offset-4 hover:text-(--color-bronze-lit)"
-            >
-              Open-Meteo
-            </a>
-          </p>
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-(--color-text-mute)">
+            <p className="label-sm">
+              Forecast{' '}
+              <a
+                href="https://open-meteo.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline underline-offset-4 hover:text-(--color-bronze-lit)"
+              >
+                Open-Meteo
+              </a>
+            </p>
+            <span className="hidden text-(--color-line-lit) sm:inline" aria-hidden="true">·</span>
+            <p className="label-sm">
+              Map by{' '}
+              <a href="https://openfreemap.org/" target="_blank" rel="noopener noreferrer" className="underline underline-offset-4 hover:text-(--color-bronze-lit)">OpenFreeMap</a>
+              {' · © '}
+              <a href="https://www.openmaptiles.org/" target="_blank" rel="noopener noreferrer" className="underline underline-offset-4 hover:text-(--color-bronze-lit)">OpenMapTiles</a>
+              {' · Data from '}
+              <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer" className="underline underline-offset-4 hover:text-(--color-bronze-lit)">OpenStreetMap</a>
+            </p>
+          </div>
         </div>
       </div>
     </footer>
