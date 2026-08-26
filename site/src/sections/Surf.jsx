@@ -95,7 +95,20 @@ export default function Surf() {
             </div>
           )}
 
-          <div className="mt-16">
+          {/* The forecast sits on its own panel rather than straight on the
+              photograph. Same material as the break cards immediately below —
+              70 per cent ink and a small backdrop blur — so the two read as one
+              surface rather than two different ideas stacked on each other.
+
+              It also does the reading work the overlay cannot: this is the
+              densest, smallest type on the page, and it lands where the
+              photograph is still fading out. */}
+          {/* On a phone the panel bleeds out to the section's own padding edge
+              and puts that padding back on the inside, so the five columns keep
+              exactly the width they had before the panel existed. Inset padding
+              alone took each column down to 57 px, and the star rating is 63 —
+              the ratings and the "Period" row spilled their cells. */}
+          <div className="-mx-5 mt-16 border border-(--color-line) bg-(--color-ink)/70 px-5 py-6 backdrop-blur-xs sm:mx-0 sm:p-6 lg:p-8">
             <p className="mb-6 text-[15px] uppercase tracking-[0.2em] text-(--color-text-soft)">
               Five-day forecast
             </p>
