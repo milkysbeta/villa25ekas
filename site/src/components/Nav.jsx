@@ -4,6 +4,7 @@ import { Link, NavLink, useLocation } from 'react-router-dom';
 import { LOGO } from '../data/images.js';
 import { whatsappLink } from '../data/villa.js';
 import { NAV_PAGES, PRIMARY_PAGES } from '../lib/routes.js';
+import { warmPage } from '../lib/prefetch.js';
 
 export default function Nav() {
   const [open, setOpen] = useState(false);

@@ -64,9 +64,14 @@ export const IMAGES = {
 
 export const LOGO = `${B}logo.png`;
 
-/* The studio mark in the footer. Used as a CSS mask rather than an <img>, so
-   it can be painted in the page's own colours until hover. */
+/* The studio mark in the footer, in its real colours. Shown on hover only. */
 export const MILKY = `${B}images/milky.png`;
+
+/* The same mark redrawn in the site's own two colours: the carton #B58E55,
+   the lettering #17140F. This is what shows by default. Made by remapping the
+   source through a two-point colour ramp off its green channel, which is the
+   only way to land on an exact pair of hex values — see tools/README.md. */
+export const MILKY_BRAND = `${B}images/milky-brand.png`;
 
 /* Where the credit points. Change this to the Milky Design site when it is
    live; it goes to the studio's Instagram for now. */

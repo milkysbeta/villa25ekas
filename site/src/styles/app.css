@@ -453,39 +453,56 @@
 }
 
 /* -- studio credit --------------------------------------------------------
-   The Milky mark sits in the footer with its colour drained out until you
-   point at it.
+   Two copies of the Milky mark, stacked. The one on top is redrawn in this
+   site's own colours — the carton #B58E55, the lettering #17140F — and the
+   real red carton fades up underneath it on hover or keyboard focus.
 
-   A CSS rule rather than utilities, for two reasons. It has to respond to
-   keyboard focus as well as hover, which a hover-only utility does not. And
-   the first version of this masked the PNG and painted it a flat colour, which
-   was wrong: a mask keys on alpha, and the "MILKY" lettering in that file is
-   opaque white rather than knocked through, so the whole drawing collapsed
-   into one solid shape.
+   Two files rather than a filter, because a filter cannot land on an exact
+   pair of hex values: greyscale gives a dead grey, and no combination of
+   hue-rotate and saturate turns one red into #B58E55 while turning white into
+   #17140F. The recolour is a two-point ramp off the source green channel,
+   done once at build time.
 
-   The brightness is not decoration. Pure red desaturates to about rgb(57,57,57)
-   and this footer is #100E0B, so a plain `saturate(0)` leaves the carton very
-   nearly invisible. 2.2x lifts it into the same tonal range as the words next
-   to it. The words themselves never change.                                 */
-.milky-mark {
-  height: 66px;
-  width: auto;
-  flex-shrink: 0;
-  filter: saturate(0) brightness(2.2) opacity(0.8);
-  transition: filter 300ms ease-out;
+   The words change with the mark. Only on hover, and only to the bronze.     */
+.milky-credit {
+  color: var(--color-text-mute);
+  transition: color 300ms ease-out;
 }
 
-/*  rather than saturate(1) brightness(1) opacity(1). Those are
-   all identity values, and the CSS minifier helpfully strips identity
-   arguments — turning the rule into , which is
-   invalid, so hover did nothing at all.  cannot be mangled. */
-a:hover > .milky-mark,
-a:focus-visible > .milky-mark {
-  filter: none;
+.milky-credit:hover,
+.milky-credit:focus-visible {
+  color: var(--color-bronze);
+}
+
+.milky-stack {
+  position: relative;
+  display: block;
+  flex-shrink: 0;
+  height: 53px;
+}
+
+.milky-mark {
+  display: block;
+  height: 53px;
+  width: auto;
+}
+
+/* the real colours, revealed on intent */
+.milky-mark-real {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 300ms ease-out;
+}
+
+.milky-credit:hover .milky-mark-real,
+.milky-credit:focus-visible .milky-mark-real {
+  opacity: 1;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .milky-mark { transition: none; }
+  .milky-credit,
+  .milky-mark-real { transition: none; }
 }
 
 /* -- map, flush to its pane ------------------------------------------------

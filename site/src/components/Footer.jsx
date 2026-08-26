@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { LOGO, MILKY, MILKY_URL } from '../data/images.js';
+import { LOGO, MILKY, MILKY_BRAND, MILKY_URL } from '../data/images.js';
 import { CONTACT, whatsappLink } from '../data/villa.js';
 import { NAV_PAGES } from '../lib/routes.js';
 
@@ -96,28 +96,22 @@ export default function Footer({ page }) {
             © {year} Villa 25 Ekas · {CONTACT.location}
           </p>
 
-          {/* Studio credit.
-
-              The mark is a real image with the colour drained out of it, not a
-              masked silhouette. Masking was the first attempt and it was wrong:
-              a mask uses alpha, and in this file the "MILKY" lettering is opaque
-              white rather than knocked through, so every detail collapsed into
-              one flat shape.
-
-              `saturate(0)` takes the colour out and leaves the drawing. The
-              brightness goes with it because pure red desaturates to about
-              rgb(57,57,57), which on this footer is very nearly invisible —
-              2.2x lifts the carton into the same tonal range as the text
-              beside it. Hover restores the real thing.
-
-              The words do not change. Only the mark does. */}
+          {/* Studio credit. See .milky-credit in app.css. */}
           <a
             href={MILKY_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="group flex items-center gap-2.5 text-(--color-text-mute)"
+            className="milky-credit flex items-center gap-2.5"
           >
-            <img src={MILKY} alt="" width="42" height="66" className="milky-mark" />
+            {/* Two marks stacked. The brand one is drawn in the site's own
+                colours and sits on top until you point at the link, when the
+                real carton fades up underneath it. Two files rather than a
+                filter because no filter maps one red to an exact #B58E55 and
+                one white to an exact #17140F. */}
+            <span className="milky-stack">
+              <img src={MILKY_BRAND} alt="" width="34" height="53" className="milky-mark" />
+              <img src={MILKY} alt="" width="34" height="53" className="milky-mark milky-mark-real" />
+            </span>
             <span className="label-sm">Made by Milky Design</span>
           </a>
           {page?.slug === 'surf' && (

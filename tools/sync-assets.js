@@ -21,6 +21,7 @@ const MAP = [
      on every page; the 640 px file was 372 kB to draw it. */
   ['logo/villa-logo-192.png', 'logo.png'],
   ['logo/milky.png',          'images/milky.png'],
+  ['logo/milky-brand.png',    'images/milky-brand.png'],
   ['01-hero/hero.jpg',        'images/hero.jpg'],
   ['02-welcome/welcome.jpg',  'images/welcome.jpg'],
   ['05-offgrid/offgrid.jpg',  'images/offgrid.jpg'],
