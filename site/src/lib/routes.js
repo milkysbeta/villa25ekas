@@ -31,7 +31,7 @@ export const PAGES = [
      same treatment the home page has always had. Without it the surf photo
      started 96 px down the page with a band of flat ink above it. */
   { slug: 'surf',         label: 'Surf',         title: 'Surf · Villa 25 Ekas',                  primary: true, bleed: true },
-  { slug: 'off-grid',     label: 'Off-grid',     title: 'Off the grid · Villa 25 Ekas',          primary: true },
+  { slug: 'off-grid',     label: 'Off-grid',     title: 'Off the grid · Villa 25 Ekas',          primary: true, bleed: true },
   { slug: 'getting-here', label: 'Getting here', title: 'Getting here · Villa 25 Ekas',          primary: true },
   { slug: 'contact',      label: 'Contact',      title: 'Contact · Villa 25 Ekas',               primary: true },
 

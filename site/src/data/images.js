@@ -27,7 +27,9 @@ export const IMAGES = {
 
   /* Section backgrounds — these sit behind text and move on scroll, so they
      want to be calm. Avoid anything with a busy left third. */
-  offgrid: { src: `${B}images/offgrid.jpg`, min: '2400×1350', alt: 'Solar panels above the villa' },
+  /* Supplied 26 Aug 2026 as temple.png, 1672×941. NOT solar panels and NOT
+     the villa — see the note in OffGrid.jsx. Alt text describes the picture. */
+  offgrid: { src: `${B}images/offgrid.jpg`, min: '2400×1350', alt: 'A Balinese-style temple gate and lotus pond in the jungle' },
   /* Supplied 26 Aug 2026 at 1672×941, which is under the size below. It is
      behind a heavy overlay so the softness does not show much, but a larger
      export would be better on a wide screen — the section is taller than it is
