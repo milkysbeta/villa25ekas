@@ -91,7 +91,7 @@ export default function Journey() {
           <div>
             <h3 className="text-2xl">We will meet you at the airport</h3>
             <p className="mt-3 max-w-lg text-(--color-text-soft)">
-              {TRANSFER.airport.name} is {TRANSFER.airport.km} km away — an hour
+              {TRANSFER.airport.name} is {TRANSFER.airport.km} km away, an hour
               to an hour and a half, depending on the road.
             </p>
           </div>

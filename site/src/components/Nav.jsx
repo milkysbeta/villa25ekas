@@ -41,7 +41,7 @@ export default function Nav({ currency, onCurrency }) {
       }`}
     >
       <div className="mx-auto flex max-w-[1500px] items-center gap-6 px-5 py-2.5 lg:px-10">
-        <Link to="/" className="flex shrink-0 items-center gap-3" aria-label="Villa 25 Ekas — home">
+        <Link to="/" className="flex shrink-0 items-center gap-3" aria-label="Villa 25 Ekas, home">
           <img src={LOGO} alt="" width="64" height="64" className="h-16 w-auto object-contain" />
           <span className="hidden flex-col leading-none sm:flex">
             <span className="font-(family-name:--font-brand) text-[15px] uppercase tracking-[0.34em] text-(--color-text)">

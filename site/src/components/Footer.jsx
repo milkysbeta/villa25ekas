@@ -13,7 +13,7 @@ export default function Footer({ page }) {
       <div className="mx-auto max-w-[1500px]">
         <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
           <div>
-            <Link to="/" className="flex items-center gap-3" aria-label="Villa 25 Ekas — home">
+            <Link to="/" className="flex items-center gap-3" aria-label="Villa 25 Ekas, home">
               <img src={LOGO} alt="" width="72" height="72" className="h-18 w-auto object-contain" />
               <span className="flex flex-col leading-none">
                 <span className="font-(family-name:--font-brand) text-base uppercase tracking-[0.34em]">

@@ -121,12 +121,12 @@ export default function Booking() {
   /* Everything the enquiry email needs, assembled once so the hidden form and
      the WhatsApp fallback cannot drift apart. */
   const summaryText = () => [
-    `Room: ${unit ? unit.name : 'Any room — happy to be advised'}`,
-    `Check in: ${from ? pretty(from) : '—'}`,
-    `Check out: ${to ? pretty(to) : '—'}`,
+    `Room: ${unit ? unit.name : 'Any room, happy to be advised'}`,
+    `Check in: ${from ? pretty(from) : '–'}`,
+    `Check out: ${to ? pretty(to) : '–'}`,
     `Nights: ${nights}`,
     `Guests: ${guests}`,
-    promo ? `Friends code: ${promo.code} — ${promo.label} (${Math.round(promo.discount * 100)}% off)` : null,
+    promo ? `Friends code: ${promo.code}, ${promo.label} (${Math.round(promo.discount * 100)}% off)` : null,
     inGap ? `Gap nights: yes (${Math.round(gapCut * 100)}% off)` : null,
     '',
     `Nightly: ${formatIdr(nightly)}`,
@@ -169,7 +169,7 @@ export default function Booking() {
             <h2 className="mt-6 max-w-2xl text-[clamp(2.1rem,4.4vw,3.6rem)]">Find your dates</h2>
           </div>
           <p className="max-w-sm text-(--color-text-soft)">
-            Pick your nights and send them over. We answer within a day — nothing
+            Pick your nights and send them over. We answer within a day. Nothing
             is charged and nothing is held until we have written back.
           </p>
         </div>
@@ -235,7 +235,7 @@ export default function Booking() {
                           type="button"
                           disabled={disabled}
                           onClick={() => pick(day)}
-                          aria-label={`${pretty(day)}${full ? ' — fully booked' : gap ? ' — discounted' : ''}`}
+                          aria-label={`${pretty(day)}${full ? ', fully booked' : gap ? ', discounted' : ''}`}
                           className={[
                             'relative aspect-square text-[17px] tabular-nums transition-colors',
                             disabled && 'cursor-not-allowed text-(--color-text-mute)/35 line-through',
@@ -263,7 +263,7 @@ export default function Booking() {
               {[
                 ['bg-(--color-bronze)', 'Your dates'],
                 ...(PRICING.gapFill.enabled
-                  ? [['bg-(--color-reef)', `Gap night — ${Math.round(PRICING.gapFill.discount * 100)}% off`]]
+                  ? [['bg-(--color-reef)', `Gap night, ${Math.round(PRICING.gapFill.discount * 100)}% off`]]
                   : []),
                 ['bg-(--color-bronze)/60', 'Some rooms left'],
                 ['bg-(--color-text-mute)/35', 'Fully booked'],
@@ -282,7 +282,7 @@ export default function Booking() {
             {sent ? (
               <div>
                 <p className="label text-(--color-bronze-lit)">Enquiry sent</p>
-                <h3 className="mt-4 text-2xl">Thank you — we have it</h3>
+                <h3 className="mt-4 text-2xl">Thank you, we have it</h3>
                 <p className="mt-4 text-(--color-text-soft)">
                   We will come back to you within a day, usually sooner, with
                   confirmation and how to pay the deposit. Check your junk folder
@@ -302,9 +302,9 @@ export default function Booking() {
 
                 <dl className="mt-6 flex flex-col">
                   {[
-                    ['Check in', from ? pretty(from) : '—'],
-                    ['Check out', to ? pretty(to) : '—'],
-                    ['Nights', nights || '—'],
+                    ['Check in', from ? pretty(from) : '–'],
+                    ['Check out', to ? pretty(to) : '–'],
+                    ['Nights', nights || '–'],
                     ['Room', unit ? unit.name : 'Any'],
                   ].map(([k, v]) => (
                     <div key={k} className="flex items-baseline justify-between gap-4 border-b border-(--color-line) py-3">
@@ -393,7 +393,7 @@ export default function Booking() {
                     </div>
                     <p className="mt-2 text-[14px] text-(--color-text-soft)">
                       {PRICING.deposit > 0
-                        ? `${Math.round(PRICING.deposit * 100)}% deposit — ${formatIdr(deposit)}`
+                        ? `${Math.round(PRICING.deposit * 100)}% deposit of ${formatIdr(deposit)}`
                         : `No deposit. Free cancellation until ${PRICING.freeCancellationDays} days before arrival.`}
                     </p>
                     {!unit && (
@@ -407,7 +407,7 @@ export default function Booking() {
 
                 {tooShort && (
                   <p className="mt-5 text-[15px] text-(--color-alert)">
-                    Minimum stay is {minNights} nights — send it anyway and we will
+                    Minimum stay is {minNights} nights. Send it anyway and we will
                     see what we can do.
                   </p>
                 )}
@@ -431,7 +431,7 @@ export default function Booking() {
                     className="mt-7 border-t border-(--color-line) pt-6"
                   >
                     <input type="hidden" name="_subject"
-                      value={`Booking enquiry — ${from ? pretty(from) : ''} · ${nights} nights`} />
+                      value={`Booking enquiry, ${from ? pretty(from) : ''} · ${nights} nights`} />
                     <input type="hidden" name="_captcha" value="false" />
                     <input type="hidden" name="_template" value="box" />
                     <input type="hidden" name="_next" value={nextUrl} />
@@ -442,7 +442,7 @@ export default function Booking() {
                       value={
                         `Thank you for your enquiry about Villa 25 Ekas.\n\n` +
                         `${summaryText()}\n\n` +
-                        `This is an automatic acknowledgement — it does not confirm your ` +
+                        `This is an automatic acknowledgement. It does not confirm your ` +
                         `booking. We will write back within a day with availability and ` +
                         `how to pay the deposit.\n\n` +
                         `Villa 25 Ekas · Ekas Bay, Lombok\n${CONTACT.phoneShow}`
@@ -468,7 +468,7 @@ export default function Booking() {
                     </button>
 
                     <p className="mt-4 text-[14px] leading-relaxed text-(--color-text-soft)">
-                      This sends us your dates — it does not book or charge anything.
+                      This sends us your dates. It does not book or charge anything.
                       We confirm by email, then send deposit details.
                     </p>
 

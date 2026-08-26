@@ -31,7 +31,7 @@ export default function Guide() {
               </h2>
             </div>
             <p className="max-w-sm text-(--color-text-soft)">
-              Ekas is quiet, and that is the point — but there is more within an
+              Ekas is quiet, and that is the point. But there is more within an
               hour and a half than most people expect.
             </p>
           </div>
@@ -69,8 +69,8 @@ export default function Guide() {
           </div>
 
           <p className="label mt-14 text-(--color-text-mute)">
-            A fuller guide — history, old photographs, where to eat — is being
-            written
+            A fuller guide is being written: history, old photographs, where to
+            eat
           </p>
         </div>
       </section>

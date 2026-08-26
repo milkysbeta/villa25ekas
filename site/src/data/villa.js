@@ -51,7 +51,7 @@ export const UNITS = [
     pool: 'small',
     blurb:
       'Three rooms on the lower level, opening onto a shared kitchen and the small pool. ' +
-      'The simplest way to stay — and the closest to the water.',
+      'The simplest way to stay, and the closest to the water.',
     features: ['Shared kitchen', 'Small pool', 'Garden outlook'],
     bookable: true,
   },
@@ -243,7 +243,7 @@ export const AMENITIES = [
     items: [
       /* The 3 m depth is John's, 25 Aug 2026, and it is not a throwaway detail:
          it is what makes dive training possible here. See WATER in content.js. */
-      'Two pools — the big one 3 m deep',
+      'Two pools, the big one 3 m deep',
       'Garden and terrace',
       'Pool views',
       'Free WiFi throughout',

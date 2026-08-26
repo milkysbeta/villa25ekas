@@ -38,7 +38,7 @@ export default function Gallery() {
             </h2>
           </div>
           <p className="max-w-sm text-(--color-text-soft)">
-            More going up as the photography comes in — rooms, the pools, and the
+            More going up as the photography comes in: rooms, the pools, and the
             bay at every hour worth photographing.
           </p>
         </div>

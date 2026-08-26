@@ -32,7 +32,7 @@ const CODES = [
     code: 'FIRSTWAVE',
     label: 'Opening season',
     discount: 0.25,
-    note: 'Opening season rate — first guests only',
+    note: 'Opening season rate, first guests only',
     // TODO confirm the real cut-off with John before this goes public
     expires: '2026-12-31',
   },
@@ -51,7 +51,7 @@ export function lookup(input) {
   if (!hit) return { ok: false, reason: 'That code is not one of ours.' };
 
   if (hit.expires && new Date(hit.expires + 'T23:59:59') < new Date()) {
-    return { ok: false, reason: 'That code has expired — ask us and we will sort something out.' };
+    return { ok: false, reason: 'That code has expired. Ask us and we will sort something out.' };
   }
 
   if (hit.minNights) {

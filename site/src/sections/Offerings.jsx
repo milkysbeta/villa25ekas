@@ -46,7 +46,7 @@ const ITEMS = [
        exclamation mark. "Pretty bloody fit" stays — it is the only line on the
        site that sounds like a person rather than a brochure, and the secret
        track is the kind of detail no competitor can copy. */
-    body: 'The Beach Break welcomes you, a four minute walk away. Boats out to Inside and Outside — unless you are pretty bloody fit. There is a secret track you can take a bike up and paddle out to Inside. Local knowledge.',
+    body: 'The Beach Break welcomes you, a four minute walk away. Boats out to Inside and Outside, unless you are pretty bloody fit. There is a secret track you can take a bike up and paddle out to Inside. Local knowledge.',
   },
   {
     icon: <Sun />,
@@ -61,7 +61,7 @@ const ITEMS = [
   {
     icon: <Leaf />,
     title: 'Built from here',
-    body: 'Locally sourced hardwood for colour, strength and durability — much of it recycled. The water the house uses goes back into the gardens.',
+    body: 'Locally sourced hardwood for colour, strength and durability, much of it recycled. The water the house uses goes back into the gardens.',
   },
 ];
 

@@ -18,27 +18,27 @@ export const PAGES = [
      home, but that is a convention people who build websites know and plenty
      of guests do not — and this site is aimed partly at an older audience who
      will look for the word. */
-  { slug: '',             label: 'Home',         title: 'Villa 25 Ekas — luxury surf villas in Ekas Bay, Lombok', primary: true, bleed: true },
+  { slug: '',             label: 'Home',         title: 'Villa 25 Ekas · luxury surf villas in Ekas Bay, Lombok', primary: true, bleed: true },
 
   /* `primary` marks the ones that earn a place in the top bar. Ten links at a
      readable size do not fit a laptop header, and ten choices is a menu rather
      than a navigation. The rest are one tap away in the mobile menu and listed
      in full in the footer — reachable, just not competing. */
-  { slug: 'stay',         label: 'Stay',         title: 'Stay — Villa 25 Ekas',                  primary: true },
-  { slug: 'availability', label: 'Availability', title: 'Availability & rates — Villa 25 Ekas',  primary: true, bleed: true },
+  { slug: 'stay',         label: 'Stay',         title: 'Stay · Villa 25 Ekas',                  primary: true },
+  { slug: 'availability', label: 'Availability', title: 'Availability & rates · Villa 25 Ekas',  primary: true, bleed: true },
   /* `bleed` means the page opens with a full-bleed photograph rather than
      text, so it wants no top padding and a transparent header over it — the
      same treatment the home page has always had. Without it the surf photo
      started 96 px down the page with a band of flat ink above it. */
-  { slug: 'surf',         label: 'Surf',         title: 'Surf — Villa 25 Ekas',                  primary: true, bleed: true },
-  { slug: 'off-grid',     label: 'Off-grid',     title: 'Off the grid — Villa 25 Ekas',          primary: true },
-  { slug: 'getting-here', label: 'Getting here', title: 'Getting here — Villa 25 Ekas',          primary: true },
-  { slug: 'contact',      label: 'Contact',      title: 'Contact — Villa 25 Ekas',               primary: true },
+  { slug: 'surf',         label: 'Surf',         title: 'Surf · Villa 25 Ekas',                  primary: true, bleed: true },
+  { slug: 'off-grid',     label: 'Off-grid',     title: 'Off the grid · Villa 25 Ekas',          primary: true },
+  { slug: 'getting-here', label: 'Getting here', title: 'Getting here · Villa 25 Ekas',          primary: true },
+  { slug: 'contact',      label: 'Contact',      title: 'Contact · Villa 25 Ekas',               primary: true },
 
-  { slug: 'experiences',  label: 'Experiences',  title: 'Experiences — Villa 25 Ekas' },
-  { slug: 'gallery',      label: 'Gallery',      title: 'Gallery — Villa 25 Ekas' },
-  { slug: 'guide',        label: 'Ekas Guide',   title: 'Ekas Guide — Villa 25 Ekas' },
-  { slug: 'journal',      label: 'Journal',      title: 'Journal — Villa 25 Ekas' },
+  { slug: 'experiences',  label: 'Experiences',  title: 'Experiences · Villa 25 Ekas' },
+  { slug: 'gallery',      label: 'Gallery',      title: 'Gallery · Villa 25 Ekas' },
+  { slug: 'guide',        label: 'Ekas Guide',   title: 'Ekas Guide · Villa 25 Ekas' },
+  { slug: 'journal',      label: 'Journal',      title: 'Journal · Villa 25 Ekas' },
 ];
 
 /** Everything reachable — the mobile menu and the footer show all of these. */

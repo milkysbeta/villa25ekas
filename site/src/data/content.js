@@ -20,7 +20,7 @@
    he actually wants (a group taking the whole place, and a traveller who
    expects more) that they are in the right place.                           */
 export const POSITIONING =
-  'Definitely not a local homestay. Every effort has been made to create a luxury resort — '
+  'Definitely not a local homestay. Every effort has been made to create a luxury resort, '
   + 'for a larger group wanting to stay together and take the entire villa, or for the '
   + 'discerning traveller who expects a little more.';
 
@@ -45,7 +45,7 @@ export const BUILDING = [
     id: 'hardwood',
     title: 'Hardwood',
     body:
-      'Locally sourced hardwood timber, for colour, strength and durability — much of which '
+      'Locally sourced hardwood timber, for colour, strength and durability, much of which '
       + 'is recycled.',
   },
   {
@@ -88,14 +88,14 @@ export const WATER = [
     id: 'kite',
     title: 'Kite surfing',
     body:
-      'Kite surfers’ heaven is a few minutes away, and is renowned as one of the best — and '
-      + 'most beautiful — spots in the world.',
+      'Kite surfers’ heaven is a few minutes away, and is renowned as one of the best '
+      + 'and most beautiful spots in the world.',
   },
   {
     id: 'foil',
     title: 'Foiling',
     body:
-      'With the new trend in foiling — wing, natural and battery powered — Ekas is becoming a '
+      'With the new trend in foiling (wing, natural and battery powered), Ekas is becoming a '
       + 'mecca to learn and experience the phenomenon everybody wants to be part of.',
   },
   {
@@ -106,7 +106,7 @@ export const WATER = [
       + 'beginners and advanced divers alike. Nearby Pink Beach offers amazing snorkelling and '
       + 'beginner diving, and trips can be arranged to the best sites in Lombok.',
     footnote:
-      'Including the famous hammerhead site at Belongas Bay — an advanced dive, and best '
+      'Including the famous hammerhead site at Belongas Bay. An advanced dive, and best '
       + 'between June and October.',
     todo: 'dive instructor name, certification agency, and day rate',
   },
@@ -194,7 +194,7 @@ export const EXPERIENCES = [
     id: 'transfers',
     name: 'Airport transfers',
     blurb:
-      'We will have a driver waiting. Lombok International is about 42 km by road — an '
+      'We will have a driver waiting. Lombok International is about 42 km by road, an '
       + 'hour to an hour and a half, depending on the road.',
     priceIdr: 450_000,
     priceNote: 'per vehicle, each way',
@@ -220,7 +220,7 @@ export const JOURNAL = [
       + 'work out that the break you are looking at is the one you are about to '
       + 'paddle out on.',
     draft: true,
-    todo: 'a guest — their own words, with name and country. Ask after the first stay.',
+    todo: 'a guest: their own words, with name and country. Ask after the first stay.',
   },
   {
     id: 'building-here',
@@ -229,11 +229,11 @@ export const JOURNAL = [
     date: null,
     standfirst:
       'Local timber and stone, twelve and a half kilowatts of solar with no grid '
-      + 'behind it, water going back into the gardens — and the parts of building '
+      + 'behind it, water going back into the gardens, and the parts of building '
       + 'in someone else’s country that no amount of planning prepares you for.',
     draft: true,
     todo:
-      'John — timber species and which mill, confirm fully off-grid vs grid-tied, '
+      'John: timber species and which mill, confirm fully off-grid vs grid-tied, '
       + 'the water recycling detail, and the electric bikes.',
   },
   {
@@ -245,7 +245,7 @@ export const JOURNAL = [
       'Which break works on which tide, when the wind turns, and why the bay '
       + 'empties out at exactly the hour it gets good.',
     draft: true,
-    todo: 'surf coach — name, and the tide and wind detail for each break.',
+    todo: 'surf coach: name, and the tide and wind detail for each break.',
   },
 ];
 
@@ -304,7 +304,7 @@ export const GUIDE = [
     name: 'Selong Belanak',
     kind: 'trip',
     drive: '1.5 hrs',
-    detail: 'A long, forgiving beach — the best place on the island to learn.',
+    detail: 'A long, forgiving beach. The best place on the island to learn.',
   },
 ];
 
@@ -341,7 +341,7 @@ export const ROUTES = [
   {
     id: 'fast-boat',
     name: 'Fast boat',
-    best: 'Best with a quiver and heavy bags — most operators carry boards free, but tell them when you book.',
+    best: 'Best with a quiver and heavy bags. Most operators carry boards free, but tell them when you book.',
     legs: [
       { label: 'Crossing', detail: 'Padangbai or Sanur to Senggigi · 1.5 to 3 hrs' },
       { label: 'Road', detail: 'Senggigi to Ekas · 82 km · about 1 hr 20' },
@@ -369,7 +369,7 @@ export const ROUTES = [
     /* This is the one thing on the page that will actually strand somebody:
        ASDP closed the ticket windows at Padangbai and Lembar, so a guest who
        turns up expecting to buy a ticket cannot board. */
-    warn: 'Book online before you travel — there are no ticket counters at either port.',
+    warn: 'Book online before you travel. There are no ticket counters at either port.',
     note: 'Runs every 60 to 90 minutes, around the clock. Tickets open 60 days ahead.',
   },
   {
@@ -391,7 +391,7 @@ export const ROUTES = [
    been let down by us, not by the ferry. */
 export const ROUTES_CAVEAT =
   'Fares and crossing times are a guide, gathered mid-2026. Confirm with the '
-  + 'operator when you book — they move with the season.';
+  + 'operator when you book. They move with the season.';
 
 /* -- The neighbouring villa -----------------------------------------------
    Alison (question 10): "The neighbouring villa not our" — so it is described
@@ -405,7 +405,7 @@ export const NEIGHBOUR = {
   show: true,
   heading: 'Larger groups',
   body:
-    'There is a neighbouring villa a moment away — not ours, but run by people '
+    'There is a neighbouring villa a moment away. Not ours, but run by people '
     + 'we know. For a group too big for five rooms, tell us what you need and we '
     + 'will see what can be arranged between us.',
   enquireOnly: true,

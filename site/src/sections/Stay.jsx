@@ -65,7 +65,7 @@ export default function Stay() {
                       <span className="label-sm ml-1.5 text-(--color-text-mute)">/ night</span>
                     </p>
                     <a
-                      href={whatsappLink(`Enquiry — ${unit.name}, Villa 25 Ekas`)}
+                      href={whatsappLink(`Enquiry: ${unit.name}, Villa 25 Ekas`)}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="label-sm shrink-0 border-b border-(--color-bronze) pb-1 text-(--color-bronze-lit)"
@@ -89,7 +89,7 @@ export default function Stay() {
                 stays a choice rather than an expectation. */}
             <p className="mt-3 max-w-lg text-(--color-text-soft)">
               {PRICING.buyoutDiscount > 0
-                ? `Every room, both pools, the run of the property — `
+                ? `Every room, both pools, the run of the property, `
                   + `${Math.round(PRICING.buyoutDiscount * 100)}% off the combined rate.`
                 : 'Every room, both pools, and the run of the property. Tell us '
                   + 'your dates and how many of you there are, and we will come '
@@ -104,7 +104,7 @@ export default function Stay() {
               </>
             ) : (
               <a
-                href={whatsappLink('Villa 25 Ekas — enquiry about taking the whole property')}
+                href={whatsappLink('Villa 25 Ekas: enquiry about taking the whole property')}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="label btn btn-solid whitespace-nowrap"
@@ -146,7 +146,7 @@ export default function Stay() {
             <h3 className="text-2xl">{NEIGHBOUR.heading}</h3>
             <p className="mt-3 max-w-xl text-(--color-text-soft)">{NEIGHBOUR.body}</p>
             <a
-              href={whatsappLink('Villa 25 Ekas — enquiry for a larger group')}
+              href={whatsappLink('Villa 25 Ekas: enquiry for a larger group')}
               target="_blank"
               rel="noopener noreferrer"
               className="label btn btn-line mt-6 inline-block"
@@ -211,7 +211,7 @@ export default function Stay() {
                           : 'text-(--color-text-mute)'
                     }
                   >
-                    {r.tone === 'no' ? '—' : r.tone === 'yes' ? '·' : '·'}
+                    {r.tone === 'no' ? '–' : r.tone === 'yes' ? '·' : '·'}
                   </span>
                   <span className="text-(--color-text-soft)">{r.rule}</span>
                 </li>
@@ -226,7 +226,7 @@ export default function Stay() {
 
         {PRICING.introductory && (
           <p className="label mt-12 text-(--color-text-mute)">
-            Introductory rates — opening 2026
+            Introductory rates, opening 2026
           </p>
         )}
       </div>

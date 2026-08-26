@@ -57,7 +57,7 @@ export default function Experiences() {
 
         <div className="mt-14 border-t border-(--color-line) pt-10">
           <a
-            href={whatsappLink('Villa 25 Ekas — I would like to ask about experiences')}
+            href={whatsappLink('Villa 25 Ekas: I would like to ask about experiences')}
             target="_blank"
             rel="noopener noreferrer"
             className="label btn btn-line"
