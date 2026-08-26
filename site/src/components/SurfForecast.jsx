@@ -178,7 +178,13 @@ function blankDays(n) {
   });
 }
 
-export default function SurfForecast({ days = 5 }) {
+/* `credit` defaults to ON, and that default is deliberate. Open-Meteo's data is
+   CC-BY, so wherever this widget appears the attribution has to appear with it.
+   The main site carries it in the footer, so the surf section switches this off
+   to avoid saying it twice — but the holding page renders this component with
+   no footer at all, and there it is the only attribution there is. Leave the
+   default alone. */
+export default function SurfForecast({ days = 5, credit = true }) {
   const [state, setState] = useState({ status: 'loading', data: null });
 
   useEffect(() => {
@@ -202,7 +208,7 @@ export default function SurfForecast({ days = 5 }) {
             <DayCard key={d.date} d={d} index={i} />
           ))}
         </div>
-        <Credit />
+        {credit && <Credit />}
       </div>
 
       {!ready && (

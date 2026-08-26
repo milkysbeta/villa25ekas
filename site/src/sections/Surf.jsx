@@ -103,16 +103,29 @@ export default function Surf() {
               It also does the reading work the overlay cannot: this is the
               densest, smallest type on the page, and it lands where the
               photograph is still fading out. */}
-          {/* On a phone the panel bleeds out to the section's own padding edge
-              and puts that padding back on the inside, so the five columns keep
-              exactly the width they had before the panel existed. Inset padding
-              alone took each column down to 57 px, and the star rating is 63 —
-              the ratings and the "Period" row spilled their cells. */}
-          <div className="-mx-5 mt-16 border border-(--color-line) bg-(--color-ink)/70 px-5 py-6 backdrop-blur-xs sm:mx-0 sm:p-6 lg:p-8">
+          {/* The same wash the forecast puts behind today, scaled up to the
+              whole five days: 10 per cent bronze fading out by 70 per cent of
+              the height, and the same rounded corner. Warm rather than dark, so
+              it lifts the block off the photograph without boxing it in.
+
+              No horizontal padding on purpose. The wash lines up with the five
+              columns exactly, and side padding would squeeze them — at 375 px
+              it took each column from 67 px down to 57, and the star rating is
+              63 wide, so the ratings spilled their cells. */}
+          <div
+            className="mt-16 rounded-lg py-5 backdrop-blur-xs"
+            style={{
+              background:
+                'linear-gradient(180deg, color-mix(in srgb, var(--color-bronze) 10%, transparent), transparent 70%)',
+            }}
+          >
             <p className="mb-6 text-[15px] uppercase tracking-[0.2em] text-(--color-text-soft)">
               Five-day forecast
             </p>
-            <SurfForecast days={5} />
+            {/* The footer already credits Open-Meteo site-wide, so it is not
+                repeated here. The holding page keeps its own copy — it has no
+                footer, and the attribution is required. */}
+            <SurfForecast days={5} credit={false} />
           </div>
 
           <ul className="mt-16 grid gap-px border border-(--color-line) bg-(--color-line) sm:grid-cols-2 lg:grid-cols-4">
