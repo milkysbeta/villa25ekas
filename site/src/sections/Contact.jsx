@@ -7,11 +7,18 @@ export default function Contact() {
     <Parallax
       src={IMAGES.closing.src}
       alt={IMAGES.closing.alt}
-      speed={0.16}
-      overlay="linear-gradient(to bottom, rgba(16,14,11,.9) 0%, rgba(16,14,11,.78) 45%, rgba(16,14,11,.94) 100%)"
+      fit="width"
+      ratio="1672 / 941"
+      /* Stronger than the off-grid page, and the photograph is why. That one
+         is jungle: dark greens, nothing near white. This is a split-level shot
+         whose top half is sky and cloud, and cloud is the brightest thing a
+         camera records. At off-grid's settings body text landed at 3.29:1.
+         Measured against the blurred backdrop, these hold 4.64. */
+      overlay="linear-gradient(to bottom, rgba(16,14,11,.52) 0%, rgba(16,14,11,.58) 30%, rgba(16,14,11,.80) 62%, rgba(16,14,11,.96) 100%)"
     >
-      <section id="contact" className="px-5 py-32 lg:px-10 lg:py-44">
-        <div className="mx-auto grid max-w-[1500px] gap-16 lg:grid-cols-2 lg:gap-24">
+      <section id="contact" className="px-5 py-28 lg:px-10 lg:py-36">
+        <div className="mx-auto max-w-[1500px] rounded-xs border border-(--color-line-lit) bg-(--color-ink)/45 p-7 backdrop-blur-lg lg:p-14">
+        <div className="grid gap-16 lg:grid-cols-2 lg:gap-24">
           <div>
             <p className="label text-(--color-bronze-lit)">Get in touch</p>
             <h2 className="mt-6 text-[clamp(2.1rem,4.4vw,3.6rem)]">
@@ -56,11 +63,12 @@ export default function Contact() {
                 key={term}
                 className="flex flex-col gap-1 border-t border-(--color-line-lit) py-5 last:border-b sm:flex-row sm:items-baseline sm:gap-8"
               >
-                <dt className="label w-32 shrink-0 text-(--color-text-mute)">{term}</dt>
+                <dt className="label w-32 shrink-0 text-(--color-text-soft)">{term}</dt>
                 <dd className="text-lg">{value}</dd>
               </div>
             ))}
           </dl>
+        </div>
         </div>
       </section>
     </Parallax>

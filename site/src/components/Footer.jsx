@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { LOGO } from '../data/images.js';
+import { LOGO, MILKY, MILKY_URL } from '../data/images.js';
 import { CONTACT, whatsappLink } from '../data/villa.js';
 import { NAV_PAGES } from '../lib/routes.js';
 
@@ -95,6 +95,41 @@ export default function Footer({ page }) {
           <p className="label-sm text-(--color-text-mute)">
             © {year} Villa 25 Ekas · {CONTACT.location}
           </p>
+
+          {/* Studio credit.
+
+              The mark is painted, not placed: the PNG is used as a MASK and the
+              colour underneath is one of the page's own tokens, so it sits in
+              the palette until you point at it, then fills with the real Milky
+              red. A filter could not do this — greyscale gives a dead grey
+              rather than the site's warm tan, and no filter turns tan back into
+              exactly #E80A0A. Masking also keeps the knocked-out "MILKY"
+              lettering knocked out at every colour.
+
+              `bg-current` does the work, so the carton and the words change
+              together from the one hover rule on the link. */}
+          <a
+            href={MILKY_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2.5 text-(--color-text-mute) transition-colors hover:text-[#E80A0A]"
+          >
+            <span
+              aria-hidden="true"
+              className="block h-[22px] w-[14px] shrink-0 bg-current"
+              style={{
+                maskImage: `url(${MILKY})`,
+                WebkitMaskImage: `url(${MILKY})`,
+                maskRepeat: 'no-repeat',
+                WebkitMaskRepeat: 'no-repeat',
+                maskPosition: 'center',
+                WebkitMaskPosition: 'center',
+                maskSize: 'contain',
+                WebkitMaskSize: 'contain',
+              }}
+            />
+            <span className="label-sm">Made by Milky Design</span>
+          </a>
           {page?.slug === 'surf' && (
             <p className="label-sm text-(--color-text-mute)">
               Forecast{' '}

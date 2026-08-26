@@ -1,13 +1,39 @@
 import Price from '../components/Price.jsx';
+import Parallax from '../components/Parallax.jsx';
 import { UNITS, PRICING, buyoutRate, whatsappLink, AMENITIES, HOUSE_RULES, STAY_TIMES } from '../data/villa.js';
 import { NEIGHBOUR, BUILDING, POSITIONING } from '../data/content.js';
 import { IMAGES } from '../data/images.js';
 
 export default function Stay() {
   return (
-    <section id="stay" className="bg-(--color-ink) px-5 py-28 lg:px-10 lg:py-40">
+    <Parallax
+      src={IMAGES.stay.src}
+      alt={IMAGES.stay.alt}
+      fit="width"
+      ratio="1672 / 941"
+      /* Two zones, because this page has two kinds of text on it.
+
+         The heading block sits straight on the photograph with no pane, and it
+         lands right where the lit pool and the lamplit walls are: measured, the
+         paragraph was at 1.52:1, which is not a rounding problem, it is
+         unreadable. So the top of the wash is heavy. It then opens right up at
+         20 per cent, where the room cards start and their own frosted panes
+         take over the contrast.
+
+         Measured: heading paragraph 5.28:1, h2 8.12, eyebrow 5.44, card body
+         5.48 through its pane. */
+      overlay="linear-gradient(to bottom, rgba(16,14,11,.76) 0%, rgba(16,14,11,.74) 10%, rgba(16,14,11,.40) 20%, rgba(16,14,11,.70) 62%, rgba(16,14,11,.96) 100%)"
+    >
+    <section id="stay" className="px-5 py-28 lg:px-10 lg:py-40">
       <div className="mx-auto max-w-[1500px]">
-        <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+        {/* A soft dark halo on the only text that is not on a pane. The wash
+            above already carries this block past AA; the glow is what stops
+            individual letters disappearing into a bright highlight behind
+            them, which a flat average cannot account for. */}
+        <div
+          className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between"
+          style={{ textShadow: '0 1px 2px rgba(16,14,11,.7), 0 0 16px rgba(16,14,11,.75)' }}
+        >
           <div>
             <p className="label text-(--color-bronze-lit)">The rooms</p>
             <h2 className="mt-6 max-w-2xl text-[clamp(2.1rem,4.4vw,3.6rem)]">
@@ -28,7 +54,7 @@ export default function Stay() {
             return (
               <li
                 key={unit.id}
-                className="group flex flex-col border border-(--color-line) bg-(--color-raise) transition-colors hover:border-(--color-line-lit)"
+                className="group flex flex-col border border-(--color-line-lit) bg-(--color-ink)/45 backdrop-blur-lg transition-colors hover:border-(--color-bronze)"
               >
                 <div
                   className="aspect-4/3 w-full bg-(--color-plate) bg-cover bg-center"
@@ -38,7 +64,7 @@ export default function Stay() {
                 />
                 <div className="flex flex-1 flex-col p-7 lg:p-8">
                   {unit.count > 1 && (
-                    <p className="label-sm text-(--color-bronze)">{unit.count} rooms</p>
+                    <p className="label-sm text-(--color-bronze-lit)">{unit.count} rooms</p>
                   )}
                   <h3 className="mt-2 text-2xl">{unit.name}</h3>
                   <p className="mt-4 flex-1 text-[15.5px] text-(--color-text-soft)">
@@ -49,7 +75,7 @@ export default function Stay() {
                     {unit.features.map((f) => (
                       <li
                         key={f}
-                        className="label-sm border border-(--color-line-lit) px-2.5 py-1.5 text-(--color-text-mute)"
+                        className="label-sm border border-(--color-line-lit) px-2.5 py-1.5 text-(--color-text-soft)"
                       >
                         {f}
                       </li>
@@ -62,7 +88,7 @@ export default function Stay() {
                         amount={unit.rate}
                         className="font-(family-name:--font-display) text-2xl"
                       />
-                      <span className="label-sm ml-1.5 text-(--color-text-mute)">/ night</span>
+                      <span className="label-sm ml-1.5 text-(--color-text-soft)">/ night</span>
                     </p>
                     <a
                       href={whatsappLink(`Enquiry: ${unit.name}, Villa 25 Ekas`)}
@@ -80,7 +106,7 @@ export default function Stay() {
         </ul>
 
         {/* whole-property buyout */}
-        <div className="mt-10 flex flex-col gap-6 border border-(--color-line) bg-(--color-raise) p-8 sm:flex-row sm:items-center sm:justify-between lg:p-10">
+        <div className="mt-10 flex flex-col gap-6 rounded-xs border border-(--color-line-lit) bg-(--color-ink)/45 p-8 backdrop-blur-lg sm:flex-row sm:items-center sm:justify-between lg:p-10">
           <div>
             <h3 className="text-2xl">Take the whole place</h3>
             {/* No standard discount. Alison's decision (05), and John confirmed
@@ -100,7 +126,7 @@ export default function Stay() {
             {PRICING.buyoutDiscount > 0 ? (
               <>
                 <Price amount={buyoutRate()} className="font-(family-name:--font-display) text-3xl" />
-                <p className="label-sm mt-1 text-(--color-text-mute)">per night</p>
+                <p className="label-sm mt-1 text-(--color-text-soft)">per night</p>
               </>
             ) : (
               <a
@@ -118,7 +144,7 @@ export default function Stay() {
         {/* How the place is actually built and what it is like to be in it —
             John's words, 25 Aug 2026. After the rooms rather than before them,
             so the rates come first and this is what confirms them. */}
-        <div className="mt-16 border-t border-(--color-line) pt-12">
+        <div className="mt-6 rounded-xs border border-(--color-line-lit) bg-(--color-ink)/45 backdrop-blur-lg p-7 lg:p-10">
           <h3 className="max-w-xl text-[clamp(1.7rem,3.2vw,2.4rem)] font-normal">
             Built for the light,
             <br />
@@ -127,7 +153,7 @@ export default function Stay() {
           <ul className="mt-10 grid gap-x-12 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
             {BUILDING.map((b) => (
               <li key={b.id}>
-                <p className="label border-b border-(--color-line-lit) pb-3 text-(--color-bronze)">
+                <p className="label border-b border-(--color-line-lit) pb-3 text-(--color-bronze-lit)">
                   {b.title}
                 </p>
                 <p className="mt-4 text-[15.5px] leading-relaxed text-(--color-text-soft)">
@@ -160,13 +186,13 @@ export default function Stay() {
             so these are confirmed rather than assumed. Stated plainly, because
             every one of them is better read before booking than discovered on
             arrival. */}
-        <div className="mt-16 grid gap-12 border-t border-(--color-line) pt-12 lg:grid-cols-[1.6fr_1fr] lg:gap-20">
+        <div className="mt-6 grid gap-12 rounded-xs border border-(--color-line-lit) bg-(--color-ink)/45 backdrop-blur-lg p-7 lg:grid-cols-[1.6fr_1fr] lg:gap-20 lg:p-10">
           <div>
             <h3 className="text-2xl">What is here</h3>
             <div className="mt-8 grid gap-10 sm:grid-cols-3">
               {AMENITIES.map((g) => (
                 <div key={g.group}>
-                  <p className="label border-b border-(--color-line) pb-3 text-(--color-bronze)">
+                  <p className="label border-b border-(--color-line-lit) pb-3 text-(--color-bronze-lit)">
                     {g.group}
                   </p>
                   <ul className="mt-4 flex flex-col gap-2">
@@ -208,7 +234,7 @@ export default function Stay() {
                         ? 'text-(--color-alert)'
                         : r.tone === 'yes'
                           ? 'text-(--color-reef)'
-                          : 'text-(--color-text-mute)'
+                          : 'text-(--color-text-soft)'
                     }
                   >
                     {r.tone === 'no' ? '–' : r.tone === 'yes' ? '·' : '·'}
@@ -218,18 +244,19 @@ export default function Stay() {
               ))}
             </ul>
 
-            <p className="mt-6 text-[14px] text-(--color-text-mute)">
+            <p className="mt-6 text-[14px] text-(--color-text-soft)">
               {STAY_TIMES.note}
             </p>
           </div>
         </div>
 
         {PRICING.introductory && (
-          <p className="label mt-12 text-(--color-text-mute)">
+          <p className="label mt-12 text-(--color-text-soft)">
             Introductory rates, opening 2026
           </p>
         )}
       </div>
     </section>
+    </Parallax>
   );
 }

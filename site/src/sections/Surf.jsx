@@ -56,7 +56,7 @@ export default function Surf() {
          66 per cent over the photograph is as light as this image allows: it
          holds the 95th-percentile contrast at about 4.5:1, and every step
          lighter takes body text under the line. */
-      overlay="linear-gradient(to bottom, rgba(16,14,11,.66) 0%, rgba(16,14,11,.74) 20%, rgba(16,14,11,.90) 38%, rgba(16,14,11,.97) 100%)"
+      overlay="linear-gradient(to bottom, rgba(16,14,11,.60) 0%, rgba(16,14,11,.68) 20%, rgba(16,14,11,.88) 38%, rgba(16,14,11,.97) 100%)"
     >
       {/* A soft shadow on everything that sits straight on the photograph.
           The overlay handles the general case; this covers the few places
@@ -66,7 +66,7 @@ export default function Surf() {
       <section
         id="surf"
         className="px-5 py-28 lg:px-10 lg:py-40"
-        style={{ textShadow: '0 1px 2px rgba(16,14,11,.85), 0 0 14px rgba(16,14,11,.55)' }}
+        style={{ textShadow: '0 1px 2px rgba(16,14,11,.9), 0 0 10px rgba(16,14,11,.85), 0 0 26px rgba(16,14,11,.7)' }}
       >
         <div className="mx-auto max-w-[1500px]">
           <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">

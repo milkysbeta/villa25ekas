@@ -148,14 +148,12 @@ export default function Booking() {
          not translate. */
       fit="width"
       ratio="1672 / 941"
-      /* Lighter at the top where the photograph is, closing to solid below it.
-
-         The first guess at these stops was lighter still, and measuring it
-         killed that: the white sand runs right across the frame about an eighth
-         of the way down, and body text over it came out at 4.48:1 — under the
-         line by a hair. Swept the band at half-percent steps against the
-         image's 95th-percentile brightness; these stops hold 5.07:1. */
-      overlay="linear-gradient(to bottom, rgba(16,14,11,.72) 0%, rgba(16,14,11,.79) 20%, rgba(16,14,11,.93) 38%, rgba(16,14,11,.98) 100%)"
+      /* Opened up now the calendar and the enquiry panel are frosted glass
+         rather than text sitting straight on the photograph. The panes carry
+         the contrast, so the wash behind them can halve and let the water
+         through. Measured against the blurred backdrop with a 45 per cent pane
+         over it: body text 4.61:1. */
+      overlay="linear-gradient(to bottom, rgba(16,14,11,.48) 0%, rgba(16,14,11,.54) 30%, rgba(16,14,11,.82) 62%, rgba(16,14,11,.96) 100%)"
     >
       <section
         id="booking"
@@ -177,7 +175,7 @@ export default function Booking() {
         <div className="mt-14 grid gap-10 lg:grid-cols-[1.55fr_1fr] lg:gap-14">
 
           {/* ------------------------------- calendar ------------------------------ */}
-          <div className="border border-(--color-line) bg-(--color-ink) p-5 lg:p-8">
+          <div className="rounded-xs border border-(--color-line-lit) bg-(--color-ink)/45 backdrop-blur-lg p-5 lg:p-8">
             <div className="flex flex-wrap gap-2">
               {[{ id: 'all', name: 'Any room' }, ...UNITS].map((u) => (
                 <button
@@ -277,7 +275,7 @@ export default function Booking() {
           </div>
 
           {/* ------------------------------- summary ------------------------------- */}
-          <aside className="flex h-fit flex-col border border-(--color-line) bg-(--color-raise) p-7 lg:sticky lg:top-28 lg:p-8">
+          <aside className="flex h-fit flex-col rounded-xs border border-(--color-line-lit) bg-(--color-ink)/45 backdrop-blur-lg p-7 lg:sticky lg:top-28 lg:p-8">
 
             {sent ? (
               <div>

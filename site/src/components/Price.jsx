@@ -20,8 +20,12 @@ export default function Price({ amount, className = '' }) {
   return (
     <span className={className}>
       <span className="tabular-nums">{formatIdr(amount)}</span>
+      {/* text-soft rather than text-mute. This is 14 px and it is a price, so
+          it has to be readable, and both the stay and availability pages now
+          put it on a transparent pane over a photograph, where text-mute
+          measures 2.68:1 against 4.96 for text-soft. */}
       {converted && (
-        <span className="ml-2 text-sm text-(--color-text-mute) tabular-nums">≈ {converted}</span>
+        <span className="ml-2 text-sm text-(--color-text-soft) tabular-nums">≈ {converted}</span>
       )}
     </span>
   );

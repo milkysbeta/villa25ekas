@@ -37,6 +37,27 @@
         sessionStorage.removeItem('v25-reloaded');
       });
     </script>
+    <!-- Fonts, fetched before the stylesheet asks for them.
+
+         Without this the browser cannot know a webfont is needed until it has
+         downloaded and parsed app.css, found the @font-face, then matched it to
+         text it has already laid out. That is three round trips deep, and the
+         headings visibly reflow when the real face lands.
+
+         Only the two that actually set type are preloaded. Yeseva One is the
+         villa name and every h1; Priestacy is the h2 line. The rest of the
+         faces in the stacks are fallbacks and should stay lazy — preloading a
+         font nobody sees is worse than not preloading at all.
+
+         `crossorigin` is required even same-origin: fonts are fetched in CORS
+         mode, and without it the preload is discarded and fetched a second
+         time. `as="font"` sets the right priority.
+
+         These live in public/ rather than src/assets so their URLs are stable.
+         A hashed filename cannot be named in a static preload tag. -->
+    <link rel="preload" href="/fonts/YesevaOne.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/Priestacy.otf" as="font" type="font/otf" crossorigin />
+
     <title>Villa 25 Ekas · Off-grid surf villas in Ekas Bay, Lombok</title>
     <meta name="description" content="Five rooms above Ekas Bay, East Lombok. Run entirely on solar, built from locally sourced hardwood, four minutes from the sand." />
     <meta name="theme-color" content="#12100C" />

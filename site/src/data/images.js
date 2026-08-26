@@ -40,7 +40,17 @@ export const IMAGES = {
      NOT EKAS — see the note in Availability.jsx. The alt text says what the
      picture shows rather than claiming it is the villa's own beach. */
   availability: { src: `${B}images/availability.jpg`, min: '2400×1350', alt: 'A reef-fringed beach in the Lombok islands, seen from the air' },
-  closing: { src: `${B}images/closing.jpg`, min: '2400×1350', alt: 'The pool after dark' },
+  /* Supplied 26 Aug 2026 as diving.png, 1672×941. A freediver and a bait ball,
+     not the villa. See the note in Contact.jsx. */
+  closing: { src: `${B}images/closing.jpg`, min: '2400×1350', alt: 'A freediver beside a bait ball, with an outrigger boat on the surface above' },
+
+  /* Getting here. Supplied 26 Aug 2026 as waterfall.png, 1672×941. */
+  journey: { src: `${B}images/journey.jpg`, min: '2400×1350', alt: 'A jungle waterfall falling into a pool over mossy rock' },
+
+  /* Stay page background. Supplied 26 Aug 2026 as "villa and pool.png",
+     1672×941. A night shot, so it is far darker than the other supplied
+     images and needs much less overlay to stay readable. */
+  stay: { src: `${B}images/stay.jpg`, min: '2400×1350', alt: 'A villa at dusk, warm light behind timber doors and a lit pool in the courtyard' },
 
   /* The rooms. Keys match unit ids in villa.js. */
   'garden-rooms':        { src: `${B}images/garden-rooms.jpg`,        min: '1200×900', alt: 'One of the garden rooms' },
@@ -49,3 +59,11 @@ export const IMAGES = {
 };
 
 export const LOGO = `${B}logo.png`;
+
+/* The studio mark in the footer. Used as a CSS mask rather than an <img>, so
+   it can be painted in the page's own colours until hover. */
+export const MILKY = `${B}images/milky.png`;
+
+/* Where the credit points. Change this to the Milky Design site when it is
+   live; it goes to the studio's Instagram for now. */
+export const MILKY_URL = 'https://www.instagram.com/milkysbeta/';

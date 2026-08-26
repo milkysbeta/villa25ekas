@@ -225,22 +225,22 @@
 /* -- free, SIL Open Font License: commercial use and web embedding, no fee -- */
 @font-face {
   font-family: 'Fraunces';
-  src: url('../assets/fonts/Fraunces.woff2') format('woff2');
+  src: url('/fonts/Fraunces.woff2') format('woff2');
   font-weight: 400; font-style: normal; font-display: swap;
 }
 @font-face {
   font-family: 'Yeseva One';
-  src: url('../assets/fonts/YesevaOne.woff2') format('woff2');
+  src: url('/fonts/YesevaOne.woff2') format('woff2');
   font-weight: 400; font-style: normal; font-display: swap;
 }
 @font-face {
   font-family: 'Parisienne';
-  src: url('../assets/fonts/Parisienne.woff2') format('woff2');
+  src: url('/fonts/Parisienne.woff2') format('woff2');
   font-weight: 400; font-style: normal; font-display: swap;
 }
 @font-face {
   font-family: 'Great Vibes';
-  src: url('../assets/fonts/GreatVibes.woff2') format('woff2');
+  src: url('/fonts/GreatVibes.woff2') format('woff2');
   font-weight: 400; font-style: normal; font-display: swap;
 }
 
@@ -255,12 +255,12 @@
    mid-word. The paid release includes digits. */
 @font-face {
   font-family: 'Transcity';
-  src: url('../assets/fonts/Transcity.otf') format('opentype');
+  src: url('/fonts/Transcity.otf') format('opentype');
   font-weight: 400; font-style: normal; font-display: swap;
 }
 @font-face {
   font-family: 'Priestacy';
-  src: url('../assets/fonts/Priestacy.otf') format('opentype');
+  src: url('/fonts/Priestacy.otf') format('opentype');
   font-weight: 400; font-style: normal; font-display: swap;
 }
 

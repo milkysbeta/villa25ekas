@@ -1,6 +1,8 @@
 import { CONTACT, TRANSFER } from '../data/villa.js';
 import { ROUTES, ROUTES_CAVEAT } from '../data/content.js';
 import EkasMap from '../components/EkasMap.jsx';
+import Parallax from '../components/Parallax.jsx';
+import { IMAGES } from '../data/images.js';
 import { formatIdr } from '../lib/currency.js';
 
 const MAPS = `https://www.google.com/maps/search/?api=1&query=${CONTACT.coords.lat},${CONTACT.coords.lng}`;
@@ -13,7 +15,24 @@ const MAPS = `https://www.google.com/maps/search/?api=1&query=${CONTACT.coords.l
    rather than guessing. A wrong ferry price strands somebody. */
 export default function Journey() {
   return (
-    <section id="journey" className="bg-(--color-ink) px-5 pb-28 pt-14 lg:px-10 lg:pb-40 lg:pt-20">
+    <Parallax
+      src={IMAGES.journey.src}
+      alt={IMAGES.journey.alt}
+      fit="width"
+      ratio="1672 / 941"
+      /* The waterfall is a bright white column straight down the middle of the
+         frame, so this is not as light as the night shot on the stay page. The
+         panes below carry the contrast; measured against the blurred backdrop
+         with a 45 per cent pane, body text holds 6.05:1. */
+      overlay="linear-gradient(to bottom, rgba(16,14,11,.50) 0%, rgba(16,14,11,.56) 30%, rgba(16,14,11,.84) 62%, rgba(16,14,11,.96) 100%)"
+    >
+    {/* The heading and the fares caveat sit straight on the photograph rather
+        than on a pane, so they get the halo. */}
+    <section
+      id="journey"
+      className="px-5 pb-28 pt-14 lg:px-10 lg:pb-40 lg:pt-20"
+      style={{ textShadow: '0 1px 2px rgba(16,14,11,.85), 0 0 16px rgba(16,14,11,.75)' }}
+    >
       <div className="mx-auto max-w-[1500px]">
         <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
           <div>
@@ -30,9 +49,9 @@ export default function Journey() {
 
         <EkasMap className="mt-9 lg:mt-11" />
 
-        <ul className="mt-14 grid gap-px border border-(--color-line) bg-(--color-line) sm:grid-cols-2 lg:grid-cols-4">
+        <ul className="mt-14 grid gap-px overflow-hidden rounded-xs border border-(--color-line-lit) bg-(--color-line-lit) sm:grid-cols-2 lg:grid-cols-4">
           {ROUTES.map((r, i) => (
-            <li key={r.id} className="bg-(--color-raise) p-8 lg:p-9">
+            <li key={r.id} className="bg-(--color-ink)/45 p-8 backdrop-blur-lg lg:p-9">
               <span className="idx">{String(i + 1).padStart(2, '0')}</span>
               <h3 className="mt-3 text-2xl">{r.name}</h3>
               <p className="mt-4 text-[15.5px] text-(--color-text-soft)">{r.best}</p>
@@ -62,7 +81,7 @@ export default function Journey() {
               )}
 
               {r.note && (
-                <p className="mt-3 text-[14px] text-(--color-text-mute)">{r.note}</p>
+                <p className="mt-3 text-[14px] text-(--color-text-soft)">{r.note}</p>
               )}
 
               {r.links?.length > 0 && (
@@ -85,7 +104,7 @@ export default function Journey() {
           ))}
         </ul>
 
-        <p className="mt-6 text-[14px] text-(--color-text-mute)">{ROUTES_CAVEAT}</p>
+        <p className="mt-6 text-[14px] text-(--color-text-soft)">{ROUTES_CAVEAT}</p>
 
         <div className="mt-10 flex flex-col gap-6 border border-(--color-line) bg-(--color-raise) p-8 sm:flex-row sm:items-center sm:justify-between lg:p-10">
           <div>
@@ -115,5 +134,6 @@ export default function Journey() {
         </a>
       </div>
     </section>
+    </Parallax>
   );
 }

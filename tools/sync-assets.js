@@ -18,10 +18,13 @@ const PUBLIC = path.join(ROOT, 'site', 'public');
 /* [source in images/, destination in site/public/] */
 const MAP = [
   ['logo/villa-logo-640.png', 'logo.png'],
+  ['logo/milky.png',          'images/milky.png'],
   ['01-hero/hero.jpg',        'images/hero.jpg'],
   ['02-welcome/welcome.jpg',  'images/welcome.jpg'],
   ['05-offgrid/offgrid.jpg',  'images/offgrid.jpg'],
   ['04-surf/surf.jpg',        'images/surf.jpg'],
+  ['03-rooms/stay.jpg',       'images/stay.jpg'],
+  ['06-journey/journey.jpg',  'images/journey.jpg'],
   ['08-availability/availability.jpg', 'images/availability.jpg'],
   ['07-gallery/closing.jpg',  'images/closing.jpg'],
   ['06-journey/map.png',      'images/map.png'],
