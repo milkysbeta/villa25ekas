@@ -49,8 +49,6 @@ export default function Stay() {
           <p className="max-w-sm text-(--color-text-soft)">{POSITIONING}</p>
         </div>
 
-        <CurrencyPicker className="mt-12" />
-
         <ul className="mt-16 grid gap-8 lg:grid-cols-3">
           {UNITS.map((unit) => {
             const img = IMAGES[unit.id];
@@ -125,22 +123,35 @@ export default function Stay() {
                   + 'back with a price.'}
             </p>
           </div>
-          <div className="shrink-0 sm:text-right">
+          {/* The call to action and the currency picker share the right-hand
+              end, with a hairline between them. They are not the same kind of
+              thing — one sends an enquiry, the other only changes how the
+              numbers above are written — so the rule keeps them from reading as
+              a pair of buttons. It turns horizontal when the row stacks on a
+              phone, because a vertical rule between stacked items is a wall. */}
+          <div className="flex shrink-0 flex-col items-stretch gap-5 sm:flex-row sm:items-center sm:gap-6">
             {PRICING.buyoutDiscount > 0 ? (
-              <>
+              <div className="sm:text-right">
                 <Price amount={buyoutRate()} className="font-(family-name:--font-display) text-3xl" />
                 <p className="label-sm mt-1 text-(--color-text-soft)">per night</p>
-              </>
+              </div>
             ) : (
               <a
                 href={whatsappLink('Villa 25 Ekas: enquiry about taking the whole property')}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="label btn btn-solid whitespace-nowrap"
+                className="label btn btn-solid whitespace-nowrap text-center"
               >
                 Ask for a price
               </a>
             )}
+
+            <span
+              aria-hidden="true"
+              className="h-px w-full bg-(--color-line-lit) sm:h-10 sm:w-px"
+            />
+
+            <CurrencyPicker />
           </div>
         </div>
 

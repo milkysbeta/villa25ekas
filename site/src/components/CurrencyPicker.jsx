@@ -31,7 +31,7 @@ export default function CurrencyPicker({ className = '', label = 'Show prices in
         id={id}
         value={currency}
         onChange={(e) => setCurrency(e.target.value)}
-        className="cursor-pointer rounded-xs border border-(--color-line-lit) px-3 py-2 text-[14px] uppercase tracking-[0.1em] text-(--color-text) hover:border-(--color-bronze)"
+        className="cursor-pointer rounded-xs border border-(--color-line-lit) px-3 py-3 text-[14px] uppercase tracking-[0.1em] text-(--color-text) hover:border-(--color-bronze)"
         /* Inline, because the Tailwind opacity form of this
            (`bg-(--color-ink)/45`) is not emitted into the stylesheet in this
            project and the control ends up fully transparent. */
