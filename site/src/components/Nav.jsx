@@ -4,17 +4,16 @@ import { Link, NavLink, useLocation } from 'react-router-dom';
 import { LOGO } from '../data/images.js';
 import { whatsappLink } from '../data/villa.js';
 import { CURRENCIES } from '../lib/currency.js';
-import { NAV_PAGES, PRIMARY_PAGES, pageFor } from '../lib/routes.js';
+import { NAV_PAGES, PRIMARY_PAGES } from '../lib/routes.js';
 
 export default function Nav({ currency, onCurrency }) {
   const [open, setOpen] = useState(false);
-  const [solid, setSolid] = useState(false);
   const { pathname } = useLocation();
 
-  /* Transparent over a page that opens with a photograph, filled in everywhere
-     else and once you scroll. A page opening with text needs the header solid
-     from the first pixel or the two collide. */
-  const overPhoto = pageFor(pathname).bleed === true;
+  /* The bar looks the same everywhere and at every scroll position. It used to
+     start transparent over a page that opened with a photograph and fill in once
+     you scrolled, which meant the same bar had two appearances on one page and
+     changed under you as you read. One appearance is easier to trust. */
 
   /* The bar gets out of the way going down the page and comes back the moment
      you scroll up, which is where someone reaches for navigation anyway.
@@ -30,7 +29,6 @@ export default function Nav({ currency, onCurrency }) {
     let last = window.scrollY;
     const onScroll = () => {
       const y = window.scrollY;
-      setSolid(y > 80);
       const dy = y - last;
       if (Math.abs(dy) > 6) {
         setHidden(dy > 0 && y > 140);
@@ -52,8 +50,6 @@ export default function Nav({ currency, onCurrency }) {
     return () => { document.body.style.overflow = ''; };
   }, [open]);
 
-  const filled = solid || open || !overPhoto;
-
   return (
     <header
       /* The hide distance is an inline style rather than a Tailwind arbitrary
@@ -73,16 +69,10 @@ export default function Nav({ currency, onCurrency }) {
            here — the utility simply does not appear in the built stylesheet, so
            the bar rendered fully transparent with its border falling back to
            currentColor. An inline value cannot be dropped by a scanner. */
-        ...(filled
-          ? {
-            backgroundColor: 'color-mix(in oklab, var(--color-ink) 72%, transparent)',
-            backdropFilter: 'blur(24px)',
-            WebkitBackdropFilter: 'blur(24px)',
-            borderBottom: '1px solid var(--color-line-lit)',
-          }
-          : {
-            backgroundImage: 'linear-gradient(to bottom, rgba(0,0,0,.55), transparent)',
-          }),
+        backgroundColor: 'color-mix(in oklab, var(--color-ink) 72%, transparent)',
+        backdropFilter: 'blur(24px)',
+        WebkitBackdropFilter: 'blur(24px)',
+        borderBottom: '1px solid var(--color-line-lit)',
       }}
       className="fixed inset-x-0 top-0 z-50 transition-[translate,background-color] duration-500 ease-out"
     >

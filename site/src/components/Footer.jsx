@@ -98,36 +98,26 @@ export default function Footer({ page }) {
 
           {/* Studio credit.
 
-              The mark is painted, not placed: the PNG is used as a MASK and the
-              colour underneath is one of the page's own tokens, so it sits in
-              the palette until you point at it, then fills with the real Milky
-              red. A filter could not do this — greyscale gives a dead grey
-              rather than the site's warm tan, and no filter turns tan back into
-              exactly #E80A0A. Masking also keeps the knocked-out "MILKY"
-              lettering knocked out at every colour.
+              The mark is a real image with the colour drained out of it, not a
+              masked silhouette. Masking was the first attempt and it was wrong:
+              a mask uses alpha, and in this file the "MILKY" lettering is opaque
+              white rather than knocked through, so every detail collapsed into
+              one flat shape.
 
-              `bg-current` does the work, so the carton and the words change
-              together from the one hover rule on the link. */}
+              `saturate(0)` takes the colour out and leaves the drawing. The
+              brightness goes with it because pure red desaturates to about
+              rgb(57,57,57), which on this footer is very nearly invisible —
+              2.2x lifts the carton into the same tonal range as the text
+              beside it. Hover restores the real thing.
+
+              The words do not change. Only the mark does. */}
           <a
             href={MILKY_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2.5 text-(--color-text-mute) transition-colors hover:text-[#E80A0A]"
+            className="group flex items-center gap-2.5 text-(--color-text-mute)"
           >
-            <span
-              aria-hidden="true"
-              className="block h-[22px] w-[14px] shrink-0 bg-current"
-              style={{
-                maskImage: `url(${MILKY})`,
-                WebkitMaskImage: `url(${MILKY})`,
-                maskRepeat: 'no-repeat',
-                WebkitMaskRepeat: 'no-repeat',
-                maskPosition: 'center',
-                WebkitMaskPosition: 'center',
-                maskSize: 'contain',
-                WebkitMaskSize: 'contain',
-              }}
-            />
+            <img src={MILKY} alt="" width="42" height="66" className="milky-mark" />
             <span className="label-sm">Made by Milky Design</span>
           </a>
           {page?.slug === 'surf' && (
