@@ -44,8 +44,46 @@ const ROUTES = {
   fast: { label: 'Fast boat', detail: '82.5 km · 1 hr 20', color: '#DCBB83', dash: [1, 1.5] },
 };
 
-const ISLAND_BOUNDS = [[115.79, -9.04], [116.75, -8.18]];
+/* Not the whole of Lombok. The frame is about 2:1 and the island is close to
+   square, so fitting all of it lets the latitude axis decide the zoom and
+   leaves the long sides filled with Bali and Sumbawa while the subject sits
+   small in the middle.
+
+   These bounds cover what the page is about instead — the three ways in, the
+   villa, and Rinjani as the landmark that orients everything — and land at
+   zoom 9.57 rather than 8.81. Nearly 1.7x the scale, with all five markers
+   still in frame; checked, not assumed. */
+const ISLAND_BOUNDS = [[115.95, -8.98], [116.62, -8.40]];
 const BAY_BOUNDS = [[116.383, -8.962], [116.517, -8.856]];
+
+/* Camera framing, in one place and used by both the first paint and the view
+   switch. It used to be two: the map was CONSTRUCTED at a hardcoded zoom of
+   8.81 and only the button computed a fit. That opening zoom was wide enough
+   to put Bali on one edge and Sumbawa on the other, so the island the page is
+   about arrived small and surrounded by sea, and only tightened once somebody
+   pressed a button they had no reason to press.
+
+   Fitting the same bounds on load lands it around zoom 10 instead. */
+const ISLAND_PADDING = { top: 70, right: 55, bottom: 90, left: 55 };
+const BAY_PADDING = { top: 70, right: 55, bottom: 70, left: 55 };
+
+/* fitBounds picks whichever axis is tighter, which leaves slack on the other.
+   A fifth again closes that gap without pushing the coast off frame. */
+const ISLAND_FILL = Math.log2(1.2);
+
+function cameraFor(map, view) {
+  const camera = map.cameraForBounds(
+    view === 'island' ? ISLAND_BOUNDS : BAY_BOUNDS,
+    { padding: view === 'island' ? ISLAND_PADDING : BAY_PADDING },
+  );
+  if (!camera) return null;
+  return {
+    ...camera,
+    zoom: view === 'island' ? camera.zoom + ISLAND_FILL : camera.zoom,
+    pitch: view === 'island' ? 38 : 25,
+    bearing: view === 'island' ? -8 : -4,
+  };
+}
 const featureCollection = (features) => ({ type: 'FeatureCollection', features });
 
 async function warmMapStyle() {
@@ -221,6 +259,10 @@ export default function EkasMap({ className = '' }) {
       map.addControl(new maplibregl.NavigationControl({ showCompass: true }), 'bottom-right');
       map.on('load', async () => {
         if (disposed) return;
+        /* Frame the island before the first paint. cameraForBounds needs the
+           container measured, which it is by the time load fires. */
+        const opening = cameraFor(map, 'island');
+        if (opening) map.jumpTo(opening);
         addTerrain(map);
         addEditorialLabels(map);
         markers = addPlaceMarkers(map);
@@ -241,18 +283,8 @@ export default function EkasMap({ className = '' }) {
     const map = mapRef.current;
     setView(next);
     if (!map) return;
-    const bounds = next === 'island' ? ISLAND_BOUNDS : BAY_BOUNDS;
-    const padding = next === 'island'
-      ? { top: 70, right: 55, bottom: 90, left: 55 }
-      : { top: 70, right: 55, bottom: 70, left: 55 };
-    const camera = map.cameraForBounds(bounds, { padding });
-    map.easeTo({
-      ...camera,
-      zoom: next === 'island' ? camera.zoom + Math.log2(1.2) : camera.zoom,
-      pitch: next === 'island' ? 38 : 25,
-      bearing: next === 'island' ? -8 : -4,
-      duration: 1000,
-    });
+    const camera = cameraFor(map, next);
+    if (camera) map.easeTo({ ...camera, duration: 1000 });
   }
 
   function toggleRoute(key) {

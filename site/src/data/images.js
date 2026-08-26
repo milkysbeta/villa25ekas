@@ -19,40 +19,44 @@ const B = import.meta.env.BASE_URL;
 export const IMAGES = {
   /* The sunset exterior with the pool in the foreground — the one that opens
      the site. Wants to be wide, and to have some sky. */
-  hero: { src: `${B}images/hero.jpg`, min: '2400×1350', alt: 'Villa 25 Ekas at dusk, looking across the pool' },
+  hero: { src: `${B}images/hero.webp`, min: '2400×1350', alt: 'Villa 25 Ekas at dusk, looking across the pool' },
 
   /* The second exterior, hung on the right of the welcome section and faded
      into the background on its left edge. Portrait or square works best. */
-  welcome: { src: `${B}images/welcome.jpg`, min: '1600×1800', alt: 'The villa and gardens in the evening' },
+  welcome: { src: `${B}images/welcome.webp`, min: '1600×1800', alt: 'The villa and gardens in the evening' },
 
   /* Section backgrounds — these sit behind text and move on scroll, so they
      want to be calm. Avoid anything with a busy left third. */
   /* Supplied 26 Aug 2026 as temple.png, 1672×941. NOT solar panels and NOT
      the villa — see the note in OffGrid.jsx. Alt text describes the picture. */
-  offgrid: { src: `${B}images/offgrid.jpg`, min: '2400×1350', alt: 'A Balinese-style temple gate and lotus pond in the jungle' },
+  offgrid: { src: `${B}images/offgrid.webp`, min: '2400×1350', alt: 'A Balinese-style temple gate and lotus pond in the jungle' },
   /* Supplied 26 Aug 2026 at 1672×941, which is under the size below. It is
      behind a heavy overlay so the softness does not show much, but a larger
      export would be better on a wide screen — the section is taller than it is
      wide, so `cover` scales this up a long way. */
-  surf:    { src: `${B}images/surf.jpg`,    min: '2400×1350', alt: 'A surfer on a right-hander at Ekas, with the sea stack behind' },
+  surf:    { src: `${B}images/surf.webp`,    min: '2400×1350', alt: 'A surfer on a right-hander at Ekas, with the sea stack behind' },
 
   /* Availability page. Supplied 26 Aug 2026 at 1672×941.
      NOT EKAS — see the note in Availability.jsx. The alt text says what the
      picture shows rather than claiming it is the villa's own beach. */
-  availability: { src: `${B}images/availability.jpg`, min: '2400×1350', alt: 'A reef-fringed beach in the Lombok islands, seen from the air' },
+  availability: { src: `${B}images/availability.webp`, min: '2400×1350', alt: 'A reef-fringed beach in the Lombok islands, seen from the air' },
   /* Supplied 26 Aug 2026 as diving.png, 1672×941. A freediver and a bait ball,
      not the villa. See the note in Contact.jsx. */
-  closing: { src: `${B}images/closing.jpg`, min: '2400×1350', alt: 'A freediver beside a bait ball, with an outrigger boat on the surface above' },
+  closing: { src: `${B}images/closing.webp`, min: '2400×1350', alt: 'A freediver beside a bait ball, with an outrigger boat on the surface above' },
 
   /* Getting here. Supplied 26 Aug 2026 as waterfall.png, 1672×941. */
-  journey: { src: `${B}images/journey.jpg`, min: '2400×1350', alt: 'A jungle waterfall falling into a pool over mossy rock' },
+  journey: { src: `${B}images/journey.webp`, min: '2400×1350', alt: 'A jungle waterfall falling into a pool over mossy rock' },
 
   /* Stay page background. Supplied 26 Aug 2026 as "villa and pool.png",
      1672×941. A night shot, so it is far darker than the other supplied
      images and needs much less overlay to stay readable. */
-  stay: { src: `${B}images/stay.jpg`, min: '2400×1350', alt: 'A villa at dusk, warm light behind timber doors and a lit pool in the courtyard' },
+  stay: { src: `${B}images/stay.webp`, min: '2400×1350', alt: 'A villa at dusk, warm light behind timber doors and a lit pool in the courtyard' },
 
-  /* The rooms. Keys match unit ids in villa.js. */
+  /* The rooms. Keys match unit ids in villa.js.
+     Still .jpg because no photograph has been supplied yet: the WebP versions
+     are produced from the JPEGs by tools/optimise-images.mjs, so there is
+     nothing to point at until the files exist. Run that after adding them and
+     switch these three. */
   'garden-rooms':        { src: `${B}images/garden-rooms.jpg`,        min: '1200×900', alt: 'One of the garden rooms' },
   'two-bedroom':         { src: `${B}images/two-bedroom.jpg`,         min: '1200×900', alt: 'The two-bedroom villa' },
   'upstairs-apartment':  { src: `${B}images/upstairs-apartment.jpg`,  min: '1200×900', alt: 'The upstairs apartment' },

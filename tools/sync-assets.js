@@ -17,7 +17,9 @@ const PUBLIC = path.join(ROOT, 'site', 'public');
 
 /* [source in images/, destination in site/public/] */
 const MAP = [
-  ['logo/villa-logo-640.png', 'logo.png'],
+  /* 192 px, not 640. The mark renders 56 px in the nav and 72 in the footer,
+     on every page; the 640 px file was 372 kB to draw it. */
+  ['logo/villa-logo-192.png', 'logo.png'],
   ['logo/milky.png',          'images/milky.png'],
   ['01-hero/hero.jpg',        'images/hero.jpg'],
   ['02-welcome/welcome.jpg',  'images/welcome.jpg'],
