@@ -14,9 +14,13 @@
 export const BASENAME = '/demo';
 
 export const PAGES = [
-  { slug: '',             label: 'Home',         title: 'Villa 25 Ekas — luxury surf villas in Ekas Bay, Lombok', nav: false },
+  /* Home earns a link of its own as well as the logo. The logo has always gone
+     home, but that is a convention people who build websites know and plenty
+     of guests do not — and this site is aimed partly at an older audience who
+     will look for the word. */
+  { slug: '',             label: 'Home',         title: 'Villa 25 Ekas — luxury surf villas in Ekas Bay, Lombok', primary: true },
 
-  /*  marks the six that earn a place in the top bar. Ten links at a
+  /* `primary` marks the ones that earn a place in the top bar. Ten links at a
      readable size do not fit a laptop header, and ten choices is a menu rather
      than a navigation. The rest are one tap away in the mobile menu and listed
      in full in the footer — reachable, just not competing. */
@@ -36,7 +40,7 @@ export const PAGES = [
 /** Everything reachable — the mobile menu and the footer show all of these. */
 export const NAV_PAGES = PAGES.filter((p) => p.nav !== false);
 
-/** The six in the desktop top bar. */
+/** The seven in the desktop top bar. */
 export const PRIMARY_PAGES = NAV_PAGES.filter((p) => p.primary);
 
 /** Slugs the build must write an index.html for. */

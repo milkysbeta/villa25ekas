@@ -28,7 +28,11 @@ export const IMAGES = {
   /* Section backgrounds — these sit behind text and move on scroll, so they
      want to be calm. Avoid anything with a busy left third. */
   offgrid: { src: `${B}images/offgrid.jpg`, min: '2400×1350', alt: 'Solar panels above the villa' },
-  surf:    { src: `${B}images/surf.jpg`,    min: '2400×1350', alt: 'Ekas Bay from the headland' },
+  /* Supplied 26 Aug 2026 at 1672×941, which is under the size below. It is
+     behind a heavy overlay so the softness does not show much, but a larger
+     export would be better on a wide screen — the section is taller than it is
+     wide, so `cover` scales this up a long way. */
+  surf:    { src: `${B}images/surf.jpg`,    min: '2400×1350', alt: 'A surfer on a right-hander at Ekas, with the sea stack behind' },
   closing: { src: `${B}images/closing.jpg`, min: '2400×1350', alt: 'The pool after dark' },
 
   /* The rooms. Keys match unit ids in villa.js. */

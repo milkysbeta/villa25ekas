@@ -57,6 +57,9 @@ export default function Nav({ currency, onCurrency }) {
             <NavLink
               key={p.slug}
               to={`/${p.slug}`}
+              /* Without `end`, "/" is a prefix of every route and Home would
+                 light up as the current page everywhere on the site. */
+              end={p.slug === ''}
               className={({ isActive }) =>
                 `text-[15px] uppercase tracking-[0.12em] transition-colors ${
                   isActive
@@ -103,6 +106,7 @@ export default function Nav({ currency, onCurrency }) {
               <li key={p.slug}>
                 <NavLink
                   to={`/${p.slug}`}
+                  end={p.slug === ''}
                   className={({ isActive }) =>
                     `block border-b border-(--color-line) py-3.5 font-(family-name:--font-display) text-2xl ${
                       isActive ? 'text-(--color-bronze-lit)' : 'text-(--color-text)'

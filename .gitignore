@@ -45,3 +45,6 @@ images/unsorted images/
 # .lnk files store absolute paths, so one made on this machine is meaningless
 # on another.
 /START DEMO.lnk
+
+# Working drop-off for images; masters live in images/
+/Ekas_surf.png
