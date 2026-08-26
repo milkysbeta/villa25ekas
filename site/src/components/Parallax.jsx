@@ -44,6 +44,22 @@ export default function Parallax({
   const travel = `${speed * 100}%`;
   const y = useTransform(scrollYProgress, [0, 1], [`-${travel}`, travel]);
 
+  /* How far the layer has to overhang the section so the translate never drags
+     an edge into view.
+
+     It is not `speed`, which is what this used to use, and the difference is
+     why a strip of bare ground appeared above or below the photograph at the
+     ends of the scroll. The two percentages resolve against different boxes:
+     a CSS top/bottom percentage is measured against the containing block —
+     the section — while a transform percentage is measured against the element
+     itself. Overhanging by `speed` makes the element taller, which makes the
+     travel longer, which outruns the overhang that allowed it.
+
+     Solving `speed x (1 + 2p) <= p` for the overhang gives p = speed / (1 - 2 x
+     speed). A little over that for safety. At the 0.18 default that is 30 per
+     cent rather than 18. */
+  const overhang = Math.min(60, (speed / (1 - 2 * speed)) * 100 * 1.06);
+
   const byWidth = fit === 'width';
 
   return (
@@ -84,8 +100,8 @@ export default function Parallax({
               y: still ? 0 : y,
               backgroundImage: `url(${src})`,
               backgroundPosition: position,
-              top: `-${speed * 100}%`,
-              bottom: `-${speed * 100}%`,
+              top: `-${overhang}%`,
+              bottom: `-${overhang}%`,
             }
         }
         className={`absolute inset-x-0 ${byWidth ? '' : 'bg-(--color-plate) bg-cover'}`}

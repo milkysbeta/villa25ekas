@@ -1,4 +1,5 @@
 import { useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion';
 import { IMAGES } from '../data/images.js';
 
@@ -58,8 +59,11 @@ export default function Hero() {
         </p>
 
         <div className="mt-10 flex flex-wrap items-center gap-4">
-          <a href="#stay" className="label btn btn-solid">Explore the villas</a>
-          <a href="#surf" className="label btn btn-line">See the swell</a>
+          {/* These were in-page anchors, left over from when the whole site was
+              one scrolling page. Since it was split up there is no #stay or
+              #surf on the home page, so both buttons did nothing at all. */}
+          <Link to="/stay" className="label btn btn-solid">Explore the villas</Link>
+          <Link to="/surf" className="label btn btn-line">See the swell</Link>
         </div>
       </motion.div>
 

@@ -22,6 +22,7 @@ const MAP = [
   ['02-welcome/welcome.jpg',  'images/welcome.jpg'],
   ['05-offgrid/offgrid.jpg',  'images/offgrid.jpg'],
   ['04-surf/surf.jpg',        'images/surf.jpg'],
+  ['08-availability/availability.jpg', 'images/availability.jpg'],
   ['07-gallery/closing.jpg',  'images/closing.jpg'],
   ['06-journey/map.png',      'images/map.png'],
   ['03-rooms/garden-rooms.jpg',       'images/garden-rooms.jpg'],

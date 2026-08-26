@@ -42,7 +42,11 @@ const ITEMS = [
   {
     icon: <Wave />,
     title: 'Surf on the doorstep',
-    body: 'Inside Ekas breaks in front of the villa. Outside is a short boat ride, and empties the moment the day boats leave.',
+    /* John's words, 26 Aug 2026, tidied only for spelling and the double
+       exclamation mark. "Pretty bloody fit" stays — it is the only line on the
+       site that sounds like a person rather than a brochure, and the secret
+       track is the kind of detail no competitor can copy. */
+    body: 'The Beach Break welcomes you, a four minute walk away. Boats out to Inside and Outside — unless you are pretty bloody fit. There is a secret track you can take a bike up and paddle out to Inside. Local knowledge.',
   },
   {
     icon: <Sun />,
@@ -63,7 +67,11 @@ const ITEMS = [
 
 export default function Offerings() {
   return (
-    <section className="border-y border-(--color-line) bg-(--color-shell)">
+    /* Pulled up over the bottom of the Welcome photograph on purpose, so the
+       band clips the image rather than meeting it at a seam. Only from `lg`,
+       because below that the photograph sits behind the Welcome text rather
+       than beside it and there is no bottom edge to overlap. */
+    <section className="relative z-10 border-y border-(--color-line) bg-(--color-shell) lg:-mt-16">
       <div className="mx-auto grid max-w-[1500px] gap-px bg-(--color-line) px-0 sm:grid-cols-2 lg:grid-cols-4">
         {ITEMS.map((item) => (
           <article key={item.title} className="bg-(--color-shell) px-7 py-12 lg:px-9 lg:py-16">

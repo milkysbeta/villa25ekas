@@ -1,4 +1,5 @@
 import { useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion';
 import { IMAGES } from '../data/images.js';
 
@@ -12,13 +13,22 @@ export default function Welcome() {
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] });
   const y = useTransform(scrollYProgress, [0, 1], ['8%', '-8%']);
 
+  /* The layer used to be exactly the height of the section while translating
+     8 per cent of itself, so at each end of the scroll a 52 px strip of bare
+     ground appeared above or below the photograph. It has to overhang, and by
+     more than the travel: a CSS top/bottom percentage measures against the
+     section, a transform percentage against the element, so overhanging makes
+     the element taller and the travel longer with it. 0.08 / (1 - 0.16) is
+     9.5 per cent; 12 leaves room. Same reasoning as Parallax. */
+  const OVERHANG = '-12%';
+
   return (
     <section id="welcome" ref={ref} className="relative overflow-hidden bg-(--color-ink)">
       {/* the photograph, hung right */}
       <motion.div
         aria-hidden="true"
-        style={{ y: still ? 0 : y }}
-        className="pointer-events-none absolute inset-y-0 right-0 w-full lg:w-[62%]"
+        style={{ y: still ? 0 : y, top: OVERHANG, bottom: OVERHANG }}
+        className="pointer-events-none absolute right-0 w-full lg:w-[62%]"
       >
         <div
           className="h-full w-full bg-(--color-plate) bg-cover bg-center"
@@ -57,9 +67,9 @@ export default function Welcome() {
             Five rooms in total. Take one, or take the lot.
           </p>
 
-          <a href="#stay" className="label btn btn-line mt-10 inline-block">
+          <Link to="/stay" className="label btn btn-line mt-10 inline-block">
             The rooms
-          </a>
+          </Link>
         </div>
       </div>
     </section>

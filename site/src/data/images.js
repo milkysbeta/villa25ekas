@@ -33,6 +33,11 @@ export const IMAGES = {
      export would be better on a wide screen — the section is taller than it is
      wide, so `cover` scales this up a long way. */
   surf:    { src: `${B}images/surf.jpg`,    min: '2400×1350', alt: 'A surfer on a right-hander at Ekas, with the sea stack behind' },
+
+  /* Availability page. Supplied 26 Aug 2026 at 1672×941.
+     NOT EKAS — see the note in Availability.jsx. The alt text says what the
+     picture shows rather than claiming it is the villa's own beach. */
+  availability: { src: `${B}images/availability.jpg`, min: '2400×1350', alt: 'A reef-fringed beach in the Lombok islands, seen from the air' },
   closing: { src: `${B}images/closing.jpg`, min: '2400×1350', alt: 'The pool after dark' },
 
   /* The rooms. Keys match unit ids in villa.js. */

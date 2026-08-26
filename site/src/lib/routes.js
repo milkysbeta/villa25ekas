@@ -25,7 +25,7 @@ export const PAGES = [
      than a navigation. The rest are one tap away in the mobile menu and listed
      in full in the footer — reachable, just not competing. */
   { slug: 'stay',         label: 'Stay',         title: 'Stay — Villa 25 Ekas',                  primary: true },
-  { slug: 'availability', label: 'Availability', title: 'Availability & rates — Villa 25 Ekas',  primary: true },
+  { slug: 'availability', label: 'Availability', title: 'Availability & rates — Villa 25 Ekas',  primary: true, bleed: true },
   /* `bleed` means the page opens with a full-bleed photograph rather than
      text, so it wants no top padding and a transparent header over it — the
      same treatment the home page has always had. Without it the surf photo

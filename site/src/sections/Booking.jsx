@@ -6,6 +6,8 @@ import {
 import { lookup } from '../lib/promo.js';
 import { UNITS, PRICING, CONTACT, whatsappLink } from '../data/villa.js';
 import Price from '../components/Price.jsx';
+import Parallax from '../components/Parallax.jsx';
+import { IMAGES } from '../data/images.js';
 import { formatIdr } from '../lib/currency.js';
 
 /* ============================================================================
@@ -138,7 +140,28 @@ export default function Booking() {
   const nextUrl = `${window.location.origin}${import.meta.env.BASE_URL}?sent=1#booking`;
 
   return (
-    <section id="booking" className="bg-(--color-shell) px-5 py-28 lg:px-10 lg:py-40">
+    <Parallax
+      src={IMAGES.availability.src}
+      alt={IMAGES.availability.alt}
+      /* Same treatment as the surf page: the whole frame at full width, top
+         aligned, dissolving into the page. See Parallax for why this mode does
+         not translate. */
+      fit="width"
+      ratio="1672 / 941"
+      /* Lighter at the top where the photograph is, closing to solid below it.
+
+         The first guess at these stops was lighter still, and measuring it
+         killed that: the white sand runs right across the frame about an eighth
+         of the way down, and body text over it came out at 4.48:1 — under the
+         line by a hair. Swept the band at half-percent steps against the
+         image's 95th-percentile brightness; these stops hold 5.07:1. */
+      overlay="linear-gradient(to bottom, rgba(16,14,11,.72) 0%, rgba(16,14,11,.79) 20%, rgba(16,14,11,.93) 38%, rgba(16,14,11,.98) 100%)"
+    >
+      <section
+        id="booking"
+        className="px-5 py-28 lg:px-10 lg:py-40"
+        style={{ textShadow: '0 1px 2px rgba(16,14,11,.85), 0 0 14px rgba(16,14,11,.55)' }}
+      >
       <div className="mx-auto max-w-[1500px]">
         <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
           <div>
@@ -467,6 +490,7 @@ export default function Booking() {
           </aside>
         </div>
       </div>
-    </section>
+      </section>
+    </Parallax>
   );
 }
